@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[40,)"
+license="MIT"
+[[mods]]
+modId="asr" #mandatory
+version="1.0"
+displayName="Asgard Shield Reloaded"
+logoFile="examplemod.png"
+credits="Updated sword textures by CrzChooChoo22"
+authors="ManGregory"
+description='''
+TODO
+'''
+[[dependencies.examplemod]]
+    modId="forge"
+    mandatory=true
+    versionRange="[40,)"
+    ordering="NONE"
+    side="BOTH"
+    
+[[dependencies.examplemod]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.2,1.19)"
+    ordering="NONE"
+    side="BOTH"
