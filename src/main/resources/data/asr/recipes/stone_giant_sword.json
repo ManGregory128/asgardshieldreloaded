@@ -7,13 +7,13 @@
     ],
     "key": {
         "#": {
-            "item": "minecraft:diamond"
+            "tag": "forge:cobblestone"
         },
         "/": {
             "item": "minecraft:stick"
         }
     },
     "result": {
-    	"item": "asr:diamond_giant_sword"
+    	"item": "asr:stone_giant_sword"
     }
 }

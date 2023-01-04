@@ -7,13 +7,13 @@
     ],
     "key": {
         "#": {
-            "item": "minecraft:diamond"
+            "item": "minecraft:gold_ingot"
         },
         "/": {
             "item": "minecraft:stick"
         }
     },
     "result": {
-    	"item": "asr:diamond_giant_sword"
+    	"item": "asr:golden_giant_sword"
     }
 }

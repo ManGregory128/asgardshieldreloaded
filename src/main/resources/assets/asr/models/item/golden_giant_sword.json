@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "asr:items/diamond_giant_sword"
+    "layer0": "asr:items/golden_giant_sword"
   }
 }

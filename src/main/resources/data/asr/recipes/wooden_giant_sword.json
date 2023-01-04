@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+    [
+        " PP",
+        "PPP",
+        "SP "
+    ],
+   
+    "key":
+    {
+        "P": { "tag": "minecraft:planks" },
+		"S": { "item": "minecraft:stick" }
+    },
+    
+    "result": { "item": "asr:wooden_giant_sword" }
+}
