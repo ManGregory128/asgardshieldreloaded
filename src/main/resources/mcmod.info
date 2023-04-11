@@ -1,0 +1,13 @@
+[
+  {
+    "modid": "asr",
+    "name": "Asgard Shield Reloaded",
+    "description": "A Hexxit favorite made into 1.12; Includes giant swords at the moment.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://github.com/ACGaming/AsgardShieldReloaded",
+    "authorList": ["ManGregory", "ACGaming"],
+    "credits": "Original sword textures by VincentX3, mod inspired by Jade_Knightblazer's Asgard Shield.",
+    "logoFile": "assets/asr/logo.png"
+  }
+]

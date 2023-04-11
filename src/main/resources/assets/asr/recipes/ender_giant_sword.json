@@ -1,0 +1,24 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " OO",
+    "OEO",
+    "BO "
+  ],
+  "key": {
+    "O": {
+      "type": "forge:ore_dict",
+      "ore": "obsidian"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "B": {
+      "item": "minecraft:blaze_rod"
+    }
+  },
+  "result": {
+    "item": "asr:ender_giant_sword",
+    "count": 1
+  }
+}
