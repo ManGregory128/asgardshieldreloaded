@@ -5,6 +5,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -21,18 +22,35 @@ public class EventHandler
         {
             World world = player.getEntityWorld();
             BlockPos pos = player.getPosition();
-            for (int i = 0; i < 3; i++)
-            {
-                int rand1 = world.rand.nextInt(2) * 2 - 1;
-                int rand2 = world.rand.nextInt(2) * 2 - 1;
-                double xCoord = pos.getX() + 0.5D + 0.25D * rand1;
-                double yCoord = pos.getY() + world.rand.nextFloat();
-                double zCoord = pos.getZ() + 0.5D + 0.25D * rand2;
-                double xSpeed = (world.rand.nextFloat() * 1.0F * rand1);
-                double ySpeed = (world.rand.nextFloat() - 0.5D) * 0.125D;
-                double zSpeed = (world.rand.nextFloat() * 1.0F * rand2);
-                world.spawnParticle(EnumParticleTypes.PORTAL, xCoord, yCoord, zCoord, xSpeed, ySpeed, zSpeed);
-            }
+            enderFx(world, pos);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onBlock(PlayerInteractEvent.RightClickItem event)
+    {
+        EntityPlayer player = event.getEntityPlayer();
+        if (player.getHeldItem(event.getHand()).getItem().equals(ModItems.ENDER_GIANT_SWORD))
+        {
+            World world = player.getEntityWorld();
+            BlockPos pos = player.getPosition();
+            enderFx(world, pos);
+        }
+    }
+
+    public static void enderFx(World world, BlockPos pos)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            int rand1 = world.rand.nextInt(2) * 2 - 1;
+            int rand2 = world.rand.nextInt(2) * 2 - 1;
+            double xCoord = pos.getX() + 0.5D + 0.25D * rand1;
+            double yCoord = pos.getY() + world.rand.nextFloat();
+            double zCoord = pos.getZ() + 0.5D + 0.25D * rand2;
+            double xSpeed = (world.rand.nextFloat() * 1.0F * rand1);
+            double ySpeed = (world.rand.nextFloat() - 0.5D) * 0.125D;
+            double zSpeed = (world.rand.nextFloat() * 1.0F * rand2);
+            world.spawnParticle(EnumParticleTypes.PORTAL, xCoord, yCoord, zCoord, xSpeed, ySpeed, zSpeed);
         }
     }
 }
