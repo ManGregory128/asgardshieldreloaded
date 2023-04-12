@@ -1,4 +1,20 @@
-# Tools
+# Asgard Shields
+item.diamond_shield.name=Diamond Shield
+item.gilded_diamond_shield.name=Gilded Diamond Shield
+item.ender_shield.name=Ender Shield
+item.gilded_ender_shield.name=Gilded Ender Shield
+item.iron_shield.name=Iron Shield
+item.gilded_iron_shield.name=Gilded Iron Shield
+item.netherquartz_shield.name=Nether Quartz Shield
+item.gilded_netherquartz_shield.name=Gilded Nether Quartz Shield
+item.skull_shield.name=Skull Shield
+item.gilded_skull_shield.name=Gilded Skull Shield
+item.stone_shield.name=Stone Shield
+item.gilded_stone_shield.name=Gilded Stone Shield
+item.wooden_shield.name=Wooden Shield
+item.gilded_wooden_shield.name=Gilded Wooden Shield
+
+# Giant Swords
 item.diamond_giant_sword.name=Diamond Giant Sword
 item.ender_giant_sword.name=Ender Giant Sword
 item.golden_giant_sword.name=Golden Giant Sword
