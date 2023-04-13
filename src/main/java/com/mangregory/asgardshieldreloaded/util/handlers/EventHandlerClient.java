@@ -7,8 +7,6 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
 import net.minecraftforge.client.event.RenderLivingEvent;
@@ -17,7 +15,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
-import com.mangregory.asgardshieldreloaded.items.ItemAsgardShield;
 import com.mangregory.asgardshieldreloaded.items.ItemGiantSword;
 
 // Courtesy of Fuzs
@@ -32,22 +29,18 @@ public class EventHandlerClient
         if (event.getEntity() instanceof AbstractClientPlayer)
         {
             AbstractClientPlayer player = (AbstractClientPlayer) event.getEntity();
-            if (player != null && player.isHandActive())
+            if (player != null && player.isHandActive() && player.getHeldItem(player.getActiveHand()).getItem() instanceof ItemGiantSword)
             {
-                Item heldItem = player.getHeldItem(player.getActiveHand()).getItem();
-                if (heldItem instanceof ItemAsgardShield || heldItem instanceof ItemGiantSword)
+                ModelPlayer model = (ModelPlayer) event.getRenderer().getMainModel();
+                boolean left1 = (player.getActiveHand() == EnumHand.OFF_HAND && player.getPrimaryHand() == EnumHandSide.RIGHT);
+                boolean left2 = (player.getActiveHand() == EnumHand.MAIN_HAND && player.getPrimaryHand() == EnumHandSide.LEFT);
+                if (left1 || left2)
                 {
-                    ModelPlayer model = (ModelPlayer) event.getRenderer().getMainModel();
-                    boolean left1 = (player.getActiveHand() == EnumHand.OFF_HAND && player.getPrimaryHand() == EnumHandSide.RIGHT);
-                    boolean left2 = (player.getActiveHand() == EnumHand.MAIN_HAND && player.getPrimaryHand() == EnumHandSide.LEFT);
-                    if (left1 || left2)
-                    {
-                        if (model.leftArmPose == ModelBiped.ArmPose.ITEM) model.leftArmPose = ModelBiped.ArmPose.BLOCK;
-                    }
-                    else if (model.rightArmPose == ModelBiped.ArmPose.ITEM)
-                    {
-                        model.rightArmPose = ModelBiped.ArmPose.BLOCK;
-                    }
+                    if (model.leftArmPose == ModelBiped.ArmPose.ITEM) model.leftArmPose = ModelBiped.ArmPose.BLOCK;
+                }
+                else if (model.rightArmPose == ModelBiped.ArmPose.ITEM)
+                {
+                    model.rightArmPose = ModelBiped.ArmPose.BLOCK;
                 }
             }
         }
@@ -57,18 +50,14 @@ public class EventHandlerClient
     public static void onRenderHand(RenderSpecificHandEvent event)
     {
         EntityPlayerSP player = mc.player;
-        if (player != null && player.isHandActive() && player.getActiveHand() == event.getHand())
+        if (player != null && player.isHandActive() && player.getActiveHand() == event.getHand() && player.getHeldItem(player.getActiveHand()).getItem() instanceof ItemGiantSword)
         {
-            ItemStack stack = event.getItemStack();
-            if (player.getHeldItem(player.getActiveHand()).getItem() instanceof ItemGiantSword)
-            {
-                GlStateManager.pushMatrix();
-                boolean rightHanded = (((event.getHand() == EnumHand.MAIN_HAND) ? player.getPrimaryHand() : player.getPrimaryHand().opposite()) == EnumHandSide.RIGHT);
-                transformSideFirstPerson(rightHanded ? 1.0F : -1.0F, event.getEquipProgress());
-                mc.getItemRenderer().renderItemSide(player, stack, rightHanded ? ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND : ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND, !rightHanded);
-                GlStateManager.popMatrix();
-                event.setCanceled(true);
-            }
+            GlStateManager.pushMatrix();
+            boolean rightHanded = (((event.getHand() == EnumHand.MAIN_HAND) ? player.getPrimaryHand() : player.getPrimaryHand().opposite()) == EnumHandSide.RIGHT);
+            transformSideFirstPerson(rightHanded ? 1.0F : -1.0F, event.getEquipProgress());
+            mc.getItemRenderer().renderItemSide(player, event.getItemStack(), rightHanded ? ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND : ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND, !rightHanded);
+            GlStateManager.popMatrix();
+            event.setCanceled(true);
         }
     }
 
