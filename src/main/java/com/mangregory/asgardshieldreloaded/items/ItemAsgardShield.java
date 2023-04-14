@@ -20,19 +20,19 @@ import com.mangregory.asgardshieldreloaded.init.ModItems;
 
 public class ItemAsgardShield extends Item
 {
-    private final int cooldown;
-    private final int maxUseDuration;
+    public int cooldown;
+    public int maxUseDuration;
 
-    public ItemAsgardShield(String name, int durability, int cooldown, int maxUseDuration)
+    public ItemAsgardShield(String name, int durability, int maxUseDuration)
     {
         this.setTranslationKey(name);
         this.setRegistryName(name);
         this.setMaxStackSize(1);
         this.setCreativeTab(CreativeTabs.COMBAT);
         this.setMaxDamage(durability);
-        this.cooldown = cooldown;
+        this.cooldown = 0;
         this.maxUseDuration = maxUseDuration;
-        this.addPropertyOverride(new ResourceLocation(AsgardShieldReloaded.MOD_ID + ":blocking"), new IItemPropertyGetter()
+        this.addPropertyOverride(new ResourceLocation(AsgardShieldReloaded.NAMESPACE + "blocking"), new IItemPropertyGetter()
         {
             @SideOnly(Side.CLIENT)
             public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
@@ -61,18 +61,16 @@ public class ItemAsgardShield extends Item
     @Override
     public int getMaxItemUseDuration(ItemStack stack)
     {
-        return this.maxUseDuration;
+        return 72000;
     }
 
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
     {
-        if (entityLiving instanceof EntityPlayer) ((EntityPlayer) entityLiving).getCooldownTracker().setCooldown(this, this.cooldown);
-    }
-
-    @Override
-    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)
-    {
-        return false;
+        if (entityLiving instanceof EntityPlayer && !worldIn.isRemote)
+        {
+            ((EntityPlayer) entityLiving).getCooldownTracker().setCooldown(this, this.cooldown / 2);
+            this.cooldown = 0;
+        }
     }
 }
