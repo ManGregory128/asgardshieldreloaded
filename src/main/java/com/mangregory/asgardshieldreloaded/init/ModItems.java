@@ -33,18 +33,18 @@ public class ModItems
     public static final ItemSword SKULL_GIANT_SWORD = new ItemGiantSword("skull_giant_sword", MATERIAL_SKULL, ASRConfig.SKULL_GIANT_SWORD_MAXUSEDURATION);
     public static final ItemSword ENDER_GIANT_SWORD = new ItemGiantSword("ender_giant_sword", MATERIAL_ENDER, ASRConfig.ENDER_GIANT_SWORD_MAXUSEDURATION);
 
-    public static final ItemAsgardShield WOODEN_SHIELD = new ItemAsgardShield("wooden_shield", 118, 200);
-    public static final ItemAsgardShield GILDED_WOODEN_SHIELD = new ItemAsgardShield("gilded_wooden_shield", 246, 200);
-    public static final ItemAsgardShield STONE_SHIELD = new ItemAsgardShield("stone_shield", 131, 200);
-    public static final ItemAsgardShield GILDED_STONE_SHIELD = new ItemAsgardShield("gilded_stone_shield", 259, 200);
-    public static final ItemAsgardShield IRON_SHIELD = new ItemAsgardShield("iron_shield", 250, 200);
-    public static final ItemAsgardShield GILDED_IRON_SHIELD = new ItemAsgardShield("gilded_iron_shield", 378, 200);
-    public static final ItemAsgardShield DIAMOND_SHIELD = new ItemAsgardShield("diamond_shield", 780, 200);
-    public static final ItemAsgardShield GILDED_DIAMOND_SHIELD = new ItemAsgardShield("gilded_diamond_shield", 908, 200);
-    public static final ItemAsgardShield NETHERQUARTZ_SHIELD = new ItemAsgardShield("netherquartz_shield", 369, 200);
-    public static final ItemAsgardShield GILDED_NETHERQUARTZ_SHIELD = new ItemAsgardShield("gilded_netherquartz_shield", 497, 200);
-    public static final ItemAsgardShield SKULL_SHIELD = new ItemAsgardShield("skull_shield", 174, 200);
-    public static final ItemAsgardShield GILDED_SKULL_SHIELD = new ItemAsgardShield("gilded_skull_shield", 302, 200);
-    public static final ItemAsgardShield ENDER_SHIELD = new ItemAsgardShield("ender_shield", 435, 200);
-    public static final ItemAsgardShield GILDED_ENDER_SHIELD = new ItemAsgardShield("gilded_ender_shield", 563, 200);
+    public static final ItemAsgardShield WOODEN_SHIELD = new ItemAsgardShield("wooden_shield", ASRConfig.WOODEN_SHIELD_DURABILITY, ASRConfig.WOODEN_SHIELD_MAXUSEDURATION);
+    public static final ItemAsgardShield GILDED_WOODEN_SHIELD = new ItemAsgardShield("gilded_wooden_shield", ASRConfig.GILDED_WOODEN_SHIELD_DURABILITY, ASRConfig.GILDED_WOODEN_SHIELD_MAXUSEDURATION);
+    public static final ItemAsgardShield STONE_SHIELD = new ItemAsgardShield("stone_shield", ASRConfig.STONE_SHIELD_DURABILITY, ASRConfig.STONE_SHIELD_MAXUSEDURATION);
+    public static final ItemAsgardShield GILDED_STONE_SHIELD = new ItemAsgardShield("gilded_stone_shield", ASRConfig.GILDED_STONE_SHIELD_DURABILITY, ASRConfig.GILDED_STONE_SHIELD_MAXUSEDURATION);
+    public static final ItemAsgardShield IRON_SHIELD = new ItemAsgardShield("iron_shield", ASRConfig.IRON_SHIELD_DURABILITY, ASRConfig.IRON_SHIELD_MAXUSEDURATION);
+    public static final ItemAsgardShield GILDED_IRON_SHIELD = new ItemAsgardShield("gilded_iron_shield", ASRConfig.GILDED_IRON_SHIELD_DURABILITY, ASRConfig.GILDED_IRON_SHIELD_MAXUSEDURATION);
+    public static final ItemAsgardShield DIAMOND_SHIELD = new ItemAsgardShield("diamond_shield", ASRConfig.DIAMOND_SHIELD_DURABILITY, ASRConfig.DIAMOND_SHIELD_MAXUSEDURATION);
+    public static final ItemAsgardShield GILDED_DIAMOND_SHIELD = new ItemAsgardShield("gilded_diamond_shield", ASRConfig.GILDED_DIAMOND_SHIELD_DURABILITY, ASRConfig.GILDED_DIAMOND_SHIELD_MAXUSEDURATION);
+    public static final ItemAsgardShield NETHERQUARTZ_SHIELD = new ItemAsgardShield("netherquartz_shield", ASRConfig.NETHERQUARTZ_SHIELD_DURABILITY, ASRConfig.NETHERQUARTZ_SHIELD_MAXUSEDURATION);
+    public static final ItemAsgardShield GILDED_NETHERQUARTZ_SHIELD = new ItemAsgardShield("gilded_netherquartz_shield", ASRConfig.GILDED_NETHERQUARTZ_SHIELD_DURABILITY, ASRConfig.GILDED_NETHERQUARTZ_SHIELD_MAXUSEDURATION);
+    public static final ItemAsgardShield SKULL_SHIELD = new ItemAsgardShield("skull_shield", ASRConfig.SKULL_SHIELD_DURABILITY, ASRConfig.SKULL_SHIELD_MAXUSEDURATION);
+    public static final ItemAsgardShield GILDED_SKULL_SHIELD = new ItemAsgardShield("gilded_skull_shield", ASRConfig.GILDED_SKULL_SHIELD_DURABILITY, ASRConfig.GILDED_SKULL_SHIELD_MAXUSEDURATION);
+    public static final ItemAsgardShield ENDER_SHIELD = new ItemAsgardShield("ender_shield", ASRConfig.ENDER_SHIELD_DURABILITY, ASRConfig.ENDER_SHIELD_MAXUSEDURATION);
+    public static final ItemAsgardShield GILDED_ENDER_SHIELD = new ItemAsgardShield("gilded_ender_shield", ASRConfig.GILDED_ENDER_SHIELD_DURABILITY, ASRConfig.GILDED_ENDER_SHIELD_MAXUSEDURATION);
 }
