@@ -16,16 +16,16 @@ import com.mangregory.asgardshieldreloaded.init.ModItems;
 
 public class ItemGiantSword extends ItemSword
 {
-    private final int cooldown;
-    private final int maxUseDuration;
+    public int cooldown;
+    public int maxUseDuration;
 
-    public ItemGiantSword(String name, Item.ToolMaterial material, int cooldown, int maxUseDuration)
+    public ItemGiantSword(String name, Item.ToolMaterial material, int maxUseDuration)
     {
         super(material);
         this.setTranslationKey(name);
         this.setRegistryName(name);
         this.setCreativeTab(CreativeTabs.COMBAT);
-        this.cooldown = cooldown;
+        this.cooldown = 0;
         this.maxUseDuration = maxUseDuration;
         ModItems.ITEMS.add(this);
     }
@@ -47,13 +47,17 @@ public class ItemGiantSword extends ItemSword
     @Override
     public int getMaxItemUseDuration(ItemStack stack)
     {
-        return this.maxUseDuration;
+        return 72000;
     }
 
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
     {
-        if (entityLiving instanceof EntityPlayer) ((EntityPlayer) entityLiving).getCooldownTracker().setCooldown(this, this.cooldown);
+        if (entityLiving instanceof EntityPlayer && !worldIn.isRemote)
+        {
+            ((EntityPlayer) entityLiving).getCooldownTracker().setCooldown(this, this.cooldown / 2);
+            this.cooldown = 0;
+        }
     }
 
     @Override

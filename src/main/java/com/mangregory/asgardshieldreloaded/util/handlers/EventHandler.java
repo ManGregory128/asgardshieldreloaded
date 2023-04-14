@@ -37,6 +37,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import com.mangregory.asgardshieldreloaded.AsgardShieldReloaded;
 import com.mangregory.asgardshieldreloaded.init.ModItems;
 import com.mangregory.asgardshieldreloaded.items.ItemAsgardShield;
+import com.mangregory.asgardshieldreloaded.items.ItemGiantSword;
 import com.mangregory.asgardshieldreloaded.util.RandomUtil;
 
 @Mod.EventBusSubscriber
@@ -323,6 +324,16 @@ public class EventHandler
         if (event.getItem().getItem() instanceof ItemAsgardShield)
         {
             ItemAsgardShield shield = (ItemAsgardShield) event.getItem().getItem();
+            shield.cooldown++;
+            if (shield.cooldown >= shield.maxUseDuration)
+            {
+                event.getEntityLiving().stopActiveHand();
+                event.setCanceled(true);
+            }
+        }
+        else if (event.getItem().getItem() instanceof ItemGiantSword)
+        {
+            ItemGiantSword shield = (ItemGiantSword) event.getItem().getItem();
             shield.cooldown++;
             if (shield.cooldown >= shield.maxUseDuration)
             {
