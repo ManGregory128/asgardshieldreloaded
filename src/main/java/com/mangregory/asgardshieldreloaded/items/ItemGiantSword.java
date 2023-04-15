@@ -1,5 +1,10 @@
 package com.mangregory.asgardshieldreloaded.items;
 
+import java.util.List;
+import javax.annotation.Nullable;
+
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,7 +16,10 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.mangregory.asgardshieldreloaded.AsgardShieldReloaded;
 import com.mangregory.asgardshieldreloaded.init.ModItems;
 
 public class ItemGiantSword extends ItemSword
@@ -22,7 +30,7 @@ public class ItemGiantSword extends ItemSword
     public ItemGiantSword(String name, Item.ToolMaterial material, int maxUseDuration)
     {
         super(material);
-        this.setTranslationKey(name);
+        this.setTranslationKey(AsgardShieldReloaded.MOD_ID + "." + name);
         this.setRegistryName(name);
         this.setCreativeTab(CreativeTabs.COMBAT);
         this.cooldown = 0;
@@ -58,6 +66,14 @@ public class ItemGiantSword extends ItemSword
             ((EntityPlayer) entityLiving).getCooldownTracker().setCooldown(this, this.cooldown / 2);
             this.cooldown = 0;
         }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
+    {
+        String duration = "tooltip." + AsgardShieldReloaded.MOD_ID + ".category.duration";
+        tooltip.add(I18n.format(duration) + ": " + this.maxUseDuration / 20 + "s");
     }
 
     @Override

@@ -87,85 +87,85 @@ public class ASRConfig
     public static int WOODEN_SHIELD_DURABILITY = 118;
 
     @Config.Name("Wooden Shield: Max Use Duration")
-    public static int WOODEN_SHIELD_MAXUSEDURATION = 300;
+    public static int WOODEN_SHIELD_MAXUSEDURATION = 200;
 
     @Config.Name("Gilded Wooden Shield: Durability")
     public static int GILDED_WOODEN_SHIELD_DURABILITY = 246;
 
     @Config.Name("Gilded Wooden Shield: Max Use Duration")
-    public static int GILDED_WOODEN_SHIELD_MAXUSEDURATION = 300;
+    public static int GILDED_WOODEN_SHIELD_MAXUSEDURATION = 200;
 
     @Config.Name("Stone Shield: Durability")
     public static int STONE_SHIELD_DURABILITY = 131;
 
     @Config.Name("Stone Shield: Max Use Duration")
-    public static int STONE_SHIELD_MAXUSEDURATION = 300;
+    public static int STONE_SHIELD_MAXUSEDURATION = 200;
 
     @Config.Name("Gilded Stone Shield: Durability")
     public static int GILDED_STONE_SHIELD_DURABILITY = 259;
 
     @Config.Name("Gilded Stone Shield: Max Use Duration")
-    public static int GILDED_STONE_SHIELD_MAXUSEDURATION = 300;
+    public static int GILDED_STONE_SHIELD_MAXUSEDURATION = 200;
 
     @Config.Name("Iron Shield: Durability")
     public static int IRON_SHIELD_DURABILITY = 250;
 
     @Config.Name("Iron Shield: Max Use Duration")
-    public static int IRON_SHIELD_MAXUSEDURATION = 300;
+    public static int IRON_SHIELD_MAXUSEDURATION = 200;
 
     @Config.Name("Gilded Iron Shield: Durability")
     public static int GILDED_IRON_SHIELD_DURABILITY = 378;
 
     @Config.Name("Gilded Iron Shield: Max Use Duration")
-    public static int GILDED_IRON_SHIELD_MAXUSEDURATION = 300;
+    public static int GILDED_IRON_SHIELD_MAXUSEDURATION = 200;
 
     @Config.Name("Diamond Shield: Durability")
     public static int DIAMOND_SHIELD_DURABILITY = 780;
 
     @Config.Name("Diamond Shield: Max Use Duration")
-    public static int DIAMOND_SHIELD_MAXUSEDURATION = 300;
+    public static int DIAMOND_SHIELD_MAXUSEDURATION = 200;
 
     @Config.Name("Gilded Diamond Shield: Durability")
     public static int GILDED_DIAMOND_SHIELD_DURABILITY = 908;
 
     @Config.Name("Gilded Diamond Shield: Max Use Duration")
-    public static int GILDED_DIAMOND_SHIELD_MAXUSEDURATION = 300;
+    public static int GILDED_DIAMOND_SHIELD_MAXUSEDURATION = 200;
 
     @Config.Name("Nether Quartz Shield: Durability")
     public static int NETHERQUARTZ_SHIELD_DURABILITY = 369;
 
     @Config.Name("Nether Quartz Shield: Max Use Duration")
-    public static int NETHERQUARTZ_SHIELD_MAXUSEDURATION = 300;
+    public static int NETHERQUARTZ_SHIELD_MAXUSEDURATION = 200;
 
     @Config.Name("Gilded Nether Quartz Shield: Durability")
     public static int GILDED_NETHERQUARTZ_SHIELD_DURABILITY = 497;
 
     @Config.Name("Gilded Nether Quartz Shield: Max Use Duration")
-    public static int GILDED_NETHERQUARTZ_SHIELD_MAXUSEDURATION = 300;
+    public static int GILDED_NETHERQUARTZ_SHIELD_MAXUSEDURATION = 200;
 
     @Config.Name("Skull Shield: Durability")
     public static int SKULL_SHIELD_DURABILITY = 174;
 
     @Config.Name("Skull Shield: Max Use Duration")
-    public static int SKULL_SHIELD_MAXUSEDURATION = 300;
+    public static int SKULL_SHIELD_MAXUSEDURATION = 200;
 
     @Config.Name("Gilded Skull Shield: Durability")
     public static int GILDED_SKULL_SHIELD_DURABILITY = 302;
 
     @Config.Name("Gilded Skull Shield: Max Use Duration")
-    public static int GILDED_SKULL_SHIELD_MAXUSEDURATION = 300;
+    public static int GILDED_SKULL_SHIELD_MAXUSEDURATION = 200;
 
     @Config.Name("Ender Shield: Durability")
     public static int ENDER_SHIELD_DURABILITY = 435;
 
     @Config.Name("Ender Shield: Max Use Duration")
-    public static int ENDER_SHIELD_MAXUSEDURATION = 300;
+    public static int ENDER_SHIELD_MAXUSEDURATION = 200;
 
     @Config.Name("Gilded Ender Shield: Durability")
     public static int GILDED_ENDER_SHIELD_DURABILITY = 563;
 
     @Config.Name("Gilded Ender Shield: Max Use Duration")
-    public static int GILDED_ENDER_SHIELD_MAXUSEDURATION = 300;
+    public static int GILDED_ENDER_SHIELD_MAXUSEDURATION = 200;
 
 
     @Mod.EventBusSubscriber
