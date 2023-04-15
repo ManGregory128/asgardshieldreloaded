@@ -1,0 +1,26 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "BHB",
+    "BLB",
+    " B "
+  ],
+  "key": {
+    "B": {
+      "type": "forge:ore_dict",
+      "ore": "cobblestone"
+    },
+    "H": {
+      "item": "minecraft:skull",
+      "data": 0
+    },
+    "L": {
+      "type": "forge:ore_dict",
+      "ore": "leather"
+    }
+  },
+  "result": {
+    "item": "asr:skull_shield",
+    "count": 1
+  }
+}

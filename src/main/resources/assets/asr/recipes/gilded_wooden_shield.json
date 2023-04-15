@@ -1,0 +1,21 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "GGG",
+    "GSG",
+    " G "
+  ],
+  "key": {
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
+    },
+    "S": {
+      "item": "asr:wooden_shield"
+    }
+  },
+  "result": {
+    "item": "asr:gilded_wooden_shield",
+    "count": 1
+  }
+}

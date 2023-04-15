@@ -1,0 +1,22 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "PPP",
+    "PLP",
+    " P "
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plankWood"
+    },
+    "L": {
+      "type": "forge:ore_dict",
+      "ore": "leather"
+    }
+  },
+  "result": {
+    "item": "asr:wooden_shield",
+    "count": 1
+  }
+}

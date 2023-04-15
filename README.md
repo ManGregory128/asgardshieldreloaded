@@ -1,2 +1,2 @@
-# asgardshieldreloaded
-A hexxit mod made into newer Minecraft versions
+# Asgard Shield Reloaded
+A Hexxit mod remake for Minecraft 1.12

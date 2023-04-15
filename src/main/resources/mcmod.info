@@ -1,0 +1,13 @@
+[
+  {
+    "modid": "asr",
+    "name": "Asgard Shield Reloaded",
+    "description": "A Hexxit mod remake for Minecraft 1.12",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://github.com/ACGaming/AsgardShieldReloaded",
+    "authorList": ["ManGregory", "ACGaming"],
+    "credits": "Original textures by VincentX3, mod inspired by Jade_Knightblazer's Asgard Shield.",
+    "logoFile": "assets/asr/logo.png"
+  }
+]

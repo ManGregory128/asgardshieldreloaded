@@ -1,0 +1,22 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "III",
+    "ILI",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "L": {
+      "type": "forge:ore_dict",
+      "ore": "leather"
+    }
+  },
+  "result": {
+    "item": "asr:iron_shield",
+    "count": 1
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "asr:items/netherquartz_giant_sword"
+  }
+}

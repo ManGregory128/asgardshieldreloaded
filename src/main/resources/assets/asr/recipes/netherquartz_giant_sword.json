@@ -1,0 +1,21 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " QQ",
+    "QQQ",
+    "BQ "
+  ],
+  "key": {
+    "Q": {
+      "type": "forge:ore_dict",
+      "ore": "gemQuartz"
+    },
+    "B": {
+      "item": "minecraft:blaze_rod"
+    }
+  },
+  "result": {
+    "item": "asr:netherquartz_giant_sword",
+    "count": 1
+  }
+}

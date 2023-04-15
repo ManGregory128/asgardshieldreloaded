@@ -1,0 +1,22 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "CCC",
+    "CLC",
+    " C "
+  ],
+  "key": {
+    "C": {
+      "type": "forge:ore_dict",
+      "ore": "cobblestone"
+    },
+    "L": {
+      "type": "forge:ore_dict",
+      "ore": "leather"
+    }
+  },
+  "result": {
+    "item": "asr:stone_shield",
+    "count": 1
+  }
+}

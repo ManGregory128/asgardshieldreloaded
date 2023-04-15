@@ -1,0 +1,26 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " BB",
+    "BHB",
+    "SB "
+  ],
+  "key": {
+    "B": {
+      "type": "forge:ore_dict",
+      "ore": "bone"
+    },
+    "H": {
+      "item": "minecraft:skull",
+      "data": 0
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    }
+  },
+  "result": {
+    "item": "asr:skull_giant_sword",
+    "count": 1
+  }
+}
