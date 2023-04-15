@@ -12,9 +12,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.entity.projectile.EntitySmallFireball;
-import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -102,7 +100,11 @@ public class EventHandler
                                 cancel = false;
                                 break;
                             }
-                            if (RandomUtil.chance(0.5D)) dropArrowAtPlayer(arrow, player);
+                            if (RandomUtil.chance(0.5D))
+                            {
+                                dropArrowAtPlayer(arrow, player);
+                                player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_ARROW_HIT_PLAYER, SoundCategory.PLAYERS, 0.8F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
+                            }
                         }
                         break;
                     case AsgardShieldReloaded.NAMESPACE + "gilded_wooden_shield":
@@ -121,6 +123,7 @@ public class EventHandler
                                 break;
                             }
                             dropArrowAtPlayer(arrow, player);
+                            player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_ARROW_HIT_PLAYER, SoundCategory.PLAYERS, 0.8F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
                         }
                         break;
                     case AsgardShieldReloaded.NAMESPACE + "stone_shield":
@@ -161,27 +164,24 @@ public class EventHandler
                         if (projectile != null && RandomUtil.chance(0.3D))
                         {
                             Vec3d look = player.getLookVec();
+                            double speed = projectile.motionX * projectile.motionX + projectile.motionY * projectile.motionY + projectile.motionZ * projectile.motionZ;
+                            speed = Math.sqrt(speed);
+                            speed += 0.2f;
+                            projectile.motionX = look.x * speed;
+                            projectile.motionY = look.y * speed;
+                            projectile.motionZ = look.z * speed;
+                            projectile.rotationYaw = (float) (Math.atan2(projectile.motionX, projectile.motionZ) * 180.0D / Math.PI);
+                            projectile.rotationPitch = (float) (Math.atan2(projectile.motionY, speed) * 180.0D / Math.PI);
+                            if (player instanceof EntityPlayerMP) ((EntityPlayerMP) player).connection.sendPacket(new SPacketEntityVelocity(projectile));
                             if (projectile instanceof EntityArrow)
                             {
-                                EntityArrow arrow = (EntityArrow) projectile;
-                                arrow.shoot(look.x, look.y, look.z, 1.1F, 0.1F);
-                            }
-                            else if (projectile instanceof EntityThrowable)
-                            {
-                                EntityThrowable throwable = (EntityThrowable) projectile;
-                                throwable.shoot(look.x, look.y, look.z, 1.1F, 0.1F);
-                            }
-                            else if (projectile instanceof EntityFireball)
-                            {
-                                EntityFireball fireball = (EntityFireball) projectile;
-                                fireball.motionX = look.x;
-                                fireball.motionY = look.y;
-                                fireball.motionZ = look.z;
-                                fireball.accelerationX = fireball.motionX * 0.1D;
-                                fireball.accelerationY = fireball.motionY * 0.1D;
-                                fireball.accelerationZ = fireball.motionZ * 0.1D;
+                                ((EntityArrow) projectile).shootingEntity = player;
+                                projectile.motionX /= -0.10000000149011612D;
+                                projectile.motionY /= -0.10000000149011612D;
+                                projectile.motionZ /= -0.10000000149011612D;
                             }
                             damage *= 1.5F;
+                            knockback = 0.0F;
                         }
                         else knockback = 1.0F;
                         player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.BLOCK_NOTE_CHIME, SoundCategory.PLAYERS, 0.8F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
@@ -280,10 +280,11 @@ public class EventHandler
                             {
                                 enemy.getEntityWorld().playSound(null, enemy.prevPosX, enemy.prevPosY, enemy.prevPosZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, enemy.getSoundCategory(), 1.0F, 1.0F);
                                 enemy.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);
+                                knockback = 0.0F;
                             }
                         }
-                        knockback = 1.0F;
-                        player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 0.8F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
+                        else knockback = 1.5F;
+                        player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERDRAGON_HURT, SoundCategory.PLAYERS, 0.8F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
                         break;
                     case AsgardShieldReloaded.NAMESPACE + "gilded_ender_shield":
                         if (enemy instanceof EntityEnderman || enemy instanceof EntityEndermite || enemy instanceof EntityDragon)
@@ -291,7 +292,7 @@ public class EventHandler
                             cancel = false;
                             break;
                         }
-                        if (enemy instanceof EntityLivingBase && RandomUtil.chance(0.2D))
+                        if (enemy instanceof EntityLivingBase && RandomUtil.chance(0.4D))
                         {
                             double d0 = enemy.posX + (enemy.getEntityWorld().rand.nextDouble() - 0.5D) * 64.0D;
                             double d1 = enemy.posY + (double) (enemy.getEntityWorld().rand.nextInt(64) - 32);
@@ -301,10 +302,11 @@ public class EventHandler
                             {
                                 enemy.getEntityWorld().playSound(null, enemy.prevPosX, enemy.prevPosY, enemy.prevPosZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, enemy.getSoundCategory(), 1.0F, 1.0F);
                                 enemy.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);
+                                knockback = 0.0F;
                             }
                         }
-                        knockback = 1.5F;
-                        player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 0.8F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
+                        else knockback = 1.5F;
+                        player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERDRAGON_HURT, SoundCategory.PLAYERS, 0.8F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
                         break;
                 }
                 if (cancel)
