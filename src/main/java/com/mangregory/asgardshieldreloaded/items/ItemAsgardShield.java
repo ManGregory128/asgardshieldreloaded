@@ -97,4 +97,11 @@ public class ItemAsgardShield extends Item
         String perkDesc = "item." + AsgardShieldReloaded.MOD_ID + "." + name + ".perk.desc";
         if (GuiScreen.isShiftKeyDown()) tooltip.add(TextFormatting.GREEN + I18n.format(perkDesc));
     }
+
+    @Override
+    public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
+    {
+        this.cooldown++;
+        if (this.cooldown >= this.maxUseDuration) player.stopActiveHand();
+    }
 }

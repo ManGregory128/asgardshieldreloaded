@@ -26,7 +26,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -355,31 +354,6 @@ public class EventHandler
                     player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ITEM_SHIELD_BLOCK, SoundCategory.PLAYERS, 1.0F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
                     event.setCanceled(true);
                 }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onUseTick(LivingEntityUseItemEvent.Tick event)
-    {
-        if (event.getItem().getItem() instanceof ItemAsgardShield)
-        {
-            ItemAsgardShield shield = (ItemAsgardShield) event.getItem().getItem();
-            shield.cooldown++;
-            if (shield.cooldown >= shield.maxUseDuration)
-            {
-                event.getEntityLiving().stopActiveHand();
-                event.setCanceled(true);
-            }
-        }
-        else if (event.getItem().getItem() instanceof ItemGiantSword)
-        {
-            ItemGiantSword shield = (ItemGiantSword) event.getItem().getItem();
-            shield.cooldown++;
-            if (shield.cooldown >= shield.maxUseDuration)
-            {
-                event.getEntityLiving().stopActiveHand();
-                event.setCanceled(true);
             }
         }
     }

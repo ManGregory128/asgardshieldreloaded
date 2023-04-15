@@ -82,6 +82,13 @@ public class ItemGiantSword extends ItemSword
     }
 
     @Override
+    public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
+    {
+        this.cooldown++;
+        if (this.cooldown >= this.maxUseDuration) player.stopActiveHand();
+    }
+
+    @Override
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)
     {
         return false;
