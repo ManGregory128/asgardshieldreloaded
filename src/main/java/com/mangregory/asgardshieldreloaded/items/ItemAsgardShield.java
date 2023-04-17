@@ -25,6 +25,7 @@ public class ItemAsgardShield extends Item
 {
     public int cooldown;
     public int maxUseDuration;
+    public boolean isBlocking;
 
     public ItemAsgardShield(String name, int durability, int maxUseDuration)
     {
@@ -35,6 +36,7 @@ public class ItemAsgardShield extends Item
         this.setMaxDamage(durability);
         this.cooldown = 0;
         this.maxUseDuration = maxUseDuration;
+        this.isBlocking = false;
         this.addPropertyOverride(new ResourceLocation(AsgardShieldReloaded.NAMESPACE + "blocking"), new IItemPropertyGetter()
         {
             @SideOnly(Side.CLIENT)
@@ -50,16 +52,17 @@ public class ItemAsgardShield extends Item
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
+        ItemStack stack = playerIn.getHeldItem(handIn);
         playerIn.setActiveHand(handIn);
         playerIn.getEntityWorld().playSound(null, playerIn.getPosition(), SoundEvents.ENTITY_IRONGOLEM_ATTACK, SoundCategory.PLAYERS, 0.8F, 0.8F + playerIn.getEntityWorld().rand.nextFloat() * 0.4F);
-        return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
+        return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }
 
     @Override
     public EnumAction getItemUseAction(ItemStack stack)
     {
-        return EnumAction.BLOCK;
+        if (this.isBlocking) return EnumAction.BLOCK;
+        return EnumAction.NONE;
     }
 
     @Override
@@ -76,6 +79,7 @@ public class ItemAsgardShield extends Item
             ((EntityPlayer) entityLiving).getCooldownTracker().setCooldown(this, this.cooldown / 2);
             this.cooldown = 0;
         }
+        this.isBlocking = false;
     }
 
     @Override
@@ -102,6 +106,10 @@ public class ItemAsgardShield extends Item
     public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
     {
         this.cooldown++;
-        if (this.cooldown >= this.maxUseDuration) player.stopActiveHand();
+        if (this.cooldown >= this.maxUseDuration)
+        {
+            player.stopActiveHand();
+            this.isBlocking = false;
+        }
     }
 }

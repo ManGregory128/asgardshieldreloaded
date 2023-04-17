@@ -9,7 +9,10 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.*;
+import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
@@ -25,6 +28,7 @@ public class ItemGiantSword extends ItemSword
 {
     public int cooldown;
     public int maxUseDuration;
+    public boolean isBlocking;
 
     public ItemGiantSword(String name, Item.ToolMaterial material, int maxUseDuration)
     {
@@ -34,6 +38,7 @@ public class ItemGiantSword extends ItemSword
         this.setCreativeTab(CreativeTabs.COMBAT);
         this.cooldown = 0;
         this.maxUseDuration = maxUseDuration;
+        this.isBlocking = false;
         ModItems.ITEMS.add(this);
     }
 
@@ -41,11 +46,6 @@ public class ItemGiantSword extends ItemSword
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
         ItemStack stack = playerIn.getHeldItem(handIn);
-        ItemStack stackOffhand = playerIn.getHeldItemOffhand();
-        if ((stackOffhand.getItem() instanceof ItemAsgardShield && !playerIn.getCooldownTracker().hasCooldown(stackOffhand.getItem())) || stackOffhand.getItem() instanceof ItemShield)
-        {
-            return new ActionResult<>(EnumActionResult.PASS, stack);
-        }
         playerIn.setActiveHand(handIn);
         playerIn.getEntityWorld().playSound(null, playerIn.getPosition(), SoundEvents.ENTITY_IRONGOLEM_ATTACK, SoundCategory.PLAYERS, 0.8F, 0.8F + playerIn.getEntityWorld().rand.nextFloat() * 0.4F);
         return new ActionResult<>(EnumActionResult.SUCCESS, stack);
@@ -54,7 +54,8 @@ public class ItemGiantSword extends ItemSword
     @Override
     public EnumAction getItemUseAction(ItemStack stack)
     {
-        return EnumAction.BLOCK;
+        if (this.isBlocking) return EnumAction.BLOCK;
+        return EnumAction.NONE;
     }
 
     @Override
@@ -71,6 +72,7 @@ public class ItemGiantSword extends ItemSword
             ((EntityPlayer) entityLiving).getCooldownTracker().setCooldown(this, this.cooldown / 2);
             this.cooldown = 0;
         }
+        this.isBlocking = false;
     }
 
     @Override
@@ -85,7 +87,11 @@ public class ItemGiantSword extends ItemSword
     public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
     {
         this.cooldown++;
-        if (this.cooldown >= this.maxUseDuration) player.stopActiveHand();
+        if (this.cooldown >= this.maxUseDuration)
+        {
+            player.stopActiveHand();
+            this.isBlocking = false;
+        }
     }
 
     @Override
