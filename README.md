@@ -3,6 +3,7 @@
 
 [![](http://cf.way2muchnoise.eu/full_asgard-shield-reloaded_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/asgard-shield-reloaded)
 [![](http://cf.way2muchnoise.eu/versions/asgard-shield-reloaded.svg)](https://www.curseforge.com/minecraft/mc-mods/asgard-shield-reloaded/files)
+[![GitHub](https://img.shields.io/github/license/ManGregory128/asgardshieldreloaded)](https://github.com/ManGregory128/asgardshieldreloaded/blob/1.19.2/LICENSE)
 
 ![image](https://user-images.githubusercontent.com/52697798/232713521-3f9cd713-5c04-4829-abc4-0a899014a7b0.png)
 This mod is a re-make of the original Asgard Shield, made popular by the 1.5 modpack Hexxit.
