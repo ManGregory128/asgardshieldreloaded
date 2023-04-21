@@ -55,6 +55,7 @@ public class ItemAsgardShield extends Item
         ItemStack stack = playerIn.getHeldItem(handIn);
         playerIn.setActiveHand(handIn);
         playerIn.getEntityWorld().playSound(null, playerIn.getPosition(), SoundEvents.ENTITY_IRONGOLEM_ATTACK, SoundCategory.PLAYERS, 0.8F, 0.8F + playerIn.getEntityWorld().rand.nextFloat() * 0.4F);
+        this.isBlocking = true;
         return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }
 
