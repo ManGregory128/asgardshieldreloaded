@@ -16,6 +16,7 @@ import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketEntityVelocity;
 import net.minecraft.util.*;
@@ -52,22 +53,34 @@ public class EventHandler
         EntityPlayer player = event.getEntityPlayer();
         Item itemMainhand = player.getHeldItemMainhand().getItem();
         Item itemOffhand = player.getHeldItemOffhand().getItem();
-        if (itemMainhand instanceof ItemGiantSword && itemOffhand instanceof ItemAsgardShield)
+        if (itemMainhand instanceof ItemGiantSword)
         {
-            if (!player.getCooldownTracker().hasCooldown(itemOffhand))
+            if (itemOffhand instanceof ItemAsgardShield)
+            {
+                if (!player.getCooldownTracker().hasCooldown(itemOffhand))
+                {
+                    ((ItemGiantSword) itemMainhand).isBlocking = false;
+                    ((ItemAsgardShield) itemOffhand).isBlocking = true;
+                    if (event.getHand() == EnumHand.MAIN_HAND)
+                    {
+                        event.setCancellationResult(EnumActionResult.PASS);
+                        event.setCanceled(true);
+                    }
+                }
+                else
+                {
+                    ((ItemGiantSword) itemMainhand).isBlocking = true;
+                    ((ItemAsgardShield) itemOffhand).isBlocking = false;
+                }
+            }
+            else if (itemOffhand instanceof ItemShield)
             {
                 ((ItemGiantSword) itemMainhand).isBlocking = false;
-                ((ItemAsgardShield) itemOffhand).isBlocking = true;
                 if (event.getHand() == EnumHand.MAIN_HAND)
                 {
                     event.setCancellationResult(EnumActionResult.PASS);
                     event.setCanceled(true);
                 }
-            }
-            else
-            {
-                ((ItemGiantSword) itemMainhand).isBlocking = true;
-                ((ItemAsgardShield) itemOffhand).isBlocking = false;
             }
         }
         if (player.getEntityWorld().isRemote && player.getHeldItem(event.getHand()).getItem().equals(ModItems.ENDER_GIANT_SWORD)) enderFx(player.getEntityWorld(), player.getPosition());
