@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "me.mangregory.asr.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "modid.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "minVersion": "0.8"
+}

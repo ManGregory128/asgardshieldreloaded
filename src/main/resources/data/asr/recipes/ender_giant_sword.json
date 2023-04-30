@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " nn",
+        "nEn",
+        "/n "
+    ],
+    "key": {
+        "n": {
+            "item": "minecraft:obsidian"
+        },
+        "E": {
+            "item": "minecraft:ender_eye"
+        },
+        "/": {
+            "item": "minecraft:blaze_rod"
+        }
+    },
+    "result": {
+    	"item": "asr:ender_giant_sword"
+    }
+}
