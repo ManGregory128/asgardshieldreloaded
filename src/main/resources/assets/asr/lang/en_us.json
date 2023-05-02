@@ -4,5 +4,19 @@
 	"item.asr.golden_giant_sword": "Golden Giant Sword",
 	"item.asr.stone_giant_sword": "Stone Giant Sword",
 	"item.asr.wooden_giant_sword": "Wooden Giant Sword",
-	"item.asr.ender_giant_sword": "Ender Giant Sword"
+	"item.asr.ender_giant_sword": "Ender Giant Sword",
+	"item.asr.iron_shield": "Iron Shield",
+	"item.asr.diamond_shield": "Diamond Shield",
+	"item.asr.ender_shield": "Ender Shield",
+	"item.asr.gilded_diamond_shield": "Gilded Diamond Shield",
+	"item.asr.gilded_ender_shield": "Gilded Ender Shield",
+	"item.asr.gilded_iron_shield": "Gilded Iron Shield",
+	"item.asr.gilded_netherquartz_shield": "Gilded Nether Quartz Shield",
+	"item.asr.gilded_skull_shield": "Gilded Skull Shield",
+	"item.asr.gilded_stone_shield": "Gilded Stone Shield",
+	"item.asr.gilded_wooden_shield": "Gilded Wooden Shield",
+	"item.asr.netherquartz_shield": "Nether Quartz Shield",
+	"item.asr.skull_shield": "Skull Shield",
+	"item.asr.stone_shield": "Stone Shield",
+	"item.asr.wooden_shield": "Wooden Shield"
 }

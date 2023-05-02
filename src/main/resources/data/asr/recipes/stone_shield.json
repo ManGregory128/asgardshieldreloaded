@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CLC",
+    " C "
+  ],
+  "key": {
+    "C": {
+      "tag": "forge:cobblestone/normal"
+    },
+    "L": {
+      "tag": "forge:leather"
+    }
+  },
+  "result": {
+    "item": "asr:stone_shield",
+    "count": 1
+  }
+}

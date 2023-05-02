@@ -1,6 +1,7 @@
 package me.mangregory.asr.init;
 
 import me.mangregory.asr.AsgardShieldReloaded;
+import me.mangregory.asr.item.AsgardShieldItem;
 import me.mangregory.asr.item.GiantSwordItem;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
@@ -33,6 +34,36 @@ public class ItemInit {
 
     public static final RegistryObject<GiantSwordItem> ENDER_GIANT_SWORD = ITEMS.register("ender_giant_sword",
             () -> new GiantSwordItem(Tiers.ENDERTIER, 1, -2f, PROPERTIES));
+
+    public static final RegistryObject<AsgardShieldItem> WOODEN_SHIELD = ITEMS.register("wooden_shield",
+            () -> new AsgardShieldItem(PROPERTIES));
+    public static final RegistryObject<AsgardShieldItem> GILDED_WOODEN_SHIELD = ITEMS.register("gilded_wooden_shield",
+            () -> new AsgardShieldItem(PROPERTIES));
+    public static final RegistryObject<AsgardShieldItem> STONE_SHIELD = ITEMS.register("stone_shield",
+            () -> new AsgardShieldItem(PROPERTIES));
+    public static final RegistryObject<AsgardShieldItem> GILDED_STONE_SHIELD = ITEMS.register("gilded_stone_shield",
+            () -> new AsgardShieldItem(PROPERTIES));
+    public static final RegistryObject<AsgardShieldItem> IRON_SHIELD = ITEMS.register("iron_shield",
+            () -> new AsgardShieldItem(PROPERTIES));
+    public static final RegistryObject<AsgardShieldItem> GILDED_IRON_SHIELD = ITEMS.register("gilded_iron_shield",
+            () -> new AsgardShieldItem(PROPERTIES));
+    public static final RegistryObject<AsgardShieldItem> DIAMOND_SHIELD = ITEMS.register("diamond_shield",
+            () -> new AsgardShieldItem(PROPERTIES));
+    public static final RegistryObject<AsgardShieldItem> GILDED_DIAMOND_SHIELD = ITEMS.register("gilded_diamond_shield",
+            () -> new AsgardShieldItem(PROPERTIES));
+    public static final RegistryObject<AsgardShieldItem> NETHERQUARTZ_SHIELD = ITEMS.register("netherquartz_shield",
+            () -> new AsgardShieldItem(PROPERTIES));
+    public static final RegistryObject<AsgardShieldItem> GILDED_NETHERQUARTZ_SHIELD = ITEMS.register("gilded_netherquartz_shield",
+            () -> new AsgardShieldItem(PROPERTIES));
+    public static final RegistryObject<AsgardShieldItem> SKULL_SHIELD = ITEMS.register("skull_shield",
+            () -> new AsgardShieldItem(PROPERTIES));
+    public static final RegistryObject<AsgardShieldItem> GILDED_SKULL_SHIELD = ITEMS.register("gilded_skull_shield",
+            () -> new AsgardShieldItem(PROPERTIES));
+    public static final RegistryObject<AsgardShieldItem> ENDER_SHIELD = ITEMS.register("ender_shield",
+            () -> new AsgardShieldItem(PROPERTIES));
+    public static final RegistryObject<AsgardShieldItem> GILDED_ENDER_SHIELD = ITEMS.register("gilded_ender_shield",
+            () -> new AsgardShieldItem(PROPERTIES));
+
     public static class Tiers {
         public static final Tier ALTDIAMOND = new ForgeTier(3, 3100, -2.4f, 6.5f, 15, null, () -> Ingredient.of(Items.DIAMOND));
         public static final Tier ALTIRON = new ForgeTier(2, 410, 6f, 5.5f, 10, null, () -> Ingredient.of(Items.IRON_INGOT));

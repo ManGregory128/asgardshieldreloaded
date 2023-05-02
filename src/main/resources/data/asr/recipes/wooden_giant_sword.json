@@ -10,7 +10,7 @@
     "key":
     {
         "P": { "tag": "minecraft:planks" },
-		"S": { "item": "minecraft:stick" }
+		"S": { "tag": "forge:rods/wooden" }
     },
     
     "result": { "item": "asr:wooden_giant_sword" }
