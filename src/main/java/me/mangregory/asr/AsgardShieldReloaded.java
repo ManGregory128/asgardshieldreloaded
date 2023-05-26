@@ -1,6 +1,7 @@
 package me.mangregory.asr;
 
 import me.mangregory.asr.init.ItemInit;
+import me.mangregory.asr.util.handlers.EventHandler;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -34,6 +35,7 @@ public class AsgardShieldReloaded {
         MinecraftForge.EVENT_BUS.register(this);
 
         modEventBus.addListener(this::addCreative);
+        //modEventBus.addListener(EventHandler::onAttackEntity);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -72,67 +74,44 @@ public class AsgardShieldReloaded {
                 new ResourceLocation(MODID, "blocking");
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
+
             event.enqueueWork(() -> {
                 ItemProperties.register(WOODEN_SHIELD.get(), BLOCKING_PROPERTY_RESLOC, ($itemStack, $level, $entity, $seed) -> {
                     return $entity != null && $entity.isUsingItem() && $entity.getUseItem() == $itemStack ? 1.0F : 0.0F;
                 });
-            });
-            event.enqueueWork(() -> {
                 ItemProperties.register(GILDED_WOODEN_SHIELD.get(), BLOCKING_PROPERTY_RESLOC, ($itemStack, $level, $entity, $seed) -> {
                     return $entity != null && $entity.isUsingItem() && $entity.getUseItem() == $itemStack ? 1.0F : 0.0F;
                 });
-            });
-            event.enqueueWork(() -> {
                 ItemProperties.register(STONE_SHIELD.get(), BLOCKING_PROPERTY_RESLOC, ($itemStack, $level, $entity, $seed) -> {
                     return $entity != null && $entity.isUsingItem() && $entity.getUseItem() == $itemStack ? 1.0F : 0.0F;
                 });
-            });
-            event.enqueueWork(() -> {
                 ItemProperties.register(GILDED_STONE_SHIELD.get(), BLOCKING_PROPERTY_RESLOC, ($itemStack, $level, $entity, $seed) -> {
                     return $entity != null && $entity.isUsingItem() && $entity.getUseItem() == $itemStack ? 1.0F : 0.0F;
                 });
-            });
-            event.enqueueWork(() -> {
                 ItemProperties.register(IRON_SHIELD.get(), BLOCKING_PROPERTY_RESLOC, ($itemStack, $level, $entity, $seed) -> {
                     return $entity != null && $entity.isUsingItem() && $entity.getUseItem() == $itemStack ? 1.0F : 0.0F;
                 });
-            });
-            event.enqueueWork(() -> {
                 ItemProperties.register(GILDED_IRON_SHIELD.get(), BLOCKING_PROPERTY_RESLOC, ($itemStack, $level, $entity, $seed) -> {
                     return $entity != null && $entity.isUsingItem() && $entity.getUseItem() == $itemStack ? 1.0F : 0.0F;
                 });
-            });
-            event.enqueueWork(() -> {
                 ItemProperties.register(DIAMOND_SHIELD.get(), BLOCKING_PROPERTY_RESLOC, ($itemStack, $level, $entity, $seed) -> {
                     return $entity != null && $entity.isUsingItem() && $entity.getUseItem() == $itemStack ? 1.0F : 0.0F;
                 });
-            });
-            event.enqueueWork(() -> {
                 ItemProperties.register(GILDED_DIAMOND_SHIELD.get(), BLOCKING_PROPERTY_RESLOC, ($itemStack, $level, $entity, $seed) -> {
                     return $entity != null && $entity.isUsingItem() && $entity.getUseItem() == $itemStack ? 1.0F : 0.0F;
                 });
-            });
-            event.enqueueWork(() -> {
                 ItemProperties.register(NETHERQUARTZ_SHIELD.get(), BLOCKING_PROPERTY_RESLOC, ($itemStack, $level, $entity, $seed) -> {
                     return $entity != null && $entity.isUsingItem() && $entity.getUseItem() == $itemStack ? 1.0F : 0.0F;
                 });
-            });
-            event.enqueueWork(() -> {
                 ItemProperties.register(GILDED_NETHERQUARTZ_SHIELD.get(), BLOCKING_PROPERTY_RESLOC, ($itemStack, $level, $entity, $seed) -> {
                     return $entity != null && $entity.isUsingItem() && $entity.getUseItem() == $itemStack ? 1.0F : 0.0F;
                 });
-            });
-            event.enqueueWork(() -> {
                 ItemProperties.register(SKULL_SHIELD.get(), BLOCKING_PROPERTY_RESLOC, ($itemStack, $level, $entity, $seed) -> {
                     return $entity != null && $entity.isUsingItem() && $entity.getUseItem() == $itemStack ? 1.0F : 0.0F;
                 });
-            });
-            event.enqueueWork(() -> {
                 ItemProperties.register(GILDED_SKULL_SHIELD.get(), BLOCKING_PROPERTY_RESLOC, ($itemStack, $level, $entity, $seed) -> {
                     return $entity != null && $entity.isUsingItem() && $entity.getUseItem() == $itemStack ? 1.0F : 0.0F;
                 });
-            });
-            event.enqueueWork(() -> {
                 ItemProperties.register(ENDER_SHIELD.get(), BLOCKING_PROPERTY_RESLOC, ($itemStack, $level, $entity, $seed) -> {
                     return $entity != null && $entity.isUsingItem() && $entity.getUseItem() == $itemStack ? 1.0F : 0.0F;
                 });

@@ -18,22 +18,22 @@ public class ItemInit {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, AsgardShieldReloaded.MODID);
     public static final Item.Properties PROPERTIES = new Item.Properties();
     public static final RegistryObject<SwordItem> DIAMOND_GIANT_SWORD = ITEMS.register("diamond_giant_sword",
-            () -> new SwordItem(Tiers.ALTDIAMOND, 1, -2.4f, PROPERTIES));
+            () -> new GiantSwordItem(Tiers.ALTDIAMOND, 1, -2.4f, PROPERTIES, 100));
 
     public static final RegistryObject<GiantSwordItem> IRON_GIANT_SWORD = ITEMS.register("iron_giant_sword",
-            () -> new GiantSwordItem(Tiers.ALTIRON, 1, -2.4f, PROPERTIES));
+            () -> new GiantSwordItem(Tiers.ALTIRON, 1, -2.4f, PROPERTIES, 100));
 
     public static final RegistryObject<GiantSwordItem> GOLDEN_GIANT_SWORD = ITEMS.register("golden_giant_sword",
-            () -> new GiantSwordItem(Tiers.ALTGOLD, 1, -2.4f, PROPERTIES));;
+            () -> new GiantSwordItem(Tiers.ALTGOLD, 1, -2.4f, PROPERTIES, 100));;
 
     public static final RegistryObject<GiantSwordItem> STONE_GIANT_SWORD = ITEMS.register("stone_giant_sword",
-            () -> new GiantSwordItem(Tiers.ALTSTONE, 1, -2.4f, PROPERTIES));
+            () -> new GiantSwordItem(Tiers.ALTSTONE, 1, -2.4f, PROPERTIES, 100));
 
     public static final RegistryObject<GiantSwordItem> WOODEN_GIANT_SWORD = ITEMS.register("wooden_giant_sword",
-            () -> new GiantSwordItem(Tiers.ALTWOOD, 1, -2.4f, PROPERTIES));
+            () -> new GiantSwordItem(Tiers.ALTWOOD, 1, -2.4f, PROPERTIES, 100));
 
     public static final RegistryObject<GiantSwordItem> ENDER_GIANT_SWORD = ITEMS.register("ender_giant_sword",
-            () -> new GiantSwordItem(Tiers.ENDERTIER, 1, -2f, PROPERTIES));
+            () -> new GiantSwordItem(Tiers.ENDERTIER, 1, -2f, PROPERTIES, 100));
 
     public static final RegistryObject<AsgardShieldItem> WOODEN_SHIELD = ITEMS.register("wooden_shield",
             () -> new AsgardShieldItem(PROPERTIES));
