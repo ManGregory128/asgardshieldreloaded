@@ -13,6 +13,7 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
@@ -39,7 +40,8 @@ public class GiantSwordItem extends SwordItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        player.setMainArm(HumanoidArm.RIGHT);
+        player.startUsingItem(hand);
+        //player.setMainArm(HumanoidArm.RIGHT);
         player.getLevel().playSound(null, BlockPos.containing(player.getPosition(0)),
                 SoundEvents.IRON_GOLEM_ATTACK, SoundSource.PLAYERS, 0.8F, 0.8F + level.random.nextFloat() * 0.4F);
         this.isBlocking = true;
@@ -48,7 +50,7 @@ public class GiantSwordItem extends SwordItem {
 
     @Override
     public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
-        return TOOL_ACTIONS.contains(toolAction);
+        return this.TOOL_ACTIONS.add(ToolActions.SHIELD_BLOCK);
     }
 
     @Override
