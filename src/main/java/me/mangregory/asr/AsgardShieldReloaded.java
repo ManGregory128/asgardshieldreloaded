@@ -22,6 +22,7 @@ public class AsgardShieldReloaded {
 
     // Define mod id in a common place for everything to reference
     public static final String MODID = "asr";
+    public static final String NAMESPACE = MODID + ":";
     public AsgardShieldReloaded() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 

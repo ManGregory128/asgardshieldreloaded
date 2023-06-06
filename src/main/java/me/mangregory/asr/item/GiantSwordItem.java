@@ -56,7 +56,6 @@ public class GiantSwordItem extends SwordItem {
         if (this.isBlocking) return UseAnim.BLOCK;
         return UseAnim.NONE;
     }
-
     @Override
     public int getUseDuration(ItemStack stack) {
         return 72000;
