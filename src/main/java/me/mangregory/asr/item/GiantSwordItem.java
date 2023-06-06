@@ -29,7 +29,8 @@ public class GiantSwordItem extends SwordItem {
     public boolean isBlocking;
     public int cooldown;
     public int maxUseDuration;
-    private static final Set<ToolAction> TOOL_ACTIONS =  Stream.of(ToolActions.SHIELD_BLOCK).collect(Collectors.toCollection(Sets::newIdentityHashSet));
+    private static final Set<ToolAction> TOOL_ACTIONS =
+            Stream.of(ToolActions.SHIELD_BLOCK).collect(Collectors.toCollection(Sets::newIdentityHashSet));
     public GiantSwordItem(Tier p_43269_, int p_43270_, float p_43271_, Properties p_43272_, int maxUseDuration) {
         super(p_43269_, p_43270_, p_43271_, p_43272_);
         isBlocking = false;

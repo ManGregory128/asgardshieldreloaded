@@ -21,6 +21,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import me.mangregory.asr.item.GiantSwordItem;
 
+
 // Courtesy of Fuzs
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class EventHandlerClient
@@ -92,4 +93,5 @@ public class EventHandlerClient
             return false;
         }
     }
+
 }

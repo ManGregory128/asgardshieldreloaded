@@ -2,6 +2,7 @@ package me.mangregory.asr;
 
 import me.mangregory.asr.init.ItemInit;
 import me.mangregory.asr.util.handlers.EventHandler;
+import me.mangregory.asr.util.handlers.SwordBlockingRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -75,6 +76,9 @@ public class AsgardShieldReloaded {
                 new ResourceLocation(MODID, "blocking");
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
+
+            final SwordBlockingRenderer swordBlockingRenderer = new SwordBlockingRenderer();
+            MinecraftForge.EVENT_BUS.addListener(swordBlockingRenderer::onRenderHand);
 
             event.enqueueWork(() -> {
                 ItemProperties.register(WOODEN_SHIELD.get(), BLOCKING_PROPERTY_RESLOC, ($itemStack, $level, $entity, $seed) -> {
