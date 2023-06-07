@@ -25,7 +25,6 @@ public class SwordBlockingRenderer {
             boolean isMainHand = evt.getHand() == InteractionHand.MAIN_HAND;
             HumanoidArm handSide = isMainHand ? player.getMainArm() : player.getMainArm().getOpposite();
             boolean isHandSideRight = handSide == HumanoidArm.RIGHT;
-            //GAME CRASHES AT EACH OF THE TWO LINES BELOW:
             applyItemArmTransform(matrixStack, handSide, evt.getEquipProgress());
             applyItemArmAttackTransform(matrixStack, handSide, evt.getSwingProgress());
             this.transformBlockFirstPerson(matrixStack, handSide);

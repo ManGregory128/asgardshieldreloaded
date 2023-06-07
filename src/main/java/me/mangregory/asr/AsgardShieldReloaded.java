@@ -1,5 +1,6 @@
 package me.mangregory.asr;
 
+import me.mangregory.asr.config.ASRCommonConfigs;
 import me.mangregory.asr.init.ItemInit;
 import me.mangregory.asr.util.handlers.EventHandler;
 import me.mangregory.asr.util.handlers.SwordBlockingRenderer;
@@ -11,7 +12,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -32,6 +35,8 @@ public class AsgardShieldReloaded {
 
         // Register the Deferred Register to the mod event bus so items get registered
         ItemInit.ITEMS.register(modEventBus);
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ASRCommonConfigs.SPEC, "asgardshieldreloaded-common.toml");
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
