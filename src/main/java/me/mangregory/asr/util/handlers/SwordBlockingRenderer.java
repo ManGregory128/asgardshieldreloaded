@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemInHandRenderer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
@@ -25,8 +26,8 @@ public class SwordBlockingRenderer {
             HumanoidArm handSide = isMainHand ? player.getMainArm() : player.getMainArm().getOpposite();
             boolean isHandSideRight = handSide == HumanoidArm.RIGHT;
             //GAME CRASHES AT EACH OF THE TWO LINES BELOW:
-            ((ItemInHandRendererAccessor) itemRenderer).callApplyItemArmTransform(matrixStack, handSide, evt.getEquipProgress());
-            ((ItemInHandRendererAccessor) itemRenderer).callApplyItemArmAttackTransform(matrixStack, handSide, evt.getSwingProgress());
+            applyItemArmTransform(matrixStack, handSide, evt.getEquipProgress());
+            applyItemArmAttackTransform(matrixStack, handSide, evt.getSwingProgress());
             this.transformBlockFirstPerson(matrixStack, handSide);
             itemRenderer.renderItem(player, evt.getItemStack(), isHandSideRight ? ItemDisplayContext.FIRST_PERSON_RIGHT_HAND : ItemDisplayContext.FIRST_PERSON_LEFT_HAND, !isHandSideRight, matrixStack, evt.getMultiBufferSource(), evt.getPackedLight());
             matrixStack.popPose();
@@ -41,5 +42,21 @@ public class SwordBlockingRenderer {
         matrixStack.mulPose(Axis.XP.rotationDegrees(-102.25F));
         matrixStack.mulPose(Axis.YP.rotationDegrees(signum * 13.365F));
         matrixStack.mulPose(Axis.ZP.rotationDegrees(signum * 78.05F));
+    }
+
+    //the two functions below are implemented from ItemRenderer:
+    private void applyItemArmTransform(PoseStack poseStack, HumanoidArm arm, float p_109385_) {
+        int i = arm == HumanoidArm.RIGHT ? 1 : -1;
+        poseStack.translate((float)i * 0.56F, -0.52F + p_109385_ * -0.6F, -0.72F);
+    }
+
+    private void applyItemArmAttackTransform(PoseStack poseStack, HumanoidArm arm, float p_109338_) {
+        int i = arm == HumanoidArm.RIGHT ? 1 : -1;
+        float f = Mth.sin(p_109338_ * p_109338_ * (float)Math.PI);
+        poseStack.mulPose(Axis.YP.rotationDegrees((float)i * (45.0F + f * -20.0F)));
+        float f1 = Mth.sin(Mth.sqrt(p_109338_) * (float)Math.PI);
+        poseStack.mulPose(Axis.ZP.rotationDegrees((float)i * f1 * -20.0F));
+        poseStack.mulPose(Axis.XP.rotationDegrees(f1 * -80.0F));
+        poseStack.mulPose(Axis.YP.rotationDegrees((float)i * -45.0F));
     }
 }
