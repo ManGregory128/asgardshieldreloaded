@@ -75,7 +75,8 @@ public class GiantSwordItem extends SwordItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
 
-        components.add(Component.literal("Maximum Block Duration: " + this.maxUseDuration / 20 + "s").withStyle(ChatFormatting.AQUA));
+        components.add(Component.literal("Maximum Block Duration: " + this.maxUseDuration / 20 + "s")
+                .withStyle(ChatFormatting.AQUA));
 
         super.appendHoverText(stack, level, components, flag);
     }

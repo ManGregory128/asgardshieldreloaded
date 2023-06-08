@@ -108,7 +108,7 @@ public class EventHandler
         {
             DamageSource source = event.getSource();
             Player player = (Player) event.getEntity();
-            if (!source.isCreativePlayer() && player.isBlocking())
+            if (source.is(DamageTypes.GENERIC) && player.isBlocking())
             {
                 ItemStack stack = player.getItemInHand(player.swingingArm);
                 Item item = stack.getItem();
