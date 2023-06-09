@@ -1,30 +1,33 @@
-# Asgard Shields
+# ASGARD SHIELDS
 item.asr.diamond_shield.name=Diamond Shield
 item.asr.ender_shield.name=Ender Shield
 item.asr.gilded_diamond_shield.name=Gilded Diamond Shield
 item.asr.gilded_ender_shield.name=Gilded Ender Shield
 item.asr.gilded_iron_shield.name=Gilded Iron Shield
 item.asr.gilded_netherquartz_shield.name=Gilded Nether Quartz Shield
+item.asr.gilded_patchwork_shield.name=Gilded Patchwork Shield
 item.asr.gilded_skull_shield.name=Gilded Skull Shield
 item.asr.gilded_stone_shield.name=Gilded Stone Shield
 item.asr.gilded_wooden_shield.name=Gilded Wooden Shield
 item.asr.iron_shield.name=Iron Shield
 item.asr.netherquartz_shield.name=Nether Quartz Shield
+item.asr.patchwork_shield.name=Patchwork Shield
 item.asr.skull_shield.name=Skull Shield
 item.asr.stone_shield.name=Stone Shield
 item.asr.wooden_shield.name=Wooden Shield
 
-# Giant Swords
+# GIANT SWORDS
 item.asr.diamond_giant_sword.name=Diamond Giant Sword
 item.asr.ender_giant_sword.name=Ender Giant Sword
 item.asr.golden_giant_sword.name=Golden Giant Sword
 item.asr.iron_giant_sword.name=Iron Giant Sword
 item.asr.netherquartz_giant_sword.name=Nether Quartz Giant Sword
+item.asr.patchwork_giant_sword.name=Patchwork Giant Sword
 item.asr.skull_giant_sword.name=Skull Giant Sword
 item.asr.stone_giant_sword.name=Stone Giant Sword
 item.asr.wooden_giant_sword.name=Wooden Giant Sword
 
-# Tooltips
+# TOOLTIPS
 item.asr.diamond_shield.perk.desc=Reflects projectiles back to attacker (30 percent chance)
 item.asr.diamond_shield.perk=Special Perk: Reflect
 item.asr.diamond_shield.weakness.desc=Reflected damage also damages the shield
@@ -49,6 +52,10 @@ item.asr.gilded_netherquartz_shield.perk.desc=Allows the player to collect fire 
 item.asr.gilded_netherquartz_shield.perk=Special Perk: Flame Keeper
 item.asr.gilded_netherquartz_shield.weakness.desc=The living mass feeds on the wielder, drains hunger gauge
 item.asr.gilded_netherquartz_shield.weakness=Weakness: Hungering
+item.asr.gilded_patchwork_shield.perk.desc=Inflicts attackers with nausea or weakness (20 percent chance)
+item.asr.gilded_patchwork_shield.perk=Special Perk: Foulness
+item.asr.gilded_patchwork_shield.weakness.desc=Inflicts wielder with nausea (5 percent chance)
+item.asr.gilded_patchwork_shield.weakness=Weakness: Foulness
 item.asr.gilded_skull_shield.perk.desc=Controls attacker to attack other targets or commit suicide (30 percent chance)
 item.asr.gilded_skull_shield.perk=Special Perk: Mind Control
 item.asr.gilded_skull_shield.weakness.desc=Receives x3 durability damage (10 percent chance)
@@ -69,6 +76,10 @@ item.asr.netherquartz_shield.perk.desc=Allows the player to collect fire charges
 item.asr.netherquartz_shield.perk=Special Perk: Flame Keeper
 item.asr.netherquartz_shield.weakness.desc=The living mass feeds on the wielder, drains hunger gauge
 item.asr.netherquartz_shield.weakness=Weakness: Hungering
+item.asr.patchwork_shield.perk.desc=Inflicts attackers with nausea or weakness (10 percent chance)
+item.asr.patchwork_shield.perk=Special Perk: Foulness
+item.asr.patchwork_shield.weakness.desc=Inflicts wielder with nausea (5 percent chance)
+item.asr.patchwork_shield.weakness=Weakness: Foulness
 item.asr.skull_shield.perk.desc=Controls attacker to attack other targets or commit suicide (15 percent chance)
 item.asr.skull_shield.perk=Special Perk: Mind Control
 item.asr.skull_shield.weakness.desc=Receives x3 durability damage (10 percent chance)

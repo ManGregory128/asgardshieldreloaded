@@ -1,0 +1,17 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " RR",
+    "RRR",
+    "RR "
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:rotten_flesh"
+    }
+  },
+  "result": {
+    "item": "asr:patchwork_giant_sword",
+    "count": 1
+  }
+}

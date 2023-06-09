@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "asr:items/patchwork_giant_sword"
+  }
+}

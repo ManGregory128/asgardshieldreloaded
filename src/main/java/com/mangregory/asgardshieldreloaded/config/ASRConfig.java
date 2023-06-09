@@ -70,6 +70,15 @@ public class ASRConfig
         @Config.Name("Nether Quartz Giant Sword: Max Use Duration")
         public int NETHERQUARTZ_GIANT_SWORD_MAXUSEDURATION = 100;
 
+        @Config.Name("Patchwork Giant Sword: Durability")
+        public int PATCHWORK_GIANT_SWORD_DURABILITY = 40;
+
+        @Config.Name("Patchwork Giant Sword: Damage")
+        public double PATCHWORK_GIANT_SWORD_DAMAGE = 5.0D;
+
+        @Config.Name("Patchwork Giant Sword: Max Use Duration")
+        public int PATCHWORK_GIANT_SWORD_MAXUSEDURATION = 100;
+
         @Config.Name("Skull Giant Sword: Durability")
         public int SKULL_GIANT_SWORD_DURABILITY = 260;
 
@@ -150,6 +159,18 @@ public class ASRConfig
 
         @Config.Name("Gilded Nether Quartz Shield: Max Use Duration")
         public int GILDED_NETHERQUARTZ_SHIELD_MAXUSEDURATION = 200;
+
+        @Config.Name("Patchwork Shield: Durability")
+        public int PATCHWORK_SHIELD_DURABILITY = 54;
+
+        @Config.Name("Patchwork Shield: Max Use Duration")
+        public int PATCHWORK_SHIELD_MAXUSEDURATION = 200;
+
+        @Config.Name("Gilded Patchwork Shield: Durability")
+        public int GILDED_PATCHWORK_SHIELD_DURABILITY = 182;
+
+        @Config.Name("Gilded Patchwork Shield: Max Use Duration")
+        public int GILDED_PATCHWORK_SHIELD_MAXUSEDURATION = 200;
 
         @Config.Name("Skull Shield: Durability")
         public int SKULL_SHIELD_DURABILITY = 174;

@@ -1,0 +1,17 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "RRR",
+    "RRR",
+    " R "
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:rotten_flesh"
+    }
+  },
+  "result": {
+    "item": "asr:patchwork_shield",
+    "count": 1
+  }
+}
