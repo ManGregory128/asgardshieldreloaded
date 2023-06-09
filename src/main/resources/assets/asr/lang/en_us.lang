@@ -1,20 +1,27 @@
 # ASGARD SHIELDS
 item.asr.diamond_shield.name=Diamond Shield
-item.asr.ender_shield.name=Ender Shield
 item.asr.gilded_diamond_shield.name=Gilded Diamond Shield
+
+item.asr.ender_shield.name=Ender Shield
 item.asr.gilded_ender_shield.name=Gilded Ender Shield
-item.asr.gilded_iron_shield.name=Gilded Iron Shield
-item.asr.gilded_netherquartz_shield.name=Gilded Nether Quartz Shield
-item.asr.gilded_patchwork_shield.name=Gilded Patchwork Shield
-item.asr.gilded_skull_shield.name=Gilded Skull Shield
-item.asr.gilded_stone_shield.name=Gilded Stone Shield
-item.asr.gilded_wooden_shield.name=Gilded Wooden Shield
+
 item.asr.iron_shield.name=Iron Shield
+item.asr.gilded_iron_shield.name=Gilded Iron Shield
+
 item.asr.netherquartz_shield.name=Nether Quartz Shield
+item.asr.gilded_netherquartz_shield.name=Gilded Nether Quartz Shield
+
 item.asr.patchwork_shield.name=Patchwork Shield
+item.asr.gilded_patchwork_shield.name=Gilded Patchwork Shield
+
 item.asr.skull_shield.name=Skull Shield
+item.asr.gilded_skull_shield.name=Gilded Skull Shield
+
 item.asr.stone_shield.name=Stone Shield
+item.asr.gilded_stone_shield.name=Gilded Stone Shield
+
 item.asr.wooden_shield.name=Wooden Shield
+item.asr.gilded_wooden_shield.name=Gilded Wooden Shield
 
 # GIANT SWORDS
 item.asr.diamond_giant_sword.name=Diamond Giant Sword
@@ -28,68 +35,84 @@ item.asr.stone_giant_sword.name=Stone Giant Sword
 item.asr.wooden_giant_sword.name=Wooden Giant Sword
 
 # TOOLTIPS
-item.asr.diamond_shield.perk.desc=Reflects projectiles back to attacker (30 percent chance)
 item.asr.diamond_shield.perk=Special Perk: Reflect
-item.asr.diamond_shield.weakness.desc=Reflected damage also damages the shield
+item.asr.diamond_shield.perk.desc=Reflects projectiles back to attacker (30 percent chance)
 item.asr.diamond_shield.weakness=Weakness: Displace
-item.asr.ender_shield.perk.desc=Teleports attackers away from the player (20 percent chance)
-item.asr.ender_shield.perk=Special Perk: Ender Shift
-item.asr.ender_shield.weakness.desc=Ender folk can bypass the guard
-item.asr.ender_shield.weakness=Weakness: End Tech
-item.asr.gilded_diamond_shield.perk.desc=Reflects projectiles back to attacker (60 percent chance)
+item.asr.diamond_shield.weakness.desc=Reflected damage also damages the shield
+
 item.asr.gilded_diamond_shield.perk=Special Perk: Reflect
-item.asr.gilded_diamond_shield.weakness.desc=Reflected damage also damages the shield
+item.asr.gilded_diamond_shield.perk.desc=Reflects projectiles back to attacker (60 percent chance)
 item.asr.gilded_diamond_shield.weakness=Weakness: Displace
-item.asr.gilded_ender_shield.perk.desc=Teleports attackers away from the player (40 percent chance)
+item.asr.gilded_diamond_shield.weakness.desc=Reflected damage also damages the shield
+
+item.asr.ender_shield.perk=Special Perk: Ender Shift
+item.asr.ender_shield.perk.desc=Teleports attackers away from the wielder (20 percent chance)
+item.asr.ender_shield.weakness=Weakness: End Tech
+item.asr.ender_shield.weakness.desc=Ender folk can bypass the guard
+
 item.asr.gilded_ender_shield.perk=Special Perk: Ender Shift
-item.asr.gilded_ender_shield.weakness.desc=Ender folk can bypass the guard
+item.asr.gilded_ender_shield.perk.desc=Teleports attackers away from the wielder (40 percent chance)
 item.asr.gilded_ender_shield.weakness=Weakness: End Tech
-item.asr.gilded_iron_shield.perk.desc=Receives less explosion durability damage
-item.asr.gilded_iron_shield.perk=Special Perk: Unmovable Object
-item.asr.gilded_iron_shield.weakness.desc=Iron begins to rust in wet environments, increasing durability damage taken
-item.asr.gilded_iron_shield.weakness=Weakness: Water
-item.asr.gilded_netherquartz_shield.perk.desc=Allows the player to collect fire charges from small fireballs
-item.asr.gilded_netherquartz_shield.perk=Special Perk: Flame Keeper
-item.asr.gilded_netherquartz_shield.weakness.desc=The living mass feeds on the wielder, drains hunger gauge
-item.asr.gilded_netherquartz_shield.weakness=Weakness: Hungering
-item.asr.gilded_patchwork_shield.perk.desc=Inflicts attackers with nausea or weakness (20 percent chance)
-item.asr.gilded_patchwork_shield.perk=Special Perk: Foulness
-item.asr.gilded_patchwork_shield.weakness.desc=Inflicts wielder with nausea (5 percent chance)
-item.asr.gilded_patchwork_shield.weakness=Weakness: Foulness
-item.asr.gilded_skull_shield.perk.desc=Controls attacker to attack other targets or commit suicide (30 percent chance)
-item.asr.gilded_skull_shield.perk=Special Perk: Mind Control
-item.asr.gilded_skull_shield.weakness.desc=Receives x3 durability damage (10 percent chance)
-item.asr.gilded_skull_shield.weakness=Weakness: Brittle Bones
-item.asr.gilded_stone_shield.perk.desc=Negates durability damage from fire sources
-item.asr.gilded_stone_shield.perk=Special Perk: Fire Protection
-item.asr.gilded_stone_shield.weakness.desc=Stone breaks easily from strong overwhelming damage
-item.asr.gilded_stone_shield.weakness=Weakness: Explosions
-item.asr.gilded_wooden_shield.perk.desc=Allows the player to collect arrows from enemies
-item.asr.gilded_wooden_shield.perk=Special Perk: Arrow Catch
-item.asr.gilded_wooden_shield.weakness.desc=Fire burns quickly through wood, be careful
-item.asr.gilded_wooden_shield.weakness=Weakness: Fire Damage
-item.asr.iron_shield.perk.desc=Receives less explosion durability damage (50 percent chance)
+item.asr.gilded_ender_shield.weakness.desc=Ender folk can bypass the guard
+
 item.asr.iron_shield.perk=Special Perk: Unmovable Object
-item.asr.iron_shield.weakness.desc=Iron begins to rust in wet environments, increasing durability damage taken
+item.asr.iron_shield.perk.desc=Receives less explosion durability damage (50 percent chance)
 item.asr.iron_shield.weakness=Weakness: Water
-item.asr.netherquartz_shield.perk.desc=Allows the player to collect fire charges from small fireballs (50 percent chance)
+item.asr.iron_shield.weakness.desc=Iron begins to rust in wet environments, increasing durability damage taken
+
+item.asr.gilded_iron_shield.perk=Special Perk: Unmovable Object
+item.asr.gilded_iron_shield.perk.desc=Receives less explosion durability damage
+item.asr.gilded_iron_shield.weakness=Weakness: Water
+item.asr.gilded_iron_shield.weakness.desc=Iron begins to rust in wet environments, increasing durability damage taken
+
 item.asr.netherquartz_shield.perk=Special Perk: Flame Keeper
-item.asr.netherquartz_shield.weakness.desc=The living mass feeds on the wielder, drains hunger gauge
+item.asr.netherquartz_shield.perk.desc=Allows the wielder to collect fire charges from small fireballs (50 percent chance)
 item.asr.netherquartz_shield.weakness=Weakness: Hungering
-item.asr.patchwork_shield.perk.desc=Inflicts attackers with nausea or weakness (10 percent chance)
+item.asr.netherquartz_shield.weakness.desc=The living mass feeds on the wielder, drains hunger gauge
+
+item.asr.gilded_netherquartz_shield.perk=Special Perk: Flame Keeper
+item.asr.gilded_netherquartz_shield.perk.desc=Allows the wielder to collect fire charges from small fireballs
+item.asr.gilded_netherquartz_shield.weakness=Weakness: Hungering
+item.asr.gilded_netherquartz_shield.weakness.desc=The living mass feeds on the wielder, drains hunger gauge
+
 item.asr.patchwork_shield.perk=Special Perk: Foulness
-item.asr.patchwork_shield.weakness.desc=Inflicts wielder with nausea (5 percent chance)
+item.asr.patchwork_shield.perk.desc=Inflicts attackers with nausea or weakness (10 percent chance)
 item.asr.patchwork_shield.weakness=Weakness: Foulness
-item.asr.skull_shield.perk.desc=Controls attacker to attack other targets or commit suicide (15 percent chance)
+item.asr.patchwork_shield.weakness.desc=Inflicts wielder with nausea (5 percent chance)
+
+item.asr.gilded_patchwork_shield.perk=Special Perk: Foulness
+item.asr.gilded_patchwork_shield.perk.desc=Inflicts attackers with nausea or weakness (20 percent chance)
+item.asr.gilded_patchwork_shield.weakness=Weakness: Foulness
+item.asr.gilded_patchwork_shield.weakness.desc=Inflicts wielder with nausea (5 percent chance)
+
 item.asr.skull_shield.perk=Special Perk: Mind Control
-item.asr.skull_shield.weakness.desc=Receives x3 durability damage (10 percent chance)
+item.asr.skull_shield.perk.desc=Controls attacker to attack other targets or commit suicide (15 percent chance)
 item.asr.skull_shield.weakness=Weakness: Brittle Bones
-item.asr.stone_shield.perk.desc=Negates durability damage from fire sources (50 percent chance)
+item.asr.skull_shield.weakness.desc=Receives x3 durability damage (10 percent chance)
+
+item.asr.gilded_skull_shield.perk=Special Perk: Mind Control
+item.asr.gilded_skull_shield.perk.desc=Controls attacker to attack other targets or commit suicide (30 percent chance)
+item.asr.gilded_skull_shield.weakness=Weakness: Brittle Bones
+item.asr.gilded_skull_shield.weakness.desc=Receives x3 durability damage (10 percent chance)
+
 item.asr.stone_shield.perk=Special Perk: Fire Protection
-item.asr.stone_shield.weakness.desc=Stone breaks easily from strong overwhelming damage
+item.asr.stone_shield.perk.desc=Negates durability damage from fire sources (50 percent chance)
 item.asr.stone_shield.weakness=Weakness: Explosions
-item.asr.wooden_shield.perk.desc=Allows the player to collect arrows from enemies (50 percent chance)
+item.asr.stone_shield.weakness.desc=Stone breaks easily from strong overwhelming damage
+
+item.asr.gilded_stone_shield.perk=Special Perk: Fire Protection
+item.asr.gilded_stone_shield.perk.desc=Negates durability damage from fire sources
+item.asr.gilded_stone_shield.weakness=Weakness: Explosions
+item.asr.gilded_stone_shield.weakness.desc=Stone breaks easily from strong overwhelming damage
+
 item.asr.wooden_shield.perk=Special Perk: Arrow Catch
-item.asr.wooden_shield.weakness.desc=Fire burns quickly through wood, be careful
+item.asr.wooden_shield.perk.desc=Allows the wielder to collect arrows from enemies (50 percent chance)
 item.asr.wooden_shield.weakness=Weakness: Fire Damage
+item.asr.wooden_shield.weakness.desc=Fire burns quickly through wood, be careful
+
+item.asr.gilded_wooden_shield.perk=Special Perk: Arrow Catch
+item.asr.gilded_wooden_shield.perk.desc=Allows the wielder to collect arrows from enemies
+item.asr.gilded_wooden_shield.weakness=Weakness: Fire Damage
+item.asr.gilded_wooden_shield.weakness.desc=Fire burns quickly through wood, be careful
+
 tooltip.asr.category.duration=Max Use Duration
