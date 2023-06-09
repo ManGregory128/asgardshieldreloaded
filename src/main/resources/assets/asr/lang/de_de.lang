@@ -1,0 +1,118 @@
+# ASGARD SHIELDS
+item.asr.diamond_shield.name=Diamantschild
+item.asr.gilded_diamond_shield.name=Vergoldeter Diamantschild
+
+item.asr.ender_shield.name=Enderschild
+item.asr.gilded_ender_shield.name=Vergoldeter Enderschild
+
+item.asr.iron_shield.name=Eisenschild
+item.asr.gilded_iron_shield.name=Vergoldeter Eisenschild
+
+item.asr.netherquartz_shield.name=Netherquarzschild
+item.asr.gilded_netherquartz_shield.name=Vergoldeter Netherquarzschild
+
+item.asr.patchwork_shield.name=Patchworkschild
+item.asr.gilded_patchwork_shield.name=Vergoldeter Patchworkschild
+
+item.asr.skull_shield.name=Skelettschädelschild
+item.asr.gilded_skull_shield.name=Vergoldeter Skelettschädelschild
+
+item.asr.stone_shield.name=Steinschild
+item.asr.gilded_stone_shield.name=Vergoldeter Steinschild
+
+item.asr.wooden_shield.name=Holzschild
+item.asr.gilded_wooden_shield.name=Vergoldeter Holzschild
+
+# GIANT SWORDS
+item.asr.diamond_giant_sword.name=Diamantriesenschwert
+item.asr.ender_giant_sword.name=Enderriesenschwert
+item.asr.golden_giant_sword.name=Goldriesenschwert
+item.asr.iron_giant_sword.name=Eisenriesenschwert
+item.asr.netherquartz_giant_sword.name=Netherquarzriesenschwert
+item.asr.patchwork_giant_sword.name=Patchworkriesenschwert
+item.asr.skull_giant_sword.name=Skelettschädelriesenschwert
+item.asr.stone_giant_sword.name=Steinriesenschwert
+item.asr.wooden_giant_sword.name=Holzriesenschwert
+
+# TOOLTIPS
+item.asr.diamond_shield.perk=Besonderer Vorteil: Reflektieren
+item.asr.diamond_shield.perk.desc=Reflektiert Geschosse zurück zum Gegner (30-Prozent-Chance)
+item.asr.diamond_shield.weakness=Schwäche: Verlagern
+item.asr.diamond_shield.weakness.desc=Reflektierter Schaden beschädigt auch den Schild
+
+item.asr.gilded_diamond_shield.perk=Besonderer Vorteil: Reflektieren
+item.asr.gilded_diamond_shield.perk.desc=Reflektiert Geschosse zurück zum Gegner (60-Prozent-Chance)
+item.asr.gilded_diamond_shield.weakness=Schwäche: Verlagern
+item.asr.gilded_diamond_shield.weakness.desc=Reflektierter Schaden beschädigt auch den Schild
+
+item.asr.ender_shield.perk=Besonderer Vorteil: Enderverschiebung
+item.asr.ender_shield.perk.desc=Teleportiert Gegner vom Träger weg (20-Prozent-Chance)
+item.asr.ender_shield.weakness=Schwäche: Endtechnologie
+item.asr.ender_shield.weakness.desc=Enderbewohner können den Schutz umgehen
+
+item.asr.gilded_ender_shield.perk=Besonderer Vorteil: Enderverschiebung
+item.asr.gilded_ender_shield.perk.desc=Teleportiert Gegner vom Träger weg (40-Prozent-Chance)
+item.asr.gilded_ender_shield.weakness=Schwäche: Endtechnologie
+item.asr.gilded_ender_shield.weakness.desc=Enderbewohner können den Schutz umgehen
+
+item.asr.iron_shield.perk=Besonderer Vorteil: Unbewegliches Objekt
+item.asr.iron_shield.perk.desc=Erhält weniger Schaden durch Explosionsbeständigkeit (50-Prozent-Chance)
+item.asr.iron_shield.weakness=Schwäche: Wasser
+item.asr.iron_shield.weakness.desc=Eisen beginnt in feuchter Umgebung zu rosten und erhöht den erlittenen Haltbarkeitsschaden
+
+item.asr.gilded_iron_shield.perk=Besonderer Vorteil: Unbewegliches Objekt
+item.asr.gilded_iron_shield.perk.desc=Erhält weniger Schaden durch Explosionsbeständigkeit
+item.asr.gilded_iron_shield.weakness=Schwäche: Wasser
+item.asr.gilded_iron_shield.weakness.desc=Eisen beginnt in feuchten Umgebungen zu rosten und erhöht den erlittenen Haltbarkeitsschaden
+
+item.asr.netherquartz_shield.perk=Besonderer Vorteil: Flammenbewahrer
+item.asr.netherquartz_shield.perk.desc=Ermöglicht es dem Träger, Feuerkugeln von kleinen Feuerbällen zu sammeln (50-Prozent-Chance)
+item.asr.netherquartz_shield.weakness=Schwäche: Hunger
+item.asr.netherquartz_shield.weakness.desc=Die lebende Masse ernährt sich vom Träger und verbraucht Nahrung
+
+item.asr.gilded_netherquartz_shield.perk=Besonderer Vorteil: Flammenbewahrer
+item.asr.gilded_netherquartz_shield.perk.desc=Ermöglicht es dem Träger, Feuerkugeln von kleinen Feuerbällen zu sammeln
+item.asr.gilded_netherquartz_shield.weakness=Schwäche: Hunger
+item.asr.gilded_netherquartz_shield.weakness.desc=Die lebende Masse ernährt sich vom Träger und verbraucht Nahrung
+
+item.asr.patchwork_shield.perk=Besonderer Vorteil: Verdorbenheit
+item.asr.patchwork_shield.perk.desc=Verursacht bei Gegnern Übelkeit oder Schwäche (10-Prozent-Chance)
+item.asr.patchwork_shield.weakness=Schwäche: Verdorbenheit
+item.asr.patchwork_shield.weakness.desc=Verursacht beim Träger Übelkeit (5-Prozent-Chance)
+
+item.asr.gilded_patchwork_shield.perk=Besonderer Vorteil: Verdorbenheit
+item.asr.gilded_patchwork_shield.perk.desc=Verursacht bei Gegnern Übelkeit oder Schwäche (20-Prozent-Chance)
+item.asr.gilded_patchwork_shield.weakness=Schwäche: Verdorbenheit
+item.asr.gilded_patchwork_shield.weakness.desc=Verursacht beim Träger Übelkeit (5-Prozent-Chance)
+
+item.asr.skull_shield.perk=Besonderer Vorteil: Gedankenkontrolle
+item.asr.skull_shield.perk.desc=Zwingt den Gegner dazu, andere Ziele anzugreifen oder Selbstmord zu begehen (15-Prozent-Chance)
+item.asr.skull_shield.weakness=Schwäche: Brüchige Knochen
+item.asr.skull_shield.weakness.desc=Erhält x3 Haltbarkeitsschaden (10-Prozent-Chance)
+
+item.asr.gilded_skull_shield.perk=Besonderer Vorteil: Gedankenkontrolle
+item.asr.gilded_skull_shield.perk.desc=Zwingt den Gegner dazu, andere Ziele anzugreifen oder Selbstmord zu begehen (30-Prozent-Chance)
+item.asr.gilded_skull_shield.weakness=Schwäche: Brüchige Knochen
+item.asr.gilded_skull_shield.weakness.desc=Erhält x3 Haltbarkeitsschaden (10-Prozent-Chance)
+
+item.asr.stone_shield.perk=Besonderer Vorteil: Feuerschutz
+item.asr.stone_shield.perk.desc=Negiert Haltbarkeitsschaden durch Feuerquellen (50-Prozent-Chance)
+item.asr.stone_shield.weakness=Schwäche: Explosionen
+item.asr.stone_shield.weakness.desc=Stein bricht leicht bei starkem, überwältigendem Schaden
+
+item.asr.gilded_stone_shield.perk=Besonderer Vorteil: Feuerschutz
+item.asr.gilded_stone_shield.perk.desc=Negiert Haltbarkeitsschaden durch Feuerquellen
+item.asr.gilded_stone_shield.weakness=Schwäche: Explosionen
+item.asr.gilded_stone_shield.weakness.desc=Stein bricht leicht bei starkem, überwältigendem Schaden
+
+item.asr.wooden_shield.perk=Besonderer Vorteil: Pfeilfang
+item.asr.wooden_shield.perk.desc=Ermöglicht es dem Träger, Pfeile von Gegnern einzusammeln (50-Prozent-Chance)
+item.asr.wooden_shield.weakness=Schwäche: Feuerschaden
+item.asr.wooden_shield.weakness.desc=Feuer brennt schnell durch Holz, sei vorsichtig
+
+item.asr.gilded_wooden_shield.perk=Besonderer Vorteil: Pfeilfang
+item.asr.gilded_wooden_shield.perk.desc=Ermöglicht es dem Träger, Pfeile von Feinden einzusammeln
+item.asr.gilded_wooden_shield.weakness=Schwäche: Feuerschaden
+item.asr.gilded_wooden_shield.weakness.desc=Feuer brennt schnell durch Holz, sei vorsichtig
+
+tooltip.asr.category.duration=Maximale Nutzungsdauer
