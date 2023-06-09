@@ -26,9 +26,9 @@ import com.mangregory.asgardshieldreloaded.init.ModItems;
 
 public class ItemGiantSword extends ItemSword
 {
-    public int cooldown;
-    public int maxUseDuration;
-    public boolean isBlocking;
+    private final int maxUseDuration;
+    private int cooldown;
+    private boolean isBlocking;
 
     public ItemGiantSword(String name, Item.ToolMaterial material, int maxUseDuration)
     {
@@ -40,6 +40,16 @@ public class ItemGiantSword extends ItemSword
         this.maxUseDuration = maxUseDuration;
         this.isBlocking = false;
         ModItems.ITEMS.add(this);
+    }
+
+    public boolean isBlocking()
+    {
+        return isBlocking;
+    }
+
+    public void setBlocking(boolean blocking)
+    {
+        isBlocking = blocking;
     }
 
     @Override

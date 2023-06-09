@@ -23,9 +23,9 @@ import com.mangregory.asgardshieldreloaded.init.ModItems;
 
 public class ItemAsgardShield extends Item
 {
-    public int cooldown;
-    public int maxUseDuration;
-    public boolean isBlocking;
+    private final int maxUseDuration;
+    private int cooldown;
+    private boolean isBlocking;
 
     public ItemAsgardShield(String name, int durability, int maxUseDuration)
     {
@@ -47,6 +47,16 @@ public class ItemAsgardShield extends Item
         });
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, ItemArmor.DISPENSER_BEHAVIOR);
         ModItems.ITEMS.add(this);
+    }
+
+    public boolean isBlocking()
+    {
+        return isBlocking;
+    }
+
+    public void setBlocking(boolean blocking)
+    {
+        isBlocking = blocking;
     }
 
     @Override

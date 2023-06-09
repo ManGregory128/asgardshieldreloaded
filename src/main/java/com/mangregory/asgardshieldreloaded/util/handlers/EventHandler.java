@@ -59,8 +59,8 @@ public class EventHandler
             {
                 if (!player.getCooldownTracker().hasCooldown(itemOffhand))
                 {
-                    ((ItemGiantSword) itemMainhand).isBlocking = false;
-                    ((ItemAsgardShield) itemOffhand).isBlocking = true;
+                    ((ItemGiantSword) itemMainhand).setBlocking(false);
+                    ((ItemAsgardShield) itemOffhand).setBlocking(true);
                     if (event.getHand() == EnumHand.MAIN_HAND)
                     {
                         event.setCancellationResult(EnumActionResult.PASS);
@@ -69,13 +69,13 @@ public class EventHandler
                 }
                 else
                 {
-                    ((ItemGiantSword) itemMainhand).isBlocking = true;
-                    ((ItemAsgardShield) itemOffhand).isBlocking = false;
+                    ((ItemGiantSword) itemMainhand).setBlocking(true);
+                    ((ItemAsgardShield) itemOffhand).setBlocking(false);
                 }
             }
             else if (itemOffhand instanceof ItemShield)
             {
-                ((ItemGiantSword) itemMainhand).isBlocking = false;
+                ((ItemGiantSword) itemMainhand).setBlocking(false);
                 if (event.getHand() == EnumHand.MAIN_HAND)
                 {
                     event.setCancellationResult(EnumActionResult.PASS);
@@ -369,7 +369,7 @@ public class EventHandler
     public static float teleportEnemy(Entity enemy, float knockback)
     {
         double d0 = enemy.posX + (enemy.getEntityWorld().rand.nextDouble() - 0.5D) * 64.0D;
-        double d1 = enemy.posY + (double) (enemy.getEntityWorld().rand.nextInt(64) - 32);
+        double d1 = enemy.posY + (enemy.getEntityWorld().rand.nextInt(64) - 32);
         double d2 = enemy.posZ + (enemy.getEntityWorld().rand.nextDouble() - 0.5D) * 64.0D;
         boolean teleport = ((EntityLivingBase) enemy).attemptTeleport(d0, d1, d2);
         if (teleport)

@@ -11,8 +11,8 @@ import com.mangregory.asgardshieldreloaded.AsgardShieldReloaded;
 @Config(modid = AsgardShieldReloaded.MOD_ID, name = "AsgardShieldReloaded")
 public class ASRConfig
 {
-    public static CategorySwords SWORDS = new CategorySwords();
-    public static CategoryShields SHIELDS = new CategoryShields();
+    public static final CategorySwords SWORDS = new CategorySwords();
+    public static final CategoryShields SHIELDS = new CategoryShields();
 
     public static class CategorySwords
     {
