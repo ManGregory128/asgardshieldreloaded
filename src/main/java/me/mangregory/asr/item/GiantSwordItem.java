@@ -41,7 +41,7 @@ public class GiantSwordItem extends SwordItem {
         ItemStack stack = player.getItemInHand(hand);
         player.startUsingItem(hand);
         //player.setMainArm(HumanoidArm.RIGHT);
-        player.getLevel().playSound(null, BlockPos.containing(player.getPosition(0)),
+        player.level().playSound(null, BlockPos.containing(player.getPosition(0)),
                 SoundEvents.IRON_GOLEM_ATTACK, SoundSource.PLAYERS, 0.8F, 0.8F + level.random.nextFloat() * 0.4F);
         this.isBlocking = true;
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
@@ -65,7 +65,7 @@ public class GiantSwordItem extends SwordItem {
 
     @Override
     public void onStopUsing(ItemStack stack, LivingEntity entity, int count) {
-        if (entity instanceof Player && !entity.getLevel().isClientSide) {
+        if (entity instanceof Player && !entity.level().isClientSide) {
             ((Player) entity).getCooldowns().addCooldown(this, this.cooldown / 2);
             this.cooldown = 0;
         }

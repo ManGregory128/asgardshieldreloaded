@@ -1,6 +1,7 @@
 package me.mangregory.asr.util.handlers;
 
 
+import me.mangregory.asr.item.GiantSwordItem;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -18,8 +19,6 @@ import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-
-import me.mangregory.asr.item.GiantSwordItem;
 
 
 // Courtesy of Fuzs

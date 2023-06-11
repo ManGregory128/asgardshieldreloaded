@@ -1,6 +1,7 @@
 package me.mangregory.asr;
 
-import me.mangregory.asr.config.ASRCommonConfigs;
+
+import com.google.common.eventbus.Subscribe;
 import me.mangregory.asr.init.ItemInit;
 import me.mangregory.asr.util.handlers.EventHandler;
 import me.mangregory.asr.util.handlers.SwordBlockingRenderer;
@@ -9,7 +10,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.CreativeModeTabEvent;
+
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -18,6 +20,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+
 import static me.mangregory.asr.init.ItemInit.*;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -32,26 +35,27 @@ public class AsgardShieldReloaded {
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
+        //modEventBus.addListener(EventHandler::onAttackEntity);
 
         // Register the Deferred Register to the mod event bus so items get registered
         ItemInit.ITEMS.register(modEventBus);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ASRCommonConfigs.SPEC, "asgardshieldreloaded-common.toml");
+        //ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ASRCommonConfigs.SPEC, "asgardshieldreloaded-common.toml");
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
-        modEventBus.addListener(this::addCreative);
-        //modEventBus.addListener(EventHandler::onAttackEntity);
+        modEventBus.addListener(this::buildContents);
+
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         // Some common setup code
 
     }
-
-    private void addCreative(CreativeModeTabEvent.BuildContents event) {
-        if(event.getTab() == CreativeModeTabs.COMBAT) {
+    @Subscribe
+    private void buildContents(BuildCreativeModeTabContentsEvent event) {
+        if(event.getTabKey() == CreativeModeTabs.COMBAT) {
             event.accept(DIAMOND_GIANT_SWORD);
             event.accept(IRON_GIANT_SWORD);
             event.accept(WOODEN_GIANT_SWORD);
@@ -74,6 +78,8 @@ public class AsgardShieldReloaded {
             event.accept(GILDED_ENDER_SHIELD);
         }
     }
+
+
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
@@ -129,6 +135,8 @@ public class AsgardShieldReloaded {
                     return $entity != null && $entity.isUsingItem() && $entity.getUseItem() == $itemStack ? 1.0F : 0.0F;
                 });
             });
+
+
         }
     }
 }
