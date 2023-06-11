@@ -11,7 +11,7 @@ loaderVersion="[46,)" #mandatory This is typically bumped every Minecraft versio
 # Review your options at https://choosealicense.com/. All rights reserved is the default copyright stance, and is thus the default here.
 license="GNU GPL 3.0"
 # A URL to refer people to when problems occur with this mod
-#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
+issueTrackerURL="https://github.com/ManGregory128/asgardshieldreloaded/issues/" #optional
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
 # The modid of the mod
@@ -21,7 +21,7 @@ modId="asr" #mandatory
 # see the associated build.gradle script for how to populate this completely automatically during a build
 version="0.1" #mandatory
 # A display name for the mod
-displayName="AsgardShieldReloaded" #mandatory
+displayName="Asgard Shield: Reloaded" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification https://docs.minecraftforge.net/en/latest/misc/updatechecker/
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
@@ -29,7 +29,7 @@ displayName="AsgardShieldReloaded" #mandatory
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="asr.png"
 # A text field displayed in the mod UI
-#credits="Thanks for this example mod goes to Java" #optional
+credits="Updated Sword Textures by CrzChooChoo22" #optional
 # A text field displayed in the mod UI
 authors="ManGregory, ACGaming" #optional
 # Display Test controls the display for your mod in the server connection screen
@@ -45,7 +45,7 @@ description='''
 A Hexxit mod ported over to new Minecraft Versions.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.asr120]] #optional
+[[dependencies.asr]] #optional
    # the modid of the dependency
    modId="forge" #mandatory
    # Does this dependency have to exist - if not, ordering below must be specified
@@ -57,7 +57,7 @@ A Hexxit mod ported over to new Minecraft Versions.
    # Side this dependency is applied on - BOTH, CLIENT or SERVER
    side="BOTH"
 # Here's another dependency
-[[dependencies.asr120]]
+[[dependencies.asr]]
    modId="minecraft"
    mandatory=true
    # This version range declares a minimum of the current minecraft version up to but not including the next major version

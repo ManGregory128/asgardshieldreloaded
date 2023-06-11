@@ -27,8 +27,7 @@ public class GiantSwordItem extends SwordItem {
     public boolean isBlocking;
     public int cooldown;
     public int maxUseDuration;
-    private static final Set<ToolAction> TOOL_ACTIONS =
-            Stream.of(ToolActions.SHIELD_BLOCK).collect(Collectors.toCollection(Sets::newIdentityHashSet));
+    private static final Set<ToolAction> TOOL_ACTIONS = ToolActions.DEFAULT_SWORD_ACTIONS;
     public GiantSwordItem(Tier p_43269_, int p_43270_, float p_43271_, Properties p_43272_, int maxUseDuration) {
         super(p_43269_, p_43270_, p_43271_, p_43272_);
         isBlocking = false;
@@ -40,16 +39,14 @@ public class GiantSwordItem extends SwordItem {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         player.startUsingItem(hand);
-        //player.setMainArm(HumanoidArm.RIGHT);
-        player.level().playSound(null, BlockPos.containing(player.getPosition(0)),
-                SoundEvents.IRON_GOLEM_ATTACK, SoundSource.PLAYERS, 0.8F, 0.8F + level.random.nextFloat() * 0.4F);
         this.isBlocking = true;
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
     }
 
     @Override
     public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
-        return this.TOOL_ACTIONS.add(ToolActions.SHIELD_BLOCK);
+        TOOL_ACTIONS.add(ToolActions.SHIELD_BLOCK);
+        return this.TOOL_ACTIONS.contains(toolAction);
     }
 
     @Override
