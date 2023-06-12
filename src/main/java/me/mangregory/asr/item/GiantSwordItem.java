@@ -84,6 +84,7 @@ public class GiantSwordItem extends SwordItem {
         this.cooldown++;
         if (this.cooldown >= this.maxUseDuration) {
             entity.stopUsingItem(); //used to be stopActiveHand
+            this.isBlocking = false;
         }
     }
 
