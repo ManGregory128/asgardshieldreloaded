@@ -63,9 +63,10 @@ public class GiantSwordItem extends SwordItem {
 
     @Override
     public void onStopUsing(ItemStack stack, LivingEntity entity, int count) {
-        if (entity instanceof Player && !entity.level().isClientSide)
+        if (entity instanceof Player && !entity.level().isClientSide) {
             ((Player) entity).getCooldowns().addCooldown(this, this.cooldown / 2);
-        this.cooldown = 0;
+            this.cooldown = 0;
+        }
         this.isBlocking = false;
     }
 
