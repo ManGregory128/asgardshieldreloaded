@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -62,10 +63,9 @@ public class GiantSwordItem extends SwordItem {
 
     @Override
     public void onStopUsing(ItemStack stack, LivingEntity entity, int count) {
-        if (entity instanceof Player && !entity.level().isClientSide) {
+        if (entity instanceof Player && !entity.level().isClientSide)
             ((Player) entity).getCooldowns().addCooldown(this, this.cooldown / 2);
-            this.cooldown = 0;
-        }
+        this.cooldown = 0;
         this.isBlocking = false;
     }
 

@@ -13,6 +13,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -51,8 +52,16 @@ public class AsgardShieldReloaded {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        // Some common setup code
+        final EventHandlerClient eventHandlerClient = new EventHandlerClient();
+        MinecraftForge.EVENT_BUS.addListener(eventHandlerClient::onLivingHurt);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.LOW, eventHandlerClient::onRightClickItem);
+        MinecraftForge.EVENT_BUS.addListener(eventHandlerClient::onItemUseStart);
+        MinecraftForge.EVENT_BUS.addListener(eventHandlerClient::onLivingKnockBack);
 
+        final EventHandler eventHandler = new EventHandler();
+        MinecraftForge.EVENT_BUS.addListener(eventHandler::onAttackEntity);
+        MinecraftForge.EVENT_BUS.addListener(eventHandler::onBlockActive);
+        MinecraftForge.EVENT_BUS.addListener(eventHandler::onBlockStart);
     }
     @Subscribe
     private void buildContents(BuildCreativeModeTabContentsEvent event) {
@@ -91,7 +100,6 @@ public class AsgardShieldReloaded {
 
             final SwordBlockingRenderer swordBlockingRenderer = new SwordBlockingRenderer();
             MinecraftForge.EVENT_BUS.addListener(swordBlockingRenderer::onRenderHand);
-            MinecraftForge.EVENT_BUS.addListener(EventHandlerClient::onLivingHurt);
 
             event.enqueueWork(() -> {
                 ItemProperties.register(WOODEN_SHIELD.get(), BLOCKING_PROPERTY_RESLOC, ($itemStack, $level, $entity, $seed) -> {
