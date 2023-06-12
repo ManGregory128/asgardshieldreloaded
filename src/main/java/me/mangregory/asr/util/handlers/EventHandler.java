@@ -43,10 +43,9 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.List;
 
 @Mod.EventBusSubscriber
-public class EventHandler
-{
+public class EventHandler {
     @SubscribeEvent
-    public void onAttackEntity(AttackEntityEvent event) {
+    public static void onAttackEntity(AttackEntityEvent event) {
         Player player = event.getEntity();
         Level level = player.level();
         Vec3 pos = player.getPosition(0);
@@ -57,8 +56,7 @@ public class EventHandler
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void onBlockStart(PlayerInteractEvent.RightClickItem event)
-    {
+    public static void onBlockStart(PlayerInteractEvent.RightClickItem event) {
         Player player = event.getEntity();
         Level level = player.level();
         Vec3 pos = player.getPosition(0);
@@ -71,31 +69,22 @@ public class EventHandler
             level.playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.IRON_GOLEM_ATTACK,
                     SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
 
-        if (itemMainHand instanceof GiantSwordItem)
-        {
-            if (itemOffHand instanceof AsgardShieldItem)
-            {
-                if (!player.getCooldowns().isOnCooldown(itemOffHand))
-                {
+        if (itemMainHand instanceof GiantSwordItem) {
+            if (itemOffHand instanceof AsgardShieldItem) {
+                if (!player.getCooldowns().isOnCooldown(itemOffHand)) {
                     ((GiantSwordItem) itemMainHand).isBlocking = false;
                     ((AsgardShieldItem) itemOffHand).isBlocking = true;
-                    if (event.getHand() == InteractionHand.MAIN_HAND)
-                    {
+                    if (event.getHand() == InteractionHand.MAIN_HAND) {
                         event.setCancellationResult(InteractionResult.PASS);
                         event.setCanceled(true);
                     }
-                }
-                else
-                {
+                } else {
                     ((GiantSwordItem) itemMainHand).isBlocking = true;
                     ((AsgardShieldItem) itemOffHand).isBlocking = false;
                 }
-            }
-            else if (itemOffHand instanceof ShieldItem)
-            {
+            } else if (itemOffHand instanceof ShieldItem) {
                 ((GiantSwordItem) itemMainHand).isBlocking = false;
-                if (event.getHand() == InteractionHand.MAIN_HAND)
-                {
+                if (event.getHand() == InteractionHand.MAIN_HAND) {
                     event.setCancellationResult(InteractionResult.PASS);
                     event.setCanceled(true);
                 }
@@ -108,17 +97,13 @@ public class EventHandler
     }
 
     @SubscribeEvent
-    public void onBlockActive(LivingAttackEvent event)
-    {
-        if (event.getEntity() instanceof Player && !event.getEntity().level().isClientSide)
-        {
+    public static void onBlockActive(LivingAttackEvent event) {
+        if (event.getEntity() instanceof Player player && !event.getEntity().level().isClientSide) {
             DamageSource source = event.getSource();
-            Player player = (Player) event.getEntity();
 
             if (player.isBlocking() && (source.is(DamageTypes.MOB_ATTACK) || source.is(DamageTypes.MOB_PROJECTILE)
                     || source.is(DamageTypes.EXPLOSION) || source.is(DamageTypes.ARROW))
-                    || source.is(DamageTypes.PLAYER_ATTACK) || source.is(DamageTypes.PLAYER_EXPLOSION))
-            {
+                    || source.is(DamageTypes.PLAYER_ATTACK) || source.is(DamageTypes.PLAYER_EXPLOSION)) {
                 ItemStack stack = player.getItemInHand(player.swingingArm);
                 Item item = stack.getItem();
                 String name = item.getName(stack).toString();
@@ -128,22 +113,17 @@ public class EventHandler
                 Entity enemy = source.getEntity();
                 boolean cancel = true;
 
-                if (item instanceof AsgardShieldItem)
-                {
-                    switch (item.toString())
-                    {
+                if (item instanceof AsgardShieldItem) {
+                    switch (item.toString()) {
                         case "wooden_shield":
                             knockback = 1.0F;
-                            if (source.is(DamageTypes.ON_FIRE))
-                            {
+                            if (source.is(DamageTypes.ON_FIRE)) {
                                 cancel = false;
                                 break;
                             }
-                            if (projectile instanceof Arrow)
-                            {
+                            if (projectile instanceof Arrow) {
                                 Arrow arrow = (Arrow) projectile;
-                                if (arrow.isOnFire())
-                                {
+                                if (arrow.isOnFire()) {
                                     cancel = false;
                                     break;
                                 }
@@ -152,16 +132,13 @@ public class EventHandler
                             break;
                         case "gilded_wooden_shield":
                             knockback = 1.5F;
-                            if (source.is(DamageTypes.ON_FIRE))
-                            {
+                            if (source.is(DamageTypes.ON_FIRE)) {
                                 cancel = false;
                                 break;
                             }
-                            if (projectile instanceof Arrow)
-                            {
+                            if (projectile instanceof Arrow) {
                                 Arrow arrow = (Arrow) projectile;
-                                if (arrow.isOnFire())
-                                {
+                                if (arrow.isOnFire()) {
                                     cancel = false;
                                     break;
                                 }
@@ -169,24 +146,20 @@ public class EventHandler
                             }
                             break;
                         case "stone_shield":
-                            if (source.is(DamageTypes.EXPLOSION))
-                            {
+                            if (source.is(DamageTypes.EXPLOSION)) {
                                 damage *= 1.5F;
                                 cancel = false;
                                 break;
-                            }
-                            else if (source.is(DamageTypes.ON_FIRE) && RandomUtil.chance(0.5D)) damage = 0.0F;
+                            } else if (source.is(DamageTypes.ON_FIRE) && RandomUtil.chance(0.5D)) damage = 0.0F;
                             knockback = 1.5F;
                             player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.STONE_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
                             break;
                         case "gilded_stone_shield":
-                            if (source.is(DamageTypes.EXPLOSION))
-                            {
+                            if (source.is(DamageTypes.EXPLOSION)) {
                                 damage *= 1.5F;
                                 cancel = false;
                                 break;
-                            }
-                            else if (source.is(DamageTypes.ON_FIRE)) damage = 0.0F;
+                            } else if (source.is(DamageTypes.ON_FIRE)) damage = 0.0F;
                             knockback = 1.5F;
                             player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.STONE_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
                             break;
@@ -203,27 +176,22 @@ public class EventHandler
                             player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.ANVIL_LAND, SoundSource.PLAYERS, 0.6F, 0.8F + player.level().random.nextFloat() * 0.4F);
                             break;
                         case "diamond_shield":
-                            if (projectile != null && RandomUtil.chance(0.3D))
-                            {
+                            if (projectile != null && RandomUtil.chance(0.3D)) {
                                 reflectProjectile(player, projectile);
                                 damage *= 1.5F;
-                            }
-                            else knockback = 1.0F;
+                            } else knockback = 1.0F;
                             player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.NOTE_BLOCK_CHIME.get(), SoundSource.PLAYERS, 0.6F, 0.8F + player.level().random.nextFloat() * 0.4F);
                             break;
                         case "gilded_diamond_shield":
-                            if (projectile != null && RandomUtil.chance(0.6D))
-                            {
+                            if (projectile != null && RandomUtil.chance(0.6D)) {
                                 reflectProjectile(player, projectile);
                                 damage *= 1.5F;
-                            }
-                            else knockback = 1.5F;
+                            } else knockback = 1.5F;
                             player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.NOTE_BLOCK_CHIME.get(), SoundSource.PLAYERS, 0.6F, 0.8F + player.level().random.nextFloat() * 0.4F);
                             break;
                         case "netherquartz_shield":
                             player.causeFoodExhaustion(damage);
-                            if (projectile instanceof SmallFireball && RandomUtil.chance(0.5D))
-                            {
+                            if (projectile instanceof SmallFireball && RandomUtil.chance(0.5D)) {
                                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 0.6F, 0.8F + player.level().random.nextFloat() * 0.4F);
                                 projectile.discard();
                                 player.getInventory().add(new ItemStack(Items.FIRE_CHARGE));
@@ -233,8 +201,7 @@ public class EventHandler
                             break;
                         case "gilded_netherquartz_shield":
                             player.causeFoodExhaustion(damage);
-                            if (projectile instanceof SmallFireball)
-                            {
+                            if (projectile instanceof SmallFireball) {
                                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
                                 projectile.discard();
                                 player.getInventory().add(new ItemStack(Items.FIRE_CHARGE));
@@ -244,67 +211,59 @@ public class EventHandler
                             break;
                         case "skull_shield":
                             if (RandomUtil.chance(0.1F)) damage *= 3.0F;
-                            if (enemy instanceof LivingEntity && RandomUtil.chance(0.15D))
-                            {
+                            if (enemy instanceof LivingEntity && RandomUtil.chance(0.15D)) {
                                 List<Entity> entities = enemy.level().getEntities(null, new AABB(enemy.getX() - 4, enemy.getY() - 4, enemy.getZ() - 4, enemy.getX() + 4, enemy.getY() + 4, enemy.getZ() + 4));
-                                if (entities.size() > 1)
-                                {
+                                if (entities.size() > 1) {
                                     //((LivingEntity) enemy).getNavigator.tryMoveToEntityLiving(entities.get(1), 1.0F);
                                     //((LivingEntity) enemy).attackEntityAsMob(entities.get(1));
-                                }
-                                else enemy.hurt(new DamageSource((Holder<DamageType>) DamageTypes.MAGIC), 10000.0F);
+                                } else enemy.hurt(new DamageSource((Holder<DamageType>) DamageTypes.MAGIC), 10000.0F);
                             }
                             knockback = 1.0F;
                             player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.SKELETON_HURT, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
                             break;
                         case "gilded_skull_shield":
                             if (RandomUtil.chance(0.1F)) damage *= 3.0F;
-                            if (enemy instanceof LivingEntity && RandomUtil.chance(0.3D))
-                            {
+                            if (enemy instanceof LivingEntity && RandomUtil.chance(0.3D)) {
                                 List<Entity> entities = enemy.level().getEntities(null, new AABB(enemy.getX() - 4, enemy.getY() - 4, enemy.getZ() - 4, enemy.getX() + 4, enemy.getY() + 4, enemy.getZ() + 4));
-                                if (entities.size() > 1)
-                                {
+                                if (entities.size() > 1) {
                                     //((EntityLiving) enemy).getNavigator().tryMoveToEntityLiving(entities.get(1), 1.0F);
                                     //((EntityLiving) enemy).attackEntityAsMob(entities.get(1));
-                                }
-                                else enemy.hurt(new DamageSource((Holder<DamageType>) DamageTypes.MAGIC), 10000.0F);
+                                } else enemy.hurt(new DamageSource((Holder<DamageType>) DamageTypes.MAGIC), 10000.0F);
                             }
                             knockback = 1.5F;
                             player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.SKELETON_HURT, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
                             break;
                         case "ender_shield":
-                            if (enemy instanceof EnderMan || enemy instanceof Endermite || enemy instanceof EnderDragon)
-                            {
+                            if (enemy instanceof EnderMan || enemy instanceof Endermite || enemy instanceof EnderDragon) {
                                 cancel = false;
                                 break;
                             }
-                            if (enemy instanceof LivingEntity && RandomUtil.chance(0.2D)) knockback = teleportEnemy(enemy, knockback);
+                            if (enemy instanceof LivingEntity && RandomUtil.chance(0.2D))
+                                knockback = teleportEnemy(enemy, knockback);
                             else knockback = 1.5F;
                             player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.ENDER_DRAGON_HURT, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
                             break;
                         case "gilded_ender_shield":
-                            if (enemy instanceof EnderMan || enemy instanceof Endermite || enemy instanceof EnderDragon)
-                            {
+                            if (enemy instanceof EnderMan || enemy instanceof Endermite || enemy instanceof EnderDragon) {
                                 cancel = false;
                                 break;
                             }
-                            if (enemy instanceof LivingEntity && RandomUtil.chance(0.4D)) knockback = teleportEnemy(enemy, knockback);
+                            if (enemy instanceof LivingEntity && RandomUtil.chance(0.4D))
+                                knockback = teleportEnemy(enemy, knockback);
                             else knockback = 1.5F;
                             player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.ENDER_DRAGON_HURT, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
                             break;
                     }
-                    if (cancel)
-                    {
-                        stack.getItem().damageItem(stack, (int) damage, player, player1 -> {});
-                        if (enemy instanceof LivingEntity && projectile == enemy) ((LivingEntity) enemy).knockback(knockback * 0.5F, player.getX() - enemy.getY(), player.getZ() - enemy.getZ());
+                    if (cancel) {
+                        stack.getItem().damageItem(stack, (int) damage, player, player1 -> {
+                        });
+                        if (enemy instanceof LivingEntity && projectile == enemy)
+                            ((LivingEntity) enemy).knockback(knockback * 0.5F, player.getX() - enemy.getY(), player.getZ() - enemy.getZ());
                         //player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.SKELETON_HURT, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
                     }
                     //event.setCanceled(cancel);
-                }
-                else if (item instanceof GiantSwordItem)
-                {
-                    switch (item.toString())
-                    {
+                } else if (item instanceof GiantSwordItem) {
+                    switch (item.toString()) {
                         case "wooden_giant_sword":
                             knockback = 1.0F;
                             break;
@@ -334,8 +293,10 @@ public class EventHandler
                             player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.ENDER_DRAGON_HURT, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
                             break;
                     }
-                    stack.getItem().damageItem(stack, (int) damage, player, player1 -> {});
-                    if (enemy instanceof LivingEntity && projectile == enemy) ((LivingEntity) enemy).knockback(knockback * 0.5F, player.getX() - enemy.getX(), player.getZ() - enemy.getZ());
+                    stack.getItem().damageItem(stack, (int) damage, player, player1 -> {
+                    });
+                    if (enemy instanceof LivingEntity && projectile == enemy)
+                        ((LivingEntity) enemy).knockback(knockback * 0.5F, player.getX() - enemy.getX(), player.getZ() - enemy.getZ());
                     //player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.SHIELD_BLOCK, SoundSource.PLAYERS, 0.1F, 0.8F + player.level().random.nextFloat() * 0.4F);
                     //event.setCanceled(true);
                 }
@@ -343,8 +304,7 @@ public class EventHandler
         }
     }
 
-    public void dropArrowAtPlayer(Arrow arrow, Player player)
-    {
+    public static void dropArrowAtPlayer(Arrow arrow, Player player) {
         arrow.pickup = AbstractArrow.Pickup.ALLOWED;
         arrow.xo = 0;
         arrow.yo = 0;
@@ -353,8 +313,7 @@ public class EventHandler
         player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.ARROW_HIT, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
     }
 
-    public void reflectProjectile(Player player, Entity projectile)
-    {
+    public static void reflectProjectile(Player player, Entity projectile) {
         Vec3 look = player.getLookAngle();
         double speed = projectile.getX() * projectile.xo + projectile.yo * projectile.yo + projectile.zo * projectile.zo;
         speed = Math.sqrt(speed);
@@ -364,9 +323,9 @@ public class EventHandler
         projectile.zo = look.z * speed;
         projectile.rotate(Rotation.CLOCKWISE_180);
 
-        if (player instanceof ServerPlayer) ((ServerPlayer) player).connection.connection.send(new ClientboundAddEntityPacket(projectile));
-        if (projectile instanceof Arrow)
-        {
+        if (player instanceof ServerPlayer)
+            ((ServerPlayer) player).connection.connection.send(new ClientboundAddEntityPacket(projectile));
+        if (projectile instanceof Arrow) {
             ((Arrow) projectile).setOwner(player);
             projectile.xo /= -0.10000000149011612D;
             projectile.yo /= -0.10000000149011612D;
@@ -375,14 +334,12 @@ public class EventHandler
 
     }
 
-    public float teleportEnemy(Entity enemy, float knockback)
-    {
+    public static float teleportEnemy(Entity enemy, float knockback) {
         Vec3 prevPos = enemy.getPosition(0);
         double d0 = enemy.getPosition(0).x + (enemy.level().random.nextDouble() - 0.5D) * 64.0D;
         double d1 = enemy.getPosition(0).y + (double) (enemy.level().random.nextInt(64) - 32);
         double d2 = enemy.getPosition(0).z + (enemy.level().random.nextDouble() - 0.5D) * 64.0D;
-        if (enemy.level() instanceof ServerLevel)
-        {
+        if (enemy.level() instanceof ServerLevel) {
             enemy.teleportTo(d0, d1, d2);
             enemy.level().playSound(null, prevPos.x, prevPos.y, prevPos.z, SoundEvents.ENDERMAN_TELEPORT, enemy.getSoundSource(), 1.0F, 1.0F);
             enemy.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 1.0F);
@@ -391,7 +348,7 @@ public class EventHandler
         return knockback;
     }
 
-    public void enderFx (ServerLevel level, Vec3 playerPos) {
+    public static void enderFx(ServerLevel level, Vec3 playerPos) {
         for (int i = 0; i < 3; i++) {
             int rand1 = level.random.nextInt(2) * 2 - 1;
             int rand2 = level.random.nextInt(2) * 2 - 1;

@@ -24,7 +24,7 @@ public class ItemInit {
             () -> new GiantSwordItem(Tiers.ALTIRON, 1, -2.4f, PROPERTIES, 100));
 
     public static final RegistryObject<GiantSwordItem> GOLDEN_GIANT_SWORD = ITEMS.register("golden_giant_sword",
-            () -> new GiantSwordItem(Tiers.ALTGOLD, 1, -2.4f, PROPERTIES, 100));;
+            () -> new GiantSwordItem(Tiers.ALTGOLD, 1, -2.4f, PROPERTIES, 100));
 
     public static final RegistryObject<GiantSwordItem> STONE_GIANT_SWORD = ITEMS.register("stone_giant_sword",
             () -> new GiantSwordItem(Tiers.ALTSTONE, 1, -2.4f, PROPERTIES, 100));

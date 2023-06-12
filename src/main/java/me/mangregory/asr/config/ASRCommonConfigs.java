@@ -29,6 +29,7 @@ public class ASRCommonConfigs {
     public static final ForgeConfigSpec.ConfigValue<Integer> ENDER_GIANT_SWORD_DURABILITY;
     public static final ForgeConfigSpec.ConfigValue<Double> ENDER_GIANT_SWORD_DAMAGE;
     public static final ForgeConfigSpec.ConfigValue<Integer> ENDER_GIANT_SWORD_MAXUSEDURATION;
+
     static {
         BUILDER.push("Configuration file for Asgard Shield: Reloaded");
 

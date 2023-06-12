@@ -3,8 +3,7 @@ package me.mangregory.asr.util;
 import java.util.Random;
 
 // Courtesy of UeberallGebannt
-public class RandomUtil
-{
+public class RandomUtil {
     public static final Random RANDOM = new Random();
 
     /**
@@ -14,8 +13,7 @@ public class RandomUtil
      * @param random The random instance to be used
      * @return true with a certain chance or false
      */
-    public static boolean chance(double chance, Random random)
-    {
+    public static boolean chance(double chance, Random random) {
         double val = random.nextDouble();
         return val <= chance;
     }
@@ -26,8 +24,7 @@ public class RandomUtil
      * @param chance The chance to return true
      * @return true with a certain chance or false
      */
-    public static boolean chance(double chance)
-    {
+    public static boolean chance(double chance) {
         return chance(chance, RANDOM);
     }
 }

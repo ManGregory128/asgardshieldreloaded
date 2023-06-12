@@ -20,11 +20,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class AsgardShieldItem extends ShieldItem {
+    private final String strengthDesc;
+    private final String weaknessDesc;
     public int cooldown;
     public boolean isBlocking;
     public int maxUseDuration;
-    private String strengthDesc;
-    private String weaknessDesc;
+
     public AsgardShieldItem(Properties properties, int maxUseDuration, String strength, String weakness) {
         super(properties);
         this.cooldown = 0;

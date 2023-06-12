@@ -1,12 +1,7 @@
 package me.mangregory.asr.item;
 
-import com.google.common.collect.Sets;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -20,15 +15,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class GiantSwordItem extends SwordItem {
 
+    private static final Set<ToolAction> TOOL_ACTIONS = ToolActions.DEFAULT_SWORD_ACTIONS;
     public boolean isBlocking;
     public int cooldown;
     public int maxUseDuration;
-    private static final Set<ToolAction> TOOL_ACTIONS = ToolActions.DEFAULT_SWORD_ACTIONS;
+
     public GiantSwordItem(Tier p_43269_, int p_43270_, float p_43271_, Properties p_43272_, int maxUseDuration) {
         super(p_43269_, p_43270_, p_43271_, p_43272_);
         isBlocking = false;
@@ -47,7 +41,7 @@ public class GiantSwordItem extends SwordItem {
     @Override
     public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
         TOOL_ACTIONS.add(ToolActions.SHIELD_BLOCK);
-        return this.TOOL_ACTIONS.contains(toolAction);
+        return TOOL_ACTIONS.contains(toolAction);
     }
 
     @Override
@@ -89,8 +83,7 @@ public class GiantSwordItem extends SwordItem {
     }
 
     @Override
-    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)
-    {
+    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
         return false;
     }
 }
