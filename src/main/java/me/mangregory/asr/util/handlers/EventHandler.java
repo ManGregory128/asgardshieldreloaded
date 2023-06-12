@@ -64,7 +64,7 @@ public class EventHandler
         Vec3 pos = player.getPosition(0);
 
         Item itemMainHand = player.getItemInHand(InteractionHand.MAIN_HAND).getItem();
-        Item itemOffHand = player.getItemInHand(InteractionHand.OFF_HAND).getItem();;
+        Item itemOffHand = player.getItemInHand(InteractionHand.OFF_HAND).getItem();
 
         if (itemMainHand instanceof GiantSwordItem || itemOffHand instanceof GiantSwordItem
                 || itemMainHand instanceof AsgardShieldItem || itemOffHand instanceof AsgardShieldItem)
@@ -110,7 +110,7 @@ public class EventHandler
     @SubscribeEvent
     public void onBlockActive(LivingAttackEvent event)
     {
-        if (event.getEntity() instanceof Player)
+        if (event.getEntity() instanceof Player && !event.getEntity().level().isClientSide)
         {
             DamageSource source = event.getSource();
             Player player = (Player) event.getEntity();
