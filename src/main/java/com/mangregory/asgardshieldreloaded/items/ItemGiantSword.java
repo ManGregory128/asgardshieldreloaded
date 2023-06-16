@@ -38,11 +38,11 @@ public class ItemGiantSword extends ItemSword
         this.setCreativeTab(CreativeTabs.COMBAT);
         this.cooldown = 0;
         this.maxUseDuration = maxUseDuration;
-        this.isBlocking = false;
+        this.setBlocking(false);
         ModItems.ITEMS.add(this);
     }
 
-    public boolean isBlocking()
+    public boolean getBlocking()
     {
         return isBlocking;
     }
@@ -58,14 +58,14 @@ public class ItemGiantSword extends ItemSword
         ItemStack stack = playerIn.getHeldItem(handIn);
         playerIn.setActiveHand(handIn);
         playerIn.getEntityWorld().playSound(null, playerIn.getPosition(), SoundEvents.ENTITY_IRONGOLEM_ATTACK, SoundCategory.PLAYERS, 0.8F, 0.8F + playerIn.getEntityWorld().rand.nextFloat() * 0.4F);
-        this.isBlocking = true;
+        this.setBlocking(true);
         return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }
 
     @Override
     public EnumAction getItemUseAction(ItemStack stack)
     {
-        if (this.isBlocking) return EnumAction.BLOCK;
+        if (this.getBlocking()) return EnumAction.BLOCK;
         return EnumAction.NONE;
     }
 
@@ -83,7 +83,7 @@ public class ItemGiantSword extends ItemSword
             ((EntityPlayer) entityLiving).getCooldownTracker().setCooldown(this, this.cooldown / 2);
             this.cooldown = 0;
         }
-        this.isBlocking = false;
+        this.setBlocking(false);
     }
 
     @Override
@@ -97,11 +97,11 @@ public class ItemGiantSword extends ItemSword
     @Override
     public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
     {
-        this.cooldown++;
+        if (!player.world.isRemote) this.cooldown++;
         if (this.cooldown >= this.maxUseDuration)
         {
             player.stopActiveHand();
-            this.isBlocking = false;
+            this.setBlocking(false);
         }
     }
 

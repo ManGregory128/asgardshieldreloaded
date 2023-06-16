@@ -36,7 +36,7 @@ public class ItemAsgardShield extends Item
         this.setMaxDamage(durability);
         this.cooldown = 0;
         this.maxUseDuration = maxUseDuration;
-        this.isBlocking = false;
+        this.setBlocking(false);
         this.addPropertyOverride(new ResourceLocation(AsgardShieldReloaded.NAMESPACE + "blocking"), new IItemPropertyGetter()
         {
             @SideOnly(Side.CLIENT)
@@ -49,7 +49,7 @@ public class ItemAsgardShield extends Item
         ModItems.ITEMS.add(this);
     }
 
-    public boolean isBlocking()
+    public boolean getBlocking()
     {
         return isBlocking;
     }
@@ -65,14 +65,14 @@ public class ItemAsgardShield extends Item
         ItemStack stack = playerIn.getHeldItem(handIn);
         playerIn.setActiveHand(handIn);
         playerIn.getEntityWorld().playSound(null, playerIn.getPosition(), SoundEvents.ENTITY_IRONGOLEM_ATTACK, SoundCategory.PLAYERS, 0.8F, 0.8F + playerIn.getEntityWorld().rand.nextFloat() * 0.4F);
-        this.isBlocking = true;
+        this.setBlocking(true);
         return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }
 
     @Override
     public EnumAction getItemUseAction(ItemStack stack)
     {
-        if (this.isBlocking) return EnumAction.BLOCK;
+        if (this.getBlocking()) return EnumAction.BLOCK;
         return EnumAction.NONE;
     }
 
@@ -90,7 +90,7 @@ public class ItemAsgardShield extends Item
             ((EntityPlayer) entityLiving).getCooldownTracker().setCooldown(this, this.cooldown / 2);
             this.cooldown = 0;
         }
-        this.isBlocking = false;
+        this.setBlocking(false);
     }
 
     @Override
@@ -116,11 +116,11 @@ public class ItemAsgardShield extends Item
     @Override
     public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
     {
-        this.cooldown++;
+        if (!player.world.isRemote) this.cooldown++;
         if (this.cooldown >= this.maxUseDuration)
         {
             player.stopActiveHand();
-            this.isBlocking = false;
+            this.setBlocking(false);
         }
     }
 }

@@ -65,6 +65,7 @@ public class EventHandler
                     ((ItemAsgardShield) itemOffhand).setBlocking(true);
                     if (event.getHand() == EnumHand.MAIN_HAND)
                     {
+                        player.resetActiveHand();
                         event.setCancellationResult(EnumActionResult.PASS);
                         event.setCanceled(true);
                     }
@@ -80,6 +81,7 @@ public class EventHandler
                 ((ItemGiantSword) itemMainhand).setBlocking(false);
                 if (event.getHand() == EnumHand.MAIN_HAND)
                 {
+                    player.resetActiveHand();
                     event.setCancellationResult(EnumActionResult.PASS);
                     event.setCanceled(true);
                 }
