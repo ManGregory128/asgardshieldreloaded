@@ -75,6 +75,7 @@ public class EventHandler {
                     ((GiantSwordItem) itemMainHand).isBlocking = false;
                     ((AsgardShieldItem) itemOffHand).isBlocking = true;
                     if (event.getHand() == InteractionHand.MAIN_HAND) {
+                        player.stopUsingItem();
                         event.setCancellationResult(InteractionResult.PASS);
                         event.setCanceled(true);
                     }
@@ -85,6 +86,7 @@ public class EventHandler {
             } else if (itemOffHand instanceof ShieldItem) {
                 ((GiantSwordItem) itemMainHand).isBlocking = false;
                 if (event.getHand() == InteractionHand.MAIN_HAND) {
+                    player.stopUsingItem();
                     event.setCancellationResult(InteractionResult.PASS);
                     event.setCanceled(true);
                 }

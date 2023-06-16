@@ -68,7 +68,7 @@ public class AsgardShieldItem extends ShieldItem {
 
     @Override
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int count) {
-        this.cooldown++;
+        if (!entity.level().isClientSide) this.cooldown++;
         if (this.cooldown >= this.maxUseDuration) {
             entity.stopUsingItem(); //used to be stopActiveHand
             this.isBlocking = false;
