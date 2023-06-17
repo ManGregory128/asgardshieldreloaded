@@ -110,4 +110,11 @@ public class ItemGiantSword extends ItemSword
     {
         return false;
     }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean isFull3D()
+    {
+        return true;
+    }
 }
