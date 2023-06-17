@@ -216,8 +216,8 @@ public class EventHandler {
                             if (enemy instanceof LivingEntity && RandomUtil.chance(0.15D)) {
                                 List<Entity> entities = enemy.getLevel().getEntities(null, new AABB(enemy.getX() - 4, enemy.getY() - 4, enemy.getZ() - 4, enemy.getX() + 4, enemy.getY() + 4, enemy.getZ() + 4));
                                 if (entities.size() > 1) {
-                                    //((LivingEntity) enemy).getNavigator.tryMoveToEntityLiving(entities.get(1), 1.0F);
-                                    //((LivingEntity) enemy).attackEntityAsMob(entities.get(1));
+                                    ((LivingEntity) enemy).travel(entities.get(1).getPosition(0));
+                                    ((LivingEntity) enemy).doHurtTarget(entities.get(1));
                                 } else enemy.hurt(new DamageSource((Holder<DamageType>) DamageTypes.MAGIC), 10000.0F);
                             }
                             knockback = 1.0F;
@@ -228,8 +228,8 @@ public class EventHandler {
                             if (enemy instanceof LivingEntity && RandomUtil.chance(0.3D)) {
                                 List<Entity> entities = enemy.getLevel().getEntities(null, new AABB(enemy.getX() - 4, enemy.getY() - 4, enemy.getZ() - 4, enemy.getX() + 4, enemy.getY() + 4, enemy.getZ() + 4));
                                 if (entities.size() > 1) {
-                                    //((EntityLiving) enemy).getNavigator().tryMoveToEntityLiving(entities.get(1), 1.0F);
-                                    //((EntityLiving) enemy).attackEntityAsMob(entities.get(1));
+                                    ((LivingEntity) enemy).travel(entities.get(1).getPosition(0));
+                                    ((LivingEntity) enemy).doHurtTarget(entities.get(1));
                                 } else enemy.hurt(new DamageSource((Holder<DamageType>) DamageTypes.MAGIC), 10000.0F);
                             }
                             knockback = 1.5F;
@@ -307,11 +307,10 @@ public class EventHandler {
     }
 
     public static void dropArrowAtPlayer(Arrow arrow, Player player) {
-        arrow.pickup = AbstractArrow.Pickup.ALLOWED;
-        arrow.xo = 0;
-        arrow.yo = 0;
-        arrow.zo = 0;
-        arrow.setPos(player.getX(), player.getY(), player.getZ());
+        arrow.setDeltaMovement(0, 0, 0);
+        arrow.discard();
+        ItemStack arrowStack = new ItemStack(Items.ARROW);
+        player.getInventory().add(arrowStack);
         player.getLevel().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.ARROW_HIT, SoundSource.PLAYERS, 0.8F, 0.8F + player.getLevel().random.nextFloat() * 0.4F);
     }
 
