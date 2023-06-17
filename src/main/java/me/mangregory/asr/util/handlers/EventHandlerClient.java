@@ -1,21 +1,16 @@
 package me.mangregory.asr.util.handlers;
 
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -24,74 +19,38 @@ import me.mangregory.asr.item.GiantSwordItem;
 
 // Courtesy of Fuzs
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
-public class EventHandlerClient
-{
+public class EventHandlerClient {
     @SubscribeEvent
-    public void onRightClickItem(final PlayerInteractEvent.RightClickItem evt) {
-        Player player = evt.getEntity();
-        if (canItemStackBlock(evt.getItemStack())) {
-            if (evt.getHand() != InteractionHand.MAIN_HAND || player.getOffhandItem().getUseAnimation() != UseAnim.BLOCK) {
-                player.startUsingItem(evt.getHand());
-                // cause reequip animation, but don't swing hand, not to be confused with ActionResultType#SUCCESS
-                // partial version seems to not affect game stats which is probably better since you can just spam sword blocking haha
-                evt.setCancellationResult(InteractionResult.CONSUME_PARTIAL);
-                evt.setCanceled(true);
-            }
-        }
-    }
-    @SubscribeEvent
-    public void onItemUseStart(final LivingEntityUseItemEvent.Start evt) {
-        if (evt.getEntity() instanceof Player && canItemStackBlock(evt.getItem())) {
-            // default use duration for items
-            evt.setDuration(72000);
-        }
-    }
-    @SubscribeEvent
-    public void onLivingHurt(final LivingHurtEvent evt) {
-        if (evt.getEntity() instanceof Player player) {
-            if (isDamageSourceBlockable(evt.getSource(), player) && evt.getAmount() > 0.0F) {
-                evt.setAmount((1.0F + evt.getAmount()) * 0.5F);
-            }
-        }
-    }
-    @SubscribeEvent
-    public void onLivingKnockBack(final LivingKnockBackEvent evt) {
-        if (evt.getEntity() instanceof Player player && isActiveItemStackBlocking(player)) {
-            float knockBackMultiplier = 1.0F;
-            if (knockBackMultiplier <= 0.0F) {
-                evt.setCanceled(true);
-            } else {
-                evt.setStrength(evt.getStrength() * knockBackMultiplier);
-            }
-        }
-    }
-    private static boolean isDamageSourceBlockable(DamageSource source, Player player) {
-        Entity entity = source.getDirectEntity();
-        if (entity instanceof AbstractArrow arrow) {
-            if (arrow.getPierceLevel() > 0) {
-                return false;
-            }
-        }
-        if (!source.is(DamageTypes.GENERIC) && isActiveItemStackBlocking(player)) {
-            Vec3 vec32 = source.getSourcePosition();
-            if (vec32 != null) {
-                Vec3 vec3 = player.getViewVector(1.0F);
-                Vec3 vec31 = vec32.vectorTo(player.position()).normalize();
-                vec31 = new Vec3(vec31.x, 0.0, vec31.z);
-                return vec31.dot(vec3) < -Math.cos(1 * Math.PI * 0.5 / 180.0);
-            }
-        }
-        return false;
-    }
-    public static boolean isActiveItemStackBlocking(Player player) {
-        return player.isUsingItem() && canItemStackBlock(player.getUseItem());
-    }
-    public static boolean canItemStackBlock(ItemStack stack) {
-        if (stack.getItem() instanceof GiantSwordItem) {
-            return true;
-        } else {
-            return false;
+    public static void onRenderHand(RenderHandEvent evt) {
+        final Minecraft minecraft = Minecraft.getInstance();
+        Player player = minecraft.player;
+        if (player != null && player.isUsingItem() && player.getUsedItemHand() == evt.getHand() && player.getItemInHand(player.getUsedItemHand()).getItem() instanceof GiantSwordItem) {
+            ItemInHandRenderer itemRenderer = minecraft.getEntityRenderDispatcher().getItemInHandRenderer();
+            PoseStack matrixStack = evt.getPoseStack();
+            matrixStack.pushPose();
+            boolean isMainHand = evt.getHand() == InteractionHand.MAIN_HAND;
+            HumanoidArm handSide = isMainHand ? player.getMainArm() : player.getMainArm().getOpposite();
+            boolean isHandSideRight = handSide == HumanoidArm.RIGHT;
+            applyItemArmTransform(matrixStack, handSide, evt.getEquipProgress());
+            transformBlockFirstPerson(matrixStack, handSide);
+            itemRenderer.renderItem(player, evt.getItemStack(), isHandSideRight ? ItemDisplayContext.FIRST_PERSON_RIGHT_HAND : ItemDisplayContext.FIRST_PERSON_LEFT_HAND, !isHandSideRight, matrixStack, evt.getMultiBufferSource(), evt.getPackedLight());
+            matrixStack.popPose();
+            evt.setCanceled(true);
         }
     }
 
+    private static void transformBlockFirstPerson(PoseStack matrixStack, HumanoidArm hand) {
+        int signum = hand == HumanoidArm.RIGHT ? 1 : -1;
+        // values taken from Minecraft snapshot 15w33b
+        matrixStack.translate(signum * -0.14142136F, 0.08F, 0.14142136F);
+        matrixStack.mulPose(Axis.XP.rotationDegrees(-102.25F));
+        matrixStack.mulPose(Axis.YP.rotationDegrees(signum * 13.365F));
+        matrixStack.mulPose(Axis.ZP.rotationDegrees(signum * 78.05F));
+    }
+
+    //the function below is implemented from ItemRenderer:
+    private static void applyItemArmTransform(PoseStack poseStack, HumanoidArm arm, float p_109385_) {
+        int i = arm == HumanoidArm.RIGHT ? 1 : -1;
+        poseStack.translate(i * 0.56F, -0.52F + p_109385_ * -0.6F, -0.72F);
+    }
 }

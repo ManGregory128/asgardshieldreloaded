@@ -20,15 +20,19 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class AsgardShieldItem extends ShieldItem {
+    private final String strengthDesc;
+    private final String weaknessDesc;
     public int cooldown;
     public boolean isBlocking;
     public int maxUseDuration;
 
-    public AsgardShieldItem(Properties p_43089_, int maxUseDuration) {
-        super(p_43089_);
+    public AsgardShieldItem(Properties properties, int maxUseDuration, String strength, String weakness) {
+        super(properties);
         this.cooldown = 0;
         this.isBlocking = false;
         this.maxUseDuration = maxUseDuration;
+        this.strengthDesc = strength;
+        this.weaknessDesc = weakness;
     }
 
     @Override
@@ -64,7 +68,7 @@ public class AsgardShieldItem extends ShieldItem {
 
     @Override
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int count) {
-        this.cooldown++;
+        if (!entity.getLevel().isClientSide) this.cooldown++;
         if (this.cooldown >= this.maxUseDuration) {
             entity.stopUsingItem(); //used to be stopActiveHand
             this.isBlocking = false;
@@ -75,7 +79,8 @@ public class AsgardShieldItem extends ShieldItem {
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
 
         components.add(Component.literal("Maximum Block Duration: " + this.maxUseDuration / 20 + "s").withStyle(ChatFormatting.AQUA));
-
+        components.add(Component.literal("Perk: " + strengthDesc).withStyle(ChatFormatting.GREEN));
+        components.add(Component.literal("Weakness: " + weaknessDesc).withStyle(ChatFormatting.RED));
         super.appendHoverText(stack, level, components, flag);
     }
 }
