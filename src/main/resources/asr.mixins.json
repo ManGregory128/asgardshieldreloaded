@@ -1,9 +1,10 @@
 {
   "required": true,
   "package": "me.mangregory.asr.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "refmap": "modid.refmap.json",
   "mixins": [
+
   ],
   "client": [
   ],
