@@ -363,4 +363,17 @@ public class EventHandler {
             level.sendParticles(ParticleTypes.PORTAL, xCoord, yCoord, zCoord, 2, 0, 0, 0, speed);
         }
     }
+    public static boolean isActiveItemStackBlocking(Player player) {
+        return !getActiveItemStackBlocking(player).isEmpty();
+    }
+
+    public static ItemStack getActiveItemStackBlocking(Player player) {
+        if (player.isUsingItem()) {
+            ItemStack stack = player.getUseItem();
+            if (stack.getItem() instanceof GiantSwordItem || stack.getItem() instanceof AsgardShieldItem) return stack;
+            else return ItemStack.EMPTY;
+        } else {
+            return ItemStack.EMPTY;
+        }
+    }
 }
