@@ -2,6 +2,7 @@ package me.mangregory.asr.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import me.mangregory.asr.item.GiantSwordItem;
 import me.mangregory.asr.util.handlers.EventHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ArmedModel;
@@ -40,7 +41,7 @@ abstract class PlayerItemInHandLayerMixin<T extends Player, M extends EntityMode
 
     @Inject(method = "renderArmWithItem", at = @At("HEAD"), cancellable = true)
     protected void renderArmWithItem(LivingEntity entity, ItemStack stack, ItemDisplayContext transform, HumanoidArm arm, PoseStack poseStack, MultiBufferSource multiBufferSource, int combinedLight, CallbackInfo callback) {
-        if (stack.isEmpty()) return;
+        if (stack.isEmpty() || !(entity instanceof Player)) return;
         if (entity.getUseItem() == stack && EventHandler.isActiveItemStackBlocking((Player) entity)) {
             this.renderBlockingWithSword(entity, stack, transform, arm, poseStack, multiBufferSource, combinedLight);
             callback.cancel();
@@ -56,7 +57,10 @@ abstract class PlayerItemInHandLayerMixin<T extends Player, M extends EntityMode
         poseStack.pushPose();
         this.getParentModel().translateToHand(arm, poseStack);
         boolean leftHand = arm == HumanoidArm.LEFT;
-        this.applyItemBlockingTransform(poseStack, leftHand);
+        if (entity.getUseItem().getItem() instanceof GiantSwordItem)
+            this.applyItemBlockingTransform(poseStack, leftHand);
+        else
+            this.applyShieldBlockingTransform(poseStack, leftHand);
         this.applyItemTransformInverse(entity, stack, transform, poseStack, leftHand);
         this.itemInHandRenderer.renderItem(entity, stack, transform, leftHand, poseStack, multiBufferSource, combinedLight);
         poseStack.popPose();
@@ -87,7 +91,31 @@ abstract class PlayerItemInHandLayerMixin<T extends Player, M extends EntityMode
         poseStack.mulPose(Axis.YN.rotationDegrees(180.0F));
         poseStack.translate(0.0F, 0.0F, 0.28125F);
     }
-
+    private void applyShieldBlockingTransform(PoseStack poseStack, boolean leftHand) {
+        poseStack.translate((leftHand ? 1.0F : -1.0F) / 16.0F, 0.4375F, 0.0625F);
+        // blocking
+        poseStack.translate(leftHand ? -0.035F : 0.05F, leftHand ? 0.045F : 0.0F, leftHand ? -0.135F : -0.1F);
+        poseStack.mulPose(Axis.YP.rotationDegrees((leftHand ? -1.0F : 1.0F) * -50.0F));
+        poseStack.mulPose(Axis.XP.rotationDegrees(-10.0F));
+        poseStack.mulPose(Axis.ZP.rotationDegrees((leftHand ? -1.0F : 1.0F) * -60.0F));
+        // old item layer
+        poseStack.translate(0.0F, 0.1875F, 0.0F);
+        // this differs from 1.7 as there was a negative y scale being used, which is not supported on Minecraft 1.16+
+        // therefore rotations on X and Y all had to be flipped down the line (and one rotation on X by 180 degrees has been added)
+        poseStack.scale(0.625F, 0.625F, 0.625F);
+        poseStack.mulPose(Axis.XP.rotationDegrees(180.0F));
+        poseStack.mulPose(Axis.XN.rotationDegrees(-100.0F));
+        poseStack.mulPose(Axis.YN.rotationDegrees(leftHand ? 35.0F : 45.0F));
+        // old item renderer
+        poseStack.translate(0.0F, -0.3F, 0.0F);
+        poseStack.scale(1.5F, 1.5F, 1.5F);
+        poseStack.mulPose(Axis.YN.rotationDegrees(50.0F));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(335.0F));
+        poseStack.translate(-0.9375F, -0.0625F, 0.0F);
+        poseStack.translate(0.5F, 0.5F, 0.25F);
+        poseStack.mulPose(Axis.YN.rotationDegrees(180.0F));
+        poseStack.translate(0.0F, 0.0F, 0.28125F);
+    }
     private void applyItemTransformInverse(LivingEntity entity, ItemStack stack, ItemDisplayContext transform, PoseStack poseStack, boolean leftHand) {
         // revert 1.8+ model changes, so we can work on a blank slate
         BakedModel model = Minecraft.getInstance().getItemRenderer().getModel(stack, entity.level(), entity, 0);
