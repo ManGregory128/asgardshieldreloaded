@@ -101,6 +101,7 @@ public class ItemAsgardShield extends ItemShield
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public String getItemStackDisplayName(ItemStack stack)
     {
         return I18n.format(this.getUnlocalizedNameInefficiently(stack) + ".name");
