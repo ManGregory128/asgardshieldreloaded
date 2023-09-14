@@ -201,7 +201,7 @@ public class ASRConfig
     public static class CategoryVanillaShield
     {
         @Config.Name("Vanilla Shield Override")
-        @Config.Comment("Utilize Asgard Shield behavior for vanilla shields without special abilities")
+        @Config.Comment("Utilize Asgard Shield behavior without special abilities for the vanilla shield")
         public boolean VANILLA_SHIELD_OVERRIDE = true;
 
         @Config.Name("Vanilla Shield: Durability")
