@@ -67,41 +67,6 @@ public class ItemAsgardShield extends ItemShield
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean isFull3D()
-    {
-        return true;
-    }
-
-    @Override
-    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
-    {
-        if (entityLiving instanceof EntityPlayer && !worldIn.isRemote)
-        {
-            ((EntityPlayer) entityLiving).getCooldownTracker().setCooldown(this, this.cooldown / 2);
-            this.cooldown = 0;
-        }
-        this.setBlocking(false);
-    }
-
-    @Override
-    public int getItemEnchantability()
-    {
-        return this.material.getEnchantability();
-    }
-
-    @Override
-    public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
-    {
-        if (!player.world.isRemote) this.cooldown++;
-        if (this.cooldown >= this.maxUseDuration)
-        {
-            player.stopActiveHand();
-            this.setBlocking(false);
-        }
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
     public String getItemStackDisplayName(ItemStack stack)
     {
         return I18n.format(this.getUnlocalizedNameInefficiently(stack) + ".name");
@@ -135,12 +100,6 @@ public class ItemAsgardShield extends ItemShield
     }
 
     @Override
-    public int getMaxItemUseDuration(ItemStack stack)
-    {
-        return 72000;
-    }
-
-    @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
         playerIn.getEntityWorld().playSound(null, playerIn.getPosition(), SoundEvents.ENTITY_IRONGOLEM_ATTACK, SoundCategory.PLAYERS, 0.8F, 0.8F + playerIn.getEntityWorld().rand.nextFloat() * 0.4F);
@@ -153,5 +112,40 @@ public class ItemAsgardShield extends ItemShield
     {
         ItemStack mat = this.material.getRepairItemStack();
         return !mat.isEmpty() && OreDictionary.itemMatches(mat, repair, false);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean isFull3D()
+    {
+        return true;
+    }
+
+    @Override
+    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
+    {
+        if (entityLiving instanceof EntityPlayer && !worldIn.isRemote)
+        {
+            ((EntityPlayer) entityLiving).getCooldownTracker().setCooldown(this, this.cooldown / 2);
+            this.cooldown = 0;
+        }
+        this.setBlocking(false);
+    }
+
+    @Override
+    public int getItemEnchantability()
+    {
+        return this.material.getEnchantability();
+    }
+
+    @Override
+    public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
+    {
+        if (!player.world.isRemote) this.cooldown++;
+        if (this.cooldown >= this.maxUseDuration)
+        {
+            player.stopActiveHand();
+            this.setBlocking(false);
+        }
     }
 }

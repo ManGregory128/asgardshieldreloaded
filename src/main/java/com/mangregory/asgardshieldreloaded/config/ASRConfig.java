@@ -13,6 +13,7 @@ public class ASRConfig
 {
     public static final CategorySwords SWORDS = new CategorySwords();
     public static final CategoryShields SHIELDS = new CategoryShields();
+    public static final CategoryVanillaShield VANILLA_SHIELD = new CategoryVanillaShield();
 
     public static class CategorySwords
     {
@@ -195,6 +196,21 @@ public class ASRConfig
 
         @Config.Name("Gilded Ender Shield: Max Use Duration")
         public int GILDED_ENDER_SHIELD_MAXUSEDURATION = 200;
+    }
+
+    public static class CategoryVanillaShield
+    {
+        @Config.Name("Vanilla Shield Override")
+        @Config.Comment("Utilize Asgard Shield behavior for vanilla shields without special abilities")
+        public boolean VANILLA_SHIELD_OVERRIDE = true;
+
+        @Config.Name("Vanilla Shield: Durability")
+        @Config.Comment("Only effective when 'Vanilla Shield Override' is enabled")
+        public int VANILLA_SHIELD_DURABILITY = 118;
+
+        @Config.Name("Vanilla Shield: Max Use Duration")
+        @Config.Comment("Only effective when 'Vanilla Shield Override' is enabled")
+        public int VANILLA_SHIELD_MAXUSEDURATION = 200;
     }
 
     @Mod.EventBusSubscriber

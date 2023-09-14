@@ -5,7 +5,9 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import com.mangregory.asgardshieldreloaded.config.ASRConfig;
 import com.mangregory.asgardshieldreloaded.init.ModItems;
+import com.mangregory.asgardshieldreloaded.items.ItemVanillaShield;
 
 @EventBusSubscriber
 public class RegistryHandler
@@ -14,5 +16,6 @@ public class RegistryHandler
     public static void onItemRegister(RegistryEvent.Register<Item> event)
     {
         event.getRegistry().registerAll(ModItems.ITEMS.toArray(new Item[0]));
+        if (ASRConfig.VANILLA_SHIELD.VANILLA_SHIELD_OVERRIDE) event.getRegistry().register(new ItemVanillaShield());
     }
 }
