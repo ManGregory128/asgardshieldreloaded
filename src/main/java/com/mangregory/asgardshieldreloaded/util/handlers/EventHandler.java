@@ -244,7 +244,7 @@ public class EventHandler
                             break;
                         case AsgardShieldReloaded.NAMESPACE + "skull_shield":
                             if (RandomUtil.chance(0.1D)) damage *= 3.0F;
-                            if (enemy instanceof EntityLiving && RandomUtil.chance(0.15D))
+                            if (enemy instanceof EntityLiving && enemy.isNonBoss() && RandomUtil.chance(0.15D) && ((EntityLiving) enemy).getHealth() <= ((EntityLiving) enemy).getMaxHealth() * 0.2F)
                             {
                                 List<EntityMob> entities = enemy.getEntityWorld().getEntitiesWithinAABB(EntityMob.class, new AxisAlignedBB(enemy.posX - 4, enemy.posY - 4, enemy.posZ - 4, enemy.posX + 4, enemy.posY + 4, enemy.posZ + 4));
                                 if (entities.size() > 1)
@@ -259,7 +259,7 @@ public class EventHandler
                             break;
                         case AsgardShieldReloaded.NAMESPACE + "gilded_skull_shield":
                             if (RandomUtil.chance(0.1D)) damage *= 3.0F;
-                            if (enemy instanceof EntityLiving && RandomUtil.chance(0.3D))
+                            if (enemy instanceof EntityLiving && enemy.isNonBoss() && RandomUtil.chance(0.3D) && ((EntityLiving) enemy).getHealth() <= ((EntityLiving) enemy).getMaxHealth() * 0.3F)
                             {
                                 List<EntityMob> entities = enemy.getEntityWorld().getEntitiesWithinAABB(EntityMob.class, new AxisAlignedBB(enemy.posX - 4, enemy.posY - 4, enemy.posZ - 4, enemy.posX + 4, enemy.posY + 4, enemy.posZ + 4));
                                 if (entities.size() > 1)
