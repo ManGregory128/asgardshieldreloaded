@@ -14,6 +14,7 @@ public class ASRConfig
     public static final CategorySwords SWORDS = new CategorySwords();
     public static final CategoryShields SHIELDS = new CategoryShields();
     public static final CategoryVanillaShield VANILLA_SHIELD = new CategoryVanillaShield();
+    public static final CategoryMisc MISC = new CategoryMisc();
 
     public static class CategorySwords
     {
@@ -45,7 +46,7 @@ public class ASRConfig
         public int IRON_GIANT_SWORD_MAXUSEDURATION = 100;
 
         @Config.Name("Gold Giant Sword: Durability")
-        public int GOLD_GIANT_SWORD_DURABILITY = 48;
+        public int GOLD_GIANT_SWORD_DURABILITY = 151;
 
         @Config.Name("Gold Giant Sword: Damage")
         public double GOLD_GIANT_SWORD_DAMAGE = 5.0D;
@@ -136,6 +137,18 @@ public class ASRConfig
 
         @Config.Name("Gilded Iron Shield: Max Use Duration")
         public int GILDED_IRON_SHIELD_MAXUSEDURATION = 200;
+        
+        @Config.Name("Golden Shield: Durability")
+        public int GOLDEN_SHIELD_DURABILITY = 121;
+
+        @Config.Name("Golden Shield: Max Use Duration")
+        public int GOLDEN_SHIELD_MAXUSEDURATION = 200;
+
+        @Config.Name("Blessed Golden Shield: Durability")
+        public int BLESSED_GOLDEN_SHIELD_DURABILITY = 489;
+
+        @Config.Name("Blessed Golden Shield: Max Use Duration")
+        public int BLESSED_GOLDEN_SHIELD_MAXUSEDURATION = 200;
 
         @Config.Name("Diamond Shield: Durability")
         public int DIAMOND_SHIELD_DURABILITY = 780;
@@ -206,11 +219,18 @@ public class ASRConfig
 
         @Config.Name("Vanilla Shield: Durability")
         @Config.Comment("Only effective when 'Vanilla Shield Override' is enabled")
-        public int VANILLA_SHIELD_DURABILITY = 118;
+        public int VANILLA_SHIELD_DURABILITY = 200;
 
         @Config.Name("Vanilla Shield: Max Use Duration")
         @Config.Comment("Only effective when 'Vanilla Shield Override' is enabled")
         public int VANILLA_SHIELD_MAXUSEDURATION = 200;
+    }
+    
+    public static class CategoryMisc
+    {
+        @Config.Name("Blocking Sound")
+        @Config.Comment("Plays a sound when attempting to block")
+        public boolean BLOCKING_SOUND = true;
     }
 
     @Mod.EventBusSubscriber

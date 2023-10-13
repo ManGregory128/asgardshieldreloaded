@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "asr:items/ender_shield"
+    "layer0": "asr:items/ender_shield_active"
   },
   "display": {
     "thirdperson_righthand": {

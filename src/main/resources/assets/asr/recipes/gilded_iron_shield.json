@@ -11,7 +11,8 @@
       "ore": "ingotGold"
     },
     "S": {
-      "item": "asr:iron_shield"
+      "item": "asr:iron_shield",
+      "data": 32767
     }
   },
   "result": {

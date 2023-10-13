@@ -23,6 +23,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.mangregory.asgardshieldreloaded.AsgardShieldReloaded;
+import com.mangregory.asgardshieldreloaded.config.ASRConfig;
 import com.mangregory.asgardshieldreloaded.init.ModItems;
 
 public class ItemAsgardShield extends ItemShield
@@ -102,7 +103,7 @@ public class ItemAsgardShield extends ItemShield
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
-        playerIn.getEntityWorld().playSound(null, playerIn.getPosition(), SoundEvents.ENTITY_IRONGOLEM_ATTACK, SoundCategory.PLAYERS, 0.8F, 0.8F + playerIn.getEntityWorld().rand.nextFloat() * 0.4F);
+        if (ASRConfig.MISC.BLOCKING_SOUND) playerIn.getEntityWorld().playSound(null, playerIn.getPosition(), SoundEvents.ENTITY_IRONGOLEM_ATTACK, SoundCategory.PLAYERS, 0.8F, 0.8F + playerIn.getEntityWorld().rand.nextFloat() * 0.4F);
         this.setBlocking(true);
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
