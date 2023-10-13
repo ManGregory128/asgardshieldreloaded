@@ -27,6 +27,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -48,7 +49,13 @@ public class EventHandler
     public static void onAttackEntity(AttackEntityEvent event)
     {
         EntityPlayer player = event.getEntityPlayer();
+        Entity enemy = event.getTarget();
         if (player.getEntityWorld().isRemote && player.getHeldItemMainhand().getItem().equals(ModItems.ENDER_GIANT_SWORD)) enderFx(player.getEntityWorld(), player.getPosition());
+        if (player.getEntityWorld().isRemote && player.getHeldItemMainhand().getItem().equals(ModItems.ENDER_SHIELD)) enderFx(player.getEntityWorld(), player.getPosition());
+        if (player.getEntityWorld().isRemote && player.getHeldItemMainhand().getItem().equals(ModItems.GILDED_ENDER_SHIELD)) enderFx(player.getEntityWorld(), player.getPosition());
+        if (player.getEntityWorld().isRemote && player.getHeldItemMainhand().getItem().equals(ModItems.GILDED_SKULL_SHIELD)) skullFx(enemy.getEntityWorld(), enemy.getPosition());
+        if (player.getEntityWorld().isRemote && player.getHeldItemMainhand().getItem().equals(ModItems.SKULL_GIANT_SWORD)) skullFx(enemy.getEntityWorld(), enemy.getPosition());
+        if (player.getEntityWorld().isRemote && player.getHeldItemMainhand().getItem().equals(ModItems.SKULL_SHIELD)) skullFx(enemy.getEntityWorld(), enemy.getPosition());
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -109,6 +116,8 @@ public class EventHandler
             }
         }
         if (player.getEntityWorld().isRemote && player.getHeldItem(event.getHand()).getItem().equals(ModItems.ENDER_GIANT_SWORD)) enderFx(player.getEntityWorld(), player.getPosition());
+        if (player.getEntityWorld().isRemote && player.getHeldItem(event.getHand()).getItem().equals(ModItems.ENDER_SHIELD)) enderFx(player.getEntityWorld(), player.getPosition());
+        if (player.getEntityWorld().isRemote && player.getHeldItem(event.getHand()).getItem().equals(ModItems.GILDED_ENDER_SHIELD)) enderFx(player.getEntityWorld(), player.getPosition());
     }
 
     @SubscribeEvent
@@ -190,7 +199,7 @@ public class EventHandler
                                 break;
                             }
                             else if (source.isFireDamage()) damage = 0.0F;
-                            knockback = 1.5F;
+                            knockback = 2.0F;
                             player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.BLOCK_NOTE_HAT, SoundCategory.PLAYERS, 1.2F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
                             break;
                         case AsgardShieldReloaded.NAMESPACE + "iron_shield":
@@ -226,7 +235,7 @@ public class EventHandler
                                 player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_ZOMBIE_INFECT, SoundCategory.PLAYERS, 2.0F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
                                 break;
                             }
-                            knockback = ((EntityLivingBase) enemy).getCreatureAttribute().equals(EnumCreatureAttribute.UNDEAD) ? 1.0F : 0.5F;
+                            knockback = ((EntityLivingBase) enemy).getCreatureAttribute().equals(EnumCreatureAttribute.UNDEAD) ? 1.5F : 0.75F;
                             player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, SoundCategory.PLAYERS, 0.6F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
                             break;
                         case AsgardShieldReloaded.NAMESPACE + "diamond_shield":
@@ -242,7 +251,7 @@ public class EventHandler
                             if (projectile != null && RandomUtil.chance(0.6D))
                             {
                                 reflectProjectile(player, projectile);
-                                damage *= 1.5F;
+                                damage *= 2.0F;
                             }
                             else knockback = 1.5F;
                             player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.BLOCK_NOTE_CHIME, SoundCategory.PLAYERS, 1.0F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
@@ -301,7 +310,7 @@ public class EventHandler
                                 }
                                 else enemy.attackEntityFrom(DamageSource.MAGIC, 10000.0F);
                             }
-                            knockback = 1.0F;
+                            knockback = 1.5F;
                             player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_SKELETON_HURT, SoundCategory.PLAYERS, 0.8F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
                             break;
                         case AsgardShieldReloaded.NAMESPACE + "gilded_skull_shield":
@@ -316,7 +325,7 @@ public class EventHandler
                                 }
                                 else enemy.attackEntityFrom(DamageSource.MAGIC, 10000.0F);
                             }
-                            knockback = 1.5F;
+                            knockback = 2.0F;
                             player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_SKELETON_HURT, SoundCategory.PLAYERS, 0.8F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
                             break;
                         case AsgardShieldReloaded.NAMESPACE + "ender_shield":
@@ -336,7 +345,7 @@ public class EventHandler
                                 break;
                             }
                             if (enemy instanceof EntityLivingBase && RandomUtil.chance(0.4D)) knockback = teleportEnemy(enemy, knockback);
-                            else knockback = 1.5F;
+                            else knockback = 2.0F;
                             player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERDRAGON_HURT, SoundCategory.PLAYERS, 0.8F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
                             break;
                     }
@@ -388,6 +397,25 @@ public class EventHandler
             }
         }
     }
+    
+    // TODO: Break particles for when shields are hit or used
+    public static void breakFx(World world, EntityPlayer player, ItemStack stack)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            Vec3d vec3d = new Vec3d(world.rand.nextFloat() - 0.5D * 0.1D, Math.random() * 0.1D + 0.1D, 0.0D);
+            vec3d = vec3d.rotatePitch(-player.rotationPitch * 0.017453292F);
+            vec3d = vec3d.rotateYaw(-player.rotationYaw * 0.017453292F);
+            double d0 = -world.rand.nextFloat() * 0.6D - 0.3D;
+            Vec3d vec3d1 = new Vec3d(world.rand.nextFloat() - 0.5D * 0.3D, d0, 0.6D);
+            vec3d1 = vec3d1.rotatePitch(-player.rotationPitch * 0.017453292F);
+            vec3d1 = vec3d1.rotateYaw(-player.rotationYaw * 0.017453292F);
+            vec3d1 = vec3d1.add(player.posX, player.posY + player.getEyeHeight(), player.posZ);
+            if (world instanceof WorldServer) ((WorldServer)world).spawnParticle(EnumParticleTypes.ITEM_CRACK, vec3d1.x, vec3d1.y, vec3d1.z, vec3d.x, vec3d.y + 0.05D, vec3d.z, Item.getIdFromItem(stack.getItem()), stack.getMetadata());
+            else
+            	world.spawnParticle(EnumParticleTypes.ITEM_CRACK, vec3d1.x, vec3d1.y, vec3d1.z, vec3d.x, vec3d.y + 0.05D, vec3d.z, Item.getIdFromItem(stack.getItem()), stack.getMetadata());
+        }
+    }
 
     public static void enderFx(World world, BlockPos pos)
     {
@@ -434,6 +462,14 @@ public class EventHandler
             projectile.motionY /= -0.10000000149011612D;
             projectile.motionZ /= -0.10000000149011612D;
         }
+    }
+    
+    public static void skullFx(World world, BlockPos pos)
+    {
+    	double xCoord = pos.getX();
+    	double yCoord = pos.getY() + 1.0D;
+    	double zCoord = pos.getZ();
+    	world.spawnParticle(EnumParticleTypes.CLOUD, xCoord, yCoord, zCoord, 0.0D, 0.0D, 0.0D);
     }
 
     public static float teleportEnemy(Entity enemy, float knockback)
