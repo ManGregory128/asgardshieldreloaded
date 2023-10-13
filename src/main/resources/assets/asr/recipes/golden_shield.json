@@ -2,7 +2,7 @@
   "type": "forge:ore_shaped",
   "pattern": [
     "GGG",
-    "GSG",
+    "GLG",
     " G "
   ],
   "key": {
@@ -10,13 +10,13 @@
       "type": "forge:ore_dict",
       "ore": "ingotGold"
     },
-    "S": {
-      "item": "asr:ender_shield",
-      "data": 32767
+    "L": {
+      "type": "forge:ore_dict",
+      "ore": "leather"
     }
   },
   "result": {
-    "item": "asr:gilded_ender_shield",
+    "item": "asr:golden_shield",
     "count": 1
   }
 }

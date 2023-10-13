@@ -11,7 +11,8 @@
       "ore": "ingotGold"
     },
     "S": {
-      "item": "asr:skull_shield"
+      "item": "asr:skull_shield",
+      "data": 32767
     }
   },
   "result": {

@@ -8,7 +8,7 @@
   "key": {
     "B": {
       "type": "forge:ore_dict",
-      "ore": "cobblestone"
+      "ore": "bone"
     },
     "H": {
       "item": "minecraft:skull",

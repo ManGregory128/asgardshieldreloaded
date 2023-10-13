@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "asr:items/gilded_skull_shield_active"
+    "layer0": "asr:items/blessed_golden_shield_active"
   },
   "display": {
     "thirdperson_righthand": {

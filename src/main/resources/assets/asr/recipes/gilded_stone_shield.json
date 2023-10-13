@@ -11,7 +11,8 @@
       "ore": "ingotGold"
     },
     "S": {
-      "item": "asr:stone_shield"
+      "item": "asr:stone_shield",
+      "data": 32767
     }
   },
   "result": {

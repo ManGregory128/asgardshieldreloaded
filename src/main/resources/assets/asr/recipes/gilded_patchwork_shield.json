@@ -11,7 +11,8 @@
       "ore": "ingotGold"
     },
     "S": {
-      "item": "asr:patchwork_shield"
+      "item": "asr:patchwork_shield",
+      "data": 32767
     }
   },
   "result": {

@@ -11,7 +11,8 @@
       "ore": "ingotGold"
     },
     "S": {
-      "item": "asr:wooden_shield"
+      "item": "asr:wooden_shield",
+      "data": 32767
     }
   },
   "result": {

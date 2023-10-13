@@ -1,0 +1,21 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " T ",
+    "TST",
+    " T "
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:ghast_tear"
+    },
+    "S": {
+      "item": "asr:golden_shield",
+      "data": 32767
+    }
+  },
+  "result": {
+    "item": "asr:blessed_golden_shield",
+    "count": 1
+  }
+}

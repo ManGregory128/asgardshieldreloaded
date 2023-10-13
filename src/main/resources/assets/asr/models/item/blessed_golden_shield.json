@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "asr:items/gilded_skull_shield_active"
+    "layer0": "asr:items/blessed_golden_shield"
   },
   "display": {
     "thirdperson_righthand": {
@@ -15,14 +15,22 @@
       "scale": [1, 1, 1]
     },
     "firstperson_righthand": {
-      "rotation": [0, 0, 0],
-      "translation": [-3, 3, 1],
+      "rotation": [0, -30, 0],
+      "translation": [1, -0.5, 1],
       "scale": [0.7, 0.7, 0.7]
     },
     "firstperson_lefthand": {
-      "rotation": [0, 0, 0],
-      "translation": [-3, 3, 1],
+      "rotation": [0, -30, 0],
+      "translation": [1, -0.5, 1],
       "scale": [0.7, 0.7, 0.7]
     }
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "asr:blocking": 1
+      },
+      "model": "asr:item/blessed_golden_shield_blocking"
+    }
+  ]
 }
