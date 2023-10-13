@@ -99,12 +99,12 @@ item.asr.gilded_patchwork_shield.weakness=Weakness: Foulness
 item.asr.gilded_patchwork_shield.weakness.desc=Inflicts wielder with nausea (5 percent chance)
 
 item.asr.skull_shield.perk=Special Perk: Mind Control
-item.asr.skull_shield.perk.desc=Controls attacker (excluding bosses) to attack other targets or commit suicide when at 20 percent of max health or below (15 percent chance)
+item.asr.skull_shield.perk.desc=Controls attacker (excluding bosses) to attack other targets or commit suicide when at 20 percent of max health or less (15 percent chance)
 item.asr.skull_shield.weakness=Weakness: Brittle Bones
 item.asr.skull_shield.weakness.desc=Receives x3 durability damage (10 percent chance)
 
 item.asr.gilded_skull_shield.perk=Special Perk: Mind Control
-item.asr.gilded_skull_shield.perk.desc=Controls attacker (excluding bosses) to attack other targets or commit suicide when at 30 percent of max health or below (30 percent chance)
+item.asr.gilded_skull_shield.perk.desc=Controls attacker (excluding bosses) to attack other targets or commit suicide when at 30 percent of max health or less (30 percent chance)
 item.asr.gilded_skull_shield.weakness=Weakness: Brittle Bones
 item.asr.gilded_skull_shield.weakness.desc=Receives x3 durability damage (10 percent chance)
 
