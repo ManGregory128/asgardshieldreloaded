@@ -91,7 +91,7 @@ public class ASRConfig
         public int SKULL_GIANT_SWORD_MAXUSEDURATION = 100;
 
         @Config.Name("Ender Giant Sword: Durability")
-        public int ENDER_GIANT_SWORD_DURABILITY = 1829;
+        public int ENDER_GIANT_SWORD_DURABILITY = 1529;
 
         @Config.Name("Ender Giant Sword: Damage")
         public double ENDER_GIANT_SWORD_DAMAGE = 8.0D;
