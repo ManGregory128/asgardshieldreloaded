@@ -55,7 +55,7 @@ public class ASRConfig
         public int GOLD_GIANT_SWORD_MAXUSEDURATION = 100;
 
         @Config.Name("Diamond Giant Sword: Durability")
-        public int DIAMOND_GIANT_SWORD_DURABILITY = 2341;
+        public int DIAMOND_GIANT_SWORD_DURABILITY = 2241;
 
         @Config.Name("Diamond Giant Sword: Damage")
         public double DIAMOND_GIANT_SWORD_DAMAGE = 8.0D;
