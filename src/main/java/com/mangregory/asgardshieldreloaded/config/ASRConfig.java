@@ -28,7 +28,7 @@ public class ASRConfig
         public int WOODEN_GIANT_SWORD_MAXUSEDURATION = 100;
 
         @Config.Name("Stone Giant Sword: Durability")
-        public int STONE_GIANT_SWORD_DURABILITY = 196;
+        public int STONE_GIANT_SWORD_DURABILITY = 176;
 
         @Config.Name("Stone Giant Sword: Damage")
         public double STONE_GIANT_SWORD_DAMAGE = 6.0D;
@@ -37,7 +37,7 @@ public class ASRConfig
         public int STONE_GIANT_SWORD_MAXUSEDURATION = 100;
 
         @Config.Name("Iron Giant Sword: Durability")
-        public int IRON_GIANT_SWORD_DURABILITY = 375;
+        public int IRON_GIANT_SWORD_DURABILITY = 475;
 
         @Config.Name("Iron Giant Sword: Damage")
         public double IRON_GIANT_SWORD_DAMAGE = 7.0D;
@@ -55,7 +55,7 @@ public class ASRConfig
         public int GOLD_GIANT_SWORD_MAXUSEDURATION = 100;
 
         @Config.Name("Diamond Giant Sword: Durability")
-        public int DIAMOND_GIANT_SWORD_DURABILITY = 2341;
+        public int DIAMOND_GIANT_SWORD_DURABILITY = 2241;
 
         @Config.Name("Diamond Giant Sword: Damage")
         public double DIAMOND_GIANT_SWORD_DAMAGE = 8.0D;
@@ -64,7 +64,7 @@ public class ASRConfig
         public int DIAMOND_GIANT_SWORD_MAXUSEDURATION = 100;
 
         @Config.Name("Nether Quartz Giant Sword: Durability")
-        public int NETHERQUARTZ_GIANT_SWORD_DURABILITY = 1646;
+        public int NETHERQUARTZ_GIANT_SWORD_DURABILITY = 525;
 
         @Config.Name("Nether Quartz Giant Sword: Damage")
         public double NETHERQUARTZ_GIANT_SWORD_DAMAGE = 7.0D;
@@ -73,7 +73,7 @@ public class ASRConfig
         public int NETHERQUARTZ_GIANT_SWORD_MAXUSEDURATION = 100;
 
         @Config.Name("Patchwork Giant Sword: Durability")
-        public int PATCHWORK_GIANT_SWORD_DURABILITY = 40;
+        public int PATCHWORK_GIANT_SWORD_DURABILITY = 45;
 
         @Config.Name("Patchwork Giant Sword: Damage")
         public double PATCHWORK_GIANT_SWORD_DAMAGE = 5.0D;
@@ -82,7 +82,7 @@ public class ASRConfig
         public int PATCHWORK_GIANT_SWORD_MAXUSEDURATION = 100;
 
         @Config.Name("Skull Giant Sword: Durability")
-        public int SKULL_GIANT_SWORD_DURABILITY = 260;
+        public int SKULL_GIANT_SWORD_DURABILITY = 360;
 
         @Config.Name("Skull Giant Sword: Damage")
         public double SKULL_GIANT_SWORD_DAMAGE = 6.0D;
@@ -91,7 +91,7 @@ public class ASRConfig
         public int SKULL_GIANT_SWORD_MAXUSEDURATION = 100;
 
         @Config.Name("Ender Giant Sword: Durability")
-        public int ENDER_GIANT_SWORD_DURABILITY = 1829;
+        public int ENDER_GIANT_SWORD_DURABILITY = 1529;
 
         @Config.Name("Ender Giant Sword: Damage")
         public double ENDER_GIANT_SWORD_DAMAGE = 8.0D;
@@ -175,13 +175,13 @@ public class ASRConfig
         public int GILDED_NETHERQUARTZ_SHIELD_MAXUSEDURATION = 200;
 
         @Config.Name("Patchwork Shield: Durability")
-        public int PATCHWORK_SHIELD_DURABILITY = 54;
+        public int PATCHWORK_SHIELD_DURABILITY = 60;
 
         @Config.Name("Patchwork Shield: Max Use Duration")
         public int PATCHWORK_SHIELD_MAXUSEDURATION = 200;
 
         @Config.Name("Gilded Patchwork Shield: Durability")
-        public int GILDED_PATCHWORK_SHIELD_DURABILITY = 182;
+        public int GILDED_PATCHWORK_SHIELD_DURABILITY = 188;
 
         @Config.Name("Gilded Patchwork Shield: Max Use Duration")
         public int GILDED_PATCHWORK_SHIELD_MAXUSEDURATION = 200;
@@ -199,13 +199,13 @@ public class ASRConfig
         public int GILDED_SKULL_SHIELD_MAXUSEDURATION = 200;
 
         @Config.Name("Ender Shield: Durability")
-        public int ENDER_SHIELD_DURABILITY = 435;
+        public int ENDER_SHIELD_DURABILITY = 450;
 
         @Config.Name("Ender Shield: Max Use Duration")
         public int ENDER_SHIELD_MAXUSEDURATION = 200;
 
         @Config.Name("Gilded Ender Shield: Durability")
-        public int GILDED_ENDER_SHIELD_DURABILITY = 563;
+        public int GILDED_ENDER_SHIELD_DURABILITY = 578;
 
         @Config.Name("Gilded Ender Shield: Max Use Duration")
         public int GILDED_ENDER_SHIELD_MAXUSEDURATION = 200;
