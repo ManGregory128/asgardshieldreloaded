@@ -8,7 +8,7 @@
   "key": {
     "Q": {
       "type": "forge:ore_dict",
-      "ore": "blockQuartz"
+      "ore": "gemQuartz"
     },
     "L": {
       "type": "forge:ore_dict",
