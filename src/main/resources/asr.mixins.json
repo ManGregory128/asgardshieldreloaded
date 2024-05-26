@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.mangregory.asr.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "asr.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+    "PlayerItemInHandLayerMixin",
+    "HumanoidModelMixin",
+    "ItemInHandRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
