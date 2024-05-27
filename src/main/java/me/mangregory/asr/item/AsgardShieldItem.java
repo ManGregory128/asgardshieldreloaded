@@ -10,10 +10,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShieldItem;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
@@ -75,12 +72,12 @@ public class AsgardShieldItem extends ShieldItem {
         }
     }
 
-//    @Override
-//    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
-//
-//        components.add(Component.literal("Maximum Block Duration: " + this.maxUseDuration / 20 + "s").withStyle(ChatFormatting.AQUA));
-//        components.add(Component.literal("Perk: " + strengthDesc).withStyle(ChatFormatting.GREEN));
-//        components.add(Component.literal("Weakness: " + weaknessDesc).withStyle(ChatFormatting.RED));
-//        super.appendHoverText(stack, level, components, flag);
-//    }
+    @Override
+    public void appendHoverText(ItemStack pStack, Item.TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
+
+        pTooltipComponents.add(Component.literal("Maximum Block Duration: " + this.maxUseDuration / 20 + "s").withStyle(ChatFormatting.AQUA));
+        pTooltipComponents.add(Component.literal("Perk: " + strengthDesc).withStyle(ChatFormatting.GREEN));
+        pTooltipComponents.add(Component.literal("Weakness: " + weaknessDesc).withStyle(ChatFormatting.RED));
+        super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
+    }
 }

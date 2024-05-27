@@ -23,8 +23,8 @@ public class GiantSwordItem extends SwordItem {
     public int cooldown;
     public int maxUseDuration;
 
-    public GiantSwordItem(Tier p_43269_, int p_43270_, float p_43271_, Properties p_43272_, int maxUseDuration) {
-        super(p_43269_, p_43272_);
+    public GiantSwordItem(Tier pTier, int maxUseDuration, Properties pProperties) {
+        super(pTier, pProperties);
         isBlocking = false;
         this.maxUseDuration = maxUseDuration;
         this.cooldown = 0;
@@ -64,14 +64,14 @@ public class GiantSwordItem extends SwordItem {
         this.isBlocking = false;
     }
 
-//    @Override
-//    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
-//
-//        components.add(Component.literal("Maximum Block Duration: " + this.maxUseDuration / 20 + "s")
-//                .withStyle(ChatFormatting.AQUA));
-//
-//        super.appendHoverText(stack, level, components, flag);
-//    }
+    @Override
+    public void appendHoverText(ItemStack pStack, Item.TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
+
+        pTooltipComponents.add(Component.literal("Maximum Block Duration: " + this.maxUseDuration / 20 + "s")
+                .withStyle(ChatFormatting.AQUA));
+
+        super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
+    }
 
     @Override
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int count) {
