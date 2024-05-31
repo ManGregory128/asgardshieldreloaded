@@ -1,5 +1,6 @@
 package me.mangregory.asr;
 
+import me.mangregory.asr.data.DataGenerators;
 import me.mangregory.asr.init.ItemInit;
 import me.mangregory.asr.util.handlers.EventHandler;
 import me.mangregory.asr.util.handlers.FirstPersonRenderingHandler;
@@ -18,6 +19,8 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(AsgardShieldReloaded.MODID)
@@ -26,6 +29,8 @@ public class AsgardShieldReloaded {
     // Define mod id in a common place for everything to reference
     public static final String MODID = "asr";
 
+    public static Logger logger = LoggerFactory.getLogger(AsgardShieldReloaded.class);
+
     public AsgardShieldReloaded(IEventBus modEventBus, ModContainer modContainer) {
 
         // Register the Deferred Register to the mod event bus so items get registered
@@ -33,9 +38,10 @@ public class AsgardShieldReloaded {
 
         // Register ourselves for server and other game events we are interested in
         NeoForge.EVENT_BUS.register(new EventHandler());
-        NeoForge.EVENT_BUS.register(FirstPersonRenderingHandler.class);
-        //      NeoForge.EVENT_BUS.register(this);
+
         modEventBus.addListener(this::buildContents);
+
+        modEventBus.addListener(DataGenerators::gatherData);
     }
 
     private void buildContents(BuildCreativeModeTabContentsEvent event) {

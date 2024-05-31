@@ -17,7 +17,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 
 
 // Courtesy of Fuzs
-@EventBusSubscriber(value = Dist.CLIENT)
+@EventBusSubscriber(value = Dist.CLIENT, modid = "asr")
 public class FirstPersonRenderingHandler {
     @SubscribeEvent
     public static void onRenderHand(RenderHandEvent evt) {

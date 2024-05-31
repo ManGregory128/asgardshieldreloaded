@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "tag": "c:ingots/iron"
+    },
+    "/": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    " ##",
+    "###",
+    "/# "
+  ],
+  "result": {
+    "count": 1,
+    "id": "asr:iron_giant_sword"
+  }
+}
