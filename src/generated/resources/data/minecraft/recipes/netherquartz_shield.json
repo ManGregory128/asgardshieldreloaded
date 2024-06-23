@@ -3,19 +3,19 @@
   "category": "equipment",
   "key": {
     "#": {
-      "tag": "minecraft:stone_tool_materials"
+      "tag": "c:gems/quartz"
     },
     "/": {
-      "tag": "c:rods/wooden"
+      "tag": "c:leathers"
     }
   },
   "pattern": [
-    " ##",
     "###",
-    "/# "
+    "#/#",
+    " # "
   ],
   "result": {
     "count": 1,
-    "id": "asr:stone_giant_sword"
+    "id": "asr:netherquartz_shield"
   }
 }

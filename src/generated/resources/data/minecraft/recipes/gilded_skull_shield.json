@@ -3,19 +3,19 @@
   "category": "equipment",
   "key": {
     "#": {
-      "tag": "minecraft:stone_tool_materials"
+      "tag": "c:ingots/gold"
     },
     "/": {
-      "tag": "c:rods/wooden"
+      "item": "asr:skull_shield"
     }
   },
   "pattern": [
-    " ##",
     "###",
-    "/# "
+    "#/#",
+    " # "
   ],
   "result": {
     "count": 1,
-    "id": "asr:stone_giant_sword"
+    "id": "asr:gilded_skull_shield"
   }
 }
