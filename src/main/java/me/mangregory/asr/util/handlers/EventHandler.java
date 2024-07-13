@@ -105,7 +105,7 @@ public class EventHandler {
             DamageSource source = event.getSource();
 
             if (player.isBlocking() && (source.is(DamageTypes.MOB_ATTACK) || source.is(DamageTypes.MOB_PROJECTILE)
-                    || source.is(DamageTypes.EXPLOSION) || source.is(DamageTypes.ARROW))
+                    || source.is(DamageTypes.EXPLOSION) || source.is(DamageTypes.PLAYER_EXPLOSION) || source.is(DamageTypes.ARROW))
                     || source.is(DamageTypes.PLAYER_ATTACK) || source.is(DamageTypes.PLAYER_EXPLOSION)) {
                 ItemStack stack = player.getItemInHand(player.swingingArm);
                 Item item = stack.getItem();
@@ -149,7 +149,7 @@ public class EventHandler {
                             }
                             break;
                         case "asr:stone_shield":
-                            if (source.is(DamageTypes.EXPLOSION)) {
+                            if (source.is(DamageTypes.PLAYER_EXPLOSION) || source.is(DamageTypes.EXPLOSION)) {
                                 damage *= 1.5F;
                                 cancel = false;
                                 break;
@@ -158,7 +158,7 @@ public class EventHandler {
                             player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.STONE_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
                             break;
                         case "asr:gilded_stone_shield":
-                            if (source.is(DamageTypes.EXPLOSION)) {
+                            if (source.is(DamageTypes.PLAYER_EXPLOSION) || source.is(DamageTypes.EXPLOSION)) {
                                 damage *= 1.5F;
                                 cancel = false;
                                 break;
@@ -168,13 +168,13 @@ public class EventHandler {
                             break;
                         case "asr:iron_shield":
                             if (player.isInWaterOrRain()) damage *= 1.5F;
-                            if (source.is(DamageTypes.EXPLOSION) && RandomUtil.chance(0.5F)) damage *= 0.5F;
+                            if ((source.is(DamageTypes.PLAYER_EXPLOSION) || source.is(DamageTypes.EXPLOSION)) && RandomUtil.chance(0.5F)) damage *= 0.5F;
                             knockback = 1.0F;
                             player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.ANVIL_LAND, SoundSource.PLAYERS, 0.6F, 0.8F + player.level().random.nextFloat() * 0.4F);
                             break;
                         case "asr:gilded_iron_shield":
                             if (player.isInWaterOrRain()) damage *= 1.5F;
-                            if (source.is(DamageTypes.EXPLOSION)) damage *= 0.5F;
+                            if (source.is(DamageTypes.PLAYER_EXPLOSION) || source.is(DamageTypes.EXPLOSION)) damage *= 0.5F;
                             knockback = 1.5F;
                             player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.ANVIL_LAND, SoundSource.PLAYERS, 0.6F, 0.8F + player.level().random.nextFloat() * 0.4F);
                             break;

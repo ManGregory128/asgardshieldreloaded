@@ -121,11 +121,11 @@ public class ItemInit {
             () -> new AsgardShieldItem(new Item.Properties().durability(580), 100, "Ender Shift - Enemies Might Teleport", "End Tech - Might be Bypassed by Ender Mobs"));
 
     public static class Tiers {
-        public static final Tier ALTDIAMOND = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 3100, -2.4f, 6.5f, 15, () -> Ingredient.of(Items.DIAMOND));
-        public static final Tier ALTIRON = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 410, 6f, 5.5f, 10, () -> Ingredient.of(Items.IRON_INGOT));
-        public static final Tier ALTGOLD = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 60, 12.0f, 3.5f, 22, () -> Ingredient.of(Items.GOLD_INGOT));
-        public static final Tier ALTSTONE = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 215, 4f, 4.5f, 5,  () -> Ingredient.of(Items.COBBLESTONE));
-        public static final Tier ALTWOOD = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 88, 2f, 3f, 7,  () -> Ingredient.of(ItemTags.PLANKS));
-        public static final Tier ENDERTIER = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 4200, -2.4f, 6.5f, 20,  () -> Ingredient.of(Items.NETHERITE_INGOT));
+        public static final Tier ALTDIAMOND = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 3100, -2.4f, 4f, 15, () -> Ingredient.of(Items.DIAMOND));
+        public static final Tier ALTIRON = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 410, 6f, 3f, 10, () -> Ingredient.of(Items.IRON_INGOT));
+        public static final Tier ALTGOLD = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 60, 12.0f, 1f, 22, () -> Ingredient.of(Items.GOLD_INGOT));
+        public static final Tier ALTSTONE = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 215, 4f, 2f, 5,  () -> Ingredient.of(Items.COBBLESTONE));
+        public static final Tier ALTWOOD = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 88, 2f, 1f, 7,  () -> Ingredient.of(ItemTags.PLANKS));
+        public static final Tier ENDERTIER = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 4200, -2.4f, 4f, 20,  () -> Ingredient.of(Items.NETHERITE_INGOT));
     }
 }

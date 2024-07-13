@@ -39,6 +39,12 @@ public class FirstPersonRenderingHandler {
         }
     }
 
+    /**
+     * Transforms the item in the first person's view based on the given parameters.
+     *
+     * @param  matrixStack the PoseStack containing the transformation matrix
+     * @param  hand        the HumanoidArm representing the hand used for transformation
+     */
     private static void transformBlockFirstPerson(PoseStack matrixStack, HumanoidArm hand) {
         int signum = hand == HumanoidArm.RIGHT ? 1 : -1;
         // values taken from Minecraft snapshot 15w33b
@@ -48,9 +54,16 @@ public class FirstPersonRenderingHandler {
         matrixStack.mulPose(Axis.ZP.rotationDegrees(signum * 78.05F));
     }
 
+    /**
+     * Transforms the player arm in the first person's view based on the given parameters.
+     *
+     * @param  poseStack         the PoseStack containing the transformation matrix
+     * @param  arm               the HumanoidArm representing the hand used for transformation
+     * @param  equipAnimProgress the equip animation progress (0.0 to 1.0)
+     */
     //the function below is implemented from ItemRenderer:
-    private static void applyItemArmTransform(PoseStack poseStack, HumanoidArm arm, float p_109385_) {
+    private static void applyItemArmTransform(PoseStack poseStack, HumanoidArm arm, float equipAnimProgress) {
         int i = arm == HumanoidArm.RIGHT ? 1 : -1;
-        poseStack.translate(i * 0.56F, -0.52F + p_109385_ * -0.6F, -0.72F);
+        poseStack.translate(i * 0.56F, -0.52F + equipAnimProgress * -0.6F, -0.72F);
     }
 }
