@@ -92,33 +92,33 @@ public class ItemInit {
                     )));
 
     public static final Supplier<AsgardShieldItem> WOODEN_SHIELD = ITEMS.register("wooden_shield",
-            () -> new AsgardShieldItem(new Item.Properties().durability(215), 100, "Arrow Catch", "Fire Damage"));
+            () -> new AsgardShieldItem(new Item.Properties().durability(215), 100));
     public static final Supplier<AsgardShieldItem> GILDED_WOODEN_SHIELD = ITEMS.register("gilded_wooden_shield",
-            () -> new AsgardShieldItem(new Item.Properties().durability(280), 100, "Arrow Catch", "Fire Damage"));
+            () -> new AsgardShieldItem(new Item.Properties().durability(280), 100));
     public static final Supplier<AsgardShieldItem> STONE_SHIELD = ITEMS.register("stone_shield",
-            () -> new AsgardShieldItem(new Item.Properties().durability(300), 100, "Fire Protection", "Breaks Easily from Explosions"));
+            () -> new AsgardShieldItem(new Item.Properties().durability(300), 100));
     public static final Supplier<AsgardShieldItem> GILDED_STONE_SHIELD = ITEMS.register("gilded_stone_shield",
-            () -> new AsgardShieldItem(new Item.Properties().durability(330), 100, "Fire Protection", "Breaks Easily from Explosions"));
+            () -> new AsgardShieldItem(new Item.Properties().durability(330), 100));
     public static final Supplier<AsgardShieldItem> IRON_SHIELD = ITEMS.register("iron_shield",
-            () -> new AsgardShieldItem(new Item.Properties().durability(380), 100, "Decreased Explosion Damage", "Water (Rusts in Wet Environments)"));
+            () -> new AsgardShieldItem(new Item.Properties().durability(380), 100));
     public static final Supplier<AsgardShieldItem> GILDED_IRON_SHIELD = ITEMS.register("gilded_iron_shield",
-            () -> new AsgardShieldItem(new Item.Properties().durability(420), 100, "Decreased Explosion Damage", "Water (Rusts in Wet Environments)"));
+            () -> new AsgardShieldItem(new Item.Properties().durability(420), 100));
     public static final Supplier<AsgardShieldItem> DIAMOND_SHIELD = ITEMS.register("diamond_shield",
-            () -> new AsgardShieldItem(new Item.Properties().durability(500), 100, "Reflect Projectiles to Attacker", "Reflecting Damages the Shield"));
+            () -> new AsgardShieldItem(new Item.Properties().durability(500), 100));
     public static final Supplier<AsgardShieldItem> GILDED_DIAMOND_SHIELD = ITEMS.register("gilded_diamond_shield",
-            () -> new AsgardShieldItem(new Item.Properties().durability(580), 100, "Reflect Projectiles to Attacker", "Reflecting Damages the Shield"));
+            () -> new AsgardShieldItem(new Item.Properties().durability(580), 100));
     public static final Supplier<AsgardShieldItem> NETHERQUARTZ_SHIELD = ITEMS.register("netherquartz_shield",
-            () -> new AsgardShieldItem(new Item.Properties().durability(450), 100, "Flame Keeper - Collect Fire Charges", "Hungering"));
+            () -> new AsgardShieldItem(new Item.Properties().durability(450), 100));
     public static final Supplier<AsgardShieldItem> GILDED_NETHERQUARTZ_SHIELD = ITEMS.register("gilded_netherquartz_shield",
-            () -> new AsgardShieldItem(new Item.Properties().durability(500), 100, "Flame Keeper - Collect Fire Charges", "Hungering"));
+            () -> new AsgardShieldItem(new Item.Properties().durability(500), 100));
     public static final Supplier<AsgardShieldItem> SKULL_SHIELD = ITEMS.register("skull_shield",
-            () -> new AsgardShieldItem(new Item.Properties().durability(500), 100, "Mind Control - Enemies Might Attack Enemies", "Brittle Bones - 3x Durability Damage"));
+            () -> new AsgardShieldItem(new Item.Properties().durability(500), 100));
     public static final Supplier<AsgardShieldItem> GILDED_SKULL_SHIELD = ITEMS.register("gilded_skull_shield",
-            () -> new AsgardShieldItem(new Item.Properties().durability(580), 100, "Mind Control - Enemies Might Attack Enemies", "Brittle Bones - 3x Durability Damage"));
+            () -> new AsgardShieldItem(new Item.Properties().durability(580), 100));
     public static final Supplier<AsgardShieldItem> ENDER_SHIELD = ITEMS.register("ender_shield",
-            () -> new AsgardShieldItem(new Item.Properties().durability(500), 100, "Ender Shift - Enemies Might Teleport", "End Tech - Might be Bypassed by Ender Mobs"));
+            () -> new AsgardShieldItem(new Item.Properties().durability(500), 100));
     public static final Supplier<AsgardShieldItem> GILDED_ENDER_SHIELD = ITEMS.register("gilded_ender_shield",
-            () -> new AsgardShieldItem(new Item.Properties().durability(580), 100, "Ender Shift - Enemies Might Teleport", "End Tech - Might be Bypassed by Ender Mobs"));
+            () -> new AsgardShieldItem(new Item.Properties().durability(580), 100));
 
     public static class Tiers {
         public static final Tier ALTDIAMOND = new SimpleTier(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 3100, -2.4f, 4f, 15, () -> Ingredient.of(Items.DIAMOND));

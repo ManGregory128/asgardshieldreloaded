@@ -1,7 +1,9 @@
 package me.mangregory.asr.item;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -12,31 +14,27 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.List;
 
 public class AsgardShieldItem extends ShieldItem {
-    private final String strengthDesc;
-    private final String weaknessDesc;
     public int cooldown;
     public boolean isBlocking;
     public int maxUseDuration;
 
-    public AsgardShieldItem(Properties properties, int maxUseDuration, String strength, String weakness) {
+    public AsgardShieldItem(Properties properties, int maxUseDuration) {
         super(properties);
         this.cooldown = 0;
         this.isBlocking = false;
         this.maxUseDuration = maxUseDuration;
-        this.strengthDesc = strength;
-        this.weaknessDesc = weakness;
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
         ItemStack stack = player.getItemInHand(interactionHand);
         player.startUsingItem(interactionHand);
-        //player.setMainArm(HumanoidArm.RIGHT);
         player.level().playSound(null, BlockPos.containing(player.getPosition(0)),
                 SoundEvents.IRON_GOLEM_ATTACK, SoundSource.PLAYERS, 0.8F, 0.8F + level.random.nextFloat() * 0.4F);
         this.isBlocking = true;
@@ -71,13 +69,31 @@ public class AsgardShieldItem extends ShieldItem {
             this.isBlocking = false;
         }
     }
-
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, Item.TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
-
-        pTooltipComponents.add(Component.literal("Maximum Block Duration: " + this.maxUseDuration / 20 + "s").withStyle(ChatFormatting.AQUA));
-        pTooltipComponents.add(Component.literal("Perk: " + strengthDesc).withStyle(ChatFormatting.GREEN));
-        pTooltipComponents.add(Component.literal("Weakness: " + weaknessDesc).withStyle(ChatFormatting.RED));
         super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
+
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.level == null || mc.player == null) {
+            return;
+        }
+
+        boolean sneakPressed = Screen.hasShiftDown();
+        pTooltipComponents.add(Component.translatable("tooltip.asr.category.duration", ": " + this.maxUseDuration / 20 + "s").withStyle(ChatFormatting.AQUA));
+        if (!sneakPressed) {
+            pTooltipComponents.add(Component.translatable("item." + pStack.toString().replace("1 asr:", "asr.") + ".perk",
+                            "shift")
+                    .withStyle(ChatFormatting.GREEN));
+            pTooltipComponents.add(Component.translatable("item." + pStack.toString().replace("1 asr:", "asr.") + ".weakness",
+                            "shift")
+                    .withStyle(ChatFormatting.RED));
+            pTooltipComponents.add(Component.literal("Hold shift for more info").withStyle(ChatFormatting.GRAY));
+        } else {
+            pTooltipComponents.add(Component.translatable("item." + pStack.toString().replace("1 asr:", "asr.") + ".perk.desc", "")
+                    .withStyle(ChatFormatting.GREEN));
+            pTooltipComponents.add(Component.translatable("item." + pStack.toString().replace("1 asr:", "asr.") + ".weakness.desc", "")
+                    .withStyle(ChatFormatting.RED));
+        }
     }
 }
