@@ -80,7 +80,8 @@ public class AsgardShieldItem extends ShieldItem {
         }
 
         boolean sneakPressed = Screen.hasShiftDown();
-        pTooltipComponents.add(Component.translatable("tooltip.asr.category.duration", ": " + this.maxUseDuration / 20 + "s").withStyle(ChatFormatting.AQUA));
+        pTooltipComponents.add(Component.literal("Maximum Block Duration: " + this.maxUseDuration / 20 + "s")
+                .withStyle(ChatFormatting.AQUA));
         if (!sneakPressed) {
             pTooltipComponents.add(Component.translatable("item." + pStack.toString().replace("1 asr:", "asr.") + ".perk",
                             "shift")
