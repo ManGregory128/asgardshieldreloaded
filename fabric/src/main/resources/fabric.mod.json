@@ -16,10 +16,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "me.mangregory.fabric.ExampleModFabric"
+      "me.mangregory.asr.fabric.AsgardShieldReloadedFabric"
     ],
     "client": [
-      "me.mangregory.fabric.client.ExampleModFabricClient"
+      "me.mangregory.asr.fabric.client.AsgardShieldReloadedFabricClient"
     ]
   },
   "mixins": [
