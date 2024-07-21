@@ -1,17 +1,17 @@
 modLoader = "javafml"
 loaderVersion = "[4,)"
 #issueTrackerURL = ""
-license = "Insert License Here"
+license = "GPL-3.0"
 
 [[mods]]
 modId = "asr"
 version = "${version}"
 displayName = "Asgard Shield: Reloaded"
-authors = "Me!"
+authors = "ManGregory, ACGaming"
 description = '''
-This is an example description! Tell everyone what your mod is about!
+A Hexxit mod ported over to new Minecraft Versions. Includes Giant Swords and Asgard Shields!
 '''
-#logoFile = ""
+logoFile = "asr.png"
 
 [[dependencies.asr]]
 modId = "neoforge"
