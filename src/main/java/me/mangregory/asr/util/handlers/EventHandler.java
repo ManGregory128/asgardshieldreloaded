@@ -1,7 +1,6 @@
 package me.mangregory.asr.util.handlers;
 
 import com.google.common.util.concurrent.Runnables;
-import me.mangregory.asr.init.ItemInit;
 import me.mangregory.asr.item.AsgardShieldItem;
 import me.mangregory.asr.item.GiantSwordItem;
 import me.mangregory.asr.util.RandomUtil;
@@ -34,9 +33,10 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import org.apache.commons.lang3.function.Consumers;
 
 
 import java.util.List;
@@ -46,9 +46,7 @@ public class EventHandler {
     public void onAttackEntity(AttackEntityEvent event) {
         Player player = event.getEntity();
         Level level = player.level();
-        Entity enemy = event.getTarget();
         Vec3 pos = player.getPosition(0);
-        Vec3 enemyPos = enemy.getPosition(0);
 
         if (level instanceof ServerLevel _level && player.getItemInHand(player.swingingArm).getItem().toString().equals("asr:ender_giant_sword")) {
             enderFx(_level, pos);
@@ -108,7 +106,7 @@ public class EventHandler {
     }
 
     @SubscribeEvent
-    public void onBlockActive(LivingAttackEvent event) {
+    public void onBlockActive(LivingIncomingDamageEvent event) {
         if (event.getEntity() instanceof Player player && !event.getEntity().level().isClientSide) {
             DamageSource source = event.getSource();
 
@@ -117,7 +115,6 @@ public class EventHandler {
                     || source.is(DamageTypes.PLAYER_ATTACK) || source.is(DamageTypes.PLAYER_EXPLOSION) || source.is(DamageTypes.FIREBALL)) {
                 ItemStack stack = player.getItemInHand(player.swingingArm);
                 Item item = stack.getItem();
-                String name = item.getName(stack).toString();
                 float damage = event.getAmount() * 0.5F;
                 float knockback = 0.0F;
                 Entity projectile = source.getDirectEntity();
@@ -132,8 +129,7 @@ public class EventHandler {
                                 cancel = false;
                                 break;
                             }
-                            if (projectile instanceof Arrow) {
-                                Arrow arrow = (Arrow) projectile;
+                            if (projectile instanceof Arrow arrow) {
                                 if (arrow.isOnFire()) {
                                     cancel = false;
                                     break;
@@ -147,8 +143,7 @@ public class EventHandler {
                                 cancel = false;
                                 break;
                             }
-                            if (projectile instanceof Arrow) {
-                                Arrow arrow = (Arrow) projectile;
+                            if (projectile instanceof Arrow arrow) {
                                 if (arrow.isOnFire()) {
                                     cancel = false;
                                     break;
@@ -303,7 +298,7 @@ public class EventHandler {
                             player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.ENDER_DRAGON_HURT, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
                             break;
                     }
-                    stack.getItem().damageItem(stack, (int) damage, player, Runnables.doNothing());
+                    stack.getItem().damageItem(stack, (int) damage, player, Consumers.nop());
                     if (enemy instanceof LivingEntity && projectile == enemy)
                         ((LivingEntity) enemy).knockback(knockback * 0.5F, player.getX() - enemy.getX(), player.getZ() - enemy.getZ());
                     //player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.SHIELD_BLOCK, SoundSource.PLAYERS, 0.1F, 0.8F + player.level().random.nextFloat() * 0.4F);
@@ -333,8 +328,10 @@ public class EventHandler {
         projectile.zo = look.z * speed;
         projectile.rotate(Rotation.CLOCKWISE_180);
 
-        if (player instanceof ServerPlayer)
-            ((ServerPlayer) player).connection.send(new ClientboundAddEntityPacket(projectile));
+//      TODO update below code to match methods used in Neoforge 1.21.1
+//        if (player instanceof ServerPlayer)
+//            ((ServerPlayer) player).connection.send(new ClientboundAddEntityPacket(projectile));
+
         if (projectile instanceof Arrow) {
             ((Arrow) projectile).setOwner(player);
             projectile.xo /= -0.10000000149011612D;

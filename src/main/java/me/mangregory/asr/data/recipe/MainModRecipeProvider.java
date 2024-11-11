@@ -26,6 +26,6 @@ public class MainModRecipeProvider extends RecipeProvider {
     }
 
     public ResourceLocation getModId(String path) {
-        return new ResourceLocation(AsgardShieldReloaded.MODID, path);
+        return ResourceLocation.fromNamespaceAndPath(AsgardShieldReloaded.MODID, path);
     }
 }

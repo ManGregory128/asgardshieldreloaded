@@ -68,7 +68,7 @@ public class AsgardShieldReloaded {
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
     {
-        private static final ResourceLocation BLOCKING_PROPERTY_RESLOC = new ResourceLocation(MODID,"blocking");
+        private static final ResourceLocation BLOCKING_PROPERTY_RESLOC = ResourceLocation.fromNamespaceAndPath(MODID,"blocking");
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
