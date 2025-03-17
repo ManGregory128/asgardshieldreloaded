@@ -149,4 +149,10 @@ public class ItemAsgardShield extends ItemShield
             this.setBlocking(false);
         }
     }
+
+    @Override
+    public boolean isShield(ItemStack stack, @Nullable EntityLivingBase entity)
+    {
+        return true;
+    }
 }

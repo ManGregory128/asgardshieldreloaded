@@ -71,6 +71,12 @@ public class ItemVanillaShield extends ItemShield
     }
 
     @Override
+    public boolean isShield(ItemStack stack, @Nullable EntityLivingBase entity)
+    {
+        return true;
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {

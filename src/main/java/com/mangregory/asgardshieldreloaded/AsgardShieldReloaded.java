@@ -11,7 +11,7 @@ public class AsgardShieldReloaded
     public static final String MOD_ID = "asr";
     public static final String NAMESPACE = MOD_ID + ":";
     public static final String NAME = "Asgard Shield Reloaded";
-    public static final String VERSION = "2.2.0";
+    public static final String VERSION = "2.2.1";
     public static final String ACCEPTED_VERSIONS = "[1.12.2]";
     public static final String DEPENDENCIES = "after:harkenscythe";
 
