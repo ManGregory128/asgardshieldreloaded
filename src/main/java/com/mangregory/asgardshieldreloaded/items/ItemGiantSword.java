@@ -109,7 +109,7 @@ public class ItemGiantSword extends ItemSword
     @Override
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)
     {
-        return false;
+        return slotChanged;
     }
 
     @Override
