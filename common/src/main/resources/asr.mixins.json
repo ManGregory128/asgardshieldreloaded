@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "me.mangregory.asr.mixin",
+  "package": "me.mangregory.mixin",
   "compatibilityLevel": "JAVA_21",
   "minVersion": "0.8",
   "client": [

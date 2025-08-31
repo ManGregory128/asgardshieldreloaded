@@ -16,20 +16,20 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "me.mangregory.asr.fabric.AsgardShieldReloadedFabric"
+      "me.mangregory.fabric.AsgardShieldReloadedFabric"
     ],
     "client": [
-      "me.mangregory.asr.fabric.client.AsgardShieldReloadedFabricClient"
+      "me.mangregory.fabric.client.AsgardShieldReloadedFabricClient"
     ]
   },
   "mixins": [
     "asr.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.16.0",
-    "minecraft": "~1.21",
+    "fabricloader": ">=0.17.2",
+    "minecraft": "~1.21.8",
     "java": ">=21",
-    "architectury": ">=13.0.2",
+    "architectury": ">=17.0.8",
     "fabric-api": "*"
   },
   "suggests": {
