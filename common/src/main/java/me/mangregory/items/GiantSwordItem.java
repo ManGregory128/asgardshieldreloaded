@@ -1,6 +1,8 @@
 package me.mangregory.items;
 
 import me.mangregory.AsgardShieldReloaded;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -8,8 +10,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
+import net.minecraft.world.item.component.UseCooldown;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Optional;
+import java.util.UUID;
 
 public class GiantSwordItem extends Item {
     private final int maxBlockDuration;
@@ -22,6 +28,18 @@ public class GiantSwordItem extends Item {
 
     @Override
     public @NotNull InteractionResult use(Level level, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+
+        // Ensure the stack has a unique cooldown group
+        if (!stack.has(DataComponents.USE_COOLDOWN)) {
+            String uniqueId = UUID.randomUUID().toString();
+            ResourceLocation uniqueCooldownGroup = ResourceLocation.fromNamespaceAndPath(
+                    AsgardShieldReloaded.MOD_ID,
+                    "giant_sword_" + uniqueId
+            );
+            stack.set(DataComponents.USE_COOLDOWN, new UseCooldown(0.1f, Optional.of(uniqueCooldownGroup)));
+        }
+
         player.startUsingItem(hand);
         return InteractionResult.SUCCESS;
     }
@@ -49,7 +67,7 @@ public class GiantSwordItem extends Item {
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int remainingUseDuration) {
         if (!level.isClientSide) {
             incrementCooldown(1);
-            AsgardShieldReloaded.log("cooldown: " + this.cooldown);
+            AsgardShieldReloaded.log("cooldown: " + this.cooldown); //TEMP
         }
         if (this.cooldown >= this.maxBlockDuration) {
             entity.stopUsingItem();

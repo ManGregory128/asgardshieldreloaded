@@ -43,6 +43,7 @@ public class EventHandler {
 
             Item itemMainHand = player.getItemInHand(InteractionHand.MAIN_HAND).getItem();
             Item itemOffHand = player.getItemInHand(InteractionHand.OFF_HAND).getItem();
+            ItemStack itemStackUsed = player.getItemInHand(hand);
 
             if (itemMainHand instanceof GiantSwordItem && itemOffHand instanceof ShieldItem) {
                 if (hand == InteractionHand.MAIN_HAND) {
@@ -53,7 +54,7 @@ public class EventHandler {
             }
 
             if (itemMainHand instanceof GiantSwordItem || itemOffHand instanceof GiantSwordItem) {
-                if (!player.getCooldowns().isOnCooldown(player.getItemInHand(hand))) {
+                if (!player.getCooldowns().isOnCooldown(itemStackUsed) && itemStackUsed.getItem() instanceof GiantSwordItem) {
                     level.playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.IRON_GOLEM_ATTACK,
                             SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
                 }
