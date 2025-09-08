@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "#c:ingots/gold",
+    "/": "asr:iron_shield"
+  },
+  "pattern": [
+    "###",
+    "#/#",
+    " # "
+  ],
+  "result": {
+    "count": 1,
+    "id": "asr:gilded_iron_shield"
+  }
+}

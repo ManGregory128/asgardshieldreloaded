@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "#minecraft:planks",
+    "/": "#c:rods/wooden"
+  },
+  "pattern": [
+    " ##",
+    "###",
+    "/# "
+  ],
+  "result": {
+    "count": 1,
+    "id": "asr:wooden_giant_sword"
+  }
+}

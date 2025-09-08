@@ -69,6 +69,54 @@ public class AsgardShieldItems {
                                 .arch$tab(CreativeModeTabs.COMBAT)
                 )
         );
+        GOLDEN_GIANT_SWORD = registerItem("golden_giant_sword",
+                () -> new GiantSwordItem(
+                        65,
+                        new Item.Properties()
+                                .durability(AsgardShieldToolMaterials.ALTGOLD.durability())
+                                .sword(AsgardShieldToolMaterials.ALTGOLD, 3, -2.4f)
+                                .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
+                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                        AsgardShieldReloaded.MOD_ID,"golden_giant_sword")))
+                                .arch$tab(CreativeModeTabs.COMBAT)
+                )
+        );
+        STONE_GIANT_SWORD = registerItem("stone_giant_sword",
+                () -> new GiantSwordItem(
+                        65,
+                        new Item.Properties()
+                                .durability(AsgardShieldToolMaterials.ALTSTONE.durability())
+                                .sword(AsgardShieldToolMaterials.ALTSTONE, 3, -2.4f)
+                                .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
+                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                        AsgardShieldReloaded.MOD_ID,"stone_giant_sword")))
+                                .arch$tab(CreativeModeTabs.COMBAT)
+                )
+        );
+        WOODEN_GIANT_SWORD = registerItem("wooden_giant_sword",
+                () -> new GiantSwordItem(
+                        65,
+                        new Item.Properties()
+                                .durability(AsgardShieldToolMaterials.ALTWOOD.durability())
+                                .sword(AsgardShieldToolMaterials.ALTWOOD, 3, -2.4f)
+                                .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
+                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                        AsgardShieldReloaded.MOD_ID,"wooden_giant_sword")))
+                                .arch$tab(CreativeModeTabs.COMBAT)
+                )
+        );
+        ENDER_GIANT_SWORD = registerItem("ender_giant_sword",
+                () -> new GiantSwordItem(
+                        65,
+                        new Item.Properties()
+                                .durability(AsgardShieldToolMaterials.ENDTOOLMATERIAL.durability())
+                                .sword(AsgardShieldToolMaterials.ENDTOOLMATERIAL, 3, -2.4f)
+                                .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
+                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                        AsgardShieldReloaded.MOD_ID,"ender_giant_sword")))
+                                .arch$tab(CreativeModeTabs.COMBAT)
+                )
+        );
 
         ITEMS.register();
     }
