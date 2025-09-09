@@ -1,8 +1,14 @@
 package me.mangregory.items;
 
 import me.mangregory.AsgardShieldReloaded;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -10,23 +16,27 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
+import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.component.UseCooldown;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Consumer;
 
-public class GiantSwordItem extends Item {
+public class AsgardShieldItem extends ShieldItem {
+
     private final int maxBlockDuration;
     private int cooldown = 0;
 
-    public GiantSwordItem(int maxBlockDuration, Properties properties) {
+    public AsgardShieldItem(Properties properties, int maxUseDuration) {
         super(properties);
-        this.maxBlockDuration = maxBlockDuration;
+        this.maxBlockDuration = maxUseDuration;
     }
 
     @Override
@@ -38,7 +48,7 @@ public class GiantSwordItem extends Item {
             String uniqueId = UUID.randomUUID().toString();
             ResourceLocation uniqueCooldownGroup = ResourceLocation.fromNamespaceAndPath(
                     AsgardShieldReloaded.MOD_ID,
-                    "giant_sword_" + uniqueId
+                    "giant_shield_" + uniqueId
             );
             stack.set(DataComponents.USE_COOLDOWN, new UseCooldown(0.1f, Optional.of(uniqueCooldownGroup)));
         }
@@ -87,5 +97,34 @@ public class GiantSwordItem extends Item {
 
     public void incrementCooldown(int value) {
         this.cooldown += value;
+    }
+
+    @Environment(EnvType.CLIENT)
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
+        super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
+
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.level == null || mc.player == null) {
+            return;
+        }
+
+        boolean sneakPressed = Screen.hasShiftDown();
+        tooltipAdder.accept(Component.literal("Maximum Block Duration: " + this.maxBlockDuration / 20 + "s")
+                .withStyle(ChatFormatting.AQUA));
+        if (!sneakPressed) {
+            tooltipAdder.accept(Component.translatable("item." + stack.toString().replace("1 asr:", "asr.") + ".perk",
+                            "shift")
+                    .withStyle(ChatFormatting.GREEN));
+            tooltipAdder.accept(Component.translatable("item." + stack.toString().replace("1 asr:", "asr.") + ".weakness",
+                            "shift")
+                    .withStyle(ChatFormatting.RED));
+            tooltipAdder.accept(Component.literal("Hold shift for more info").withStyle(ChatFormatting.GRAY));
+        } else {
+            tooltipAdder.accept(Component.translatable("item." + stack.toString().replace("1 asr:", "asr.") + ".perk.desc", "")
+                    .withStyle(ChatFormatting.GREEN));
+            tooltipAdder.accept(Component.translatable("item." + stack.toString().replace("1 asr:", "asr.") + ".weakness.desc", "")
+                    .withStyle(ChatFormatting.RED));
+        }
     }
 }

@@ -29,6 +29,8 @@ public class AsgardShieldItems {
     public static RegistrySupplier<Item> WOODEN_GIANT_SWORD;
     public static RegistrySupplier<Item> ENDER_GIANT_SWORD;
 
+    public static RegistrySupplier<Item> DIAMOND_SHIELD;
+
     private static final BlocksAttacks BLOCKS_ATTACKS = new BlocksAttacks(
             0.25f, // blockDelaySeconds (5 ticks = 0.25 seconds)
             1.0f,  // disableCooldownScale
@@ -116,6 +118,17 @@ public class AsgardShieldItems {
                                         AsgardShieldReloaded.MOD_ID,"ender_giant_sword")))
                                 .arch$tab(CreativeModeTabs.COMBAT)
                 )
+        );
+
+        DIAMOND_SHIELD = registerItem("diamond_shield",
+                () -> new AsgardShieldItem(
+                        new Item.Properties()
+                                .durability(215)
+                                .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
+                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                        AsgardShieldReloaded.MOD_ID,"diamond_shield")))
+                                .arch$tab(CreativeModeTabs.COMBAT)
+                , 65)
         );
 
         ITEMS.register();

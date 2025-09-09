@@ -53,13 +53,6 @@ public class EventHandler {
                 }
             }
 
-            if (itemMainHand instanceof GiantSwordItem || itemOffHand instanceof GiantSwordItem) {
-                if (!player.getCooldowns().isOnCooldown(itemStackUsed) && itemStackUsed.getItem() instanceof GiantSwordItem) {
-                    level.playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.IRON_GOLEM_ATTACK,
-                            SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
-                }
-            }
-
             if (level instanceof ServerLevel serverLevel && (
                     player.getItemInHand(player.getUsedItemHand()).getItem().toString().equals("asr:ender_giant_sword") ||
                             player.getItemInHand(player.getUsedItemHand()).getItem().toString().equals("asr:ender_shield") ||

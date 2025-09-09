@@ -4,5 +4,11 @@
   "item.asr.stone_giant_sword": "Stone Giant Sword",
   "item.asr.wooden_giant_sword": "Wooden Giant Sword",
   "item.asr.golden_giant_sword": "Golden Giant Sword",
-  "item.asr.ender_giant_sword": "Ender Giant Sword"
+  "item.asr.ender_giant_sword": "Ender Giant Sword",
+  "item.asr.diamond_shield": "Diamond Shield",
+
+  "item.asr.diamond_shield.perk": "Special Perk: Reflect",
+  "item.asr.diamond_shield.perk.desc": "Reflects projectiles back to the attacker (30 percent chance)",
+  "item.asr.diamond_shield.weakness": "Weakness: Displace",
+  "item.asr.diamond_shield.weakness.desc": "Reflected damage also damages the shield"
 }
