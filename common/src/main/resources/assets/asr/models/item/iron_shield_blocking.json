@@ -1,0 +1,26 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "asr:item/iron_shield"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [63.7, -0.03, 0.78],
+      "translation": [0, 0.5, 1]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [63.7, -0.03, 0.78],
+      "translation": [0, 0.5, 1]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, 0, 0],
+      "translation": [-3, 3, 1],
+      "scale": [0.7, 0.7, 0.7]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, 0, 0],
+      "translation": [-3, 3, 1],
+      "scale": [0.7, 0.7, 0.7]
+    }
+  }
+}

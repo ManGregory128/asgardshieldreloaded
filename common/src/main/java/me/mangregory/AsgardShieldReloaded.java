@@ -1,6 +1,6 @@
 package me.mangregory;
 
-import me.mangregory.items.AsgardShieldItems;
+import me.mangregory.items.init.AsgardShieldItems;
 import me.mangregory.util.handlers.EventHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

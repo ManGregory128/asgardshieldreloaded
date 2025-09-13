@@ -82,7 +82,7 @@ public class AsgardShieldItem extends ShieldItem {
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int remainingUseDuration) {
         if (!level.isClientSide) {
             incrementCooldown(1);
-            AsgardShieldReloaded.log("cooldown: " + this.cooldown); //TEMP
+            // AsgardShieldReloaded.log("cooldown: " + this.cooldown);
         }
         if (this.cooldown >= this.maxBlockDuration) {
             entity.stopUsingItem();
