@@ -99,24 +99,32 @@ public class EventHandler {
                         break;
                     case "asr:stone_giant_sword":
                         knockback = 1.0F;
-                        player.level().playSound(null, BlockPos.containing(player.getPosition(0)),
-                                SoundEvents.STONE_BREAK, SoundSource.PLAYERS, 0.8F,
-                                0.8F + player.level().random.nextFloat() * 0.4F);
+                        player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.STONE_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
                         break;
                     case "asr:iron_giant_sword":
+                        knockback = 1.0F;
+                        player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.ANVIL_LAND, SoundSource.PLAYERS, 0.6F, 0.8F + player.level().random.nextFloat() * 0.4F);
+                        break;
                     case "asr:golden_giant_sword":
                         knockback = 1.0F;
-                        player.level().playSound(null, BlockPos.containing(player.getPosition(0)),
-                                SoundEvents.ANVIL_LAND, SoundSource.PLAYERS, 0.6F,
-                                0.8F + player.level().random.nextFloat() * 0.4F);
+                        player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.ANVIL_LAND, SoundSource.PLAYERS, 0.6F, 0.8F + player.level().random.nextFloat() * 0.4F);
                         break;
                     case "asr:diamond_giant_sword":
                         knockback = 1.0F;
-                        player.level().playSound(null, BlockPos.containing(player.getPosition(0)),
-                                SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.PLAYERS, 0.8F,
-                                0.8F + player.level().random.nextFloat() * 0.4F);
+                        player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
                         break;
-                    // Add more cases as needed
+                    case "asr:netherquartz_giant_sword":
+                        knockback = 1.0F;
+                        player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.NOTE_BLOCK_XYLOPHONE.value(), SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
+                        break;
+                    case "asr:skull_giant_sword":
+                        knockback = 1.0F;
+                        player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.SKELETON_HURT, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
+                        break;
+                    case "asr:ender_giant_sword":
+                        knockback = 1.0F;
+                        player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.ENDER_DRAGON_HURT, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
+                        break;
                 }
 
                 // Apply knockback to enemy
