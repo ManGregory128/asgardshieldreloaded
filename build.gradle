@@ -31,6 +31,11 @@ allprojects {
             name = "Terraformers"
             url = "https://maven.terraformersmc.com/"
         }
+        maven {
+            // Location of the maven that hosts Team Resourceful's jars.
+            name = "Team Resourceful Maven"
+            url = "https://maven.teamresourceful.com/repository/maven-public/"
+        }
     }
 }
 
@@ -60,7 +65,7 @@ subprojects {
         minecraft "net.minecraft:minecraft:$rootProject.minecraft_version"
         mappings loom.layered() {
             officialMojangMappings()
-            parchment("org.parchmentmc.data:parchment-${rootProject.minecraft_version}:2025.07.20@zip")
+            parchment("org.parchmentmc.data:parchment-1.21.8:2025.07.20@zip")
         }
     }
 

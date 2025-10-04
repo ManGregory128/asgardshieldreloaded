@@ -1,11 +1,11 @@
 package me.mangregory.items;
 
 import me.mangregory.AsgardShieldReloaded;
+import me.mangregory.util.ModConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -31,12 +31,12 @@ import java.util.function.Consumer;
 
 public class AsgardShieldItem extends ShieldItem {
 
-    private final int maxBlockDuration;
+    private long maxBlockDuration;
     private int cooldown = 0;
 
-    public AsgardShieldItem(Properties properties, int maxUseDuration) {
+    public AsgardShieldItem(Properties properties) {
         super(properties);
-        this.maxBlockDuration = maxUseDuration;
+        updateMaxBlockDuration();
     }
 
     @Override
@@ -52,6 +52,7 @@ public class AsgardShieldItem extends ShieldItem {
             );
             stack.set(DataComponents.USE_COOLDOWN, new UseCooldown(0.1f, Optional.of(uniqueCooldownGroup)));
         }
+        updateMaxBlockDuration();
         player.startUsingItem(hand);
 
         player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.IRON_GOLEM_ATTACK,
@@ -71,7 +72,7 @@ public class AsgardShieldItem extends ShieldItem {
 
     @Override
     public boolean releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeUsed) {
-        if (entity instanceof Player && !level.isClientSide) {
+        if (entity instanceof Player && !level.isClientSide()) {
             ((Player) entity).getCooldowns().addCooldown(stack, this.cooldown / 2);
             resetCooldown();
         }
@@ -80,9 +81,8 @@ public class AsgardShieldItem extends ShieldItem {
 
     @Override
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int remainingUseDuration) {
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             incrementCooldown(1);
-            // AsgardShieldReloaded.log("cooldown: " + this.cooldown);
         }
         if (this.cooldown >= this.maxBlockDuration) {
             entity.stopUsingItem();
@@ -99,6 +99,10 @@ public class AsgardShieldItem extends ShieldItem {
         this.cooldown += value;
     }
 
+    private void updateMaxBlockDuration() {
+        this.maxBlockDuration = ModConfig.ASGARD_SHIELD_BLOCK_DURATION;
+    }
+
     @Environment(EnvType.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
@@ -108,8 +112,8 @@ public class AsgardShieldItem extends ShieldItem {
         if (mc.level == null || mc.player == null) {
             return;
         }
-
-        boolean sneakPressed = Screen.hasShiftDown();
+        updateMaxBlockDuration();
+        boolean sneakPressed = Minecraft.getInstance().hasShiftDown();
         tooltipAdder.accept(Component.literal("Maximum Block Duration: " + this.maxBlockDuration / 20 + "s")
                 .withStyle(ChatFormatting.AQUA));
         if (!sneakPressed) {

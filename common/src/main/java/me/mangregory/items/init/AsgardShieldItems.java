@@ -64,7 +64,6 @@ public class AsgardShieldItems {
     public static void init() {
         DIAMOND_GIANT_SWORD = registerItem("diamond_giant_sword",
                 () -> new GiantSwordItem(
-                        65,
                         new Item.Properties()
                                 .durability(AsgardShieldToolMaterials.ALTDIAMOND.durability())
                                 .sword(AsgardShieldToolMaterials.ALTDIAMOND, 3, -2.4f)
@@ -76,7 +75,6 @@ public class AsgardShieldItems {
         );
         IRON_GIANT_SWORD = registerItem("iron_giant_sword",
                 () -> new GiantSwordItem(
-                        65,
                         new Item.Properties()
                                 .durability(AsgardShieldToolMaterials.ALTIRON.durability())
                                 .sword(AsgardShieldToolMaterials.ALTIRON, 3, -2.4f)
@@ -88,7 +86,6 @@ public class AsgardShieldItems {
         );
         GOLDEN_GIANT_SWORD = registerItem("golden_giant_sword",
                 () -> new GiantSwordItem(
-                        65,
                         new Item.Properties()
                                 .durability(AsgardShieldToolMaterials.ALTGOLD.durability())
                                 .sword(AsgardShieldToolMaterials.ALTGOLD, 3, -2.4f)
@@ -100,7 +97,6 @@ public class AsgardShieldItems {
         );
         STONE_GIANT_SWORD = registerItem("stone_giant_sword",
                 () -> new GiantSwordItem(
-                        65,
                         new Item.Properties()
                                 .durability(AsgardShieldToolMaterials.ALTSTONE.durability())
                                 .sword(AsgardShieldToolMaterials.ALTSTONE, 3, -2.4f)
@@ -112,7 +108,6 @@ public class AsgardShieldItems {
         );
         WOODEN_GIANT_SWORD = registerItem("wooden_giant_sword",
                 () -> new GiantSwordItem(
-                        65,
                         new Item.Properties()
                                 .durability(AsgardShieldToolMaterials.ALTWOOD.durability())
                                 .sword(AsgardShieldToolMaterials.ALTWOOD, 3, -2.4f)
@@ -124,7 +119,6 @@ public class AsgardShieldItems {
         );
         ENDER_GIANT_SWORD = registerItem("ender_giant_sword",
                 () -> new GiantSwordItem(
-                        65,
                         new Item.Properties()
                                 .durability(AsgardShieldToolMaterials.ENDTOOLMATERIAL.durability())
                                 .sword(AsgardShieldToolMaterials.ENDTOOLMATERIAL, 3, -2.4f)
@@ -142,8 +136,7 @@ public class AsgardShieldItems {
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"ender_shield")))
-                                .arch$tab(CreativeModeTabs.COMBAT)
-                , 65)
+                                .arch$tab(CreativeModeTabs.COMBAT))
         );
         GILDED_ENDER_SHIELD = registerItem("gilded_ender_shield",
                 () -> new AsgardShieldItem(
@@ -152,8 +145,7 @@ public class AsgardShieldItems {
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"gilded_ender_shield")))
-                                .arch$tab(CreativeModeTabs.COMBAT)
-                , 65)
+                                .arch$tab(CreativeModeTabs.COMBAT))
         );
         DIAMOND_SHIELD = registerItem("diamond_shield",
                 () -> new AsgardShieldItem(
@@ -162,8 +154,7 @@ public class AsgardShieldItems {
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"diamond_shield")))
-                                .arch$tab(CreativeModeTabs.COMBAT)
-                , 65)
+                                .arch$tab(CreativeModeTabs.COMBAT))
         );
         GILDED_DIAMOND_SHIELD = registerItem("gilded_diamond_shield",
                 () -> new AsgardShieldItem(
@@ -172,8 +163,7 @@ public class AsgardShieldItems {
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"gilded_diamond_shield")))
-                                .arch$tab(CreativeModeTabs.COMBAT)
-                , 65)
+                                .arch$tab(CreativeModeTabs.COMBAT))
         );
         NETHERQUARTZ_SHIELD = registerItem("netherquartz_shield",
                 () -> new AsgardShieldItem(
@@ -182,8 +172,7 @@ public class AsgardShieldItems {
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"netherquartz_shield")))
-                                .arch$tab(CreativeModeTabs.COMBAT)
-                , 65)
+                                .arch$tab(CreativeModeTabs.COMBAT))
         );
         GILDED_NETHERQUARTZ_SHIELD = registerItem("gilded_netherquartz_shield",
                 () -> new AsgardShieldItem(
@@ -192,8 +181,7 @@ public class AsgardShieldItems {
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"gilded_netherquartz_shield")))
-                                .arch$tab(CreativeModeTabs.COMBAT)
-                , 65)
+                                .arch$tab(CreativeModeTabs.COMBAT))
         );
         SKULL_SHIELD = registerItem("skull_shield",
                 () -> new AsgardShieldItem(
@@ -202,8 +190,7 @@ public class AsgardShieldItems {
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"skull_shield")))
-                                .arch$tab(CreativeModeTabs.COMBAT)
-                , 65)
+                                .arch$tab(CreativeModeTabs.COMBAT))
         );
         GILDED_SKULL_SHIELD = registerItem("gilded_skull_shield",
                 () -> new AsgardShieldItem(
@@ -212,8 +199,7 @@ public class AsgardShieldItems {
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"gilded_skull_shield")))
-                                .arch$tab(CreativeModeTabs.COMBAT)
-                , 65)
+                                .arch$tab(CreativeModeTabs.COMBAT))
         );
         IRON_SHIELD = registerItem("iron_shield",
                 () -> new AsgardShieldItem(
@@ -222,8 +208,7 @@ public class AsgardShieldItems {
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"iron_shield")))
-                                .arch$tab(CreativeModeTabs.COMBAT)
-                , 65)
+                                .arch$tab(CreativeModeTabs.COMBAT))
         );
         GILDED_IRON_SHIELD = registerItem("gilded_iron_shield",
                 () -> new AsgardShieldItem(
@@ -232,8 +217,7 @@ public class AsgardShieldItems {
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"gilded_iron_shield")))
-                                .arch$tab(CreativeModeTabs.COMBAT)
-                        , 65)
+                                .arch$tab(CreativeModeTabs.COMBAT))
         );
         STONE_SHIELD = registerItem("stone_shield",
                 () -> new AsgardShieldItem(
@@ -242,8 +226,7 @@ public class AsgardShieldItems {
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"stone_shield")))
-                                .arch$tab(CreativeModeTabs.COMBAT)
-                , 65)
+                                .arch$tab(CreativeModeTabs.COMBAT))
         );
         GILDED_STONE_SHIELD = registerItem("gilded_stone_shield",
                 () -> new AsgardShieldItem(
@@ -252,8 +235,7 @@ public class AsgardShieldItems {
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"gilded_stone_shield")))
-                                .arch$tab(CreativeModeTabs.COMBAT)
-                , 65)
+                                .arch$tab(CreativeModeTabs.COMBAT))
         );
         WOODEN_SHIELD = registerItem("wooden_shield",
                 () -> new AsgardShieldItem(
@@ -262,8 +244,7 @@ public class AsgardShieldItems {
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"wooden_shield")))
-                                .arch$tab(CreativeModeTabs.COMBAT)
-                , 65)
+                                .arch$tab(CreativeModeTabs.COMBAT))
         );
         GILDED_WOODEN_SHIELD = registerItem("gilded_wooden_shield",
                 () -> new AsgardShieldItem(
@@ -272,8 +253,7 @@ public class AsgardShieldItems {
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"gilded_wooden_shield")))
-                                .arch$tab(CreativeModeTabs.COMBAT)
-                , 65)
+                                .arch$tab(CreativeModeTabs.COMBAT))
         );
 
         ITEMS.register();

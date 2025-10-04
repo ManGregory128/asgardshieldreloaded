@@ -74,5 +74,8 @@
   "item.asr.wooden_shield.perk": "Special Perk: Arrow Catch",
   "item.asr.wooden_shield.perk.desc": "Allows the wielder to collect arrows from enemies (25 percent chance)",
   "item.asr.wooden_shield.weakness": "Weakness: Fire Damage",
-  "item.asr.wooden_shield.weakness.desc": "Fire burns quickly through wood, be careful"
+  "item.asr.wooden_shield.weakness.desc": "Fire burns quickly through wood, be careful",
+  "config.asr.title": "Asgard Shield: Reloaded Config",
+  "config.asr.giant_sword_block_duration": "Giant Sword Block Duration",
+  "config.asr.asgard_shield_block_duration": "Asgard Shield Block Duration"
 }

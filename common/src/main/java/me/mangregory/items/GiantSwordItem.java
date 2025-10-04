@@ -1,8 +1,14 @@
 package me.mangregory.items;
 
 import me.mangregory.AsgardShieldReloaded;
+import me.mangregory.util.ModConfig;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -13,20 +19,23 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.component.UseCooldown;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 public class GiantSwordItem extends Item {
-    private final int maxBlockDuration;
+    private long maxBlockDuration;
     private int cooldown = 0;
 
-    public GiantSwordItem(int maxBlockDuration, Properties properties) {
+    public GiantSwordItem(Properties properties) {
         super(properties);
-        this.maxBlockDuration = maxBlockDuration;
+        updateMaxBlockDuration();
     }
 
     @Override
@@ -42,6 +51,7 @@ public class GiantSwordItem extends Item {
             );
             stack.set(DataComponents.USE_COOLDOWN, new UseCooldown(0.1f, Optional.of(uniqueCooldownGroup)));
         }
+        updateMaxBlockDuration();
         player.startUsingItem(hand);
 
         player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.IRON_GOLEM_ATTACK,
@@ -61,7 +71,7 @@ public class GiantSwordItem extends Item {
 
     @Override
     public boolean releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeUsed) {
-        if (entity instanceof Player && !level.isClientSide) {
+        if (entity instanceof Player && !level.isClientSide()) {
             ((Player) entity).getCooldowns().addCooldown(stack, this.cooldown / 2);
             resetCooldown();
         }
@@ -70,9 +80,8 @@ public class GiantSwordItem extends Item {
 
     @Override
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int remainingUseDuration) {
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             incrementCooldown(1);
-            // AsgardShieldReloaded.log("cooldown: " + this.cooldown);
         }
         if (this.cooldown >= this.maxBlockDuration) {
             entity.stopUsingItem();
@@ -87,5 +96,23 @@ public class GiantSwordItem extends Item {
 
     public void incrementCooldown(int value) {
         this.cooldown += value;
+    }
+
+    @Environment(EnvType.CLIENT)
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
+        super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
+
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.level == null || mc.player == null) {
+            return;
+        }
+        updateMaxBlockDuration();
+        tooltipAdder.accept(Component.literal("Maximum Block Duration: " + this.maxBlockDuration / 20 + "s")
+                .withStyle(ChatFormatting.AQUA));
+    }
+
+    private void updateMaxBlockDuration() {
+        this.maxBlockDuration = ModConfig.GIANT_SWORD_BLOCK_DURATION;
     }
 }

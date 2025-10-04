@@ -71,7 +71,7 @@ public class EventHandler {
 
         // Register living hurt event (for blocking damage)
         EntityEvent.LIVING_HURT.register((entity, damageSource, amount) -> {
-            if (entity instanceof Player player && !entity.level().isClientSide) {
+            if (entity instanceof Player player && !entity.level().isClientSide()) {
                 return handleBlockingDamage(player, damageSource, amount);
             }
             return EventResult.pass();
