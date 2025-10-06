@@ -10,6 +10,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.BlocksAttacks;
@@ -59,6 +60,20 @@ public class AsgardShieldItems {
             Optional.empty(), // bypassedBy damage types
             Optional.of(SoundEvents.SHIELD_BLOCK), // block sound
             Optional.of(SoundEvents.SHIELD_BREAK)  // disable sound
+    );
+    private static final BlocksAttacks BLOCKS_ATTACKS_WOODEN = new BlocksAttacks(
+            0.25f,
+            1.0f,
+            List.of(new BlocksAttacks.DamageReduction(
+                    90.0f,
+                    Optional.empty(),
+                    0.5f,
+                    1.0f
+            )),
+            BlocksAttacks.ItemDamageFunction.DEFAULT,
+            Optional.of(DamageTypeTags.IS_FIRE), // bypassedBy all fire damage types
+            Optional.of(SoundEvents.SHIELD_BLOCK),
+            Optional.of(SoundEvents.SHIELD_BREAK)
     );
 
     public static void init() {
@@ -241,7 +256,7 @@ public class AsgardShieldItems {
                 () -> new AsgardShieldItem(
                         new Item.Properties()
                                 .durability(215)
-                                .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
+                                .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS_WOODEN)
                                 .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"wooden_shield")))
                                 .arch$tab(CreativeModeTabs.COMBAT))
@@ -250,7 +265,7 @@ public class AsgardShieldItems {
                 () -> new AsgardShieldItem(
                         new Item.Properties()
                                 .durability(280)
-                                .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
+                                .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS_WOODEN)
                                 .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"gilded_wooden_shield")))
                                 .arch$tab(CreativeModeTabs.COMBAT))

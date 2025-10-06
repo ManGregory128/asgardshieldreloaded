@@ -77,5 +77,7 @@
   "item.asr.wooden_shield.weakness.desc": "Fire burns quickly through wood, be careful",
   "config.asr.title": "Asgard Shield: Reloaded Config",
   "config.asr.giant_sword_block_duration": "Giant Sword Block Duration",
-  "config.asr.asgard_shield_block_duration": "Asgard Shield Block Duration"
+  "config.asr.asgard_shield_block_duration": "Asgard Shield Block Duration",
+  "config.asr.giant_sword_base_knockback": "Giant Sword Base Knockback",
+  "config.asr.asgard_shield_base_knockback": "Asgard Shield Base Knockback"
 }
