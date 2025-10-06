@@ -31,6 +31,8 @@ public class AsgardShieldItems {
     public static RegistrySupplier<Item> STONE_GIANT_SWORD;
     public static RegistrySupplier<Item> WOODEN_GIANT_SWORD;
     public static RegistrySupplier<Item> ENDER_GIANT_SWORD;
+    public static RegistrySupplier<Item> NETHERQUARTZ_GIANT_SWORD;
+    public static RegistrySupplier<Item> SKULL_GIANT_SWORD;
 
     public static RegistrySupplier<Item> DIAMOND_SHIELD;
     public static RegistrySupplier<Item> GILDED_DIAMOND_SHIELD;
@@ -140,6 +142,28 @@ public class AsgardShieldItems {
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"ender_giant_sword")))
+                                .arch$tab(CreativeModeTabs.COMBAT)
+                )
+        );
+        NETHERQUARTZ_GIANT_SWORD = registerItem("netherquartz_giant_sword",
+                () -> new GiantSwordItem(
+                        new Item.Properties()
+                                .durability(AsgardShieldToolMaterials.NQ_TOOLMATERIAL.durability())
+                                .sword(AsgardShieldToolMaterials.NQ_TOOLMATERIAL, 3, -2.4f)
+                                .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
+                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                        AsgardShieldReloaded.MOD_ID,"netherquartz_giant_sword")))
+                                .arch$tab(CreativeModeTabs.COMBAT)
+                )
+        );
+        SKULL_GIANT_SWORD = registerItem("skull_giant_sword",
+                () -> new GiantSwordItem(
+                        new Item.Properties()
+                                .durability(AsgardShieldToolMaterials.SKULL_TOOLMATERIAL.durability())
+                                .sword(AsgardShieldToolMaterials.SKULL_TOOLMATERIAL, 3, -2.4f)
+                                .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
+                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                        AsgardShieldReloaded.MOD_ID,"skull_giant_sword")))
                                 .arch$tab(CreativeModeTabs.COMBAT)
                 )
         );

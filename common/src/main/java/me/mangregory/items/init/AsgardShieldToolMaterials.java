@@ -52,4 +52,20 @@ public class AsgardShieldToolMaterials {
             20,
             ItemTags.NETHERITE_TOOL_MATERIALS
     );
+    public static final ToolMaterial NQ_TOOLMATERIAL = new ToolMaterial(
+            BlockTags.INCORRECT_FOR_DIAMOND_TOOL,
+            480,
+            6f,
+            3f,
+            13,
+            ItemTags.IRON_TOOL_MATERIALS
+    );
+    public static final ToolMaterial SKULL_TOOLMATERIAL = new ToolMaterial(
+            BlockTags.INCORRECT_FOR_DIAMOND_TOOL,
+            360,
+            5f,
+            2f,
+            6,
+            ItemTags.SKULLS
+    );
 }
