@@ -8,7 +8,7 @@ import com.teamresourceful.resourcefulconfig.api.annotations.*;
         icon = "swords"
 )
 public class ModConfig {
-    @Comment("Giant Sword maximum block duration in ticks (20 ticks = 1 second)")
+    @Comment("Giant Sword maximum block duration in ticks (min 20 ticks = 1 second, max 200 ticks = 10 seconds)")
     @ConfigOption.Range(min = 20, max = 200)
     @ConfigEntry(
             id = "giant_sword_block_duration",
@@ -16,7 +16,7 @@ public class ModConfig {
     )
     public static long GIANT_SWORD_BLOCK_DURATION = 65;
 
-    @Comment("Asgard Shields maximum block duration in ticks (20 ticks = 1 second)")
+    @Comment("Asgard Shields maximum block duration in ticks (min 20 ticks = 1 second, max 200 ticks = 10 seconds)")
     @ConfigOption.Range(min = 20, max = 200)
     @ConfigEntry(
             id = "asgard_shield_block_duration",
@@ -24,7 +24,7 @@ public class ModConfig {
     )
     public static long ASGARD_SHIELD_BLOCK_DURATION = 65;
 
-    @Comment("Giant Sword Base Knockback")
+    @Comment("Giant Sword Base Knockback (min: 0.0, max: 5.0)")
     @ConfigOption.Range(min = 0.0, max = 5.0)
     @ConfigEntry(
             id = "giant_sword_base_knockback",
@@ -32,7 +32,7 @@ public class ModConfig {
     )
     public static float GIANT_SWORD_BASE_KNOCKBACK = 1.0F;
 
-    @Comment("Asgard Shield Base Knockback")
+    @Comment("Asgard Shield Base Knockback (min: 0.0, max: 5.0)")
     @ConfigOption.Range(min = 0.0, max = 5.0)
     @ConfigEntry(
             id = "asgard_shield_base_knockback",
