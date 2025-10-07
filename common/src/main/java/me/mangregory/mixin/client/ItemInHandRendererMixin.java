@@ -22,7 +22,8 @@ abstract class ItemInHandRendererMixin {
     public void itemUsed(InteractionHand interactionHand, CallbackInfo callback) {
         // don't play the reequip animation when beginning to use an item, like shield or bow
         if (this.minecraft.player.isUsingItem() && this.minecraft.player.getUsedItemHand() == interactionHand) {
-            if (this.minecraft.player.getUseItem().getItem() instanceof GiantSwordItem || this.minecraft.player.getUseItem().getItem() instanceof AsgardShieldItem)
+            if (this.minecraft.player.getUseItem().getItem() instanceof GiantSwordItem ||
+                    this.minecraft.player.getUseItem().getItem() instanceof AsgardShieldItem)
                 callback.cancel();
         }
     }

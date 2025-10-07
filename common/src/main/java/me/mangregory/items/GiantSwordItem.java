@@ -1,15 +1,12 @@
 package me.mangregory.items;
 
-import me.mangregory.AsgardShieldReloaded;
 import me.mangregory.util.ModConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -21,12 +18,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
-import net.minecraft.world.item.component.UseCooldown;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Optional;
-import java.util.UUID;
 import java.util.function.Consumer;
 
 public class GiantSwordItem extends Item {
@@ -40,17 +34,6 @@ public class GiantSwordItem extends Item {
 
     @Override
     public @NotNull InteractionResult use(Level level, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-
-        // Ensure the stack has a unique cooldown group
-        if (!stack.has(DataComponents.USE_COOLDOWN)) {
-            String uniqueId = UUID.randomUUID().toString();
-            ResourceLocation uniqueCooldownGroup = ResourceLocation.fromNamespaceAndPath(
-                    AsgardShieldReloaded.MOD_ID,
-                    "giant_sword_" + uniqueId
-            );
-            stack.set(DataComponents.USE_COOLDOWN, new UseCooldown(0.1f, Optional.of(uniqueCooldownGroup)));
-        }
         updateMaxBlockDuration();
         player.startUsingItem(hand);
 
@@ -88,6 +71,10 @@ public class GiantSwordItem extends Item {
             ((Player) entity).getCooldowns().addCooldown(stack, this.cooldown / 2);
             resetCooldown();
         }
+    }
+
+    public int getCooldown() {
+        return this.cooldown;
     }
 
     public void resetCooldown() {

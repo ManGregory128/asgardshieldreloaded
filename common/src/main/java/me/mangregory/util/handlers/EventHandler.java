@@ -4,13 +4,17 @@ import dev.architectury.event.EventResult;
 import dev.architectury.event.events.common.EntityEvent;
 import dev.architectury.event.events.common.InteractionEvent;
 import dev.architectury.event.events.common.PlayerEvent;
+import dev.architectury.event.events.common.TickEvent;
+import me.mangregory.AsgardShieldReloaded;
 import me.mangregory.items.AsgardShieldItem;
 import me.mangregory.items.GiantSwordItem;
 import me.mangregory.util.ModConfig;
 import me.mangregory.util.RandomUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -30,24 +34,52 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.component.UseCooldown;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public class EventHandler {
     public static void registerEvents() {
         // Register attack entity event
         PlayerEvent.ATTACK_ENTITY.register((player, level, entity, hand, hitResult) -> {
-            Vec3 pos = player.getPosition(0);
-
             if (level instanceof ServerLevel serverLevel &&
                     player.getItemInHand(player.swingingArm).getItem().toString().equals("asr:ender_giant_sword")) {
                 particleFx(serverLevel, player, ParticleTypes.PORTAL);
             }
-
             return EventResult.pass();
+        });
+
+        // Register player tick event (for cooldown management)
+        TickEvent.PLAYER_POST.register((player) -> {
+            if (!player.level().isClientSide()) {
+                if (!player.isUsingItem()) {
+                    player.getInventory().iterator().forEachRemaining(stack -> {
+                        Item item = stack.getItem();
+                        if (item instanceof GiantSwordItem && ((GiantSwordItem) item).getCooldown() > 0) {
+                            player.getCooldowns().addCooldown(stack, ((GiantSwordItem) item).getCooldown() / 2);
+                            ((GiantSwordItem) item).resetCooldown();
+                        } else if (item instanceof AsgardShieldItem && ((AsgardShieldItem) item).getCooldown() > 0) {
+                            player.getCooldowns().addCooldown(stack, ((AsgardShieldItem) item).getCooldown() / 2);
+                            ((AsgardShieldItem) item).resetCooldown();
+                        } else if (item instanceof GiantSwordItem || item instanceof AsgardShieldItem) {
+                            if (!stack.has(DataComponents.USE_COOLDOWN)) {
+                                String uniqueId = UUID.randomUUID().toString();
+                                String itemType = item instanceof GiantSwordItem ? "giant_sword" : "shield";
+                                ResourceLocation uniqueCooldownGroup = ResourceLocation.fromNamespaceAndPath(
+                                        AsgardShieldReloaded.MOD_ID,
+                                        itemType + "_" + uniqueId
+                                );
+                                stack.set(DataComponents.USE_COOLDOWN, new UseCooldown(0.1f, Optional.of(uniqueCooldownGroup)));
+                            }
+                        }
+                    });
+                }
+            }
         });
 
         // Register right-click item event (for blocking)
