@@ -7,6 +7,7 @@
     "client.ItemInHandRendererMixin"
   ],
   "mixins": [
+    "LivingEntityAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

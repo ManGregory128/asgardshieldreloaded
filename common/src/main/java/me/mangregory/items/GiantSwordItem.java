@@ -1,5 +1,6 @@
 package me.mangregory.items;
 
+import me.mangregory.mixin.LivingEntityAccessor;
 import me.mangregory.util.ModConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -15,7 +16,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
@@ -34,17 +34,16 @@ public class GiantSwordItem extends Item {
 
     @Override
     public @NotNull InteractionResult use(Level level, Player player, InteractionHand hand) {
+        if (player instanceof LivingEntityAccessor accessor) {
+            if (accessor.getAttackStrengthTicker() < 10) {
+                return InteractionResult.PASS; // Prevent blocking if the player recently attacked
+            }
+        }
         updateMaxBlockDuration();
-        player.startUsingItem(hand);
-
+        super.use(level, player, hand);
         player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.IRON_GOLEM_ATTACK,
                 SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
-        return InteractionResult.SUCCESS;
-    }
-
-    @Override
-    public @NotNull ItemUseAnimation getUseAnimation(@NotNull ItemStack stack) {
-        return ItemUseAnimation.BLOCK;
+        return InteractionResult.CONSUME;
     }
 
     @Override

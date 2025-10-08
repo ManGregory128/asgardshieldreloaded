@@ -33,16 +33,10 @@ public class AsgardShieldItem extends ShieldItem {
     @Override
     public @NotNull InteractionResult use(Level level, Player player, InteractionHand hand) {
         updateMaxBlockDuration();
-        player.startUsingItem(hand);
-
+        super.use(level, player, hand);
         player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.IRON_GOLEM_ATTACK,
                 SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
-        return InteractionResult.SUCCESS;
-    }
-
-    @Override
-    public @NotNull ItemUseAnimation getUseAnimation(@NotNull ItemStack stack) {
-        return ItemUseAnimation.BLOCK;
+        return InteractionResult.CONSUME;
     }
 
     @Override
