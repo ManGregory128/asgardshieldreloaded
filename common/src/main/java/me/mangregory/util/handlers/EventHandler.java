@@ -61,11 +61,9 @@ public class EventHandler {
                     player.getInventory().iterator().forEachRemaining(stack -> {
                         Item item = stack.getItem();
                         if (item instanceof GiantSwordItem && ((GiantSwordItem) item).getCooldown() > 0) {
-                            player.getCooldowns().addCooldown(stack, ((GiantSwordItem) item).getCooldown() / 2);
-                            ((GiantSwordItem) item).resetCooldown();
+                            resetSwordCooldown(player, stack, (GiantSwordItem) item);
                         } else if (item instanceof AsgardShieldItem && ((AsgardShieldItem) item).getCooldown() > 0) {
-                            player.getCooldowns().addCooldown(stack, ((AsgardShieldItem) item).getCooldown() / 2);
-                            ((AsgardShieldItem) item).resetCooldown();
+                            resetShieldCooldown(player, stack, (AsgardShieldItem) item);
                         } else if (item instanceof GiantSwordItem || item instanceof AsgardShieldItem) {
                             if (!stack.has(DataComponents.USE_COOLDOWN)) {
                                 String uniqueId = UUID.randomUUID().toString();
@@ -75,6 +73,33 @@ public class EventHandler {
                                         itemType + "_" + uniqueId
                                 );
                                 stack.set(DataComponents.USE_COOLDOWN, new UseCooldown(0.1f, Optional.of(uniqueCooldownGroup)));
+                            }
+                        }
+                    });
+                }
+                else if (player.isUsingItem()) {
+                    ItemStack usedStack = player.getItemInHand(player.getUsedItemHand());
+                    Item usedItem = usedStack.getItem();
+                    player.getInventory().iterator().forEachRemaining(stack -> {
+                        Item item = stack.getItem();
+                        switch (usedItem) {
+                            case GiantSwordItem giantSwordItem when item instanceof GiantSwordItem && !player.getCooldowns().isOnCooldown(stack) -> {
+                                if (giantSwordItem.getCooldown() != ((GiantSwordItem) item).getCooldown())
+                                    resetSwordCooldown(player, stack, (GiantSwordItem) item);
+                            }
+                            case AsgardShieldItem asgardShieldItem when item instanceof AsgardShieldItem && !player.getCooldowns().isOnCooldown(stack) -> {
+                                if (asgardShieldItem.getCooldown() != ((AsgardShieldItem) item).getCooldown())
+                                    resetShieldCooldown(player, stack, (AsgardShieldItem) item);
+                            }
+                            case GiantSwordItem giantSwordItem when item instanceof AsgardShieldItem && !player.getCooldowns().isOnCooldown(stack) ->
+                                    resetShieldCooldown(player, stack, (AsgardShieldItem) item);
+                            case AsgardShieldItem asgardShieldItem when item instanceof GiantSwordItem && !player.getCooldowns().isOnCooldown(stack) ->
+                                    resetSwordCooldown(player, stack, (GiantSwordItem) item);
+                            default -> {
+                                if (item instanceof GiantSwordItem && ((GiantSwordItem) item).getCooldown() > 0)
+                                    resetSwordCooldown(player, stack, (GiantSwordItem) item);
+                                else if (item instanceof AsgardShieldItem && ((AsgardShieldItem) item).getCooldown() > 0)
+                                    resetShieldCooldown(player, stack, (AsgardShieldItem) item);
                             }
                         }
                     });
@@ -91,7 +116,8 @@ public class EventHandler {
             Item itemOffHand = player.getItemInHand(InteractionHand.OFF_HAND).getItem();
 
             if (itemMainHand instanceof GiantSwordItem && itemOffHand instanceof ShieldItem) {
-                if (hand == InteractionHand.MAIN_HAND) {
+                if (hand == InteractionHand.MAIN_HAND
+                        && !player.getCooldowns().isOnCooldown(player.getItemInHand(InteractionHand.OFF_HAND))) {
                     player.stopUsingItem();
                     ((GiantSwordItem) itemMainHand).resetCooldown();
                     return EventResult.interruptFalse().asMinecraft();
@@ -126,6 +152,16 @@ public class EventHandler {
             }
             return EventResult.pass();
         });
+    }
+
+    private static void resetSwordCooldown(Player player, ItemStack stack, GiantSwordItem item) {
+        player.getCooldowns().addCooldown(stack, item.getCooldown() / 2);
+        item.resetCooldown();
+    }
+
+    private static void resetShieldCooldown(Player player, ItemStack stack, AsgardShieldItem item) {
+        player.getCooldowns().addCooldown(stack, item.getCooldown() / 2);
+        item.resetCooldown();
     }
 
     private static EventResult handleSwordFunctionality(Player player, Item item, DamageSource source) {

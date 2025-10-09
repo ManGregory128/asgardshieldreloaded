@@ -81,5 +81,7 @@
   "config.asr.giant_sword_block_duration": "Giant Sword Block Duration",
   "config.asr.asgard_shield_block_duration": "Asgard Shield Block Duration",
   "config.asr.giant_sword_base_knockback": "Giant Sword Base Knockback",
-  "config.asr.asgard_shield_base_knockback": "Asgard Shield Base Knockback"
+  "config.asr.asgard_shield_base_knockback": "Asgard Shield Base Knockback",
+  "config.asr.enable_giant_sword_equip_sound": "Enable Giant Sword Equip Sound",
+  "config.asr.enable_asgard_shield_equip_sound": "Enable Asgard Shield Equip Sound"
 }

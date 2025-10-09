@@ -39,4 +39,18 @@ public class ModConfig {
             translation = "config.asr.asgard_shield_base_knockback"
     )
     public static float ASGARD_SHIELD_BASE_KNOCKBACK = 1.0F;
+
+    @Comment("Enable or disable Giant Sword equipping sound")
+    @ConfigEntry(
+            id = "enable_giant_sword_equip_sound",
+            translation = "config.asr.enable_giant_sword_equip_sound"
+    )
+    public static boolean ENABLE_GIANT_SWORD_EQUIP_SOUND = true;
+
+    @Comment("Enable or disable Asgard Shield equipping sound")
+    @ConfigEntry(
+            id = "enable_asgard_shield_equip_sound",
+            translation = "config.asr.enable_asgard_shield_equip_sound"
+    )
+    public static boolean ENABLE_ASGARD_SHIELD_EQUIP_SOUND = true;
 }

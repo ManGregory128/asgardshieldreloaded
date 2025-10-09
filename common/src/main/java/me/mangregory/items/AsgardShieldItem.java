@@ -34,8 +34,9 @@ public class AsgardShieldItem extends ShieldItem {
     public @NotNull InteractionResult use(Level level, Player player, InteractionHand hand) {
         updateMaxBlockDuration();
         super.use(level, player, hand);
-        player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.IRON_GOLEM_ATTACK,
-                SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
+        if (ModConfig.ENABLE_ASGARD_SHIELD_EQUIP_SOUND)
+            player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.IRON_GOLEM_ATTACK,
+                    SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
         return InteractionResult.CONSUME;
     }
 
