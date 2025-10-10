@@ -21,11 +21,13 @@ import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class GiantSwordItem extends Item {
     private long maxBlockDuration;
-    private int cooldown = 0;
+    private static final Map<String, Integer> cooldownMap = new HashMap<>();
 
     public GiantSwordItem(Properties properties) {
         super(properties);
@@ -54,35 +56,53 @@ public class GiantSwordItem extends Item {
 
     @Override
     public boolean releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeUsed) {
-        if (entity instanceof Player && !level.isClientSide()) {
-            ((Player) entity).getCooldowns().addCooldown(stack, this.cooldown / 2);
-            resetCooldown();
+        if (entity instanceof Player player && !level.isClientSide()) {
+            String key = getCooldownKey(player, stack);
+            player.getCooldowns().addCooldown(stack, getCooldown(key) / 2);
+            resetCooldown(key);
         }
         return false;
     }
 
     @Override
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int remainingUseDuration) {
-        if (!level.isClientSide()) {
-            incrementCooldown(1);
+        if (!level.isClientSide() && entity instanceof Player player) {
+            String key = getCooldownKey(player, stack);
+            incrementCooldown(key, 1);
+
+            if (getCooldown(key) >= this.maxBlockDuration) {
+                entity.stopUsingItem();
+                player.getCooldowns().addCooldown(stack, getCooldown(key) / 2);
+                resetCooldown(key);
+            }
         }
-        if (this.cooldown >= this.maxBlockDuration) {
-            entity.stopUsingItem();
-            ((Player) entity).getCooldowns().addCooldown(stack, this.cooldown / 2);
-            resetCooldown();
-        }
     }
 
-    public int getCooldown() {
-        return this.cooldown;
+    private String getCooldownKey(Player player, ItemStack stack) {
+        int slot = player.getInventory().findSlotMatchingItem(stack);
+        return player.getUUID() + ":" + slot;
     }
 
-    public void resetCooldown() {
-        this.cooldown = 0;
+    private int getCooldown(String key) {
+        return cooldownMap.getOrDefault(key, 0);
     }
 
-    public void incrementCooldown(int value) {
-        this.cooldown += value;
+    private void resetCooldown(String key) {
+        cooldownMap.remove(key);
+    }
+
+    public int getCooldown(Player player, ItemStack stack) {
+        String key = getCooldownKey(player, stack);
+        return getCooldown(key);
+    }
+
+    public void resetCooldown(Player player, ItemStack stack) {
+        String key = getCooldownKey(player, stack);
+        resetCooldown(key);
+    }
+
+    private void incrementCooldown(String key, int value) {
+        cooldownMap.put(key, getCooldown(key) + value);
     }
 
     @Environment(EnvType.CLIENT)

@@ -5,6 +5,7 @@ import com.teamresourceful.resourcefulconfig.api.annotations.*;
 @Config(value = "asgard-shield-reloaded")
 @ConfigInfo(
         titleTranslation = "config.asr.title",
+        descriptionTranslation = "config.asr.description",
         icon = "swords"
 )
 public class ModConfig {
