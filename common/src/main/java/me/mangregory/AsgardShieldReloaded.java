@@ -4,6 +4,7 @@ import com.teamresourceful.resourcefulconfig.api.loader.Configurator;
 import me.mangregory.items.init.AsgardShieldItems;
 import me.mangregory.util.ModConfig;
 import me.mangregory.util.handlers.EventHandler;
+import me.mangregory.util.handlers.LootEventHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +19,7 @@ public final class AsgardShieldReloaded {
         CONFIGURATOR.register(ModConfig.class);
         AsgardShieldItems.init();
         EventHandler.registerEvents();
+        LootEventHandler.registerEvents();
     }
 
     public static void log(String message) {

@@ -60,7 +60,7 @@ public class AsgardShieldItems {
                     0.5f,  // base damage reduction
                     1.0f   // factor (1000% damage reduction)
             )),
-            BlocksAttacks.ItemDamageFunction.DEFAULT, // item damage function
+            new BlocksAttacks.ItemDamageFunction(0.0f, 0.0f, 0.0f),
             Optional.empty(), // bypassedBy damage types
             Optional.of(SoundEvents.SHIELD_BLOCK), // block sound
             Optional.of(SoundEvents.SHIELD_BREAK)  // disable sound
@@ -74,7 +74,7 @@ public class AsgardShieldItems {
                     0.5f,
                     1.0f
             )),
-            BlocksAttacks.ItemDamageFunction.DEFAULT,
+            new BlocksAttacks.ItemDamageFunction(0.0f, 0.0f, 0.0f),
             Optional.of(DamageTypeTags.IS_FIRE), // bypassedBy all fire damage types
             Optional.of(SoundEvents.SHIELD_BLOCK),
             Optional.of(SoundEvents.SHIELD_BREAK)

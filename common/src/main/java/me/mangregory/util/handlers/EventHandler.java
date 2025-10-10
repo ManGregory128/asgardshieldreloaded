@@ -1,10 +1,7 @@
 package me.mangregory.util.handlers;
 
 import dev.architectury.event.EventResult;
-import dev.architectury.event.events.common.EntityEvent;
-import dev.architectury.event.events.common.InteractionEvent;
-import dev.architectury.event.events.common.PlayerEvent;
-import dev.architectury.event.events.common.TickEvent;
+import dev.architectury.event.events.common.*;
 import me.mangregory.AsgardShieldReloaded;
 import me.mangregory.items.AsgardShieldItem;
 import me.mangregory.items.GiantSwordItem;
@@ -144,11 +141,12 @@ public class EventHandler {
         EntityEvent.LIVING_HURT.register((entity, damageSource, amount) -> {
             if (entity instanceof Player player && !entity.level().isClientSide()
                     && player.isBlocking() && !damageSource.is(DamageTypeTags.BYPASSES_SHIELD)) {
-                Item item = entity.getItemInHand(entity.swingingArm).getItem();
+                InteractionHand hand = player.getUsedItemHand();
+                Item item = entity.getItemInHand(hand).getItem();
                 if (item instanceof GiantSwordItem)
                     return handleSwordFunctionality(player, item, damageSource);
                 else if (item instanceof AsgardShieldItem)
-                    return handleShieldFunctionality(player, item, damageSource);
+                    return handleShieldFunctionality(player, item, hand, damageSource);
             }
             return EventResult.pass();
         });
@@ -168,6 +166,7 @@ public class EventHandler {
         float knockback = ModConfig.GIANT_SWORD_BASE_KNOCKBACK;
         Entity projectile = source.getDirectEntity();
         Entity enemy = source.getEntity();
+        int damageAccumulator = 1;
 
         switch (item.toString()) {
             case "asr:wooden_giant_sword":
@@ -198,14 +197,15 @@ public class EventHandler {
                 break;
         }
         knockbackEnemy(player, enemy, projectile, knockback);
-
+        player.getItemInHand(player.getUsedItemHand()).hurtAndBreak(damageAccumulator, player, player.getUsedItemHand());
         return EventResult.pass();
     }
 
-    private static EventResult handleShieldFunctionality(Player player, Item item, DamageSource source) {
+    private static EventResult handleShieldFunctionality(Player player, Item item, InteractionHand hand, DamageSource source) {
         Entity enemy = source.getEntity();
         Entity projectile = source.getDirectEntity();
-        ItemStack stack = player.getItemInHand(player.swingingArm);
+        ItemStack stack = player.getItemInHand(hand);
+        int damageAccumulator = 1;
         float knockback = ModConfig.ASGARD_SHIELD_BASE_KNOCKBACK;
         switch (item.toString()) {
             case "asr:wooden_shield":
@@ -219,42 +219,42 @@ public class EventHandler {
                 break;
             case "asr:stone_shield":
                 if (source.is(DamageTypeTags.IS_EXPLOSION))
-                    stack.hurtAndBreak(6, player, player.swingingArm);
+                    damageAccumulator += 5;
                 else if (source.is(DamageTypeTags.IS_FIRE) && RandomUtil.chance(0.50))
-                    stack.hurtAndBreak(-4, player, player.swingingArm);
+                    damageAccumulator = 0;
                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.STONE_BREAK,
                         SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
                 break;
             case "asr:gilded_stone_shield":
                 knockback += 0.5F;
                 if (source.is(DamageTypeTags.IS_EXPLOSION))
-                    stack.hurtAndBreak(6, player, player.swingingArm);
+                    damageAccumulator += 5;
                 else if (source.is(DamageTypeTags.IS_FIRE))
-                    stack.hurtAndBreak(-4, player, player.swingingArm);
+                    damageAccumulator = 0;
                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.STONE_BREAK,
                         SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
                 break;
             case "asr:iron_shield":
                 if (player.isInWaterOrRain())
-                    stack.hurtAndBreak(6, player, player.swingingArm);
+                    damageAccumulator += 5;
                 else if (source.is(DamageTypeTags.IS_EXPLOSION) && RandomUtil.chance(0.50))
-                    stack.hurtAndBreak(-4, player, player.swingingArm);
+                    damageAccumulator = 0;
                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.ANVIL_LAND,
                         SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
                 break;
             case "asr:gilded_iron_shield":
                 knockback += 0.5F;
                 if (player.isInWaterOrRain())
-                    stack.hurtAndBreak(6, player, player.swingingArm);
+                    damageAccumulator += 5;
                 else if (source.is(DamageTypeTags.IS_EXPLOSION))
-                    stack.hurtAndBreak(-4, player, player.swingingArm);
+                    damageAccumulator = 0;
                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.ANVIL_LAND,
                         SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
                 break;
             case "asr:diamond_shield":
                 if (source.is(DamageTypes.ARROW) && RandomUtil.chance(0.30)) {
                     reflectArrow(player, (Arrow) projectile, source.getEntity());
-                    stack.hurtAndBreak(4, player, player.swingingArm);
+                    damageAccumulator += 3;
                     knockback = 0.0F;
                 }
                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.NOTE_BLOCK_CHIME.value(),
@@ -263,7 +263,7 @@ public class EventHandler {
             case "asr:gilded_diamond_shield":
                 if (source.is(DamageTypes.ARROW) && RandomUtil.chance(0.60)) {
                     reflectArrow(player, (Arrow) projectile, source.getEntity());
-                    stack.hurtAndBreak(4, player, player.swingingArm);
+                    damageAccumulator += 3;
                     knockback = 0.0F;
                 }
                 else knockback += 0.5F;
@@ -316,19 +316,20 @@ public class EventHandler {
                         SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
                 break;
             case "asr:skull_shield":
-                if (RandomUtil.chance(0.1F)) stack.hurtAndBreak(6, player, player.swingingArm);
+                if (RandomUtil.chance(0.1F)) damageAccumulator += 5;;
                 if (enemy instanceof LivingEntity && RandomUtil.chance(0.15D))
                     hurtNearbyEntity(enemy);
                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.SKELETON_HURT, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
                 break;
             case "asr:gilded_skull_shield":
-                if (RandomUtil.chance(0.1F)) stack.hurtAndBreak(6, player, player.swingingArm);
+                if (RandomUtil.chance(0.1F)) damageAccumulator += 5;;
                 if (enemy instanceof LivingEntity && RandomUtil.chance(0.30D))
                     hurtNearbyEntity(enemy);
                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.SKELETON_HURT, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
                 break;
         }
         knockbackEnemy(player, enemy, projectile, knockback);
+        stack.hurtAndBreak(damageAccumulator, player, hand);
         return EventResult.pass();
     }
 
