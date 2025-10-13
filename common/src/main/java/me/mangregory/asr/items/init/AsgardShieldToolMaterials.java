@@ -1,4 +1,4 @@
-package me.mangregory.items.init;
+package me.mangregory.asr.items.init;
 
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;

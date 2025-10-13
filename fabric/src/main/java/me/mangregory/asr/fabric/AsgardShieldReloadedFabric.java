@@ -1,8 +1,8 @@
-package me.mangregory.fabric;
+package me.mangregory.asr.fabric;
 
 import net.fabricmc.api.ModInitializer;
 
-import me.mangregory.AsgardShieldReloaded;
+import me.mangregory.asr.AsgardShieldReloaded;
 
 public final class AsgardShieldReloadedFabric implements ModInitializer {
     @Override

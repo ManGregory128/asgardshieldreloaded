@@ -1,5 +1,5 @@
-package me.mangregory.mixin.client;
-import me.mangregory.items.GiantSwordItem;
+package me.mangregory.asr.mixin.client;
+import me.mangregory.asr.items.GiantSwordItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.world.InteractionHand;

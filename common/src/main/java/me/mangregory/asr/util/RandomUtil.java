@@ -1,4 +1,4 @@
-package me.mangregory.util;
+package me.mangregory.asr.util;
 
 import java.util.Random;
 

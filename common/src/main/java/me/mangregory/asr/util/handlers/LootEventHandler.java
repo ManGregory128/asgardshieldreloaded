@@ -1,7 +1,7 @@
-package me.mangregory.util.handlers;
+package me.mangregory.asr.util.handlers;
 
 import dev.architectury.event.events.common.LootEvent;
-import me.mangregory.items.init.AsgardShieldItems;
+import me.mangregory.asr.items.init.AsgardShieldItems;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;

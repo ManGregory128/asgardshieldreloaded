@@ -1,7 +1,7 @@
-package me.mangregory.network;
+package me.mangregory.asr.network;
 
 import dev.architectury.networking.NetworkManager;
-import me.mangregory.config.ModConfig;
+import me.mangregory.asr.config.ModConfig;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;

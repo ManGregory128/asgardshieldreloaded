@@ -1,10 +1,10 @@
-package me.mangregory.items.init;
+package me.mangregory.asr.items.init;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
-import me.mangregory.AsgardShieldReloaded;
-import me.mangregory.items.AsgardShieldItem;
-import me.mangregory.items.GiantSwordItem;
+import me.mangregory.asr.AsgardShieldReloaded;
+import me.mangregory.asr.items.AsgardShieldItem;
+import me.mangregory.asr.items.GiantSwordItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;

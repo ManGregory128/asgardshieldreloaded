@@ -1,4 +1,4 @@
-package me.mangregory.config;
+package me.mangregory.asr.config;
 
 import com.teamresourceful.resourcefulconfig.api.annotations.*;
 

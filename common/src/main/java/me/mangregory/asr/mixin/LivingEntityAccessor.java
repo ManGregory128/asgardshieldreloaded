@@ -1,4 +1,4 @@
-package me.mangregory.mixin;
+package me.mangregory.asr.mixin;
 
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;

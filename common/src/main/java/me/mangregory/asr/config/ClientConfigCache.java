@@ -1,4 +1,4 @@
-package me.mangregory.config;
+package me.mangregory.asr.config;
 
 public class ClientConfigCache {
     public static long giantSwordBlockDuration = ModConfig.GIANT_SWORD_BLOCK_DURATION;

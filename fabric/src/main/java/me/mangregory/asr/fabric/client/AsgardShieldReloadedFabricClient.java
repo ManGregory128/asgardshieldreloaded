@@ -1,4 +1,4 @@
-package me.mangregory.fabric.client;
+package me.mangregory.asr.fabric.client;
 
 import net.fabricmc.api.ClientModInitializer;
 
