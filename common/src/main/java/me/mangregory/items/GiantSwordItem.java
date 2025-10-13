@@ -1,7 +1,8 @@
 package me.mangregory.items;
 
 import me.mangregory.mixin.LivingEntityAccessor;
-import me.mangregory.util.ModConfig;
+import me.mangregory.config.ClientConfigCache;
+import me.mangregory.config.ModConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
@@ -114,8 +115,13 @@ public class GiantSwordItem extends Item {
         if (mc.level == null || mc.player == null) {
             return;
         }
-        updateMaxBlockDuration();
-        tooltipAdder.accept(Component.literal("Maximum Block Duration: " + this.maxBlockDuration / 20 + "s")
+        long displayDuration;
+        if (mc.hasSingleplayerServer()) {
+            updateMaxBlockDuration();
+            displayDuration = this.maxBlockDuration;
+        } else displayDuration = ClientConfigCache.asgardShieldBlockDuration;
+
+        tooltipAdder.accept(Component.literal("Maximum Block Duration: " + displayDuration / 20 + "s")
                 .withStyle(ChatFormatting.AQUA));
     }
 

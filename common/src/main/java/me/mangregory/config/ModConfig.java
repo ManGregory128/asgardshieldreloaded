@@ -1,4 +1,4 @@
-package me.mangregory.util;
+package me.mangregory.config;
 
 import com.teamresourceful.resourcefulconfig.api.annotations.*;
 
@@ -17,7 +17,7 @@ public class ModConfig {
     )
     public static long GIANT_SWORD_BLOCK_DURATION = 65;
 
-    @Comment("Asgard Shields maximum block duration in ticks (min 20 ticks = 1 second, max 200 ticks = 10 seconds)")
+    @Comment("Asgard Shield maximum block duration in ticks (min 20 ticks = 1 second, max 200 ticks = 10 seconds)")
     @ConfigOption.Range(min = 20, max = 200)
     @ConfigEntry(
             id = "asgard_shield_block_duration",
@@ -40,6 +40,22 @@ public class ModConfig {
             translation = "config.asr.asgard_shield_base_knockback"
     )
     public static float ASGARD_SHIELD_BASE_KNOCKBACK = 1.0F;
+
+    @Comment("Giant Sword Base Item Damage (min: 1, max: 5)")
+    @ConfigOption.Range(min = 1, max = 5)
+    @ConfigEntry(
+            id = "giant_sword_base_itemdamage",
+            translation = "config.asr.giant_sword_base_itemdamage"
+    )
+    public static long GIANT_SWORD_BASE_ATTACKDMG = 1;
+
+    @Comment("Asgard Shield Base Item Damage (min: 1, max: 5)")
+    @ConfigOption.Range(min = 1, max = 5)
+    @ConfigEntry(
+            id = "asgard_shield_base_itemdamage",
+            translation = "config.asr.asgard_shield_base_itemdamage"
+    )
+    public static long ASGARD_SHIELD_BASE_ATTACKDMG = 1;
 
     @Comment("Enable or disable Giant Sword equipping sound")
     @ConfigEntry(

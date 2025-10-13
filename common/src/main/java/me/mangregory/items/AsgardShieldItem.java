@@ -1,6 +1,7 @@
 package me.mangregory.items;
 
-import me.mangregory.util.ModConfig;
+import me.mangregory.config.ClientConfigCache;
+import me.mangregory.config.ModConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
@@ -111,9 +112,14 @@ public class AsgardShieldItem extends ShieldItem {
         if (mc.level == null || mc.player == null) {
             return;
         }
-        updateMaxBlockDuration();
-        boolean sneakPressed = Minecraft.getInstance().hasShiftDown();
-        tooltipAdder.accept(Component.literal("Maximum Block Duration: " + this.maxBlockDuration / 20 + "s")
+        long displayDuration;
+        if (mc.hasSingleplayerServer()) {
+            updateMaxBlockDuration();
+            displayDuration = this.maxBlockDuration;
+        } else displayDuration = ClientConfigCache.asgardShieldBlockDuration;
+
+        boolean sneakPressed = mc.hasShiftDown();
+        tooltipAdder.accept(Component.literal("Maximum Block Duration: " + displayDuration / 20 + "s")
                 .withStyle(ChatFormatting.AQUA));
         if (!sneakPressed) {
             tooltipAdder.accept(Component.translatable("item." + stack.toString().replace("1 asr:", "asr.") + ".perk",

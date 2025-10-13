@@ -5,7 +5,8 @@ import dev.architectury.event.events.common.*;
 import me.mangregory.AsgardShieldReloaded;
 import me.mangregory.items.AsgardShieldItem;
 import me.mangregory.items.GiantSwordItem;
-import me.mangregory.util.ModConfig;
+import me.mangregory.network.ConfigSyncPacket;
+import me.mangregory.config.ModConfig;
 import me.mangregory.util.RandomUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -13,6 +14,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
@@ -50,6 +52,12 @@ public class EventHandler {
             }
             return EventResult.pass();
         });
+
+        PlayerEvent.PLAYER_JOIN.register((player -> {
+            if (player instanceof ServerPlayer serverPlayer) {
+                ConfigSyncPacket.sendToPlayer(serverPlayer);
+            }
+        }));
 
         // Register player tick event (for cooldown management)
         TickEvent.PLAYER_POST.register((player) -> {
@@ -166,7 +174,7 @@ public class EventHandler {
         float knockback = ModConfig.GIANT_SWORD_BASE_KNOCKBACK;
         Entity projectile = source.getDirectEntity();
         Entity enemy = source.getEntity();
-        int damageAccumulator = 1;
+        long damageAccumulator = ModConfig.GIANT_SWORD_BASE_ATTACKDMG;
 
         switch (item.toString()) {
             case "asr:wooden_giant_sword":
@@ -197,7 +205,7 @@ public class EventHandler {
                 break;
         }
         knockbackEnemy(player, enemy, projectile, knockback);
-        player.getItemInHand(player.getUsedItemHand()).hurtAndBreak(damageAccumulator, player, player.getUsedItemHand());
+        player.getItemInHand(player.getUsedItemHand()).hurtAndBreak((int) damageAccumulator, player, player.getUsedItemHand());
         return EventResult.pass();
     }
 
@@ -205,7 +213,7 @@ public class EventHandler {
         Entity enemy = source.getEntity();
         Entity projectile = source.getDirectEntity();
         ItemStack stack = player.getItemInHand(hand);
-        int damageAccumulator = 1;
+        long damageAccumulator = ModConfig.ASGARD_SHIELD_BASE_ATTACKDMG;
         float knockback = ModConfig.ASGARD_SHIELD_BASE_KNOCKBACK;
         switch (item.toString()) {
             case "asr:wooden_shield":
@@ -329,7 +337,7 @@ public class EventHandler {
                 break;
         }
         knockbackEnemy(player, enemy, projectile, knockback);
-        stack.hurtAndBreak(damageAccumulator, player, hand);
+        stack.hurtAndBreak((int) damageAccumulator, player, hand);
         return EventResult.pass();
     }
 

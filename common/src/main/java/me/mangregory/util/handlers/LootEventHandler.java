@@ -14,6 +14,7 @@ public class LootEventHandler {
                 context.addPool(LootPool.lootPool()
                         .setRolls(UniformGenerator.between(0.0f, 1.0f))
                         .add(LootItem.lootTableItem(AsgardShieldItems.ENDER_SHIELD.get()).setWeight(5))
+                        .add(LootItem.lootTableItem(AsgardShieldItems.ENDER_GIANT_SWORD.get()).setWeight(4))
                         .add(LootItem.lootTableItem(AsgardShieldItems.GILDED_ENDER_SHIELD.get()).setWeight(2)));
             }
             if (BuiltInLootTables.BASTION_TREASURE.equals(key)) {
@@ -31,7 +32,7 @@ public class LootEventHandler {
             }
             if (BuiltInLootTables.SPAWN_BONUS_CHEST.equals(key)) {
                 context.addPool(LootPool.lootPool()
-                        .setRolls(UniformGenerator.between(0.9f, 1.0f))
+                        .setRolls(UniformGenerator.between(0.0f, 1.0f))
                         .add(LootItem.lootTableItem(AsgardShieldItems.WOODEN_GIANT_SWORD.get()).setWeight(5))
                         .add(LootItem.lootTableItem(AsgardShieldItems.WOODEN_SHIELD.get()).setWeight(5)));
             }
@@ -40,6 +41,24 @@ public class LootEventHandler {
                         .setRolls(UniformGenerator.between(0.0f, 1.0f))
                         .add(LootItem.lootTableItem(AsgardShieldItems.SKULL_GIANT_SWORD.get()).setWeight(5))
                         .add(LootItem.lootTableItem(AsgardShieldItems.GILDED_SKULL_SHIELD.get()).setWeight(2)));
+            }
+            if (BuiltInLootTables.STRONGHOLD_CORRIDOR.equals(key)) {
+                context.addPool(LootPool.lootPool()
+                        .setRolls(UniformGenerator.between(0.0f, 1.0f))
+                        .add(LootItem.lootTableItem(AsgardShieldItems.IRON_GIANT_SWORD.get()).setWeight(5))
+                        .add(LootItem.lootTableItem(AsgardShieldItems.GILDED_IRON_SHIELD.get()).setWeight(2)));
+            }
+            if (BuiltInLootTables.RUINED_PORTAL.equals(key)) {
+                context.addPool(LootPool.lootPool()
+                        .setRolls(UniformGenerator.between(0.0f, 1.0f))
+                        .add(LootItem.lootTableItem(AsgardShieldItems.GOLDEN_GIANT_SWORD.get()).setWeight(2)));
+            }
+            if (BuiltInLootTables.WOODLAND_MANSION.equals(key)) {
+                context.addPool(LootPool.lootPool()
+                        .setRolls(UniformGenerator.between(0.0f, 1.0f))
+                        .add(LootItem.lootTableItem(AsgardShieldItems.DIAMOND_GIANT_SWORD.get()).setWeight(4))
+                        .add(LootItem.lootTableItem(AsgardShieldItems.DIAMOND_SHIELD.get()).setWeight(3))
+                        .add(LootItem.lootTableItem(AsgardShieldItems.GILDED_DIAMOND_SHIELD.get()).setWeight(2)));
             }
         });
     }
