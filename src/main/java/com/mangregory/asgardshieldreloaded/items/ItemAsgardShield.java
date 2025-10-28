@@ -223,7 +223,6 @@ public class ItemAsgardShield extends ItemShield implements IDyeable
     @Override
     public int getDefaultDyedColorForMeta(int meta)
     {
-        // When undyed it will use the undyed texture instead
         return color;
     }
 
