@@ -1,13 +1,17 @@
 package com.mangregory.asgardshieldreloaded.util.handlers;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import com.mangregory.asgardshieldreloaded.AsgardShieldReloaded;
 import com.mangregory.asgardshieldreloaded.config.ASRConfig;
 import com.mangregory.asgardshieldreloaded.init.ModItems;
 import com.mangregory.asgardshieldreloaded.items.ItemVanillaShield;
+import com.mangregory.asgardshieldreloaded.recipes.DyeableItem;
 
 @EventBusSubscriber
 public class RegistryHandler
@@ -17,5 +21,11 @@ public class RegistryHandler
     {
         event.getRegistry().registerAll(ModItems.ITEMS.toArray(new Item[0]));
         if (ASRConfig.VANILLA_SHIELD.VANILLA_SHIELD_OVERRIDE) event.getRegistry().register(new ItemVanillaShield());
+    }
+
+    @SubscribeEvent
+    public static void onRecipeRegister(RegistryEvent.Register<IRecipe> event)
+    {
+        event.getRegistry().register(new DyeableItem().setRegistryName(new ResourceLocation(AsgardShieldReloaded.MOD_ID, "dyeable_item")));
     }
 }
