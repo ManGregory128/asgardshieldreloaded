@@ -55,6 +55,7 @@ public class AsgardShieldReloaded
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler(itemColorHandler, ModItems.GILDED_SKULL_SHIELD);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler(itemColorHandler, ModItems.GILDED_STONE_SHIELD);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler(itemColorHandler, ModItems.GILDED_WOODEN_SHIELD);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(itemColorHandler, ModItems.GOLDEN_SHIELD);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler(itemColorHandler, ModItems.IRON_SHIELD);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler(itemColorHandler, ModItems.NETHERQUARTZ_SHIELD);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler(itemColorHandler, ModItems.PATCHWORK_SHIELD);
