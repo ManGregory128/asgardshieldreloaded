@@ -1,7 +1,8 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "asr:items/gilded_livingmetal_shield"
+    "layer0": "asr:items/gilded_livingmetal_shield_overlay",
+    "layer1": "asr:items/gilded_livingmetal_shield"
   },
   "display": {
     "thirdperson_righthand": {

@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -31,7 +32,7 @@ public class AsgardShieldReloaded
 
     @SideOnly(Side.CLIENT)
     @Mod.EventHandler
-    public void initClient(FMLPreInitializationEvent event)
+    public void initClient(FMLInitializationEvent event)
     {
         IItemColor itemColorHandler = (stack, tintIndex) ->
         {

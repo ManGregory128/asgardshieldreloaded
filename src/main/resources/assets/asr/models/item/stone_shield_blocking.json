@@ -1,7 +1,8 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "asr:items/stone_shield"
+    "layer0": "asr:items/stone_shield_overlay",
+    "layer1": "asr:items/stone_shield"
   },
   "display": {
     "thirdperson_righthand": {
