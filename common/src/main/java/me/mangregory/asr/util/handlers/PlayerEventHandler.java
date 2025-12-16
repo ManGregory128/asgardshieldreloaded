@@ -9,7 +9,7 @@ import me.mangregory.asr.items.GiantSwordItem;
 import me.mangregory.asr.network.ConfigSyncPacket;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -52,7 +52,7 @@ public class PlayerEventHandler {
                             if (!stack.has(DataComponents.USE_COOLDOWN)) {
                                 String uniqueId = UUID.randomUUID().toString();
                                 String itemType = item instanceof GiantSwordItem ? "giant_sword" : "shield";
-                                ResourceLocation uniqueCooldownGroup = ResourceLocation.fromNamespaceAndPath(
+                                Identifier uniqueCooldownGroup = Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,
                                         itemType + "_" + uniqueId
                                 );

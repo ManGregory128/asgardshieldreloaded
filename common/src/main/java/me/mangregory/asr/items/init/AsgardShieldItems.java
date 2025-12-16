@@ -7,8 +7,8 @@ import me.mangregory.asr.items.AsgardShieldItem;
 import me.mangregory.asr.items.GiantSwordItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.ItemTags;
@@ -87,7 +87,7 @@ public class AsgardShieldItems {
                                 .durability(AsgardShieldToolMaterials.ALTDIAMOND.durability())
                                 .sword(AsgardShieldToolMaterials.ALTDIAMOND, 3, -2.4f)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                             AsgardShieldReloaded.MOD_ID,"diamond_giant_sword")))
                                 .arch$tab(CreativeModeTabs.COMBAT)
                 )
@@ -98,7 +98,7 @@ public class AsgardShieldItems {
                                 .durability(AsgardShieldToolMaterials.ALTIRON.durability())
                                 .sword(AsgardShieldToolMaterials.ALTIRON, 3, -2.4f)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"iron_giant_sword")))
                                 .arch$tab(CreativeModeTabs.COMBAT)
                 )
@@ -109,7 +109,7 @@ public class AsgardShieldItems {
                                 .durability(AsgardShieldToolMaterials.ALTGOLD.durability())
                                 .sword(AsgardShieldToolMaterials.ALTGOLD, 3, -2.4f)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"golden_giant_sword")))
                                 .arch$tab(CreativeModeTabs.COMBAT)
                 )
@@ -120,7 +120,7 @@ public class AsgardShieldItems {
                                 .durability(AsgardShieldToolMaterials.ALTSTONE.durability())
                                 .sword(AsgardShieldToolMaterials.ALTSTONE, 3, -2.4f)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"stone_giant_sword")))
                                 .arch$tab(CreativeModeTabs.COMBAT)
                 )
@@ -131,7 +131,7 @@ public class AsgardShieldItems {
                                 .durability(AsgardShieldToolMaterials.ALTWOOD.durability())
                                 .sword(AsgardShieldToolMaterials.ALTWOOD, 3, -2.4f)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"wooden_giant_sword")))
                                 .arch$tab(CreativeModeTabs.COMBAT)
                 )
@@ -143,7 +143,7 @@ public class AsgardShieldItems {
                                 .sword(AsgardShieldToolMaterials.ENDTOOLMATERIAL, 3, -2.4f)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(Items.OBSIDIAN)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"ender_giant_sword")))
                                 .arch$tab(CreativeModeTabs.COMBAT)
                 )
@@ -155,7 +155,7 @@ public class AsgardShieldItems {
                                 .sword(AsgardShieldToolMaterials.NQ_TOOLMATERIAL, 3, -2.4f)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(Items.QUARTZ)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"netherquartz_giant_sword")))
                                 .arch$tab(CreativeModeTabs.COMBAT)
                 )
@@ -167,7 +167,7 @@ public class AsgardShieldItems {
                                 .sword(AsgardShieldToolMaterials.SKULL_TOOLMATERIAL, 3, -2.4f)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(Items.BONE)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"skull_giant_sword")))
                                 .arch$tab(CreativeModeTabs.COMBAT)
                 )
@@ -179,7 +179,7 @@ public class AsgardShieldItems {
                                 .durability(500)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(Items.OBSIDIAN)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"ender_shield")))
                                 .arch$tab(CreativeModeTabs.COMBAT))
         );
@@ -189,7 +189,7 @@ public class AsgardShieldItems {
                                 .durability(580)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(Items.OBSIDIAN)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"gilded_ender_shield")))
                                 .arch$tab(CreativeModeTabs.COMBAT))
         );
@@ -199,7 +199,7 @@ public class AsgardShieldItems {
                                 .durability(500)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.DIAMOND_TOOL_MATERIALS)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"diamond_shield")))
                                 .arch$tab(CreativeModeTabs.COMBAT))
         );
@@ -209,7 +209,7 @@ public class AsgardShieldItems {
                                 .durability(580)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.DIAMOND_TOOL_MATERIALS)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"gilded_diamond_shield")))
                                 .arch$tab(CreativeModeTabs.COMBAT))
         );
@@ -219,7 +219,7 @@ public class AsgardShieldItems {
                                 .durability(450)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(Items.QUARTZ)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"netherquartz_shield")))
                                 .arch$tab(CreativeModeTabs.COMBAT))
         );
@@ -229,7 +229,7 @@ public class AsgardShieldItems {
                                 .durability(500)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(Items.QUARTZ)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"gilded_netherquartz_shield")))
                                 .arch$tab(CreativeModeTabs.COMBAT))
         );
@@ -239,7 +239,7 @@ public class AsgardShieldItems {
                                 .durability(500)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(Items.BONE)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"skull_shield")))
                                 .arch$tab(CreativeModeTabs.COMBAT))
         );
@@ -249,7 +249,7 @@ public class AsgardShieldItems {
                                 .durability(580)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(Items.BONE)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"gilded_skull_shield")))
                                 .arch$tab(CreativeModeTabs.COMBAT))
         );
@@ -259,7 +259,7 @@ public class AsgardShieldItems {
                                 .durability(380)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.IRON_TOOL_MATERIALS)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"iron_shield")))
                                 .arch$tab(CreativeModeTabs.COMBAT))
         );
@@ -269,7 +269,7 @@ public class AsgardShieldItems {
                                 .durability(420)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.IRON_TOOL_MATERIALS)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"gilded_iron_shield")))
                                 .arch$tab(CreativeModeTabs.COMBAT))
         );
@@ -279,7 +279,7 @@ public class AsgardShieldItems {
                                 .durability(300)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.STONE_TOOL_MATERIALS)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"stone_shield")))
                                 .arch$tab(CreativeModeTabs.COMBAT))
         );
@@ -289,7 +289,7 @@ public class AsgardShieldItems {
                                 .durability(330)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.STONE_TOOL_MATERIALS)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"gilded_stone_shield")))
                                 .arch$tab(CreativeModeTabs.COMBAT))
         );
@@ -299,7 +299,7 @@ public class AsgardShieldItems {
                                 .durability(215)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS_WOODEN)
                                 .repairable(ItemTags.WOODEN_TOOL_MATERIALS)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"wooden_shield")))
                                 .arch$tab(CreativeModeTabs.COMBAT))
         );
@@ -309,7 +309,7 @@ public class AsgardShieldItems {
                                 .durability(280)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS_WOODEN)
                                 .repairable(ItemTags.WOODEN_TOOL_MATERIALS)
-                                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID,"gilded_wooden_shield")))
                                 .arch$tab(CreativeModeTabs.COMBAT))
         );
@@ -318,6 +318,6 @@ public class AsgardShieldItems {
     }
 
     public static RegistrySupplier<Item> registerItem(String name, Supplier<Item> item) {
-        return ITEMS.register(ResourceLocation.fromNamespaceAndPath(AsgardShieldReloaded.MOD_ID, name), item);
+        return ITEMS.register(Identifier.fromNamespaceAndPath(AsgardShieldReloaded.MOD_ID, name), item);
     }
 }
