@@ -56,3 +56,15 @@ shadowJar {
 remapJar {
     inputFile.set shadowJar.archiveFile
 }
+
+def commonProject = project(":common")
+fabricApi {
+    configureDataGeneration() {
+        modId = "$rootProject.archives_name"
+        outputDirectory = commonProject.file("src/generated/resources")
+        client = true
+        addToResources = false
+        createSourceSet = false
+        strictValidation = false
+    }
+}

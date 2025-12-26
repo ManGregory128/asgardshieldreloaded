@@ -1,0 +1,78 @@
+{
+  "parent": "item/generated",
+  "display": {
+    "firstperson_lefthand": {
+      "rotation": [
+        0.0,
+        -30.0,
+        0.0
+      ],
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "translation": [
+        1.0,
+        -0.5,
+        1.0
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0.0,
+        -30.0,
+        0.0
+      ],
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "translation": [
+        1.0,
+        -0.5,
+        1.0
+      ]
+    },
+    "ground": {
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "translation": [
+        0.0,
+        2.0,
+        0.0
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        -80.97,
+        -88.52,
+        -81.7
+      ],
+      "translation": [
+        2.5,
+        -2.25,
+        1.75
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        -80.97,
+        -88.52,
+        -81.7
+      ],
+      "translation": [
+        2.5,
+        -2.25,
+        1.75
+      ]
+    }
+  },
+  "textures": {
+    "layer0": "asr:item/diamond_shield"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_blade": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#minecraft:diamond_tool_materials"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "asr:diamond_giant_sword"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_blade"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "asr:diamond_giant_sword"
+    ]
+  }
+}

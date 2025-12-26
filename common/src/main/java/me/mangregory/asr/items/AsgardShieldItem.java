@@ -122,17 +122,15 @@ public class AsgardShieldItem extends ShieldItem {
         tooltipAdder.accept(Component.literal("Maximum Block Duration: " + displayDuration / 20 + "s")
                 .withStyle(ChatFormatting.AQUA));
         if (!sneakPressed) {
-            tooltipAdder.accept(Component.translatable("item." + stack.toString().replace("1 asr:", "asr.") + ".perk",
-                            "shift")
+            tooltipAdder.accept(Component.translatable(TooltipKeys.perk(stack), "shift")
                     .withStyle(ChatFormatting.GREEN));
-            tooltipAdder.accept(Component.translatable("item." + stack.toString().replace("1 asr:", "asr.") + ".weakness",
-                            "shift")
+            tooltipAdder.accept(Component.translatable(TooltipKeys.weakness(stack), "shift")
                     .withStyle(ChatFormatting.RED));
             tooltipAdder.accept(Component.literal("Hold shift for more info").withStyle(ChatFormatting.GRAY));
         } else {
-            tooltipAdder.accept(Component.translatable("item." + stack.toString().replace("1 asr:", "asr.") + ".perk.desc", "")
+            tooltipAdder.accept(Component.translatable(TooltipKeys.perkDesc(stack), "")
                     .withStyle(ChatFormatting.GREEN));
-            tooltipAdder.accept(Component.translatable("item." + stack.toString().replace("1 asr:", "asr.") + ".weakness.desc", "")
+            tooltipAdder.accept(Component.translatable(TooltipKeys.weaknessDesc(stack), "")
                     .withStyle(ChatFormatting.RED));
         }
     }

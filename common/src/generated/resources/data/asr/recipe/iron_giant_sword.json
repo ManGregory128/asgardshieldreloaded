@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "#minecraft:iron_tool_materials",
+    "/": "#c:rods/wooden"
+  },
+  "pattern": [
+    " ##",
+    "###",
+    "/# "
+  ],
+  "result": {
+    "count": 1,
+    "id": "asr:iron_giant_sword"
+  }
+}

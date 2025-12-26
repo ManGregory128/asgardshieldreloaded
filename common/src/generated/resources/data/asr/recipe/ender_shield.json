@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "minecraft:obsidian",
+    "*": "minecraft:ender_eye",
+    "/": "#c:leathers"
+  },
+  "pattern": [
+    "#*#",
+    "#/#",
+    " # "
+  ],
+  "result": {
+    "count": 1,
+    "id": "asr:ender_shield"
+  }
+}
