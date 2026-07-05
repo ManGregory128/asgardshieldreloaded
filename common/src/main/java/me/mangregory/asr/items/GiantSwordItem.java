@@ -46,7 +46,7 @@ public class GiantSwordItem extends Item {
         super.use(level, player, hand);
         if (ModConfig.ENABLE_GIANT_SWORD_EQUIP_SOUND)
             player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.IRON_GOLEM_ATTACK,
-                    SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
+                    SoundSource.PLAYERS, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
         return InteractionResult.CONSUME;
     }
 

@@ -1,6 +1,6 @@
 modLoader = "javafml"
-loaderVersion = "[9,)"
-issueTrackerURL = "https://github.com/ManGregory128/asgardshieldreloaded/issues"
+loaderVersion = "[11,)"
+#issueTrackerURL = ""
 license = "GPL-3.0"
 
 [[mods]]
@@ -16,21 +16,21 @@ logoFile = "asr.png"
 [[dependencies.asr]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.11,)"
+versionRange = "[26.2,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.asr]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21.11,)"
+versionRange = "[26.2,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.asr]]
 modId = "architectury"
 type = "required"
-versionRange = "[19.0.1,)"
+versionRange = "[21.0.2,)"
 ordering = "AFTER"
 side = "BOTH"
 
