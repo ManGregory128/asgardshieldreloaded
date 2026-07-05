@@ -14,6 +14,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -87,10 +88,11 @@ public class EventHandler {
     }
 
     public static void knockbackEnemy(Player player, Entity enemy, Entity projectile, float knockback) {
+        DamageSource source = player.damageSources().playerAttack(player);
         if (enemy instanceof LivingEntity && projectile == enemy) {
             ((LivingEntity) enemy).knockback(knockback * 0.4F,
                     player.getX() - enemy.getX(),
-                    player.getZ() - enemy.getZ());
+                    player.getZ() - enemy.getZ(), source, knockback);
         }
     }
 
