@@ -44,7 +44,7 @@ public class EventHandler {
                         && !player.getCooldowns().isOnCooldown(player.getItemInHand(InteractionHand.OFF_HAND))) {
                     player.stopUsingItem();
                     ((GiantSwordItem) itemMainHand).resetCooldown(player, player.getItemInHand(InteractionHand.MAIN_HAND));
-                    return EventResult.interruptFalse().asMinecraft();
+                    return EventResult.interruptFalse();
                 }
             }
             ItemStack usedStack = player.getItemInHand(hand);
@@ -61,7 +61,7 @@ public class EventHandler {
                 particleFx(serverLevel, player, ParticleTypes.CLOUD);
             }
 
-            return EventResult.pass().asMinecraft();
+            return EventResult.pass();
         });
 
         // Register living hurt event (for blocking damage)
@@ -102,11 +102,11 @@ public class EventHandler {
         for (int i = 0; i < 3; i++) {
             // Spawn particles in front of the player at different distances
             double distance = 0.5D + (i * 0.3D); // 0.5 to 1.7 blocks in front
-            double xCoord = playerPos.x + lookAngle.x * distance + (level.random.nextDouble() - 0.5D) * 0.5D;
-            double yCoord = playerPos.y + player.getEyeHeight() * 0.5D + (level.random.nextDouble() - 0.5D) * 0.3D;
-            double zCoord = playerPos.z + lookAngle.z * distance + (level.random.nextDouble() - 0.5D) * 0.5D;
+            double xCoord = playerPos.x + lookAngle.x * distance + (level.getRandom().nextDouble() - 0.5D) * 0.5D;
+            double yCoord = playerPos.y + player.getEyeHeight() * 0.5D + (level.getRandom().nextDouble() - 0.5D) * 0.3D;
+            double zCoord = playerPos.z + lookAngle.z * distance + (level.getRandom().nextDouble() - 0.5D) * 0.5D;
 
-            double speed = (level.random.nextFloat() - 0.5D) * 0.125D;
+            double speed = (level.getRandom().nextFloat() - 0.5D) * 0.125D;
 
             level.sendParticles(particleType, xCoord, yCoord, zCoord, 2, 0.1, 0.1, 0.1, speed);
             if (particleType == ParticleTypes.CLOUD)
@@ -120,7 +120,7 @@ public class EventHandler {
         ItemStack arrowStack = new ItemStack(Items.ARROW);
         player.getInventory().add(arrowStack);
         player.level().playSound(null, BlockPos.containing(player.getPosition(0)),
-                SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
+                SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
     }
 
     public static void reflectArrow(Player player, Arrow arrow, Entity attacker) {
@@ -139,8 +139,8 @@ public class EventHandler {
         // Try to find a safe teleport location within a reasonable range
         for (int attempts = 0; attempts < 20; attempts++) {
             // Smaller range to keep enemy visible (8 blocks instead of 32)
-            double offsetX = (serverLevel.random.nextDouble() - 0.5D) * 16.0D;
-            double offsetZ = (serverLevel.random.nextDouble() - 0.5D) * 16.0D;
+            double offsetX = (serverLevel.getRandom().nextDouble() - 0.5D) * 16.0D;
+            double offsetZ = (serverLevel.getRandom().nextDouble() - 0.5D) * 16.0D;
 
             BlockPos targetPos = enemyPos.offset((int)offsetX, 0, (int)offsetZ);
             // Find safe Y position by checking for valid ground

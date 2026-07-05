@@ -1,7 +1,7 @@
 package me.mangregory.asr.fabric.client.datagen;
 
 import me.mangregory.asr.items.init.AsgardShieldItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -16,7 +16,7 @@ public class EnUsLangProvider extends FabricLanguageProvider {
 
     private record ShieldTooltip(String perk, String perkDesc, String weakness, String weaknessDesc) {}
 
-    public EnUsLangProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+    public EnUsLangProvider(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(dataOutput, "en_us", registryLookup);
     }
 

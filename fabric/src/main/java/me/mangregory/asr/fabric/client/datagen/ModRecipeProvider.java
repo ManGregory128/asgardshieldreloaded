@@ -1,11 +1,11 @@
 package me.mangregory.asr.fabric.client.datagen;
 
 import me.mangregory.asr.items.init.AsgardShieldItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.criterion.InventoryChangeTrigger;
-import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.predicates.ItemPredicate;
+import net.minecraft.advancements.triggers.Criterion;
+import net.minecraft.advancements.triggers.InventoryChangeTrigger;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -35,7 +35,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     private static final TagKey<Item> C_LEATHERS =
             TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("c", "leathers"));
 
-    public ModRecipeProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public ModRecipeProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 
@@ -186,7 +186,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         return inventoryTrigger(ItemPredicate.Builder.item().of(items, item));
     }
 
-    public static Criterion<InventoryChangeTrigger.TriggerInstance> hasW(HolderGetter<Item> items, TagKey<Item> tagKey)
+    public static Criterion<?> hasW(HolderGetter<Item> items, TagKey<Item> tagKey)
     {
         return inventoryTrigger(ItemPredicate.Builder.item().of(items, tagKey));
     }

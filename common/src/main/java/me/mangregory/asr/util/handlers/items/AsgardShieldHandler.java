@@ -46,7 +46,7 @@ public class AsgardShieldHandler {
                 else if (source.is(DamageTypeTags.IS_FIRE) && RandomUtil.chance(0.50))
                     damageAccumulator = 0;
                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.STONE_BREAK,
-                        SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
+                        SoundSource.PLAYERS, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
                 break;
             case "asr:gilded_stone_shield":
                 knockback += 0.5F;
@@ -55,7 +55,7 @@ public class AsgardShieldHandler {
                 else if (source.is(DamageTypeTags.IS_FIRE))
                     damageAccumulator = 0;
                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.STONE_BREAK,
-                        SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
+                        SoundSource.PLAYERS, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
                 break;
             case "asr:iron_shield":
                 if (player.isInWaterOrRain())
@@ -63,7 +63,7 @@ public class AsgardShieldHandler {
                 else if (source.is(DamageTypeTags.IS_EXPLOSION) && RandomUtil.chance(0.50))
                     damageAccumulator = 0;
                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.ANVIL_LAND,
-                        SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
+                        SoundSource.PLAYERS, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
                 break;
             case "asr:gilded_iron_shield":
                 knockback += 0.5F;
@@ -72,7 +72,7 @@ public class AsgardShieldHandler {
                 else if (source.is(DamageTypeTags.IS_EXPLOSION))
                     damageAccumulator = 0;
                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.ANVIL_LAND,
-                        SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
+                        SoundSource.PLAYERS, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
                 break;
             case "asr:diamond_shield":
                 if (source.is(DamageTypes.ARROW) && RandomUtil.chance(0.30)) {
@@ -81,7 +81,7 @@ public class AsgardShieldHandler {
                     knockback = 0.0F;
                 }
                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.NOTE_BLOCK_CHIME.value(),
-                        SoundSource.PLAYERS, 0.6F, 0.8F + player.level().random.nextFloat() * 0.4F);
+                        SoundSource.PLAYERS, 0.6F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
                 break;
             case "asr:gilded_diamond_shield":
                 if (source.is(DamageTypes.ARROW) && RandomUtil.chance(0.60)) {
@@ -91,30 +91,30 @@ public class AsgardShieldHandler {
                 }
                 else knockback += 0.5F;
                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.NOTE_BLOCK_CHIME.value(),
-                        SoundSource.PLAYERS, 0.6F, 0.8F + player.level().random.nextFloat() * 0.4F);
+                        SoundSource.PLAYERS, 0.6F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
                 break;
             case "asr:netherquartz_shield":
                 player.causeFoodExhaustion(1.0F);
                 if (projectile instanceof SmallFireball && RandomUtil.chance(0.5D)) {
                     player.level().playSound(null, BlockPos.containing(player.getPosition(0)),
-                            SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 0.6F, 0.8F + player.level().random.nextFloat() * 0.4F);
+                            SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 0.6F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
                     projectile.discard();
                     if (RandomUtil.chance(0.25D)) player.getInventory().add(new ItemStack(Items.FIRE_CHARGE));
                 }
                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.NOTE_BLOCK_XYLOPHONE.value(),
-                        SoundSource.PLAYERS, 0.6F, 0.8F + player.level().random.nextFloat() * 0.4F);
+                        SoundSource.PLAYERS, 0.6F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
                 break;
             case "asr:gilded_netherquartz_shield":
                 player.causeFoodExhaustion(1.0F);
                 knockback += 0.5F;
                 if (projectile instanceof SmallFireball) {
                     player.level().playSound(null, BlockPos.containing(player.getPosition(0)),
-                            SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 0.6F, 0.8F + player.level().random.nextFloat() * 0.4F);
+                            SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 0.6F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
                     projectile.discard();
                     if (RandomUtil.chance(0.50D)) player.getInventory().add(new ItemStack(Items.FIRE_CHARGE));
                 }
                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.NOTE_BLOCK_XYLOPHONE.value(),
-                        SoundSource.PLAYERS, 0.6F, 0.8F + player.level().random.nextFloat() * 0.4F);
+                        SoundSource.PLAYERS, 0.6F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
                 break;
             case "asr:ender_shield":
                 if (enemy instanceof EnderDragon || enemy instanceof EnderMan || enemy instanceof Endermite) {
@@ -125,7 +125,7 @@ public class AsgardShieldHandler {
                     knockback = EventHandler.teleportEnemy(enemy, knockback);
                 else knockback += 0.5F;
                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.ENDER_DRAGON_HURT,
-                        SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
+                        SoundSource.PLAYERS, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
                 break;
             case "asr:gilded_ender_shield":
                 if (enemy instanceof EnderDragon || enemy instanceof EnderMan || enemy instanceof Endermite) {
@@ -136,19 +136,19 @@ public class AsgardShieldHandler {
                     knockback = EventHandler.teleportEnemy(enemy, knockback);
                 else knockback += 0.5F;
                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.ENDER_DRAGON_HURT,
-                        SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
+                        SoundSource.PLAYERS, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
                 break;
             case "asr:skull_shield":
                 if (RandomUtil.chance(0.1F)) damageAccumulator += 5;
                 if (enemy instanceof LivingEntity && RandomUtil.chance(0.15D))
                     EventHandler.hurtNearbyEntity(enemy);
-                player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.SKELETON_HURT, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
+                player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.SKELETON_HURT, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
                 break;
             case "asr:gilded_skull_shield":
                 if (RandomUtil.chance(0.1F)) damageAccumulator += 5;
                 if (enemy instanceof LivingEntity && RandomUtil.chance(0.30D))
                     EventHandler.hurtNearbyEntity(enemy);
-                player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.SKELETON_HURT, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().random.nextFloat() * 0.4F);
+                player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.SKELETON_HURT, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
                 break;
         }
         EventHandler.knockbackEnemy(player, enemy, projectile, knockback);

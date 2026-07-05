@@ -70,20 +70,6 @@ public class AsgardShieldItems {
             Optional.of(SoundEvents.SHIELD_BLOCK), // block sound
             Optional.of(SoundEvents.SHIELD_BREAK)  // disable sound
     );
-    private static final BlocksAttacks BLOCKS_ATTACKS_WOODEN = new BlocksAttacks(
-            0.25f,
-            1.0f,
-            List.of(new BlocksAttacks.DamageReduction(
-                    90.0f,
-                    Optional.empty(),
-                    0.5f,
-                    1.0f
-            )),
-            new BlocksAttacks.ItemDamageFunction(0.0f, 0.0f, 0.0f),
-            Optional.empty(), // bypassedBy damage types (requires registry context)
-            Optional.of(SoundEvents.SHIELD_BLOCK),
-            Optional.of(SoundEvents.SHIELD_BREAK)
-    );
 
     public static void init() {
         DIAMOND_GIANT_SWORD = registerItem("diamond_giant_sword",
@@ -322,7 +308,21 @@ public class AsgardShieldItems {
                 () -> new AsgardShieldItem(
                         new Item.Properties()
                                 .durability(215)
-                                .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS_WOODEN)
+                                .delayedComponent(DataComponents.BLOCKS_ATTACKS,
+                                        context -> new BlocksAttacks(
+                                                0.25f,
+                                                1.0F,
+                                                List.of(new BlocksAttacks.DamageReduction(
+                                                        90.0f,
+                                                        Optional.empty(),
+                                                        0.5f,
+                                                        1.0f
+                                                )),
+                                                new BlocksAttacks.ItemDamageFunction(0.0F, 0.0F, 0.0F),
+                                                Optional.of(context.getOrThrow(DamageTypeTags.IS_FIRE)),
+                                                Optional.of(SoundEvents.SHIELD_BLOCK),
+                                                Optional.of(SoundEvents.SHIELD_BREAK)
+                                        ))
                                 .repairable(ItemTags.WOODEN_TOOL_MATERIALS)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "wooden_shield")))
@@ -333,7 +333,21 @@ public class AsgardShieldItems {
                 () -> new AsgardShieldItem(
                         new Item.Properties()
                                 .durability(280)
-                                .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS_WOODEN)
+                                .delayedComponent(DataComponents.BLOCKS_ATTACKS,
+                                        context -> new BlocksAttacks(
+                                                0.25f,
+                                                1.0F,
+                                                List.of(new BlocksAttacks.DamageReduction(
+                                                        90.0f,
+                                                        Optional.empty(),
+                                                        0.5f,
+                                                        1.0f
+                                                )),
+                                                new BlocksAttacks.ItemDamageFunction(0.0F, 0.0F, 0.0F),
+                                                Optional.of(context.getOrThrow(DamageTypeTags.IS_FIRE)),
+                                                Optional.of(SoundEvents.SHIELD_BLOCK),
+                                                Optional.of(SoundEvents.SHIELD_BREAK)
+                                        ))
                                 .repairable(ItemTags.WOODEN_TOOL_MATERIALS)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "gilded_wooden_shield")))
@@ -366,12 +380,6 @@ public class AsgardShieldItems {
                 GILDED_STONE_SHIELD,
                 WOODEN_SHIELD,
                 GILDED_WOODEN_SHIELD
-        );
-
-        ITEMS.register();
-        
-
-                                )
         );
 
         ITEMS.register();
