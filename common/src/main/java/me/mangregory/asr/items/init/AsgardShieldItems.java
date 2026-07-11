@@ -13,6 +13,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -172,6 +173,7 @@ public class AsgardShieldItems {
                                 .durability(500)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(Items.OBSIDIAN)
+                                .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "ender_shield")))
                                 )
@@ -182,6 +184,7 @@ public class AsgardShieldItems {
                                 .durability(580)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(Items.OBSIDIAN)
+                                .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "gilded_ender_shield")))
                                 )
@@ -192,6 +195,7 @@ public class AsgardShieldItems {
                                 .durability(500)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.DIAMOND_TOOL_MATERIALS)
+                                .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "diamond_shield")))
                                 )
@@ -202,6 +206,7 @@ public class AsgardShieldItems {
                                 .durability(580)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.DIAMOND_TOOL_MATERIALS)
+                                .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "gilded_diamond_shield")))
                                 )
@@ -212,6 +217,7 @@ public class AsgardShieldItems {
                                 .durability(450)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(Items.QUARTZ)
+                                .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "netherquartz_shield")))
                                 )
@@ -222,6 +228,7 @@ public class AsgardShieldItems {
                                 .durability(500)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(Items.QUARTZ)
+                                .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "gilded_netherquartz_shield")))
                                 )
@@ -232,6 +239,7 @@ public class AsgardShieldItems {
                                 .durability(500)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(Items.BONE)
+                                .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "skull_shield")))
                                 )
@@ -242,6 +250,7 @@ public class AsgardShieldItems {
                                 .durability(580)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(Items.BONE)
+                                .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "gilded_skull_shield")))
 
@@ -253,6 +262,7 @@ public class AsgardShieldItems {
                                 .durability(380)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.IRON_TOOL_MATERIALS)
+                                .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "iron_shield")))
 
@@ -264,6 +274,7 @@ public class AsgardShieldItems {
                                 .durability(420)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.IRON_TOOL_MATERIALS)
+                                .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "gilded_iron_shield")))
 
@@ -275,6 +286,7 @@ public class AsgardShieldItems {
                                 .durability(300)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.STONE_TOOL_MATERIALS)
+                                .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "stone_shield")))
 
@@ -286,6 +298,7 @@ public class AsgardShieldItems {
                                 .durability(330)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.STONE_TOOL_MATERIALS)
+                                .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "gilded_stone_shield")))
                                 )
@@ -310,6 +323,7 @@ public class AsgardShieldItems {
                                                 Optional.of(SoundEvents.SHIELD_BREAK)
                                         ))
                                 .repairable(ItemTags.WOODEN_TOOL_MATERIALS)
+                                .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "wooden_shield")))
                                 )
@@ -334,6 +348,7 @@ public class AsgardShieldItems {
                                                 Optional.of(SoundEvents.SHIELD_BREAK)
                                         ))
                                 .repairable(ItemTags.WOODEN_TOOL_MATERIALS)
+                                .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "gilded_wooden_shield")))
                                 )
