@@ -6,12 +6,12 @@ import dev.architectury.registry.CreativeTabRegistry;
 import me.mangregory.asr.AsgardShieldReloaded;
 import me.mangregory.asr.items.AsgardShieldItem;
 import me.mangregory.asr.items.GiantSwordItem;
+import me.mangregory.asr.util.AsgardShieldTags;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -318,7 +318,7 @@ public class AsgardShieldItems {
                                                         1.0f
                                                 )),
                                                 new BlocksAttacks.ItemDamageFunction(0.0F, 0.0F, 0.0F),
-                                                Optional.of(context.getOrThrow(DamageTypeTags.IS_FIRE)),
+                                                Optional.of(context.getOrThrow(AsgardShieldTags.WOODEN_SHIELD_BYPASSED_BY)),
                                                 Optional.of(SoundEvents.SHIELD_BLOCK),
                                                 Optional.of(SoundEvents.SHIELD_BREAK)
                                         ))
@@ -343,7 +343,7 @@ public class AsgardShieldItems {
                                                         1.0f
                                                 )),
                                                 new BlocksAttacks.ItemDamageFunction(0.0F, 0.0F, 0.0F),
-                                                Optional.of(context.getOrThrow(DamageTypeTags.IS_FIRE)),
+                                                Optional.of(context.getOrThrow(AsgardShieldTags.WOODEN_SHIELD_BYPASSED_BY)),
                                                 Optional.of(SoundEvents.SHIELD_BLOCK),
                                                 Optional.of(SoundEvents.SHIELD_BREAK)
                                         ))
