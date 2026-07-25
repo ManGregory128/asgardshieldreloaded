@@ -30,7 +30,13 @@ public class EnUsLangProvider extends FabricLanguageProvider {
         tb.add(AsgardShieldItems.ENDER_GIANT_SWORD.get(), "Ender Giant Sword");
         tb.add(AsgardShieldItems.NETHERQUARTZ_GIANT_SWORD.get(), "Nether Quartz Giant Sword");
         tb.add(AsgardShieldItems.SKULL_GIANT_SWORD.get(), "Skull Giant Sword");
+        tb.add(AsgardShieldItems.COPPER_GIANT_SWORD.get(), "Copper Giant Sword");
+        tb.add(AsgardShieldItems.NETHERITE_GIANT_SWORD.get(), "Netherite Giant Sword");
 
+        tb.add(AsgardShieldItems.NETHERITE_SHIELD.get(), "Netherite Shield");
+        tb.add(AsgardShieldItems.GILDED_NETHERITE_SHIELD.get(), "Gilded Netherite Shield");
+        tb.add(AsgardShieldItems.COPPER_SHIELD.get(), "Copper Shield");
+        tb.add(AsgardShieldItems.GILDED_COPPER_SHIELD.get(), "Gilded Copper Shield");
         tb.add(AsgardShieldItems.DIAMOND_SHIELD.get(), "Diamond Shield");
         tb.add(AsgardShieldItems.ENDER_SHIELD.get(), "Ender Shield");
         tb.add(AsgardShieldItems.GILDED_DIAMOND_SHIELD.get(), "Gilded Diamond Shield");

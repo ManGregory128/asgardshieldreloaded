@@ -33,6 +33,8 @@ public class AsgardShieldItems {
     public static RegistrySupplier<Item> DIAMOND_GIANT_SWORD;
     public static RegistrySupplier<Item> IRON_GIANT_SWORD;
     public static RegistrySupplier<Item> GOLDEN_GIANT_SWORD;
+    public static RegistrySupplier<Item> COPPER_GIANT_SWORD;
+    public static RegistrySupplier<Item> NETHERITE_GIANT_SWORD;
     public static RegistrySupplier<Item> STONE_GIANT_SWORD;
     public static RegistrySupplier<Item> WOODEN_GIANT_SWORD;
     public static RegistrySupplier<Item> ENDER_GIANT_SWORD;
@@ -51,8 +53,12 @@ public class AsgardShieldItems {
     public static RegistrySupplier<Item> GILDED_SKULL_SHIELD;
     public static RegistrySupplier<Item> STONE_SHIELD;
     public static RegistrySupplier<Item> GILDED_STONE_SHIELD;
+    public static RegistrySupplier<Item> COPPER_SHIELD;
+    public static RegistrySupplier<Item> GILDED_COPPER_SHIELD;
     public static RegistrySupplier<Item> WOODEN_SHIELD;
     public static RegistrySupplier<Item> GILDED_WOODEN_SHIELD;
+    public static RegistrySupplier<Item> NETHERITE_SHIELD;
+    public static RegistrySupplier<Item> GILDED_NETHERITE_SHIELD;
 
     // Grouped views (populated in init()) for datagen iteration.
     public static List<RegistrySupplier<Item>> GIANT_SWORDS = List.of();
@@ -106,6 +112,28 @@ public class AsgardShieldItems {
                                 .component(DataComponents.ENCHANTABLE, new Enchantable(AsgardShieldToolMaterials.ALTGOLD.enchantmentValue()))
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "golden_giant_sword")))
+                )
+        );
+        COPPER_GIANT_SWORD = registerItem("copper_giant_sword",
+                () -> new GiantSwordItem(
+                        new Item.Properties()
+                                .durability(AsgardShieldToolMaterials.ALTCOPPER.durability())
+                                .sword(AsgardShieldToolMaterials.ALTCOPPER, 3, -2.4f)
+                                .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
+                                .component(DataComponents.ENCHANTABLE, new Enchantable(AsgardShieldToolMaterials.ALTCOPPER.enchantmentValue()))
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
+                                        AsgardShieldReloaded.MOD_ID, "copper_giant_sword")))
+                )
+        );
+        NETHERITE_GIANT_SWORD = registerItem("netherite_giant_sword",
+                () -> new GiantSwordItem(
+                        new Item.Properties()
+                                .durability(AsgardShieldToolMaterials.ALTNETHERITE.durability())
+                                .sword(AsgardShieldToolMaterials.ALTNETHERITE, 3, -2.4f)
+                                .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
+                                .component(DataComponents.ENCHANTABLE, new Enchantable(AsgardShieldToolMaterials.ALTNETHERITE.enchantmentValue()))
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
+                                        AsgardShieldReloaded.MOD_ID, "netherite_giant_sword")))
                 )
         );
         STONE_GIANT_SWORD = registerItem("stone_giant_sword",
@@ -176,7 +204,7 @@ public class AsgardShieldItems {
                                 .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "ender_shield")))
-                                )
+                )
         );
         GILDED_ENDER_SHIELD = registerItem("gilded_ender_shield",
                 () -> new AsgardShieldItem(
@@ -187,7 +215,7 @@ public class AsgardShieldItems {
                                 .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "gilded_ender_shield")))
-                                )
+                )
         );
         DIAMOND_SHIELD = registerItem("diamond_shield",
                 () -> new AsgardShieldItem(
@@ -198,7 +226,7 @@ public class AsgardShieldItems {
                                 .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "diamond_shield")))
-                                )
+                )
         );
         GILDED_DIAMOND_SHIELD = registerItem("gilded_diamond_shield",
                 () -> new AsgardShieldItem(
@@ -209,7 +237,7 @@ public class AsgardShieldItems {
                                 .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "gilded_diamond_shield")))
-                                )
+                )
         );
         NETHERQUARTZ_SHIELD = registerItem("netherquartz_shield",
                 () -> new AsgardShieldItem(
@@ -220,7 +248,7 @@ public class AsgardShieldItems {
                                 .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "netherquartz_shield")))
-                                )
+                )
         );
         GILDED_NETHERQUARTZ_SHIELD = registerItem("gilded_netherquartz_shield",
                 () -> new AsgardShieldItem(
@@ -231,7 +259,7 @@ public class AsgardShieldItems {
                                 .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "gilded_netherquartz_shield")))
-                                )
+                )
         );
         SKULL_SHIELD = registerItem("skull_shield",
                 () -> new AsgardShieldItem(
@@ -242,7 +270,7 @@ public class AsgardShieldItems {
                                 .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "skull_shield")))
-                                )
+                )
         );
         GILDED_SKULL_SHIELD = registerItem("gilded_skull_shield",
                 () -> new AsgardShieldItem(
@@ -254,7 +282,7 @@ public class AsgardShieldItems {
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "gilded_skull_shield")))
 
-                                )
+                )
         );
         IRON_SHIELD = registerItem("iron_shield",
                 () -> new AsgardShieldItem(
@@ -266,7 +294,7 @@ public class AsgardShieldItems {
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "iron_shield")))
 
-                                )
+                )
         );
         GILDED_IRON_SHIELD = registerItem("gilded_iron_shield",
                 () -> new AsgardShieldItem(
@@ -278,7 +306,7 @@ public class AsgardShieldItems {
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "gilded_iron_shield")))
 
-                                )
+                )
         );
         STONE_SHIELD = registerItem("stone_shield",
                 () -> new AsgardShieldItem(
@@ -290,7 +318,7 @@ public class AsgardShieldItems {
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "stone_shield")))
 
-                                )
+                )
         );
         GILDED_STONE_SHIELD = registerItem("gilded_stone_shield",
                 () -> new AsgardShieldItem(
@@ -301,7 +329,51 @@ public class AsgardShieldItems {
                                 .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "gilded_stone_shield")))
-                                )
+                )
+        );
+        COPPER_SHIELD = registerItem("copper_shield",
+                () -> new AsgardShieldItem(
+                        new Item.Properties()
+                                .durability(250)
+                                .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
+                                .repairable(ItemTags.COPPER_TOOL_MATERIALS)
+                                .equippableUnswappable(EquipmentSlot.OFFHAND)
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
+                                        AsgardShieldReloaded.MOD_ID, "copper_shield")))
+                )
+        );
+        GILDED_COPPER_SHIELD = registerItem("gilded_copper_shield",
+                () -> new AsgardShieldItem(
+                        new Item.Properties()
+                                .durability(300)
+                                .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
+                                .repairable(ItemTags.COPPER_TOOL_MATERIALS)
+                                .equippableUnswappable(EquipmentSlot.OFFHAND)
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
+                                        AsgardShieldReloaded.MOD_ID, "gilded_copper_shield")))
+                )
+        );
+        NETHERITE_SHIELD = registerItem("netherite_shield",
+                () -> new AsgardShieldItem(
+                        new Item.Properties()
+                                .durability(590)
+                                .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
+                                .repairable(ItemTags.NETHERITE_TOOL_MATERIALS)
+                                .equippableUnswappable(EquipmentSlot.OFFHAND)
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
+                                        AsgardShieldReloaded.MOD_ID, "netherite_shield")))
+                )
+        );
+        GILDED_NETHERITE_SHIELD = registerItem("gilded_netherite_shield",
+                () -> new AsgardShieldItem(
+                        new Item.Properties()
+                                .durability(690)
+                                .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
+                                .repairable(ItemTags.NETHERITE_TOOL_MATERIALS)
+                                .equippableUnswappable(EquipmentSlot.OFFHAND)
+                                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
+                                        AsgardShieldReloaded.MOD_ID, "gilded_netherite_shield")))
+                )
         );
         WOODEN_SHIELD = registerItem("wooden_shield",
                 () -> new AsgardShieldItem(
@@ -355,9 +427,11 @@ public class AsgardShieldItems {
         );
 
         GIANT_SWORDS = List.of(
+                NETHERITE_GIANT_SWORD,
                 DIAMOND_GIANT_SWORD,
                 IRON_GIANT_SWORD,
                 GOLDEN_GIANT_SWORD,
+                COPPER_GIANT_SWORD,
                 STONE_GIANT_SWORD,
                 WOODEN_GIANT_SWORD,
                 ENDER_GIANT_SWORD,
@@ -378,6 +452,10 @@ public class AsgardShieldItems {
                 GILDED_SKULL_SHIELD,
                 STONE_SHIELD,
                 GILDED_STONE_SHIELD,
+                COPPER_SHIELD,
+                GILDED_COPPER_SHIELD,
+                NETHERITE_SHIELD,
+                GILDED_NETHERITE_SHIELD,
                 WOODEN_SHIELD,
                 GILDED_WOODEN_SHIELD
         );
@@ -388,14 +466,17 @@ public class AsgardShieldItems {
 
     private static void registerCreativeTabs() {
         // Register all items to COMBAT creative tab
+        CreativeTabRegistry.append(CreativeModeTabs.COMBAT, NETHERITE_GIANT_SWORD);
         CreativeTabRegistry.append(CreativeModeTabs.COMBAT, DIAMOND_GIANT_SWORD);
         CreativeTabRegistry.append(CreativeModeTabs.COMBAT, IRON_GIANT_SWORD);
         CreativeTabRegistry.append(CreativeModeTabs.COMBAT, GOLDEN_GIANT_SWORD);
+        CreativeTabRegistry.append(CreativeModeTabs.COMBAT, COPPER_GIANT_SWORD);
         CreativeTabRegistry.append(CreativeModeTabs.COMBAT, STONE_GIANT_SWORD);
         CreativeTabRegistry.append(CreativeModeTabs.COMBAT, WOODEN_GIANT_SWORD);
         CreativeTabRegistry.append(CreativeModeTabs.COMBAT, ENDER_GIANT_SWORD);
         CreativeTabRegistry.append(CreativeModeTabs.COMBAT, NETHERQUARTZ_GIANT_SWORD);
         CreativeTabRegistry.append(CreativeModeTabs.COMBAT, SKULL_GIANT_SWORD);
+
         CreativeTabRegistry.append(CreativeModeTabs.COMBAT, DIAMOND_SHIELD);
         CreativeTabRegistry.append(CreativeModeTabs.COMBAT, GILDED_DIAMOND_SHIELD);
         CreativeTabRegistry.append(CreativeModeTabs.COMBAT, IRON_SHIELD);
@@ -408,6 +489,10 @@ public class AsgardShieldItems {
         CreativeTabRegistry.append(CreativeModeTabs.COMBAT, GILDED_SKULL_SHIELD);
         CreativeTabRegistry.append(CreativeModeTabs.COMBAT, STONE_SHIELD);
         CreativeTabRegistry.append(CreativeModeTabs.COMBAT, GILDED_STONE_SHIELD);
+        CreativeTabRegistry.append(CreativeModeTabs.COMBAT, COPPER_SHIELD);
+        CreativeTabRegistry.append(CreativeModeTabs.COMBAT, GILDED_COPPER_SHIELD);
+        CreativeTabRegistry.append(CreativeModeTabs.COMBAT, NETHERITE_SHIELD);
+        CreativeTabRegistry.append(CreativeModeTabs.COMBAT, GILDED_NETHERITE_SHIELD);
         CreativeTabRegistry.append(CreativeModeTabs.COMBAT, WOODEN_SHIELD);
         CreativeTabRegistry.append(CreativeModeTabs.COMBAT, GILDED_WOODEN_SHIELD);
     }

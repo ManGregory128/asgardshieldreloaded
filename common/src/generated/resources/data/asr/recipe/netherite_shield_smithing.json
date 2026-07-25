@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "minecraft:netherite_ingot",
+  "base": "asr:diamond_shield",
+  "result": {
+    "id": "asr:netherite_shield"
+  },
+  "template": "minecraft:netherite_upgrade_smithing_template"
+}

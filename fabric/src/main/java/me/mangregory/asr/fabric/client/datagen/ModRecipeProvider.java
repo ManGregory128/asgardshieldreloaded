@@ -9,15 +9,13 @@ import net.minecraft.advancements.triggers.InventoryChangeTrigger;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import org.jspecify.annotations.NonNull;
 
@@ -52,20 +50,26 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 giantSwordCommonTag(items, out, AsgardShieldItems.GOLDEN_GIANT_SWORD.get(), ItemTags.GOLD_TOOL_MATERIALS, C_RODS_WOODEN, ItemTags.GOLD_TOOL_MATERIALS);
                 giantSwordCommonTag(items, out, AsgardShieldItems.STONE_GIANT_SWORD.get(), ItemTags.STONE_TOOL_MATERIALS, C_RODS_WOODEN, ItemTags.STONE_TOOL_MATERIALS);
                 giantSwordCommonTag(items, out, AsgardShieldItems.NETHERQUARTZ_GIANT_SWORD.get(), C_GEMS_QUARTZ, C_RODS_BLAZE, C_GEMS_QUARTZ);
+                giantSwordCommonTag(items, out, AsgardShieldItems.COPPER_GIANT_SWORD.get(), ItemTags.COPPER_TOOL_MATERIALS, C_RODS_WOODEN,  ItemTags.COPPER_TOOL_MATERIALS);
                 giantSwordEnder(items, out, AsgardShieldItems.ENDER_GIANT_SWORD.get());
                 giantSwordSkull(items, out, AsgardShieldItems.SKULL_GIANT_SWORD.get());
+                netheriteUpgrades(items, out, AsgardShieldItems.DIAMOND_GIANT_SWORD.get(), AsgardShieldItems.NETHERITE_GIANT_SWORD.get());
 
                 asgardShieldCommonTag(items, out, AsgardShieldItems.DIAMOND_SHIELD.get(), ItemTags.DIAMOND_TOOL_MATERIALS, ItemTags.DIAMOND_TOOL_MATERIALS);
                 asgardShieldCommonTag(items, out, AsgardShieldItems.IRON_SHIELD.get(), ItemTags.IRON_TOOL_MATERIALS, ItemTags.IRON_TOOL_MATERIALS);
                 asgardShieldCommonTag(items, out, AsgardShieldItems.STONE_SHIELD.get(), ItemTags.STONE_TOOL_MATERIALS, ItemTags.STONE_TOOL_MATERIALS);
+                asgardShieldCommonTag(items, out, AsgardShieldItems.COPPER_SHIELD.get(), ItemTags.COPPER_TOOL_MATERIALS, ItemTags.COPPER_TOOL_MATERIALS);
                 asgardShieldCommonTag(items, out, AsgardShieldItems.WOODEN_SHIELD.get(), ItemTags.WOODEN_TOOL_MATERIALS, ItemTags.WOODEN_TOOL_MATERIALS);
                 asgardShieldCommonTag(items, out, AsgardShieldItems.NETHERQUARTZ_SHIELD.get(), C_GEMS_QUARTZ, C_GEMS_QUARTZ);
                 asgardShieldEnder(items, out, AsgardShieldItems.ENDER_SHIELD.get());
                 asgardShieldSkull(items, out, AsgardShieldItems.SKULL_SHIELD.get());
+                netheriteUpgrades(items, out, AsgardShieldItems.DIAMOND_SHIELD.get(), AsgardShieldItems.NETHERITE_SHIELD.get());
 
+                asgardShieldCommonGilded(items, out, AsgardShieldItems.GILDED_NETHERITE_SHIELD.get(), AsgardShieldItems.NETHERITE_SHIELD.get());
                 asgardShieldCommonGilded(items, out, AsgardShieldItems.GILDED_DIAMOND_SHIELD.get(), AsgardShieldItems.DIAMOND_SHIELD.get());
                 asgardShieldCommonGilded(items, out, AsgardShieldItems.GILDED_IRON_SHIELD.get(), AsgardShieldItems.IRON_SHIELD.get());
                 asgardShieldCommonGilded(items, out, AsgardShieldItems.GILDED_STONE_SHIELD.get(), AsgardShieldItems.STONE_SHIELD.get());
+                asgardShieldCommonGilded(items, out, AsgardShieldItems.GILDED_COPPER_SHIELD.get(), AsgardShieldItems.COPPER_SHIELD.get());
                 asgardShieldCommonGilded(items, out, AsgardShieldItems.GILDED_WOODEN_SHIELD.get(), AsgardShieldItems.WOODEN_SHIELD.get());
                 asgardShieldCommonGilded(items, out, AsgardShieldItems.GILDED_NETHERQUARTZ_SHIELD.get(), AsgardShieldItems.NETHERQUARTZ_SHIELD.get());
                 asgardShieldCommonGilded(items, out, AsgardShieldItems.GILDED_ENDER_SHIELD.get(), AsgardShieldItems.ENDER_SHIELD.get());
@@ -102,6 +106,18 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .define('/', C_RODS_BLAZE)
                 .unlockedBy("has_ender_eye", hasW(items, Items.ENDER_EYE))
                 .save(out);
+    }
+
+    private void netheriteUpgrades(HolderGetter<Item> items, RecipeOutput out, ItemLike base, ItemLike result) {
+        SmithingTransformRecipeBuilder.smithing(
+                Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+                Ingredient.of(base),
+                Ingredient.of(Items.NETHERITE_INGOT),
+                RecipeCategory.COMBAT,
+                result.asItem()
+        )
+                .unlocks("has_template", hasW(items, Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE))
+                .save(out, result + "_smithing");
     }
 
     private void giantSwordSkull(HolderGetter<Item> items, RecipeOutput out, ItemLike result) {

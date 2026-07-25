@@ -68,4 +68,20 @@ public class AsgardShieldToolMaterials {
             6,
             ItemTags.SKULLS
     );
+    public static final ToolMaterial ALTCOPPER = new ToolMaterial(
+            BlockTags.INCORRECT_FOR_COPPER_TOOL,
+            250,
+            4f,
+            2f,
+            10,
+            ItemTags.COPPER_TOOL_MATERIALS
+    );
+    public static final ToolMaterial ALTNETHERITE = new ToolMaterial(
+            BlockTags.INCORRECT_FOR_NETHERITE_TOOL,
+            5000,
+            -2.4f,
+            5f,
+            15,
+            ItemTags.NETHERITE_TOOL_MATERIALS
+    );
 }
