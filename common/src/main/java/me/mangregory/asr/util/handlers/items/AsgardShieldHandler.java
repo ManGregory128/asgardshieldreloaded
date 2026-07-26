@@ -11,8 +11,7 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Endermite;
@@ -23,6 +22,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
+import java.util.Objects;
+
 public class AsgardShieldHandler {
     public static EventResult handleShieldFunctionality(Player player, Item item, InteractionHand hand, DamageSource source) {
         Entity enemy = source.getEntity();
@@ -32,18 +33,28 @@ public class AsgardShieldHandler {
         float knockback = ModConfig.ASGARD_SHIELD_BASE_KNOCKBACK;
         switch (item.toString()) {
             case "asr:wooden_shield":
-                if (source.is(DamageTypes.ARROW) && RandomUtil.chance(0.25))
+                if (player.isOnFire() || player.isInLava() ||
+                        (enemy != null && enemy.isOnFire() && enemy == projectile) ||
+                        (projectile != null && projectile.isOnFire()))
+                    damageAccumulator += 10;
+                if (source.is(DamageTypes.ARROW) && RandomUtil.chance(0.50))
                     EventHandler.collectArrow(player, (Arrow) projectile);
                 break;
             case "asr:gilded_wooden_shield":
                 knockback += 0.5F;
+                if (player.isOnFire() || player.isInLava() ||
+                        (enemy != null && enemy.isOnFire() && enemy == projectile) ||
+                        (projectile != null && projectile.isOnFire()))
+                    damageAccumulator += 5;
                 if (source.is(DamageTypes.ARROW) && RandomUtil.chance(0.50))
                     EventHandler.collectArrow(player, (Arrow) projectile);
                 break;
             case "asr:stone_shield":
                 if (source.is(DamageTypeTags.IS_EXPLOSION))
                     damageAccumulator += 5;
-                else if (source.is(DamageTypeTags.IS_FIRE) && RandomUtil.chance(0.50))
+                else if ((player.isOnFire() || player.isInLava() ||
+                        (enemy != null && enemy.isOnFire() && enemy == projectile) ||
+                        (projectile != null && projectile.isOnFire())) && RandomUtil.chance(0.50))
                     damageAccumulator = 0;
                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.STONE_BREAK,
                         SoundSource.PLAYERS, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
@@ -52,7 +63,9 @@ public class AsgardShieldHandler {
                 knockback += 0.5F;
                 if (source.is(DamageTypeTags.IS_EXPLOSION))
                     damageAccumulator += 5;
-                else if (source.is(DamageTypeTags.IS_FIRE))
+                else if (player.isOnFire() || player.isInLava() ||
+                        (enemy != null && enemy.isOnFire() && enemy == projectile) ||
+                        (projectile != null && projectile.isOnFire()))
                     damageAccumulator = 0;
                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.STONE_BREAK,
                         SoundSource.PLAYERS, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
@@ -149,6 +162,20 @@ public class AsgardShieldHandler {
                 if (enemy instanceof LivingEntity && RandomUtil.chance(0.30D))
                     EventHandler.hurtNearbyEntity(enemy);
                 player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.SKELETON_HURT, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
+                break;
+            case "asr:copper_shield":
+                if (player.level().isThundering() && RandomUtil.chance(0.1F))
+                    player.level().addFreshEntity(Objects.requireNonNull(EntityTypes.LIGHTNING_BOLT.spawn(
+                            Objects.requireNonNull(Objects.requireNonNull(player.level().getServer())
+                                    .getLevel(player.level().dimension())), player.getOnPos(), EntitySpawnReason.EVENT)));
+                player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.COPPER_GOLEM_HURT, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
+                break;
+            case "asr:gilded_copper_shield":
+                if (player.level().isThundering() && RandomUtil.chance(0.2F))
+                    player.level().addFreshEntity(Objects.requireNonNull(EntityTypes.LIGHTNING_BOLT.spawn(
+                            Objects.requireNonNull(Objects.requireNonNull(player.level().getServer())
+                                    .getLevel(player.level().dimension())), player.getOnPos(), EntitySpawnReason.EVENT)));
+                player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.COPPER_GOLEM_HURT, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
                 break;
         }
         EventHandler.knockbackEnemy(player, enemy, projectile, knockback);

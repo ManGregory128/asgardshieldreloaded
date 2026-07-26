@@ -54,104 +54,114 @@ public class EnUsLangProvider extends FabricLanguageProvider {
 
         Map<Item, ShieldTooltip> tooltips = new LinkedHashMap<>();
 
+        tooltips.put(AsgardShieldItems.NETHERITE_SHIELD.get(), new ShieldTooltip(
+                "Special Perk: Unyielding",
+                "Cannot be disabled by axes. Does not burn in fire.",
+                "Weakness: None",
+                "None"
+        ));
+        tooltips.put(AsgardShieldItems.GILDED_NETHERITE_SHIELD.get(), new ShieldTooltip(
+                "Special Perk: Unyielding",
+                "Cannot be disabled by axes. Does not burn in fire.",
+                "Weakness: None",
+                "None"
+        ));
         tooltips.put(AsgardShieldItems.DIAMOND_SHIELD.get(), new ShieldTooltip(
                 "Special Perk: Reflect",
                 "Reflects projectiles back to the attacker (30 percent chance)",
                 "Weakness: Displace",
                 "Reflected damage also damages the shield"
         ));
-
         tooltips.put(AsgardShieldItems.ENDER_SHIELD.get(), new ShieldTooltip(
                 "Special Perk: Ender Shift",
                 "Teleports attackers away from the wielder (20 percent chance)",
                 "Weakness: End Tech",
                 "Ender folk can bypass the guard"
         ));
-
         tooltips.put(AsgardShieldItems.GILDED_DIAMOND_SHIELD.get(), new ShieldTooltip(
                 "Special Perk: Reflect",
                 "Reflects projectiles back to the attacker (60 percent chance)",
                 "Weakness: Displace",
                 "Reflected damage also damages the shield"
         ));
-
         tooltips.put(AsgardShieldItems.GILDED_ENDER_SHIELD.get(), new ShieldTooltip(
                 "Special Perk: Ender Shift",
                 "Teleports attackers away from the wielder (40 percent chance)",
                 "Weakness: End Tech",
                 "Ender folk can bypass the guard"
         ));
-
         tooltips.put(AsgardShieldItems.GILDED_IRON_SHIELD.get(), new ShieldTooltip(
                 "Special Perk: Unmovable Object",
                 "Receives less explosion durability damage",
                 "Weakness: Water",
                 "Iron begins to rust in wet environments, increasing durability damage taken"
         ));
-
         tooltips.put(AsgardShieldItems.GILDED_NETHERQUARTZ_SHIELD.get(), new ShieldTooltip(
                 "Special Perk: Flame Keeper",
                 "Allows the wielder to collect fire charges from small fireballs (50 percent chance)",
                 "Weakness: Hungering",
                 "The living mass feeds on the wielder, drains hunger gauge"
         ));
-
         tooltips.put(AsgardShieldItems.GILDED_SKULL_SHIELD.get(), new ShieldTooltip(
                 "Special Perk: Mind Control",
                 "Controls attacker (excluding bosses) to attack other targets or kill self when at 30 percent of max health or less (30 percent chance)",
                 "Weakness: Brittle Bones",
                 "Receives x3 durability damage (10 percent chance)"
         ));
-
         tooltips.put(AsgardShieldItems.GILDED_STONE_SHIELD.get(), new ShieldTooltip(
                 "Special Perk: Fire Protection",
                 "Negates durability damage from fire sources",
                 "Weakness: Explosions",
                 "Stone breaks easily from strong overwhelming damage"
         ));
-
         tooltips.put(AsgardShieldItems.GILDED_WOODEN_SHIELD.get(), new ShieldTooltip(
                 "Special Perk: Arrow Catch",
                 "Allows the wielder to collect arrows from enemies (50 percent chance)",
                 "Weakness: Fire Damage",
                 "Fire burns quickly through wood, be careful"
         ));
-
         tooltips.put(AsgardShieldItems.IRON_SHIELD.get(), new ShieldTooltip(
                 "Special Perk: Unmovable Object",
                 "Receives less explosion durability damage (50 percent chance)",
                 "Weakness: Water",
                 "Iron begins to rust in wet environments, increasing durability damage taken"
         ));
-
+        tooltips.put(AsgardShieldItems.COPPER_SHIELD.get(), new ShieldTooltip(
+                "Special Perk: Conducting",
+                "Attracts lightning bolts during thunderstorms (10 percent chance)",
+                "Weakness: Uninsulated",
+                "You are not immune to lightning strikes, be careful"
+        ));
+        tooltips.put(AsgardShieldItems.GILDED_COPPER_SHIELD.get(), new ShieldTooltip(
+                "Special Perk: Conducting",
+                "Attracts lightning bolts during thunderstorms (20 percent chance)",
+                "Weakness: Uninsulated",
+                "You are not immune to lightning strikes, be careful"
+        ));
         tooltips.put(AsgardShieldItems.NETHERQUARTZ_SHIELD.get(), new ShieldTooltip(
                 "Special Perk: Flame Keeper",
                 "Allows the wielder to collect fire charges from small fireballs (25 percent chance)",
                 "Weakness: Hungering",
                 "The living mass feeds on the wielder, drains hunger gauge"
         ));
-
         tooltips.put(AsgardShieldItems.SKULL_SHIELD.get(), new ShieldTooltip(
                 "Special Perk: Mind Control",
-                "Controls attacker (excluding bosses) to attack other targets or kil self when at 20 percent of max health or less (15 percent chance)",
+                "Controls attacker (excluding bosses) to attack other targets or kill self when at 20 percent of max health or less (15 percent chance)",
                 "Weakness: Brittle Bones",
                 "Receives x3 durability damage (10 percent chance)"
         ));
-
         tooltips.put(AsgardShieldItems.STONE_SHIELD.get(), new ShieldTooltip(
                 "Special Perk: Fire Protection",
                 "Negates durability damage from fire sources (50 percent chance)",
                 "Weakness: Explosions",
                 "Stone breaks easily from strong overwhelming damage"
         ));
-
         tooltips.put(AsgardShieldItems.WOODEN_SHIELD.get(), new ShieldTooltip(
                 "Special Perk: Arrow Catch",
                 "Allows the wielder to collect arrows from enemies (25 percent chance)",
                 "Weakness: Fire Damage",
                 "Fire burns quickly through wood, be careful"
         ));
-
         tooltips.forEach((item, spec) -> {
             Identifier id = BuiltInRegistries.ITEM.getKey(item);
             String baseKey = "item." + id.getNamespace() + "." + id.getPath();
@@ -160,7 +170,6 @@ public class EnUsLangProvider extends FabricLanguageProvider {
             tb.add(baseKey + ".weakness", spec.weakness);
             tb.add(baseKey + ".weakness.desc", spec.weaknessDesc);
         });
-
         tb.add("config.asr.title", "Asgard Shield: Reloaded Config");
         tb.add("config.asr.description", "(Affects client-side values only)");
         tb.add("config.asr.giant_sword_block_duration", "Giant Sword Block Duration");

@@ -131,6 +131,7 @@ public class AsgardShieldItems {
                                 .durability(AsgardShieldToolMaterials.ALTNETHERITE.durability())
                                 .sword(AsgardShieldToolMaterials.ALTNETHERITE, 3, -2.4f)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
+                                .fireResistant()
                                 .component(DataComponents.ENCHANTABLE, new Enchantable(AsgardShieldToolMaterials.ALTNETHERITE.enchantmentValue()))
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "netherite_giant_sword")))
@@ -359,6 +360,7 @@ public class AsgardShieldItems {
                                 .durability(590)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.NETHERITE_TOOL_MATERIALS)
+                                .fireResistant()
                                 .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "netherite_shield")))
@@ -370,6 +372,7 @@ public class AsgardShieldItems {
                                 .durability(690)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.NETHERITE_TOOL_MATERIALS)
+                                .fireResistant()
                                 .equippableUnswappable(EquipmentSlot.OFFHAND)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "gilded_netherite_shield")))

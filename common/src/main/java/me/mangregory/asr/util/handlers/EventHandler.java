@@ -56,7 +56,8 @@ public class EventHandler {
             }
 
             if (level instanceof ServerLevel serverLevel && !player.getCooldowns().isOnCooldown(usedStack) && (
-                    player.getItemInHand(player.getUsedItemHand()).getItem().toString().equals("asr:skull_shield") ||
+                    player.getItemInHand(player.getUsedItemHand()).getItem().toString().equals("asr:skull_giant_sword") ||
+                            player.getItemInHand(player.getUsedItemHand()).getItem().toString().equals("asr:skull_shield") ||
                             player.getItemInHand(player.getUsedItemHand()).getItem().toString().equals("asr:gilded_skull_shield"))) {
                 particleFx(serverLevel, player, ParticleTypes.CLOUD);
             }
