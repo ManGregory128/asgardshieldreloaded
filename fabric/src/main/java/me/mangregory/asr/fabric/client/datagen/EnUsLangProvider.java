@@ -56,13 +56,13 @@ public class EnUsLangProvider extends FabricLanguageProvider {
 
         tooltips.put(AsgardShieldItems.NETHERITE_SHIELD.get(), new ShieldTooltip(
                 "Special Perk: Unyielding",
-                "Cannot be disabled by axes. Does not burn in fire.",
+                "Cannot be disabled by axes. Does not burn in fire",
                 "Weakness: None",
                 "None"
         ));
         tooltips.put(AsgardShieldItems.GILDED_NETHERITE_SHIELD.get(), new ShieldTooltip(
-                "Special Perk: Unyielding",
-                "Cannot be disabled by axes. Does not burn in fire.",
+                "Special Perk: Eternal Bastion",
+                "Unyielding perk plus immune to damage (20 percent chance)",
                 "Weakness: None",
                 "None"
         ));

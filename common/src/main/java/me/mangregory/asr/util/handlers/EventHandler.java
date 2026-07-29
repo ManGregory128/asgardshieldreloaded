@@ -10,6 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
@@ -81,7 +82,13 @@ public class EventHandler {
     }
 
     public static void hurtNearbyEntity(Entity enemy) {
-        List<Entity> entities = enemy.level().getEntities(null, new AABB(enemy.getX() - 4, enemy.getY() - 4, enemy.getZ() - 4, enemy.getX() + 4, enemy.getY() + 4, enemy.getZ() + 4));
+        List<Entity> entities = enemy.level().getEntities(null, new AABB(
+                enemy.getX() - 4,
+                enemy.getY() - 4,
+                enemy.getZ() - 4,
+                enemy.getX() + 4,
+                enemy.getY() + 4,
+                enemy.getZ() + 4));
         if (entities.size() > 1) {
             ((LivingEntity) enemy).travel(entities.get(1).getPosition(0));
             ((LivingEntity) enemy).doHurtTarget((ServerLevel) enemy.level(), entities.get(1));
@@ -120,14 +127,18 @@ public class EventHandler {
         arrow.discard();
         ItemStack arrowStack = new ItemStack(Items.ARROW);
         player.getInventory().add(arrowStack);
-        player.level().playSound(null, BlockPos.containing(player.getPosition(0)),
-                SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
+        playSound(player, SoundEvents.ITEM_PICKUP, 0.8F);
     }
 
     public static void reflectArrow(Player player, Arrow arrow, Entity attacker) {
         arrow.setOwner(player);
         arrow.shootFromRotation(player, attacker.xRotO, attacker.yRotO, 0, 7.5F, 0.2F);
         arrow.hurtMarked = true;
+    }
+
+    public static void playSound(Player player, SoundEvent sound, float volume) {
+        player.level().playSound(null, BlockPos.containing(player.getPosition(0)), sound,
+                SoundSource.PLAYERS, volume, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
     }
 
     public static float teleportEnemy(Entity enemy, float knockback) {

@@ -7,10 +7,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,6 +23,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
+
+import static me.mangregory.asr.util.handlers.EventHandler.playSound;
 
 public class GiantSwordItem extends Item {
     private long maxBlockDuration;
@@ -45,8 +45,7 @@ public class GiantSwordItem extends Item {
         updateMaxBlockDuration();
         super.use(level, player, hand);
         if (ModConfig.ENABLE_GIANT_SWORD_EQUIP_SOUND)
-            player.level().playSound(null, BlockPos.containing(player.getPosition(0)), SoundEvents.IRON_GOLEM_ATTACK,
-                    SoundSource.PLAYERS, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
+            playSound(player, SoundEvents.IRON_GOLEM_ATTACK, 0.8F);
         return InteractionResult.CONSUME;
     }
 
@@ -108,7 +107,8 @@ public class GiantSwordItem extends Item {
 
     @Environment(EnvType.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay,
+                                Consumer<Component> tooltipAdder, TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
 
         Minecraft mc = Minecraft.getInstance();
