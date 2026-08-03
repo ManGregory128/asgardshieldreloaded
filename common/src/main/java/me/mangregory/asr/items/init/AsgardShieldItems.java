@@ -86,7 +86,7 @@ public class AsgardShieldItems {
                                 .durability(AsgardShieldToolMaterials.ALTDIAMOND.durability())
                                 .sword(AsgardShieldToolMaterials.ALTDIAMOND, 3, -2.4f)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
-                                .component(DataComponents.ENCHANTABLE, new Enchantable(AsgardShieldToolMaterials.ALTDIAMOND.enchantmentValue()))
+                                .enchantable(AsgardShieldToolMaterials.ALTDIAMOND.enchantmentValue())
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "diamond_giant_sword")))
                 )
@@ -97,7 +97,7 @@ public class AsgardShieldItems {
                                 .durability(AsgardShieldToolMaterials.ALTIRON.durability())
                                 .sword(AsgardShieldToolMaterials.ALTIRON, 3, -2.4f)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
-                                .component(DataComponents.ENCHANTABLE, new Enchantable(AsgardShieldToolMaterials.ALTIRON.enchantmentValue()))
+                                .enchantable(AsgardShieldToolMaterials.ALTIRON.enchantmentValue())
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "iron_giant_sword")))
 
@@ -109,7 +109,7 @@ public class AsgardShieldItems {
                                 .durability(AsgardShieldToolMaterials.ALTGOLD.durability())
                                 .sword(AsgardShieldToolMaterials.ALTGOLD, 3, -2.4f)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
-                                .component(DataComponents.ENCHANTABLE, new Enchantable(AsgardShieldToolMaterials.ALTGOLD.enchantmentValue()))
+                                .enchantable(AsgardShieldToolMaterials.ALTGOLD.enchantmentValue())
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "golden_giant_sword")))
                 )
@@ -120,7 +120,7 @@ public class AsgardShieldItems {
                                 .durability(AsgardShieldToolMaterials.ALTCOPPER.durability())
                                 .sword(AsgardShieldToolMaterials.ALTCOPPER, 3, -2.4f)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
-                                .component(DataComponents.ENCHANTABLE, new Enchantable(AsgardShieldToolMaterials.ALTCOPPER.enchantmentValue()))
+                                .enchantable(AsgardShieldToolMaterials.ALTCOPPER.enchantmentValue())
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "copper_giant_sword")))
                 )
@@ -132,7 +132,7 @@ public class AsgardShieldItems {
                                 .sword(AsgardShieldToolMaterials.ALTNETHERITE, 3, -2.4f)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .fireResistant()
-                                .component(DataComponents.ENCHANTABLE, new Enchantable(AsgardShieldToolMaterials.ALTNETHERITE.enchantmentValue()))
+                                .enchantable(AsgardShieldToolMaterials.ALTNETHERITE.enchantmentValue())
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "netherite_giant_sword")))
                 )
@@ -143,7 +143,7 @@ public class AsgardShieldItems {
                                 .durability(AsgardShieldToolMaterials.ALTSTONE.durability())
                                 .sword(AsgardShieldToolMaterials.ALTSTONE, 3, -2.4f)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
-                                .component(DataComponents.ENCHANTABLE, new Enchantable(AsgardShieldToolMaterials.ALTSTONE.enchantmentValue()))
+                                .enchantable(AsgardShieldToolMaterials.ALTSTONE.enchantmentValue())
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "stone_giant_sword")))
                 )
@@ -154,7 +154,7 @@ public class AsgardShieldItems {
                                 .durability(AsgardShieldToolMaterials.ALTWOOD.durability())
                                 .sword(AsgardShieldToolMaterials.ALTWOOD, 3, -2.4f)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
-                                .component(DataComponents.ENCHANTABLE, new Enchantable(AsgardShieldToolMaterials.ALTWOOD.enchantmentValue()))
+                                .enchantable(AsgardShieldToolMaterials.ALTWOOD.enchantmentValue())
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "wooden_giant_sword")))
                 )
@@ -165,7 +165,7 @@ public class AsgardShieldItems {
                                 .durability(AsgardShieldToolMaterials.ENDTOOLMATERIAL.durability())
                                 .sword(AsgardShieldToolMaterials.ENDTOOLMATERIAL, 3, -2.4f)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
-                                .component(DataComponents.ENCHANTABLE, new Enchantable(AsgardShieldToolMaterials.ENDTOOLMATERIAL.enchantmentValue()))
+                                .enchantable(AsgardShieldToolMaterials.ENDTOOLMATERIAL.enchantmentValue())
                                 .repairable(Items.OBSIDIAN)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "ender_giant_sword")))
@@ -177,7 +177,7 @@ public class AsgardShieldItems {
                                 .durability(AsgardShieldToolMaterials.NQ_TOOLMATERIAL.durability())
                                 .sword(AsgardShieldToolMaterials.NQ_TOOLMATERIAL, 3, -2.4f)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
-                                .component(DataComponents.ENCHANTABLE, new Enchantable(AsgardShieldToolMaterials.NQ_TOOLMATERIAL.enchantmentValue()))
+                                .enchantable(AsgardShieldToolMaterials.NQ_TOOLMATERIAL.enchantmentValue())
                                 .repairable(Items.QUARTZ)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "netherquartz_giant_sword")))
@@ -189,7 +189,7 @@ public class AsgardShieldItems {
                                 .durability(AsgardShieldToolMaterials.SKULL_TOOLMATERIAL.durability())
                                 .sword(AsgardShieldToolMaterials.SKULL_TOOLMATERIAL, 3, -2.4f)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
-                                .component(DataComponents.ENCHANTABLE, new Enchantable(AsgardShieldToolMaterials.SKULL_TOOLMATERIAL.enchantmentValue()))
+                                .enchantable(AsgardShieldToolMaterials.SKULL_TOOLMATERIAL.enchantmentValue())
                                 .repairable(Items.BONE)
                                 .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(
                                         AsgardShieldReloaded.MOD_ID, "skull_giant_sword")))
@@ -199,7 +199,7 @@ public class AsgardShieldItems {
         ENDER_SHIELD = registerItem("ender_shield",
                 () -> new AsgardShieldItem(
                         new Item.Properties()
-                                .durability(500)
+                                .durability(600)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(Items.OBSIDIAN)
                                 .equippableUnswappable(EquipmentSlot.OFFHAND)
@@ -210,7 +210,7 @@ public class AsgardShieldItems {
         GILDED_ENDER_SHIELD = registerItem("gilded_ender_shield",
                 () -> new AsgardShieldItem(
                         new Item.Properties()
-                                .durability(580)
+                                .durability(700)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(Items.OBSIDIAN)
                                 .equippableUnswappable(EquipmentSlot.OFFHAND)
@@ -221,7 +221,7 @@ public class AsgardShieldItems {
         DIAMOND_SHIELD = registerItem("diamond_shield",
                 () -> new AsgardShieldItem(
                         new Item.Properties()
-                                .durability(500)
+                                .durability(600)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.DIAMOND_TOOL_MATERIALS)
                                 .equippableUnswappable(EquipmentSlot.OFFHAND)
@@ -232,7 +232,7 @@ public class AsgardShieldItems {
         GILDED_DIAMOND_SHIELD = registerItem("gilded_diamond_shield",
                 () -> new AsgardShieldItem(
                         new Item.Properties()
-                                .durability(580)
+                                .durability(680)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.DIAMOND_TOOL_MATERIALS)
                                 .equippableUnswappable(EquipmentSlot.OFFHAND)
@@ -288,7 +288,7 @@ public class AsgardShieldItems {
         IRON_SHIELD = registerItem("iron_shield",
                 () -> new AsgardShieldItem(
                         new Item.Properties()
-                                .durability(380)
+                                .durability(400)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.IRON_TOOL_MATERIALS)
                                 .equippableUnswappable(EquipmentSlot.OFFHAND)
@@ -300,7 +300,7 @@ public class AsgardShieldItems {
         GILDED_IRON_SHIELD = registerItem("gilded_iron_shield",
                 () -> new AsgardShieldItem(
                         new Item.Properties()
-                                .durability(420)
+                                .durability(480)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.IRON_TOOL_MATERIALS)
                                 .equippableUnswappable(EquipmentSlot.OFFHAND)
@@ -335,7 +335,7 @@ public class AsgardShieldItems {
         COPPER_SHIELD = registerItem("copper_shield",
                 () -> new AsgardShieldItem(
                         new Item.Properties()
-                                .durability(250)
+                                .durability(350)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.COPPER_TOOL_MATERIALS)
                                 .equippableUnswappable(EquipmentSlot.OFFHAND)
@@ -346,7 +346,7 @@ public class AsgardShieldItems {
         GILDED_COPPER_SHIELD = registerItem("gilded_copper_shield",
                 () -> new AsgardShieldItem(
                         new Item.Properties()
-                                .durability(300)
+                                .durability(380)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.COPPER_TOOL_MATERIALS)
                                 .equippableUnswappable(EquipmentSlot.OFFHAND)
@@ -357,7 +357,7 @@ public class AsgardShieldItems {
         NETHERITE_SHIELD = registerItem("netherite_shield",
                 () -> new AsgardShieldItem(
                         new Item.Properties()
-                                .durability(590)
+                                .durability(800)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.NETHERITE_TOOL_MATERIALS)
                                 .fireResistant()
@@ -369,7 +369,7 @@ public class AsgardShieldItems {
         GILDED_NETHERITE_SHIELD = registerItem("gilded_netherite_shield",
                 () -> new AsgardShieldItem(
                         new Item.Properties()
-                                .durability(690)
+                                .durability(900)
                                 .component(DataComponents.BLOCKS_ATTACKS, BLOCKS_ATTACKS)
                                 .repairable(ItemTags.NETHERITE_TOOL_MATERIALS)
                                 .fireResistant()

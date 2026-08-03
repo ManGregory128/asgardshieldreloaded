@@ -1,0 +1,22 @@
+{
+  "values": [
+    "asr:diamond_shield",
+    "asr:gilded_diamond_shield",
+    "asr:iron_shield",
+    "asr:gilded_iron_shield",
+    "asr:ender_shield",
+    "asr:gilded_ender_shield",
+    "asr:netherquartz_shield",
+    "asr:gilded_netherquartz_shield",
+    "asr:skull_shield",
+    "asr:gilded_skull_shield",
+    "asr:stone_shield",
+    "asr:gilded_stone_shield",
+    "asr:copper_shield",
+    "asr:gilded_copper_shield",
+    "asr:netherite_shield",
+    "asr:gilded_netherite_shield",
+    "asr:wooden_shield",
+    "asr:gilded_wooden_shield"
+  ]
+}

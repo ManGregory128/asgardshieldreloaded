@@ -7,7 +7,7 @@ import net.minecraft.world.item.ToolMaterial;
 public class AsgardShieldToolMaterials {
     public static final ToolMaterial ALTDIAMOND = new ToolMaterial(
             BlockTags.INCORRECT_FOR_DIAMOND_TOOL,
-            3100,
+            2600,
             -2.4f,
             4f,
             15,
@@ -46,10 +46,10 @@ public class AsgardShieldToolMaterials {
     );
     public static final ToolMaterial ENDTOOLMATERIAL = new ToolMaterial(
             BlockTags.INCORRECT_FOR_DIAMOND_TOOL,
-            4200,
+            3100,
             -2.4f,
             4f,
-            20,
+            15,
             ItemTags.NETHERITE_TOOL_MATERIALS
     );
     public static final ToolMaterial NQ_TOOLMATERIAL = new ToolMaterial(
@@ -70,7 +70,7 @@ public class AsgardShieldToolMaterials {
     );
     public static final ToolMaterial ALTCOPPER = new ToolMaterial(
             BlockTags.INCORRECT_FOR_COPPER_TOOL,
-            250,
+            300,
             4f,
             2f,
             10,
@@ -78,10 +78,10 @@ public class AsgardShieldToolMaterials {
     );
     public static final ToolMaterial ALTNETHERITE = new ToolMaterial(
             BlockTags.INCORRECT_FOR_NETHERITE_TOOL,
-            5000,
+            4000,
             -2.4f,
             5f,
-            15,
+            18,
             ItemTags.NETHERITE_TOOL_MATERIALS
     );
 }

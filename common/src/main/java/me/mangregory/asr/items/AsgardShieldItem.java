@@ -29,7 +29,7 @@ public class AsgardShieldItem extends ShieldItem {
     private static final Map<String, Integer> cooldownMap = new HashMap<>();
 
     public AsgardShieldItem(Properties properties) {
-        super(properties);
+        super(properties.enchantable(15));
         updateMaxBlockDuration();
     }
 

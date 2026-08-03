@@ -5,6 +5,8 @@ import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -15,6 +17,11 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
 public class ItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
+
+    private static final TagKey<Item> ENCHANTABLE_DURABILITY = TagKey.create(
+            Registries.ITEM,
+            Identifier.fromNamespaceAndPath("minecraft", "enchantable/durability")
+    );
 
     public ItemTagsProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
         super(output, completableFuture);
@@ -30,6 +37,10 @@ public class ItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
         add(ItemTags.SWORDS, AsgardShieldItems.NETHERQUARTZ_GIANT_SWORD.get());
         add(ItemTags.SWORDS, AsgardShieldItems.ENDER_GIANT_SWORD.get());
         add(ItemTags.SWORDS, AsgardShieldItems.SKULL_GIANT_SWORD.get());
+
+        add(ENCHANTABLE_DURABILITY, AsgardShieldItems.ASGARD_SHIELDS.stream()
+                .map(supplier -> supplier.get())
+                .toArray(Item[]::new));
     }
 
     private void add(TagKey<Item> tag, ItemLike... suppliers) {
