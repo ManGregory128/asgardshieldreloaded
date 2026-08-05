@@ -154,14 +154,14 @@ public class AsgardShieldHandler {
                 break;
             case "asr:copper_shield":
                 if (player.level().isThundering() && RandomUtil.chance(0.1F))
-                    player.level().addFreshEntity(Objects.requireNonNull(EntityTypes.LIGHTNING_BOLT.spawn(
+                    player.level().addFreshEntity(Objects.requireNonNull(EntityType.LIGHTNING_BOLT.spawn(
                             Objects.requireNonNull(Objects.requireNonNull(player.level().getServer())
                                     .getLevel(player.level().dimension())), player.getOnPos(), EntitySpawnReason.EVENT)));
                 playSound(player, SoundEvents.COPPER_GOLEM_HURT, 0.8F);
                 break;
             case "asr:gilded_copper_shield":
                 if (player.level().isThundering() && RandomUtil.chance(0.2F))
-                    player.level().addFreshEntity(Objects.requireNonNull(EntityTypes.LIGHTNING_BOLT.spawn(
+                    player.level().addFreshEntity(Objects.requireNonNull(EntityType.LIGHTNING_BOLT.spawn(
                             Objects.requireNonNull(Objects.requireNonNull(player.level().getServer())
                                     .getLevel(player.level().dimension())), player.getOnPos(), EntitySpawnReason.EVENT)));
                 playSound(player, SoundEvents.COPPER_GOLEM_HURT, 0.8F);

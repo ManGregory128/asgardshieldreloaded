@@ -3,7 +3,6 @@ package me.mangregory.asr.fabric.client.datagen;
 import me.mangregory.asr.items.init.AsgardShieldItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
@@ -44,10 +43,8 @@ public class ItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
     }
 
     private void add(TagKey<Item> tag, ItemLike... suppliers) {
-        tag(tag).addAll(Stream.of(suppliers)
+        valueLookupBuilder(tag).add(Stream.of(suppliers)
                 .map(ItemLike::asItem)
-                .map(Item::builtInRegistryHolder)
-                .map(Holder.Reference::key)
-                .toList());
+                .toArray(Item[]::new));
     }
 }

@@ -45,7 +45,7 @@ public class EventHandler {
                         && !player.getCooldowns().isOnCooldown(player.getItemInHand(InteractionHand.OFF_HAND))) {
                     player.stopUsingItem();
                     ((GiantSwordItem) itemMainHand).resetCooldown(player, player.getItemInHand(InteractionHand.MAIN_HAND));
-                    return EventResult.interruptFalse();
+                    return EventResult.interruptFalse().asMinecraft();
                 }
             }
             ItemStack usedStack = player.getItemInHand(hand);
@@ -63,7 +63,7 @@ public class EventHandler {
                 particleFx(serverLevel, player, ParticleTypes.CLOUD);
             }
 
-            return EventResult.pass();
+            return EventResult.pass().asMinecraft();
         });
 
         // Register living hurt event (for blocking damage)
@@ -96,11 +96,10 @@ public class EventHandler {
     }
 
     public static void knockbackEnemy(Player player, Entity enemy, Entity projectile, float knockback) {
-        DamageSource source = player.damageSources().playerAttack(player);
         if (enemy instanceof LivingEntity && projectile == enemy) {
             ((LivingEntity) enemy).knockback(knockback * 0.4F,
                     player.getX() - enemy.getX(),
-                    player.getZ() - enemy.getZ(), source, knockback);
+                    player.getZ() - enemy.getZ());
         }
     }
 
