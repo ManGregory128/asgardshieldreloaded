@@ -10,19 +10,18 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
 import static me.mangregory.asr.util.handlers.EventHandler.playSound;
 
@@ -36,17 +35,17 @@ public class GiantSwordItem extends Item {
     }
 
     @Override
-    public @NotNull InteractionResult use(Level level, Player player, InteractionHand hand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (player instanceof LivingEntityAccessor accessor) {
             if (accessor.getAttackStrengthTicker() < 10) {
-                return InteractionResult.PASS; // Prevent blocking if the player recently attacked
+                return InteractionResultHolder.pass(player.getItemInHand(hand)); // Prevent blocking if recently attacked
             }
         }
         updateMaxBlockDuration();
         super.use(level, player, hand);
         if (ModConfig.ENABLE_GIANT_SWORD_EQUIP_SOUND)
             playSound(player, SoundEvents.IRON_GOLEM_ATTACK, 0.8F);
-        return InteractionResult.CONSUME;
+        return InteractionResultHolder.consume(player.getItemInHand(hand));
     }
 
     @Override
@@ -55,13 +54,12 @@ public class GiantSwordItem extends Item {
     }
 
     @Override
-    public boolean releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeUsed) {
+    public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeUsed) {
         if (entity instanceof Player player && !level.isClientSide()) {
             String key = getCooldownKey(player, stack);
-            player.getCooldowns().addCooldown(stack, getCooldown(key) / 2);
+            player.getCooldowns().addCooldown(stack.getItem(), getCooldown(key) / 2);
             resetCooldown(key);
         }
-        return false;
     }
 
     @Override
@@ -72,7 +70,7 @@ public class GiantSwordItem extends Item {
 
             if (getCooldown(key) >= this.maxBlockDuration) {
                 entity.stopUsingItem();
-                player.getCooldowns().addCooldown(stack, getCooldown(key) / 2);
+                player.getCooldowns().addCooldown(stack.getItem(), getCooldown(key) / 2);
                 resetCooldown(key);
             }
         }
@@ -107,9 +105,9 @@ public class GiantSwordItem extends Item {
 
     @Environment(EnvType.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay,
-                                Consumer<Component> tooltipAdder, TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
+    public void appendHoverText(ItemStack stack, TooltipContext context,
+                                List<Component> tooltipAdder, TooltipFlag flag) {
+        super.appendHoverText(stack, context, tooltipAdder, flag);
 
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null || mc.player == null) {
@@ -121,7 +119,7 @@ public class GiantSwordItem extends Item {
             displayDuration = this.maxBlockDuration;
         } else displayDuration = ClientConfigCache.giantSwordBlockDuration;
 
-        tooltipAdder.accept(Component.literal("Maximum Block Duration: " + displayDuration / 20 + "s")
+        tooltipAdder.add(Component.literal("Maximum Block Duration: " + displayDuration / 20 + "s")
                 .withStyle(ChatFormatting.AQUA));
     }
 

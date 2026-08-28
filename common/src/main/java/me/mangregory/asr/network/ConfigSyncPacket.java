@@ -6,11 +6,11 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
 public record ConfigSyncPacket(long giantSwordBlockDuration, long asgardShieldBlockDuration) implements CustomPacketPayload {
-    public static final Type<ConfigSyncPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath("asgardshieldreloaded", "config_sync"));
+    public static final Type<ConfigSyncPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath("asgardshieldreloaded", "config_sync"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ConfigSyncPacket> CODEC = StreamCodec.composite(
             ByteBufCodecs.VAR_LONG, ConfigSyncPacket::giantSwordBlockDuration,

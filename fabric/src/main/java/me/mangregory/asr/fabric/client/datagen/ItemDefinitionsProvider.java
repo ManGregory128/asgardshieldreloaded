@@ -10,7 +10,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
 import java.io.IOException;
@@ -31,17 +31,17 @@ public final class ItemDefinitionsProvider implements DataProvider {
 
     @Override
     public CompletableFuture<?> run(CachedOutput cachedOutput) {
-        Map<Identifier, JsonObject> toWrite = new LinkedHashMap<>();
+        Map<ResourceLocation, JsonObject> toWrite = new LinkedHashMap<>();
 
         for (var sup : AsgardShieldItems.GIANT_SWORDS) {
             Item item = sup.get();
-            Identifier id = BuiltInRegistries.ITEM.getKey(item);
+            ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
             toWrite.put(id, swordItemDefinition(id));
         }
 
         for (var sup : AsgardShieldItems.ASGARD_SHIELDS) {
             Item item = sup.get();
-            Identifier id = BuiltInRegistries.ITEM.getKey(item);
+            ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
             toWrite.put(id, shieldItemDefinition(id));
         }
 
@@ -52,7 +52,7 @@ public final class ItemDefinitionsProvider implements DataProvider {
         return CompletableFuture.allOf(futures);
     }
 
-    private CompletableFuture<?> writeJsonAsync(CachedOutput cachedOutput, Identifier id, JsonObject json) {
+    private CompletableFuture<?> writeJsonAsync(CachedOutput cachedOutput, ResourceLocation id, JsonObject json) {
         Path path = itemsPath.json(id); // assets/<ns>/items/<path>.json
         byte[] bytes = (GSON.toJson(json) + "\n").getBytes(StandardCharsets.UTF_8);
         var hash = Hashing.sha1().hashBytes(bytes);
@@ -71,7 +71,7 @@ public final class ItemDefinitionsProvider implements DataProvider {
         return "AsgardShieldReloaded Item Definitions";
     }
 
-    private static JsonObject swordItemDefinition(Identifier itemId) {
+    private static JsonObject swordItemDefinition(ResourceLocation itemId) {
         JsonObject root = new JsonObject();
 
         JsonObject model = new JsonObject();
@@ -82,7 +82,7 @@ public final class ItemDefinitionsProvider implements DataProvider {
         return root;
     }
 
-    private static JsonObject shieldItemDefinition(Identifier itemId) {
+    private static JsonObject shieldItemDefinition(ResourceLocation itemId) {
         JsonObject root = new JsonObject();
 
         JsonObject model = new JsonObject();
@@ -104,11 +104,11 @@ public final class ItemDefinitionsProvider implements DataProvider {
         return root;
     }
 
-    private static String modelId(Identifier itemId) {
+    private static String modelId(ResourceLocation itemId) {
         return AsgardShieldReloaded.MOD_ID + ":item/" + itemId.getPath();
     }
 
-    private static String modelIdBlocking(Identifier itemId) {
+    private static String modelIdBlocking(ResourceLocation itemId) {
         return AsgardShieldReloaded.MOD_ID + ":item/" + itemId.getPath() + "_blocking";
     }
 }

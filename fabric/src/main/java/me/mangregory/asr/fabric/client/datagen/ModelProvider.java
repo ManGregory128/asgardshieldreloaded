@@ -3,47 +3,45 @@ package me.mangregory.asr.fabric.client.datagen;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import me.mangregory.asr.items.init.AsgardShieldItems;
-import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
-import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
-import net.minecraft.client.data.models.BlockModelGenerators;
-import net.minecraft.client.data.models.ItemModelGenerators;
-import net.minecraft.client.data.models.model.ModelTemplates;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.data.models.BlockModelGenerators;
+import net.minecraft.data.models.ItemModelGenerators;
+import net.minecraft.data.models.model.ModelTemplates;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import org.jspecify.annotations.NonNull;
 
 public class ModelProvider extends FabricModelProvider {
-
-    public ModelProvider(FabricPackOutput output) {
+    public ModelProvider(FabricDataOutput output) {
         super(output);
     }
 
     @Override
-    public void generateBlockStateModels(@NonNull BlockModelGenerators blockStateModelGenerator) {
+    public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
         // no block models to generate
     }
 
     @Override
-    public void generateItemModels(@NonNull ItemModelGenerators gen) {
+    public void generateItemModels(ItemModelGenerators gen) {
         AsgardShieldItems.GIANT_SWORDS.forEach(sword ->
-                gen.createFlatItemModel(sword.get(), ModelTemplates.FLAT_HANDHELD_ITEM));
+                gen.generateFlatItem(sword.get(), ModelTemplates.FLAT_HANDHELD_ITEM));
         AsgardShieldItems.ASGARD_SHIELDS.forEach(shield ->
                 shieldModels(gen, shield.get()));
     }
 
     private static void shieldModels(ItemModelGenerators gen, Item shield) {
-        Identifier itemId = BuiltInRegistries.ITEM.getKey(shield);
-        Identifier texture = Identifier.fromNamespaceAndPath(itemId.getNamespace(), "item/" + itemId.getPath());
+        ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(shield);
+        ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(itemId.getNamespace(), "item/" + itemId.getPath());
 
-        Identifier baseModelId = Identifier.fromNamespaceAndPath(itemId.getNamespace(), "item/" + itemId.getPath());
-        Identifier blockingModelId = Identifier.fromNamespaceAndPath(itemId.getNamespace(), "item/" + itemId.getPath() + "_blocking");
+        ResourceLocation baseModelId = ResourceLocation.fromNamespaceAndPath(itemId.getNamespace(), "item/" + itemId.getPath());
+        ResourceLocation blockingModelId = ResourceLocation.fromNamespaceAndPath(itemId.getNamespace(), "item/" + itemId.getPath() + "_blocking");
 
-        gen.modelOutput.accept(baseModelId, () -> baseShieldModelJson(texture));
-        gen.modelOutput.accept(blockingModelId, () -> blockingShieldModelJson(texture));
+        gen.output.accept(baseModelId, () -> baseShieldModelJson(texture));
+        gen.output.accept(blockingModelId, () -> blockingShieldModelJson(texture));
     }
 
-    private static JsonObject baseShieldModelJson(Identifier layer0) {
+    private static JsonObject baseShieldModelJson(ResourceLocation layer0) {
         JsonObject root = new JsonObject();
         root.addProperty("parent", "item/generated");
 
@@ -55,7 +53,7 @@ public class ModelProvider extends FabricModelProvider {
         return root;
     }
 
-    private static JsonObject blockingShieldModelJson(Identifier layer0) {
+    private static JsonObject blockingShieldModelJson(ResourceLocation layer0) {
         JsonObject root = new JsonObject();
         root.addProperty("parent", "item/generated");
 

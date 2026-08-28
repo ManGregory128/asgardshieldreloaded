@@ -6,20 +6,20 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
 import static me.mangregory.asr.util.handlers.EventHandler.playSound;
 
@@ -29,17 +29,17 @@ public class AsgardShieldItem extends ShieldItem {
     private static final Map<String, Integer> cooldownMap = new HashMap<>();
 
     public AsgardShieldItem(Properties properties) {
-        super(properties.enchantable(15));
+        super(properties);
         updateMaxBlockDuration();
     }
 
     @Override
-    public @NotNull InteractionResult use(Level level, Player player, InteractionHand hand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         updateMaxBlockDuration();
         super.use(level, player, hand);
         if (ModConfig.ENABLE_ASGARD_SHIELD_EQUIP_SOUND)
             playSound(player, SoundEvents.IRON_GOLEM_ATTACK, 0.8F);
-        return InteractionResult.CONSUME;
+        return InteractionResultHolder.consume(player.getItemInHand(hand));
     }
 
     @Override
@@ -48,13 +48,12 @@ public class AsgardShieldItem extends ShieldItem {
     }
 
     @Override
-    public boolean releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeUsed) {
+    public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeUsed) {
         if (entity instanceof Player player && !level.isClientSide()) {
             String key = getCooldownKey(player, stack);
-            player.getCooldowns().addCooldown(stack, getCooldown(key) / 2);
+            player.getCooldowns().addCooldown(stack.getItem(), getCooldown(key) / 2);
             resetCooldown(key);
         }
-        return false;
     }
 
     @Override
@@ -65,7 +64,7 @@ public class AsgardShieldItem extends ShieldItem {
 
             if (getCooldown(key) >= this.maxBlockDuration) {
                 entity.stopUsingItem();
-                player.getCooldowns().addCooldown(stack, getCooldown(key) / 2);
+                player.getCooldowns().addCooldown(stack.getItem(), getCooldown(key) / 2);
                 resetCooldown(key);
             }
         }
@@ -104,9 +103,9 @@ public class AsgardShieldItem extends ShieldItem {
 
     @Environment(EnvType.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay,
-                                Consumer<Component> tooltipAdder, TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
+    public void appendHoverText(ItemStack stack, TooltipContext context,
+                                List<Component> tooltipAdder, TooltipFlag flag) {
+        super.appendHoverText(stack, context, tooltipAdder, flag);
 
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null || mc.player == null) {
@@ -118,19 +117,19 @@ public class AsgardShieldItem extends ShieldItem {
             displayDuration = this.maxBlockDuration;
         } else displayDuration = ClientConfigCache.asgardShieldBlockDuration;
 
-        boolean sneakPressed = mc.hasShiftDown();
-        tooltipAdder.accept(Component.literal("Maximum Block Duration: " + displayDuration / 20 + "s")
+        boolean sneakPressed = Screen.hasShiftDown();
+        tooltipAdder.add(Component.literal("Maximum Block Duration: " + displayDuration / 20 + "s")
                 .withStyle(ChatFormatting.AQUA));
         if (!sneakPressed) {
-            tooltipAdder.accept(Component.translatable(TooltipKeys.perk(stack), "shift")
+            tooltipAdder.add(Component.translatable(TooltipKeys.perk(stack), "shift")
                     .withStyle(ChatFormatting.GREEN));
-            tooltipAdder.accept(Component.translatable(TooltipKeys.weakness(stack), "shift")
+            tooltipAdder.add(Component.translatable(TooltipKeys.weakness(stack), "shift")
                     .withStyle(ChatFormatting.RED));
-            tooltipAdder.accept(Component.literal("Hold shift for more info").withStyle(ChatFormatting.GRAY));
+            tooltipAdder.add(Component.literal("Hold shift for more info").withStyle(ChatFormatting.GRAY));
         } else {
-            tooltipAdder.accept(Component.translatable(TooltipKeys.perkDesc(stack), "")
+            tooltipAdder.add(Component.translatable(TooltipKeys.perkDesc(stack), "")
                     .withStyle(ChatFormatting.GREEN));
-            tooltipAdder.accept(Component.translatable(TooltipKeys.weaknessDesc(stack), "")
+            tooltipAdder.add(Component.translatable(TooltipKeys.weaknessDesc(stack), "")
                     .withStyle(ChatFormatting.RED));
         }
     }

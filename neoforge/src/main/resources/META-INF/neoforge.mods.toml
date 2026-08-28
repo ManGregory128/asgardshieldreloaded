@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[11,)"
+loaderVersion = "[2,)"
 #issueTrackerURL = ""
 license = "GPL-3.0"
 
@@ -16,21 +16,21 @@ logoFile = "asr.png"
 [[dependencies.asr]]
 modId = "neoforge"
 type = "required"
-versionRange = "[26.1.2,)"
+versionRange = "[21.1.248,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.asr]]
 modId = "minecraft"
 type = "required"
-versionRange = "[26.1.2, 26.2)"
+versionRange = "[1.21, 1.21.1]"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.asr]]
 modId = "architectury"
 type = "required"
-versionRange = "[20.0.12,)"
+versionRange = "[13.0.11,)"
 ordering = "AFTER"
 side = "BOTH"
 

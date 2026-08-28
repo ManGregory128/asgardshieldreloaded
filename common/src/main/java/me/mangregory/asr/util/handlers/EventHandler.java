@@ -1,5 +1,6 @@
 package me.mangregory.asr.util.handlers;
 
+import dev.architectury.event.CompoundEventResult;
 import dev.architectury.event.EventResult;
 import dev.architectury.event.events.common.*;
 import me.mangregory.asr.items.AsgardShieldItem;
@@ -9,17 +10,18 @@ import me.mangregory.asr.util.handlers.items.GiantSwordHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.arrow.Arrow;
+import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -40,30 +42,34 @@ public class EventHandler {
             Item itemMainHand = player.getItemInHand(InteractionHand.MAIN_HAND).getItem();
             Item itemOffHand = player.getItemInHand(InteractionHand.OFF_HAND).getItem();
 
+            ItemStack usedStack = player.getItemInHand(hand);
+            Item usedItem = usedStack.getItem();
             if (itemMainHand instanceof GiantSwordItem && itemOffHand instanceof ShieldItem) {
                 if (hand == InteractionHand.MAIN_HAND
-                        && !player.getCooldowns().isOnCooldown(player.getItemInHand(InteractionHand.OFF_HAND))) {
+                        && !player.getCooldowns().isOnCooldown(usedItem)) {
                     player.stopUsingItem();
                     ((GiantSwordItem) itemMainHand).resetCooldown(player, player.getItemInHand(InteractionHand.MAIN_HAND));
-                    return EventResult.interruptFalse().asMinecraft();
+                    return CompoundEventResult.interruptFalse(usedStack);
                 }
             }
-            ItemStack usedStack = player.getItemInHand(hand);
-            if (level instanceof ServerLevel serverLevel && !player.getCooldowns().isOnCooldown(usedStack) && (
-                    player.getItemInHand(player.getUsedItemHand()).getItem().toString().equals("asr:ender_giant_sword") ||
-                            player.getItemInHand(player.getUsedItemHand()).getItem().toString().equals("asr:ender_shield") ||
-                            player.getItemInHand(player.getUsedItemHand()).getItem().toString().equals("asr:gilded_ender_shield"))) {
+            Item usedItemInHand = player.getItemInHand(player.getUsedItemHand()).getItem();
+            ResourceLocation usedItemId = BuiltInRegistries.ITEM.getKey(usedItemInHand);
+            
+            if (level instanceof ServerLevel serverLevel && !player.getCooldowns().isOnCooldown(usedItem) && (
+                    usedItemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "ender_giant_sword")) ||
+                            usedItemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "ender_shield")) ||
+                            usedItemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "gilded_ender_shield")))) {
                 particleFx(serverLevel, player, ParticleTypes.PORTAL);
             }
 
-            if (level instanceof ServerLevel serverLevel && !player.getCooldowns().isOnCooldown(usedStack) && (
-                    player.getItemInHand(player.getUsedItemHand()).getItem().toString().equals("asr:skull_giant_sword") ||
-                            player.getItemInHand(player.getUsedItemHand()).getItem().toString().equals("asr:skull_shield") ||
-                            player.getItemInHand(player.getUsedItemHand()).getItem().toString().equals("asr:gilded_skull_shield"))) {
+            if (level instanceof ServerLevel serverLevel && !player.getCooldowns().isOnCooldown(usedItem) && (
+                    usedItemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "skull_giant_sword")) ||
+                            usedItemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "skull_shield")) ||
+                            usedItemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "gilded_skull_shield")))) {
                 particleFx(serverLevel, player, ParticleTypes.CLOUD);
             }
 
-            return EventResult.pass().asMinecraft();
+            return CompoundEventResult.pass();
         });
 
         // Register living hurt event (for blocking damage)
@@ -91,7 +97,7 @@ public class EventHandler {
                 enemy.getZ() + 4));
         if (entities.size() > 1) {
             ((LivingEntity) enemy).travel(entities.get(1).getPosition(0));
-            ((LivingEntity) enemy).doHurtTarget((ServerLevel) enemy.level(), entities.get(1));
+            ((LivingEntity) enemy).doHurtTarget(enemy);
         } else enemy.hurt(enemy.damageSources().magic(), 10000.0F);
     }
 

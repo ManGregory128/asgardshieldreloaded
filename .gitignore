@@ -25,6 +25,7 @@ run-data
 
 repo
 /gradlew.bat
+.architectury-transformer
 
 # macOS
 .DS_Store

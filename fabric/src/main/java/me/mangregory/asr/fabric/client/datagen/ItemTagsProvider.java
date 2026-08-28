@@ -1,33 +1,32 @@
 package me.mangregory.asr.fabric.client.datagen;
 
 import me.mangregory.asr.items.init.AsgardShieldItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
-import org.jspecify.annotations.NonNull;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
-public class ItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
+public class ItemTagsProvider extends FabricTagProvider.ItemTagProvider {
 
     private static final TagKey<Item> ENCHANTABLE_DURABILITY = TagKey.create(
             Registries.ITEM,
-            Identifier.fromNamespaceAndPath("minecraft", "enchantable/durability")
+            ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/durability")
     );
 
-    public ItemTagsProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
+    public ItemTagsProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
         super(output, completableFuture);
     }
 
     @Override
-    protected void addTags(HolderLookup.@NonNull Provider provider) {
+    protected void addTags(HolderLookup.Provider provider) {
         add(ItemTags.SWORDS, AsgardShieldItems.DIAMOND_GIANT_SWORD.get());
         add(ItemTags.SWORDS, AsgardShieldItems.GOLDEN_GIANT_SWORD.get());
         add(ItemTags.SWORDS, AsgardShieldItems.IRON_GIANT_SWORD.get());
@@ -43,7 +42,7 @@ public class ItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
     }
 
     private void add(TagKey<Item> tag, ItemLike... suppliers) {
-        valueLookupBuilder(tag).add(Stream.of(suppliers)
+        getOrCreateTagBuilder(tag).add(Stream.of(suppliers)
                 .map(ItemLike::asItem)
                 .toArray(Item[]::new));
     }
