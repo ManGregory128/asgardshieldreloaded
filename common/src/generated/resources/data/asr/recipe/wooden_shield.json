@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": "#minecraft:wooden_tool_materials",
-    "/": "#c:leathers"
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "/": {
+      "tag": "c:leathers"
+    }
   },
   "pattern": [
     "###",
@@ -11,6 +15,7 @@
     " # "
   ],
   "result": {
+    "count": 1,
     "id": "asr:wooden_shield"
   }
 }

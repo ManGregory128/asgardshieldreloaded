@@ -8,7 +8,6 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
-import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
@@ -25,9 +24,20 @@ public class ModelProvider extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerators gen) {
         AsgardShieldItems.GIANT_SWORDS.forEach(sword ->
-                gen.generateFlatItem(sword.get(), ModelTemplates.FLAT_HANDHELD_ITEM));
+                swordModels(gen, sword.get()));
         AsgardShieldItems.ASGARD_SHIELDS.forEach(shield ->
                 shieldModels(gen, shield.get()));
+    }
+
+    private static void swordModels(ItemModelGenerators gen, Item sword) {
+        ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(sword);
+        ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(itemId.getNamespace(), "item/" + itemId.getPath());
+
+        ResourceLocation baseModelId = ResourceLocation.fromNamespaceAndPath(itemId.getNamespace(), "item/" + itemId.getPath());
+        ResourceLocation blockingModelId = ResourceLocation.fromNamespaceAndPath(itemId.getNamespace(), "item/" + itemId.getPath() + "_blocking");
+
+        gen.output.accept(baseModelId, () -> baseSwordModelJson(texture, blockingModelId));
+        gen.output.accept(blockingModelId, () -> blockingSwordModelJson(texture));
     }
 
     private static void shieldModels(ItemModelGenerators gen, Item shield) {
@@ -37,11 +47,11 @@ public class ModelProvider extends FabricModelProvider {
         ResourceLocation baseModelId = ResourceLocation.fromNamespaceAndPath(itemId.getNamespace(), "item/" + itemId.getPath());
         ResourceLocation blockingModelId = ResourceLocation.fromNamespaceAndPath(itemId.getNamespace(), "item/" + itemId.getPath() + "_blocking");
 
-        gen.output.accept(baseModelId, () -> baseShieldModelJson(texture));
+        gen.output.accept(baseModelId, () -> baseShieldModelJson(texture, blockingModelId));
         gen.output.accept(blockingModelId, () -> blockingShieldModelJson(texture));
     }
 
-    private static JsonObject baseShieldModelJson(ResourceLocation layer0) {
+    private static JsonObject baseShieldModelJson(ResourceLocation layer0, ResourceLocation blockingModelId) {
         JsonObject root = new JsonObject();
         root.addProperty("parent", "item/generated");
 
@@ -50,6 +60,17 @@ public class ModelProvider extends FabricModelProvider {
         root.add("textures", textures);
 
         root.add("display", shieldDisplayDefault());
+
+        // Add blocking override predicate
+        JsonArray overrides = new JsonArray();
+        JsonObject blockingOverride = new JsonObject();
+        JsonObject predicate = new JsonObject();
+        predicate.addProperty("blocking", 1);
+        blockingOverride.add("predicate", predicate);
+        blockingOverride.addProperty("model", blockingModelId.toString());
+        overrides.add(blockingOverride);
+        root.add("overrides", overrides);
+
         return root;
     }
 
@@ -94,6 +115,67 @@ public class ModelProvider extends FabricModelProvider {
         ground.add("translation", arr(0, 2, 0));
         ground.add("scale", arr(0.7, 0.7, 0.7));
         display.add("ground", ground);
+
+        return display;
+    }
+
+    private static JsonObject baseSwordModelJson(ResourceLocation layer0, ResourceLocation blockingModelId) {
+        JsonObject root = new JsonObject();
+        root.addProperty("parent", "minecraft:item/handheld");
+
+        JsonObject textures = new JsonObject();
+        textures.addProperty("layer0", layer0.toString());
+        root.add("textures", textures);
+
+        JsonArray overrides = new JsonArray();
+        JsonObject blockingOverride = new JsonObject();
+        JsonObject predicate = new JsonObject();
+        predicate.addProperty("blocking", 1);
+        blockingOverride.add("predicate", predicate);
+        blockingOverride.addProperty("model", blockingModelId.toString());
+        overrides.add(blockingOverride);
+        root.add("overrides", overrides);
+
+        return root;
+    }
+
+    private static JsonObject blockingSwordModelJson(ResourceLocation layer0) {
+        JsonObject root = new JsonObject();
+        root.addProperty("parent", "minecraft:item/handheld");
+
+        JsonObject textures = new JsonObject();
+        textures.addProperty("layer0", layer0.toString());
+        root.add("textures", textures);
+
+        root.add("display", swordDisplayBlocking());
+        return root;
+    }
+
+    private static JsonObject swordDisplayBlocking() {
+        JsonObject display = new JsonObject();
+
+        JsonObject tpr = new JsonObject();
+        tpr.add("rotation", arr(30, -27, 90));
+        tpr.add("translation", arr(-5.5, 2, 2.5));
+        tpr.add("scale", arr(0.8, 0.8, 0.8));
+        display.add("thirdperson_righthand", tpr);
+
+        JsonObject tpl = new JsonObject();
+        tpl.add("rotation", arr(30, -27, 0));
+        tpl.add("translation", arr(-5.5, 2, 2.5));
+        tpl.add("scale", arr(0.8, 0.8, 0.8));
+        display.add("thirdperson_lefthand", tpl);
+
+        JsonObject fpr = new JsonObject();
+        fpr.add("rotation", arr(0, 180, 0));
+        fpr.add("translation", arr(-1, 3, 1));
+        fpr.add("scale", arr(0.7, 0.7, 0.7));
+        display.add("firstperson_righthand", fpr);
+
+        JsonObject fpl = new JsonObject();
+        fpl.add("translation", arr(-1, 3, 1));
+        fpl.add("scale", arr(0.7, 0.7, 0.7));
+        display.add("firstperson_lefthand", fpl);
 
         return display;
     }

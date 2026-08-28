@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": "#minecraft:diamond_tool_materials",
-    "/": "#c:rods/wooden"
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "/": {
+      "tag": "c:rods/wooden"
+    }
   },
   "pattern": [
     " ##",
@@ -11,6 +15,7 @@
     "/# "
   ],
   "result": {
+    "count": 1,
     "id": "asr:diamond_giant_sword"
   }
 }

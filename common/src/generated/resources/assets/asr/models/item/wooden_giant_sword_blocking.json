@@ -1,0 +1,71 @@
+{
+  "parent": "minecraft:item/handheld",
+  "display": {
+    "firstperson_lefthand": {
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "translation": [
+        -1.0,
+        3.0,
+        1.0
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "translation": [
+        -1.0,
+        3.0,
+        1.0
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        30.0,
+        -27.0,
+        0.0
+      ],
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ],
+      "translation": [
+        -5.5,
+        2.0,
+        2.5
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        30.0,
+        -27.0,
+        90.0
+      ],
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ],
+      "translation": [
+        -5.5,
+        2.0,
+        2.5
+      ]
+    }
+  },
+  "textures": {
+    "layer0": "asr:item/wooden_giant_sword"
+  }
+}

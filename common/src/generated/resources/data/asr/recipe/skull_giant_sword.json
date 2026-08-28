@@ -2,9 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": "minecraft:bone",
-    "*": "minecraft:skeleton_skull",
-    "/": "#c:rods/wooden"
+    "#": {
+      "item": "minecraft:bone"
+    },
+    "*": {
+      "item": "minecraft:skeleton_skull"
+    },
+    "/": {
+      "tag": "c:rods/wooden"
+    }
   },
   "pattern": [
     " ##",
@@ -12,6 +18,7 @@
     "/# "
   ],
   "result": {
+    "count": 1,
     "id": "asr:skull_giant_sword"
   }
 }

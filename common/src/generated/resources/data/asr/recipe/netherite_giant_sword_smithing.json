@@ -1,9 +1,16 @@
 {
   "type": "minecraft:smithing_transform",
-  "addition": "minecraft:netherite_ingot",
-  "base": "asr:diamond_giant_sword",
+  "addition": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "base": {
+    "item": "asr:diamond_giant_sword"
+  },
   "result": {
+    "count": 1,
     "id": "asr:netherite_giant_sword"
   },
-  "template": "minecraft:netherite_upgrade_smithing_template"
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  }
 }

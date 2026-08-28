@@ -1,6 +1,5 @@
 package me.mangregory.asr.items.init;
 
-import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import me.mangregory.asr.AsgardShieldReloaded;
@@ -10,6 +9,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SwordItem;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -55,43 +55,53 @@ public class AsgardShieldItems {
 
     public static void init() {
         DIAMOND_GIANT_SWORD = registerItem("diamond_giant_sword",
-                () -> new GiantSwordItem(new Item.Properties().durability(AsgardShieldToolMaterials.ALTDIAMOND.getUses())
+                () -> new GiantSwordItem(AsgardShieldToolMaterials.ALTDIAMOND, new Item.Properties().durability(AsgardShieldToolMaterials.ALTDIAMOND.getUses())
+                        .attributes(SwordItem.createAttributes(AsgardShieldToolMaterials.ALTDIAMOND, 3, -2.4F))
                         .arch$tab(CreativeModeTabs.COMBAT))
         );
         IRON_GIANT_SWORD = registerItem("iron_giant_sword",
-                () -> new GiantSwordItem(new Item.Properties().durability(AsgardShieldToolMaterials.ALTIRON.getUses())
+                () -> new GiantSwordItem(AsgardShieldToolMaterials.ALTIRON, new Item.Properties().durability(AsgardShieldToolMaterials.ALTIRON.getUses())
+                        .attributes(SwordItem.createAttributes(AsgardShieldToolMaterials.ALTIRON, 3, -2.4F))
                         .arch$tab(CreativeModeTabs.COMBAT))
         );
         GOLDEN_GIANT_SWORD = registerItem("golden_giant_sword",
-                () -> new GiantSwordItem(new Item.Properties().durability(AsgardShieldToolMaterials.ALTGOLD.getUses())
+                () -> new GiantSwordItem(AsgardShieldToolMaterials.ALTGOLD, new Item.Properties().durability(AsgardShieldToolMaterials.ALTGOLD.getUses())
+                        .attributes(SwordItem.createAttributes(AsgardShieldToolMaterials.ALTGOLD, 3, -2.4F))
                         .arch$tab(CreativeModeTabs.COMBAT))
         );
         COPPER_GIANT_SWORD = registerItem("copper_giant_sword",
-                () -> new GiantSwordItem(new Item.Properties().durability(AsgardShieldToolMaterials.ALTCOPPER.getUses())
+                () -> new GiantSwordItem(AsgardShieldToolMaterials.ALTCOPPER, new Item.Properties().durability(AsgardShieldToolMaterials.ALTCOPPER.getUses())
+                        .attributes(SwordItem.createAttributes(AsgardShieldToolMaterials.ALTCOPPER, 3, -2.4F))
                         .arch$tab(CreativeModeTabs.COMBAT))
         );
         NETHERITE_GIANT_SWORD = registerItem("netherite_giant_sword",
-                () -> new GiantSwordItem(new Item.Properties().durability(AsgardShieldToolMaterials.ALTNETHERITE.getUses()).fireResistant()
+                () -> new GiantSwordItem(AsgardShieldToolMaterials.ALTNETHERITE, new Item.Properties().durability(AsgardShieldToolMaterials.ALTNETHERITE.getUses()).fireResistant()
+                        .attributes(SwordItem.createAttributes(AsgardShieldToolMaterials.ALTNETHERITE, 3, -2.4F))
                         .arch$tab(CreativeModeTabs.COMBAT))
         );
         STONE_GIANT_SWORD = registerItem("stone_giant_sword",
-                () -> new GiantSwordItem(new Item.Properties().durability(AsgardShieldToolMaterials.ALTSTONE.getUses())
+                () -> new GiantSwordItem(AsgardShieldToolMaterials.ALTSTONE, new Item.Properties().durability(AsgardShieldToolMaterials.ALTSTONE.getUses())
+                        .attributes(SwordItem.createAttributes(AsgardShieldToolMaterials.ALTSTONE, 3, -2.4F))
                         .arch$tab(CreativeModeTabs.COMBAT))
         );
         WOODEN_GIANT_SWORD = registerItem("wooden_giant_sword",
-                () -> new GiantSwordItem(new Item.Properties().durability(AsgardShieldToolMaterials.ALTWOOD.getUses())
+                () -> new GiantSwordItem(AsgardShieldToolMaterials.ALTWOOD, new Item.Properties().durability(AsgardShieldToolMaterials.ALTWOOD.getUses())
+                        .attributes(SwordItem.createAttributes(AsgardShieldToolMaterials.ALTWOOD, 3, -2.4F))
                         .arch$tab(CreativeModeTabs.COMBAT))
         );
         ENDER_GIANT_SWORD = registerItem("ender_giant_sword",
-                () -> new GiantSwordItem(new Item.Properties().durability(AsgardShieldToolMaterials.ENDTOOLMATERIAL.getUses())
+                () -> new GiantSwordItem(AsgardShieldToolMaterials.ENDTOOLMATERIAL, new Item.Properties().durability(AsgardShieldToolMaterials.ENDTOOLMATERIAL.getUses())
+                        .attributes(SwordItem.createAttributes(AsgardShieldToolMaterials.ENDTOOLMATERIAL, 3, -2.4F))
                         .arch$tab(CreativeModeTabs.COMBAT))
         );
         NETHERQUARTZ_GIANT_SWORD = registerItem("netherquartz_giant_sword",
-                () -> new GiantSwordItem(new Item.Properties().durability(AsgardShieldToolMaterials.NQ_TOOLMATERIAL.getUses())
+                () -> new GiantSwordItem(AsgardShieldToolMaterials.NQ_TOOLMATERIAL, new Item.Properties().durability(AsgardShieldToolMaterials.NQ_TOOLMATERIAL.getUses())
+                        .attributes(SwordItem.createAttributes(AsgardShieldToolMaterials.NQ_TOOLMATERIAL, 3, -2.4F))
                         .arch$tab(CreativeModeTabs.COMBAT))
         );
         SKULL_GIANT_SWORD = registerItem("skull_giant_sword",
-                () -> new GiantSwordItem(new Item.Properties().durability(AsgardShieldToolMaterials.SKULL_TOOLMATERIAL.getUses())
+                () -> new GiantSwordItem(AsgardShieldToolMaterials.SKULL_TOOLMATERIAL, new Item.Properties().durability(AsgardShieldToolMaterials.SKULL_TOOLMATERIAL.getUses())
+                        .attributes(SwordItem.createAttributes(AsgardShieldToolMaterials.SKULL_TOOLMATERIAL, 3, -2.4F))
                         .arch$tab(CreativeModeTabs.COMBAT))
         );
 

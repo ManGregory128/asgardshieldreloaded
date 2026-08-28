@@ -2,9 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": "#minecraft:stone_tool_materials",
-    "*": "minecraft:skeleton_skull",
-    "/": "#c:leathers"
+    "#": {
+      "tag": "minecraft:stone_tool_materials"
+    },
+    "*": {
+      "item": "minecraft:skeleton_skull"
+    },
+    "/": {
+      "tag": "c:leathers"
+    }
   },
   "pattern": [
     "#*#",
@@ -12,6 +18,7 @@
     " # "
   ],
   "result": {
+    "count": 1,
     "id": "asr:skull_shield"
   }
 }

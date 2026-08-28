@@ -72,6 +72,14 @@
       ]
     }
   },
+  "overrides": [
+    {
+      "model": "asr:item/netherite_shield_blocking",
+      "predicate": {
+        "blocking": 1
+      }
+    }
+  ],
   "textures": {
     "layer0": "asr:item/netherite_shield"
   }

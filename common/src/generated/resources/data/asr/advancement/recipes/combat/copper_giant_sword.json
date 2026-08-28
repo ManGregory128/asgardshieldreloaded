@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "#minecraft:copper_tool_materials"
+            "items": "minecraft:copper_ingot"
           }
         ]
       },

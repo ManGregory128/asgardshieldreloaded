@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": "#c:gems/quartz",
-    "/": "#c:rods/blaze"
+    "#": {
+      "tag": "c:gems/quartz"
+    },
+    "/": {
+      "tag": "c:rods/blaze"
+    }
   },
   "pattern": [
     " ##",
@@ -11,6 +15,7 @@
     "/# "
   ],
   "result": {
+    "count": 1,
     "id": "asr:netherquartz_giant_sword"
   }
 }

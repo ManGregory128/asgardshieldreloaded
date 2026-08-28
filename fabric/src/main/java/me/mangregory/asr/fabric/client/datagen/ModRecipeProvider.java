@@ -28,8 +28,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "rods/blaze"));
     private static final TagKey<Item> C_LEATHERS =
             TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "leathers"));
-    private static final TagKey<Item> C_STONES =
-            TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "stone"));
 
     public ModRecipeProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
@@ -42,7 +40,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         giantSwordCommonTag(recipeOutput, AsgardShieldItems.DIAMOND_GIANT_SWORD.get(), Items.DIAMOND, C_RODS_WOODEN, Items.DIAMOND);
         giantSwordCommonTag(recipeOutput, AsgardShieldItems.IRON_GIANT_SWORD.get(), Items.IRON_INGOT, C_RODS_WOODEN, Items.IRON_INGOT);
         giantSwordCommonTag(recipeOutput, AsgardShieldItems.GOLDEN_GIANT_SWORD.get(), Items.GOLD_INGOT, C_RODS_WOODEN, Items.GOLD_INGOT);
-        giantSwordCommonTag(recipeOutput, AsgardShieldItems.STONE_GIANT_SWORD.get(), C_STONES, C_RODS_WOODEN, C_STONES);
+        giantSwordCommonTag(recipeOutput, AsgardShieldItems.STONE_GIANT_SWORD.get(), ItemTags.STONE_TOOL_MATERIALS, C_RODS_WOODEN, ItemTags.STONE_TOOL_MATERIALS);
         giantSwordCommonTag(recipeOutput, AsgardShieldItems.NETHERQUARTZ_GIANT_SWORD.get(), C_GEMS_QUARTZ, C_RODS_BLAZE, C_GEMS_QUARTZ);
         giantSwordCommonTag(recipeOutput, AsgardShieldItems.COPPER_GIANT_SWORD.get(), Items.COPPER_INGOT, C_RODS_WOODEN,  Items.COPPER_INGOT);
         giantSwordEnder(recipeOutput, AsgardShieldItems.ENDER_GIANT_SWORD.get());
@@ -51,7 +49,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
         asgardShieldCommonTag(recipeOutput, AsgardShieldItems.DIAMOND_SHIELD.get(), Items.DIAMOND, Items.DIAMOND);
         asgardShieldCommonTag(recipeOutput, AsgardShieldItems.IRON_SHIELD.get(), Items.IRON_INGOT, Items.IRON_INGOT);
-        asgardShieldCommonTag(recipeOutput, AsgardShieldItems.STONE_SHIELD.get(), C_STONES, C_STONES);
+        asgardShieldCommonTag(recipeOutput, AsgardShieldItems.STONE_SHIELD.get(), ItemTags.STONE_TOOL_MATERIALS, ItemTags.STONE_TOOL_MATERIALS);
         asgardShieldCommonTag(recipeOutput, AsgardShieldItems.COPPER_SHIELD.get(), Items.COPPER_INGOT, Items.COPPER_INGOT);
         asgardShieldCommonTag(recipeOutput, AsgardShieldItems.WOODEN_SHIELD.get(), ItemTags.PLANKS, ItemTags.PLANKS);
         asgardShieldCommonTag(recipeOutput, AsgardShieldItems.NETHERQUARTZ_SHIELD.get(), C_GEMS_QUARTZ, C_GEMS_QUARTZ);
@@ -209,7 +207,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .pattern("#*#")
                 .pattern("#/#")
                 .pattern(" # ")
-                .define('#', C_STONES)
+                .define('#', ItemTags.STONE_TOOL_MATERIALS)
                 .define('*', Items.SKELETON_SKULL)
                 .define('/', C_LEATHERS)
                 .unlockedBy("has_skull", hasW(Items.SKELETON_SKULL))

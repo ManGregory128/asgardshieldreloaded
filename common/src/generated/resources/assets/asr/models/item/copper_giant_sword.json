@@ -1,5 +1,13 @@
 {
   "parent": "minecraft:item/handheld",
+  "overrides": [
+    {
+      "model": "asr:item/copper_giant_sword_blocking",
+      "predicate": {
+        "blocking": 1
+      }
+    }
+  ],
   "textures": {
     "layer0": "asr:item/copper_giant_sword"
   }

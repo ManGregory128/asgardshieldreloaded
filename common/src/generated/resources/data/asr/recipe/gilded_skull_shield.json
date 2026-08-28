@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": "#minecraft:gold_tool_materials",
-    "/": "asr:skull_shield"
+    "#": {
+      "item": "minecraft:gold_ingot"
+    },
+    "/": {
+      "item": "asr:skull_shield"
+    }
   },
   "pattern": [
     "###",
@@ -11,6 +15,7 @@
     " # "
   ],
   "result": {
+    "count": 1,
     "id": "asr:gilded_skull_shield"
   }
 }

@@ -13,9 +13,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,12 +23,12 @@ import java.util.Map;
 
 import static me.mangregory.asr.util.handlers.EventHandler.playSound;
 
-public class GiantSwordItem extends Item {
+public class GiantSwordItem extends SwordItem {
     private long maxBlockDuration;
     private static final Map<String, Integer> cooldownMap = new HashMap<>();
 
-    public GiantSwordItem(Properties properties) {
-        super(properties);
+    public GiantSwordItem(Tier tier, Properties properties) {
+        super(tier, properties);
         updateMaxBlockDuration();
     }
 
@@ -42,10 +40,15 @@ public class GiantSwordItem extends Item {
             }
         }
         updateMaxBlockDuration();
-        super.use(level, player, hand);
         if (ModConfig.ENABLE_GIANT_SWORD_EQUIP_SOUND)
             playSound(player, SoundEvents.IRON_GOLEM_ATTACK, 0.8F);
+        player.startUsingItem(hand);
         return InteractionResultHolder.consume(player.getItemInHand(hand));
+    }
+
+    @Override
+    public @NotNull UseAnim getUseAnimation(ItemStack stack) {
+        return UseAnim.BLOCK;
     }
 
     @Override

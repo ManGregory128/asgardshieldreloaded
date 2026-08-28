@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": "#minecraft:copper_tool_materials",
-    "/": "#c:leathers"
+    "#": {
+      "item": "minecraft:copper_ingot"
+    },
+    "/": {
+      "tag": "c:leathers"
+    }
   },
   "pattern": [
     "###",
@@ -11,6 +15,7 @@
     " # "
   ],
   "result": {
+    "count": 1,
     "id": "asr:copper_shield"
   }
 }
