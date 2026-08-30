@@ -1,6 +1,7 @@
 package me.mangregory.asr.items.init;
 
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
@@ -43,7 +44,7 @@ public class AsgardShieldToolMaterials {
             2.0f,
             5,
             BlockTags.INCORRECT_FOR_STONE_TOOL,
-            Items.COBBLESTONE
+            Ingredient.of(ItemTags.STONE_TOOL_MATERIALS)
     );
 
     public static final Tier ALTWOOD = createTier(
@@ -52,7 +53,7 @@ public class AsgardShieldToolMaterials {
             1.0f,
             7,
             BlockTags.INCORRECT_FOR_WOODEN_TOOL,
-            Items.OAK_PLANKS
+            Ingredient.of(ItemTags.PLANKS)
     );
 
     public static final Tier ENDTOOLMATERIAL = createTier(
@@ -108,6 +109,17 @@ public class AsgardShieldToolMaterials {
             TagKey<Block> incorrectBlocks,
             ItemLike repairIngredient
     ) {
+        return createTier(uses, speed, attackDamage, enchantmentValue, incorrectBlocks, Ingredient.of(repairIngredient));
+    }
+
+    private static Tier createTier(
+            int uses,
+            float speed,
+            float attackDamage,
+            int enchantmentValue,
+            TagKey<Block> incorrectBlocks,
+            Ingredient repairIngredient
+    ) {
         return new Tier() {
             @Override
             public int getUses() {
@@ -136,7 +148,7 @@ public class AsgardShieldToolMaterials {
 
             @Override
             public @NotNull Ingredient getRepairIngredient() {
-                return Ingredient.of(repairIngredient);
+                return repairIngredient;
             }
         };
     }

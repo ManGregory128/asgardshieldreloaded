@@ -76,6 +76,7 @@ public class AsgardShieldItems {
         );
         NETHERITE_GIANT_SWORD = registerItem("netherite_giant_sword",
                 () -> new GiantSwordItem(AsgardShieldToolMaterials.ALTNETHERITE, new Item.Properties().durability(AsgardShieldToolMaterials.ALTNETHERITE.getUses()).fireResistant()
+                        .fireResistant()
                         .attributes(SwordItem.createAttributes(AsgardShieldToolMaterials.ALTNETHERITE, 3, -2.4F))
                         .arch$tab(CreativeModeTabs.COMBAT))
         );

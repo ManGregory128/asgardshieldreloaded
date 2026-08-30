@@ -35,6 +35,8 @@ public class ItemTagsProvider extends FabricTagProvider.ItemTagProvider {
         add(ItemTags.SWORDS, AsgardShieldItems.NETHERQUARTZ_GIANT_SWORD.get());
         add(ItemTags.SWORDS, AsgardShieldItems.ENDER_GIANT_SWORD.get());
         add(ItemTags.SWORDS, AsgardShieldItems.SKULL_GIANT_SWORD.get());
+        add(ItemTags.SWORDS, AsgardShieldItems.NETHERITE_GIANT_SWORD.get());
+        add(ItemTags.SWORDS, AsgardShieldItems.COPPER_GIANT_SWORD.get());
 
         add(ENCHANTABLE_DURABILITY, AsgardShieldItems.ASGARD_SHIELDS.stream()
                 .map(supplier -> supplier.get())

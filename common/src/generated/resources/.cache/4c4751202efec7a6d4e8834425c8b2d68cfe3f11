@@ -1,8 +1,8 @@
-// 1.21.1	2026-08-28T23:38:57.2169898	Asgard Shield: Reloaded/Model Definitions
+// 1.21.1	2026-08-30T21:14:22.108382	Asgard Shield: Reloaded/Model Definitions
 f1b7ba1f03545000ed61ff3cbcf01e96b78b5edb assets\asr\models\item\copper_giant_sword_blocking.json
 a0819836c22c5848228a7d5a1bc4fa508ddddc85 assets\asr\models\item\stone_giant_sword.json
-7365d9a49675ea01c79f2f581a3cd8baa76a1814 assets\asr\models\item\wooden_shield_blocking.json
 06fdf1f4f67eb32573b8276e7592f2de23cf1d24 assets\asr\models\item\diamond_shield_blocking.json
+7365d9a49675ea01c79f2f581a3cd8baa76a1814 assets\asr\models\item\wooden_shield_blocking.json
 29fade39064510f970fad5fe2e23d4586c0c5979 assets\asr\models\item\gilded_stone_shield_blocking.json
 0b40d6aa5c106a37cc839ff3db1e596876b22761 assets\asr\models\item\gilded_wooden_shield_blocking.json
 fbf8e40d2ae42780bd8af0224f5e62f734987d71 assets\asr\models\item\skull_shield_blocking.json
