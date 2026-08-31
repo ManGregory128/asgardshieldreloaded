@@ -12,6 +12,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class ItemTagsProvider extends FabricTagProvider.ItemTagProvider {
@@ -39,7 +40,7 @@ public class ItemTagsProvider extends FabricTagProvider.ItemTagProvider {
         add(ItemTags.SWORDS, AsgardShieldItems.COPPER_GIANT_SWORD.get());
 
         add(ENCHANTABLE_DURABILITY, AsgardShieldItems.ASGARD_SHIELDS.stream()
-                .map(supplier -> supplier.get())
+                .map(Supplier::get)
                 .toArray(Item[]::new));
     }
 

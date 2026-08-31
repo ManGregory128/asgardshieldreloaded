@@ -2,6 +2,7 @@ package me.mangregory.asr.neoforge.client;
 
 import me.mangregory.asr.AsgardShieldReloaded;
 import me.mangregory.asr.items.init.AsgardShieldItems;
+import me.mangregory.asr.util.handlers.BlockHudRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -30,6 +31,9 @@ public final class AsgardShieldReloadedNeoForgeClient {
                                 entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F
                 );
             }
+            
+            // Register HUD renderer for block time display
+            BlockHudRenderer.register();
         });
     }
 }

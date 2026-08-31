@@ -1,6 +1,7 @@
 package me.mangregory.asr.fabric.client;
 
 import me.mangregory.asr.items.init.AsgardShieldItems;
+import me.mangregory.asr.util.handlers.BlockHudRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -24,5 +25,8 @@ public final class AsgardShieldReloadedFabricClient implements ClientModInitiali
                             entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F
             );
         }
+        
+        // Register HUD renderer for block time display
+        BlockHudRenderer.register();
     }
 }
