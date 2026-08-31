@@ -75,13 +75,15 @@ public class EventHandler {
         // Register living hurt event (for blocking damage)
         EntityEvent.LIVING_HURT.register((entity, damageSource, amount) -> {
             if (entity instanceof Player player && !entity.level().isClientSide()
-                    && player.isBlocking() && !damageSource.is(DamageTypeTags.BYPASSES_SHIELD)) {
+                    && !damageSource.is(DamageTypeTags.BYPASSES_SHIELD)) {
                 InteractionHand hand = player.getUsedItemHand();
                 Item item = entity.getItemInHand(hand).getItem();
-                if (item instanceof GiantSwordItem)
-                    return GiantSwordHandler.handleSwordFunctionality(player, item, damageSource);
-                else if (item instanceof AsgardShieldItem)
-                    return AsgardShieldHandler.handleShieldFunctionality(player, item, hand, damageSource);
+                if (player.isUsingItem()) {
+                    if (item instanceof GiantSwordItem)
+                        return GiantSwordHandler.handleSwordFunctionality(player, item, damageSource);
+                    else if (item instanceof AsgardShieldItem)
+                        return AsgardShieldHandler.handleShieldFunctionality(player, item, hand, damageSource);
+                }
             }
             return EventResult.pass();
         });

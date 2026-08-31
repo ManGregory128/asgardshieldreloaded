@@ -2,7 +2,6 @@ package me.mangregory.asr.util.handlers.items;
 
 import dev.architectury.event.EventResult;
 import me.mangregory.asr.config.ModConfig;
-import me.mangregory.asr.items.init.AsgardShieldItems;
 import me.mangregory.asr.util.handlers.EventHandler;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -24,9 +23,7 @@ public class GiantSwordHandler {
 
         ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(item);
         
-        if (itemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "wooden_giant_sword"))) {
-            // No sound for wooden
-        } else if (itemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "stone_giant_sword"))) {
+        if (itemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "stone_giant_sword"))) {
             playSound(player, SoundEvents.STONE_BREAK, 0.8F);
         } else if (itemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "iron_giant_sword")) || 
                    itemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "golden_giant_sword"))) {
@@ -48,6 +45,7 @@ public class GiantSwordHandler {
         EventHandler.knockbackEnemy(player, enemy, projectile, knockback);
         ItemStack stack = player.getItemInHand(player.getUsedItemHand());
         stack.hurtAndBreak((int) damageAccumulator, player, player.getEquipmentSlotForItem(stack));
-        return EventResult.pass();
+        playSound(player, SoundEvents.SHIELD_BLOCK, 0.8F);
+        return EventResult.interruptFalse();
     }
 }
