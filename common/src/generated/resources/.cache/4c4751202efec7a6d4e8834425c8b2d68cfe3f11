@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-30T21:14:22.108382	Asgard Shield: Reloaded/Model Definitions
+// 1.21.1	2026-09-01T23:16:43.8088599	Asgard Shield: Reloaded/Model Definitions
 f1b7ba1f03545000ed61ff3cbcf01e96b78b5edb assets\asr\models\item\copper_giant_sword_blocking.json
 a0819836c22c5848228a7d5a1bc4fa508ddddc85 assets\asr\models\item\stone_giant_sword.json
 06fdf1f4f67eb32573b8276e7592f2de23cf1d24 assets\asr\models\item\diamond_shield_blocking.json
@@ -41,8 +41,8 @@ a535e7779721d945a7de8564379dcdfa8acf237c assets\asr\models\item\gilded_stone_shi
 d6cfd41ef7e7f5c9ecfdafc098162dd23c8f9ade assets\asr\models\item\gilded_diamond_shield_blocking.json
 2b7a88e4af98d3a40d8a589d0f09170907b94518 assets\asr\models\item\iron_shield.json
 67f78093c276e5c1b3994075cf474891939419e3 assets\asr\models\item\ender_shield_blocking.json
-45db8c2218b63cbda7201987f7eb6fab96bd36ae assets\asr\models\item\skull_giant_sword_blocking.json
 a9c2b02bac389ddbc7f9c1b9eb6b6b36201d34f4 assets\asr\models\item\diamond_giant_sword.json
+45db8c2218b63cbda7201987f7eb6fab96bd36ae assets\asr\models\item\skull_giant_sword_blocking.json
 dc10f85e8311099bc42f10b9b533e0fb9eb1962c assets\asr\models\item\gilded_copper_shield_blocking.json
 d1d2ee9f679a37fce7d7f09f2dd1c0ac2f3a7d26 assets\asr\models\item\iron_giant_sword_blocking.json
 1542d8974bc66868f1ba894deb8b9fc990716486 assets\asr\models\item\netherite_shield_blocking.json

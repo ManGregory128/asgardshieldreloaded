@@ -13,6 +13,7 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -46,7 +47,7 @@ public class EventHandler {
             Item usedItem = usedStack.getItem();
             if (itemMainHand instanceof GiantSwordItem && itemOffHand instanceof ShieldItem) {
                 if (hand == InteractionHand.MAIN_HAND
-                        && !player.getCooldowns().isOnCooldown(usedItem)) {
+                        && !player.getCooldowns().isOnCooldown(itemOffHand)) {
                     player.stopUsingItem();
                     ((GiantSwordItem) itemMainHand).resetCooldown(player, player.getItemInHand(InteractionHand.MAIN_HAND));
                     return CompoundEventResult.interruptFalse(usedStack);
@@ -97,9 +98,11 @@ public class EventHandler {
                 enemy.getX() + 4,
                 enemy.getY() + 4,
                 enemy.getZ() + 4));
-        if (entities.size() > 1) {
-            ((LivingEntity) enemy).travel(entities.get(1).getPosition(0));
-            ((LivingEntity) enemy).doHurtTarget(enemy);
+        // remove the enemy itself and any ServerPlayer entities from the list
+        entities.removeIf(e -> e == enemy || e instanceof ServerPlayer);
+        if (!entities.isEmpty()) {
+            ((LivingEntity) enemy).travel(entities.getFirst().getPosition(0));
+            ((LivingEntity) enemy).doHurtTarget(entities.getFirst());
         } else enemy.hurt(enemy.damageSources().magic(), 10000.0F);
     }
 
