@@ -26,7 +26,9 @@ import static me.mangregory.asr.util.handlers.EventHandler.playSound;
 public class AsgardShieldItem extends ShieldItem {
 
     private long maxBlockDuration;
-    private static final Map<String, Integer> cooldownMap = new HashMap<>();
+    private static final Map<String, Integer> BLOCK_TICKS = new HashMap<>();
+    private static final Map<String, Integer> COOLDOWN_REMAINING = new HashMap<>();
+    private static final Map<String, Integer> COOLDOWN_TOTAL = new HashMap<>();
 
     public AsgardShieldItem(Properties properties) {
         super(properties);
@@ -35,66 +37,103 @@ public class AsgardShieldItem extends ShieldItem {
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+        if (isCoolingDown(player, stack)) {
+            return InteractionResultHolder.fail(stack);
+        }
+
         updateMaxBlockDuration();
         super.use(level, player, hand);
         if (ModConfig.ENABLE_ASGARD_SHIELD_EQUIP_SOUND)
             playSound(player, SoundEvents.IRON_GOLEM_ATTACK, 0.8F);
-        return InteractionResultHolder.consume(player.getItemInHand(hand));
+        return InteractionResultHolder.consume(stack);
     }
 
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity) {
-        return 72000; // Maximum possible use duration
+        return 72000;
     }
 
     @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeUsed) {
         if (entity instanceof Player player && !level.isClientSide()) {
-            String key = getCooldownKey(player, stack);
-            player.getCooldowns().addCooldown(stack.getItem(), getCooldown(key) / 2);
-            resetCooldown(key);
+            startStackCooldown(player, stack);
         }
     }
 
     @Override
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int remainingUseDuration) {
         if (!level.isClientSide() && entity instanceof Player player) {
-            String key = getCooldownKey(player, stack);
-            incrementCooldown(key, 1);
+            String key = getStackKey(player, stack);
+            int blockTicks = getCurrentBlockingTicks(player, stack) + 1;
+            BLOCK_TICKS.put(key, blockTicks);
 
-            if (getCooldown(key) >= this.maxBlockDuration) {
+            if (blockTicks >= this.maxBlockDuration) {
                 entity.stopUsingItem();
-                player.getCooldowns().addCooldown(stack.getItem(), getCooldown(key) / 2);
-                resetCooldown(key);
+                startStackCooldown(player, stack);
             }
         }
     }
 
-    private String getCooldownKey(Player player, ItemStack stack) {
-        int slot = player.getInventory().findSlotMatchingItem(stack);
-        return player.getUUID() + ":" + slot;
+    public static void tickStackCooldown(Player player, ItemStack stack) {
+        if (stack.isEmpty()) {
+            return;
+        }
+
+        String key = getStackKey(player, stack);
+        int remaining = COOLDOWN_REMAINING.getOrDefault(key, 0);
+        if (remaining <= 0) {
+            return;
+        }
+
+        int next = remaining - 1;
+        if (next > 0) {
+            COOLDOWN_REMAINING.put(key, next);
+        } else {
+            COOLDOWN_REMAINING.remove(key);
+            COOLDOWN_TOTAL.remove(key);
+            BLOCK_TICKS.remove(key);
+        }
     }
 
-    private int getCooldown(String key) {
-        return cooldownMap.getOrDefault(key, 0);
+    public static int getCurrentBlockingTicks(Player player, ItemStack stack) {
+        return BLOCK_TICKS.getOrDefault(getStackKey(player, stack), 0);
     }
 
-    private void resetCooldown(String key) {
-        cooldownMap.remove(key);
+    public static int getCooldownRemaining(Player player, ItemStack stack) {
+        return COOLDOWN_REMAINING.getOrDefault(getStackKey(player, stack), 0);
     }
 
-    public int getCooldown(Player player, ItemStack stack) {
-        String key = getCooldownKey(player, stack);
-        return getCooldown(key);
+    public static boolean isCoolingDown(Player player, ItemStack stack) {
+        return getCooldownRemaining(player, stack) > 0;
     }
 
-    public void resetCooldown(Player player, ItemStack stack) {
-        String key = getCooldownKey(player, stack);
-        resetCooldown(key);
+    public static int getCooldownTotal(Player player, ItemStack stack) {
+        return COOLDOWN_TOTAL.getOrDefault(getStackKey(player, stack), 0);
     }
 
-    private void incrementCooldown(String key, int value) {
-        cooldownMap.put(key, getCooldown(key) + value);
+    private void startStackCooldown(Player player, ItemStack stack) {
+        String key = getStackKey(player, stack);
+        int used = BLOCK_TICKS.getOrDefault(key, 0);
+        int cooldownTicks = Math.max(1, used / 2);
+        COOLDOWN_REMAINING.put(key, cooldownTicks);
+        COOLDOWN_TOTAL.put(key, cooldownTicks);
+        BLOCK_TICKS.remove(key);
+    }
+
+    private static String getStackKey(Player player, ItemStack stack) {
+        if (stack == player.getMainHandItem()) {
+            return player.getUUID() + ":main";
+        }
+        if (stack == player.getOffhandItem()) {
+            return player.getUUID() + ":off";
+        }
+        for (int i = 0; i < player.getInventory().items.size(); i++) {
+            if (player.getInventory().items.get(i) == stack) {
+                return player.getUUID() + ":inv:" + i;
+            }
+        }
+        return player.getUUID() + ":" + System.identityHashCode(stack);
     }
 
     private void updateMaxBlockDuration() {
