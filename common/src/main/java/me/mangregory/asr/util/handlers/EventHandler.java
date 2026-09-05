@@ -53,8 +53,7 @@ public class EventHandler {
                     return CompoundEventResult.interruptFalse(usedStack);
                 }
             }
-            Item usedItemInHand = player.getItemInHand(player.getUsedItemHand()).getItem();
-            ResourceLocation usedItemId = BuiltInRegistries.ITEM.getKey(usedItemInHand);
+            ResourceLocation usedItemId = BuiltInRegistries.ITEM.getKey(usedItem);
             
             if (level instanceof ServerLevel serverLevel && !player.getCooldowns().isOnCooldown(usedItem) && (
                     usedItemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "ender_giant_sword")) ||

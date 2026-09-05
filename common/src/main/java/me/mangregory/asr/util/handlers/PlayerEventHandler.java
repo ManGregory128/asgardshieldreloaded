@@ -20,7 +20,7 @@ public class PlayerEventHandler {
         // Register attack entity event
         PlayerEvent.ATTACK_ENTITY.register((player, level, entity, hand, hitResult) -> {
             if (level instanceof ServerLevel serverLevel) {
-                ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(player.getItemInHand(player.swingingArm).getItem());
+                ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(player.getItemInHand(hand).getItem());
                 if (itemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "ender_giant_sword"))) {
                     EventHandler.particleFx(serverLevel, player, ParticleTypes.PORTAL);
                 }
