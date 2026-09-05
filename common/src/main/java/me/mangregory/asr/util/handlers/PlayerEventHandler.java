@@ -35,26 +35,56 @@ public class PlayerEventHandler {
             }
         }));
 
+        // Register player tick event (for cooldown management)
         TickEvent.PLAYER_POST.register((player) -> {
             if (!player.level().isClientSide()) {
-                for (ItemStack stack : player.getInventory().items) {
-                    tickCooldownStack(player, stack);
+                if (!player.isUsingItem()) {
+                    player.getInventory().items.iterator().forEachRemaining(stack -> {
+                        Item item = stack.getItem();
+                        if (item instanceof GiantSwordItem && ((GiantSwordItem) item).getCooldown(player, stack) > 0) {
+                            resetSwordCooldown(player, stack, (GiantSwordItem) item);
+                        } else if (item instanceof AsgardShieldItem && ((AsgardShieldItem) item).getCooldown(player, stack) > 0) {
+                            resetShieldCooldown(player, stack, (AsgardShieldItem) item);
+                        }
+                    });
                 }
-                tickCooldownStack(player, player.getOffhandItem());
+                else if (player.isUsingItem()) {
+                    ItemStack usedStack = player.getItemInHand(player.getUsedItemHand());
+                    Item usedItem = usedStack.getItem();
+                    player.getInventory().items.iterator().forEachRemaining(stack -> {
+                        Item item = stack.getItem();
+                        switch (usedItem) {
+                            case GiantSwordItem giantSwordItem when item instanceof GiantSwordItem && !player.getCooldowns().isOnCooldown(item) -> {
+                                if (giantSwordItem.getCooldown(player, usedStack) != ((GiantSwordItem) item).getCooldown(player, stack))
+                                    resetSwordCooldown(player, stack, (GiantSwordItem) item);
+                            }
+                            case AsgardShieldItem asgardShieldItem when item instanceof AsgardShieldItem && !player.getCooldowns().isOnCooldown(item) -> {
+                                if (asgardShieldItem.getCooldown(player, usedStack) != ((AsgardShieldItem) item).getCooldown(player, stack))
+                                    resetShieldCooldown(player, stack, (AsgardShieldItem) item);
+                            }
+                            case GiantSwordItem ignored when item instanceof AsgardShieldItem && !player.getCooldowns().isOnCooldown(item) ->
+                                    resetShieldCooldown(player, stack, (AsgardShieldItem) item);
+                            case AsgardShieldItem ignored when item instanceof GiantSwordItem && !player.getCooldowns().isOnCooldown(item) ->
+                                    resetSwordCooldown(player, stack, (GiantSwordItem) item);
+                            default -> {
+                                if (item instanceof GiantSwordItem && ((GiantSwordItem) item).getCooldown(player, stack) > 0)
+                                    resetSwordCooldown(player, stack, (GiantSwordItem) item);
+                                else if (item instanceof AsgardShieldItem && ((AsgardShieldItem) item).getCooldown(player, stack) > 0)
+                                    resetShieldCooldown(player, stack, (AsgardShieldItem) item);
+                            }
+                        }
+                    });
+                }
             }
         });
     }
+    private static void resetSwordCooldown(Player player, ItemStack stack, GiantSwordItem sword) {
+        player.getCooldowns().addCooldown(sword, sword.getCooldown(player, stack) / 2);
+        sword.resetCooldown(player, stack);
+    }
 
-    private static void tickCooldownStack(Player player, ItemStack stack) {
-        if (stack.isEmpty()) {
-            return;
-        }
-
-        Item item = stack.getItem();
-        if (item instanceof GiantSwordItem) {
-            GiantSwordItem.tickStackCooldown(player, stack);
-        } else if (item instanceof AsgardShieldItem) {
-            AsgardShieldItem.tickStackCooldown(player, stack);
-        }
+    private static void resetShieldCooldown(Player player, ItemStack stack, AsgardShieldItem shield) {
+        player.getCooldowns().addCooldown(shield, shield.getCooldown(player, stack) / 2);
+        shield.resetCooldown(player, stack);
     }
 }

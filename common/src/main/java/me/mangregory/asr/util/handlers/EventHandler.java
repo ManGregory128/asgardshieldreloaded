@@ -40,17 +40,16 @@ public class EventHandler {
             Level level = player.level();
 
             // Handle Giant Sword + Shield combo blocking
-            ItemStack mainHandStack = player.getItemInHand(InteractionHand.MAIN_HAND);
-            ItemStack offHandStack = player.getItemInHand(InteractionHand.OFF_HAND);
-            Item itemMainHand = mainHandStack.getItem();
-            Item itemOffHand = offHandStack.getItem();
+            Item itemMainHand = player.getItemInHand(InteractionHand.MAIN_HAND).getItem();
+            Item itemOffHand = player.getItemInHand(InteractionHand.OFF_HAND).getItem();
 
             ItemStack usedStack = player.getItemInHand(hand);
             Item usedItem = usedStack.getItem();
             if (itemMainHand instanceof GiantSwordItem && itemOffHand instanceof ShieldItem) {
-                if (hand == InteractionHand.MAIN_HAND && !AsgardShieldItem.isCoolingDown(player, offHandStack)) {
+                if (hand == InteractionHand.MAIN_HAND
+                        && !player.getCooldowns().isOnCooldown(itemOffHand)) {
                     player.stopUsingItem();
-                    ((GiantSwordItem) itemMainHand).resetCooldown(player, mainHandStack);
+                    ((GiantSwordItem) itemMainHand).resetCooldown(player, player.getItemInHand(InteractionHand.MAIN_HAND));
                     return CompoundEventResult.interruptFalse(usedStack);
                 }
             }
