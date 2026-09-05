@@ -165,8 +165,9 @@ public class ASRJeiPlugin implements IModPlugin {
     private void addRepairRecipe(List<IJeiAnvilRecipe> recipes, 
                                    RegistrySupplier<Item> itemSupplier,
                                    Ingredient repairMaterial) {
-        ItemStack damaged = createDamagedItem(itemSupplier);
-        ItemStack repaired = new ItemStack(itemSupplier.get());
+        ItemStack damaged = new ItemStack(itemSupplier.get());
+        damaged.setDamageValue(damaged.getMaxDamage() - 1);
+        ItemStack repaired = createMaterialRepairResult(itemSupplier);
         
         ResourceLocation uid = ResourceLocation.fromNamespaceAndPath(
                 "asr", 
@@ -185,8 +186,9 @@ public class ASRJeiPlugin implements IModPlugin {
     private void addShieldRepairRecipe(List<IJeiAnvilRecipe> recipes,
                                          RegistrySupplier<Item> itemSupplier,
                                          Ingredient repairMaterial) {
-        ItemStack damaged = createDamagedItem(itemSupplier);
-        ItemStack repaired = new ItemStack(itemSupplier.get());
+        ItemStack damaged = new ItemStack(itemSupplier.get());
+        damaged.setDamageValue(damaged.getMaxDamage() - 1);
+        ItemStack repaired = createMaterialRepairResult(itemSupplier);
         
         ResourceLocation uid = ResourceLocation.fromNamespaceAndPath(
                 "asr", 
@@ -198,7 +200,7 @@ public class ASRJeiPlugin implements IModPlugin {
 
     private void addSameItemRepairRecipe(List<IJeiAnvilRecipe> recipes, RegistrySupplier<Item> itemSupplier) {
         ItemStack damaged = createDamagedItem(itemSupplier);
-        ItemStack repaired = new ItemStack(itemSupplier.get());
+        ItemStack repaired = createSameItemRepairResult(itemSupplier);
         
         ResourceLocation uid = ResourceLocation.fromNamespaceAndPath(
                 "asr", 
@@ -215,5 +217,21 @@ public class ASRJeiPlugin implements IModPlugin {
         // This is more representative than 1 durability which was too extreme
         damaged.setDamageValue((int) (damaged.getMaxDamage() * 0.75f));
         return damaged;
+    }
+
+    private static ItemStack createMaterialRepairResult(RegistrySupplier<Item> itemSupplier) {
+        ItemStack repaired = new ItemStack(itemSupplier.get());
+        int maxDamage = repaired.getMaxDamage();
+        repaired.setDamageValue(maxDamage - maxDamage / 4);
+        return repaired;
+    }
+
+    private static ItemStack createSameItemRepairResult(RegistrySupplier<Item> itemSupplier) {
+        ItemStack repaired = new ItemStack(itemSupplier.get());
+        int maxDamage = repaired.getMaxDamage();
+        int durability = maxDamage - (int) (maxDamage * 0.75f);
+        int combinedDurability = Math.min(maxDamage, durability + durability + maxDamage * 5 / 100);
+        repaired.setDamageValue(maxDamage - combinedDurability);
+        return repaired;
     }
 }

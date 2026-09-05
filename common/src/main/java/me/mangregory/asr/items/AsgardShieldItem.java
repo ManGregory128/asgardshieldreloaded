@@ -14,6 +14,8 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -44,6 +46,26 @@ public class AsgardShieldItem extends ShieldItem {
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity) {
         return 72000; // Maximum possible use duration
+    }
+
+    @Override
+    public boolean isValidRepairItem(ItemStack stack, ItemStack repairCandidate) {
+        if (super.isValidRepairItem(stack, repairCandidate))
+            return true;
+
+        String itemId = BuiltInRegistries.ITEM.getKey(this).getPath();
+        return switch (itemId) {
+            case "diamond_shield", "gilded_diamond_shield" -> repairCandidate.is(Items.DIAMOND);
+            case "ender_shield", "gilded_ender_shield" -> repairCandidate.is(Items.OBSIDIAN);
+            case "netherquartz_shield", "gilded_netherquartz_shield" -> repairCandidate.is(Items.QUARTZ);
+            case "skull_shield", "gilded_skull_shield" -> repairCandidate.is(Items.BONE);
+            case "iron_shield", "gilded_iron_shield" -> repairCandidate.is(Items.IRON_INGOT);
+            case "stone_shield", "gilded_stone_shield" -> repairCandidate.is(ItemTags.STONE_TOOL_MATERIALS);
+            case "copper_shield", "gilded_copper_shield" -> repairCandidate.is(Items.COPPER_INGOT);
+            case "netherite_shield", "gilded_netherite_shield" -> repairCandidate.is(Items.NETHERITE_INGOT);
+            case "wooden_shield", "gilded_wooden_shield" -> repairCandidate.is(ItemTags.PLANKS);
+            default -> false;
+        };
     }
 
     @Override
