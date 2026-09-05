@@ -4,6 +4,8 @@ import dev.architectury.event.events.client.ClientGuiEvent;
 import me.mangregory.asr.config.ModConfig;
 import me.mangregory.asr.items.AsgardShieldItem;
 import me.mangregory.asr.items.GiantSwordItem;
+import me.mangregory.asr.items.StackCooldowns;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -43,11 +45,14 @@ public class BlockHudRenderer {
         Minecraft minecraft = Minecraft.getInstance();
         Player player = minecraft.player;
         
-        if (player == null || !player.isUsingItem()) {
+        if (player == null) {
             return;
         }
 
-        ItemStack usingItem = player.getUseItem();
+        ItemStack usingItem = getDisplayedStack(player);
+        if (usingItem.isEmpty()) {
+            return;
+        }
         Item item = usingItem.getItem();
         
         // Check if player is blocking with a giant sword or asgard shield
@@ -57,14 +62,6 @@ public class BlockHudRenderer {
 
         boolean isBlockingWithGiantSword = item instanceof GiantSwordItem;
 
-        // Get cooldown from the item (increases as player blocks)
-        long cooldown;
-        if (isBlockingWithGiantSword) {
-            cooldown = ((GiantSwordItem) item).getCooldown(player, usingItem);
-        } else {
-            cooldown = ((AsgardShieldItem) item).getCooldown(player, usingItem);
-        }
-
         // Get max duration from config
         long maxDuration;
         if (isBlockingWithGiantSword) {
@@ -73,15 +70,12 @@ public class BlockHudRenderer {
             maxDuration = ModConfig.ASGARD_SHIELD_BLOCK_DURATION;
         }
 
-        // Calculate fill percentage (invert since cooldown increases)
-        // cooldown=0 at start (full bar), cooldown=maxDuration at end (empty bar)
-        float fillPercentage = 1.0f - (float) cooldown / maxDuration;
-        fillPercentage = Math.clamp(fillPercentage, 0.0f, 1.0f);
+        float fillPercentage = StackCooldowns.getFillPercentage(
+                player, usingItem, deltaTracker.getGameTimeDeltaPartialTick(false), (int) maxDuration);
 
         // Prevent flash when cooldown resets (player hit or new block starts)
-        boolean isBlocking = player.isUsingItem();
-        if (isBlocking && cooldown == 0 && wasBlockingLastTick) {
-            // Cooldown reset mid-block (e.g., player was hit) - use last percentage to avoid flash
+        boolean isBlocking = player.isUsingItem() && player.getUseItem() == usingItem;
+        if (isBlocking && fillPercentage == 1.0F && wasBlockingLastTick) {
             fillPercentage = lastFillPercentage;
         }
 
@@ -102,7 +96,7 @@ public class BlockHudRenderer {
             barY -= OVERLAP_SHIFT;
         }
 
-        // Calculate how many segments should be filled
+        // The same right-anchored segments drain while blocking and refill during cooldown.
         int filledSegments = (int) Math.ceil(fillPercentage * SEGMENT_COUNT);
         
         // Render each segment
@@ -132,6 +126,33 @@ public class BlockHudRenderer {
         wasBlockingLastTick = isBlocking;
         lastFillPercentage = fillPercentage;
     }
+
+    private static ItemStack getDisplayedStack(Player player) {
+        if (player.isUsingItem() && isBlockingItem(player.getUseItem())) {
+            return player.getUseItem();
+        }
+        ItemStack mainHand = player.getItemInHand(InteractionHand.MAIN_HAND);
+        if (isCoolingDownItem(player, mainHand)) {
+            ItemStack offHand = player.getItemInHand(InteractionHand.OFF_HAND);
+            if (isCoolingDownItem(player, offHand)
+                    && StackCooldowns.getRemainingCooldown(player, offHand)
+                    < StackCooldowns.getRemainingCooldown(player, mainHand)) {
+                return offHand;
+            }
+            return mainHand;
+        }
+        ItemStack offHand = player.getItemInHand(InteractionHand.OFF_HAND);
+        return isCoolingDownItem(player, offHand) ? offHand : ItemStack.EMPTY;
+    }
+
+    private static boolean isCoolingDownItem(Player player, ItemStack stack) {
+        return isBlockingItem(stack) && StackCooldowns.isOnCooldown(player, stack);
+    }
+
+    private static boolean isBlockingItem(ItemStack stack) {
+        return stack.getItem() instanceof GiantSwordItem || stack.getItem() instanceof AsgardShieldItem;
+    }
+
     static boolean isBlockingWithGildedShield(Item item) {
         return item.toString().contains("gilded");
     }

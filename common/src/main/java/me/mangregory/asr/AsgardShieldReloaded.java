@@ -5,6 +5,7 @@ import dev.architectury.networking.NetworkManager;
 import dev.architectury.utils.Env;
 import dev.architectury.utils.EnvExecutor;
 import me.mangregory.asr.items.init.AsgardShieldItems;
+import me.mangregory.asr.items.ModDataComponents;
 import me.mangregory.asr.network.ConfigSyncPacket;
 import me.mangregory.asr.config.ClientConfigCache;
 import me.mangregory.asr.config.ModConfig;
@@ -24,6 +25,7 @@ public final class AsgardShieldReloaded {
         LOGGER.info("Initializing Asgard Shield Reloaded");
         CONFIGURATOR.register(ModConfig.class);
 
+        ModDataComponents.init();
         AsgardShieldItems.init();
         EventHandler.registerEvents();
         LootEventHandler.registerEvents();

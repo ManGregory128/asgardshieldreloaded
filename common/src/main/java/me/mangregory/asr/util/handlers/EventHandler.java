@@ -5,6 +5,7 @@ import dev.architectury.event.EventResult;
 import dev.architectury.event.events.common.*;
 import me.mangregory.asr.items.AsgardShieldItem;
 import me.mangregory.asr.items.GiantSwordItem;
+import me.mangregory.asr.items.StackCooldowns;
 import me.mangregory.asr.util.handlers.items.AsgardShieldHandler;
 import me.mangregory.asr.util.handlers.items.GiantSwordHandler;
 import net.minecraft.core.BlockPos;
@@ -47,7 +48,7 @@ public class EventHandler {
             Item usedItem = usedStack.getItem();
             if (itemMainHand instanceof GiantSwordItem && itemOffHand instanceof ShieldItem) {
                 if (hand == InteractionHand.MAIN_HAND
-                        && !player.getCooldowns().isOnCooldown(itemOffHand)) {
+                        && !StackCooldowns.isOnCooldown(player, player.getItemInHand(InteractionHand.OFF_HAND))) {
                     player.stopUsingItem();
                     ((GiantSwordItem) itemMainHand).resetCooldown(player, player.getItemInHand(InteractionHand.MAIN_HAND));
                     return CompoundEventResult.interruptFalse(usedStack);
@@ -55,14 +56,14 @@ public class EventHandler {
             }
             ResourceLocation usedItemId = BuiltInRegistries.ITEM.getKey(usedItem);
             
-            if (level instanceof ServerLevel serverLevel && !player.getCooldowns().isOnCooldown(usedItem) && (
+            if (level instanceof ServerLevel serverLevel && !StackCooldowns.isOnCooldown(player, usedStack) && (
                     usedItemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "ender_giant_sword")) ||
                             usedItemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "ender_shield")) ||
                             usedItemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "gilded_ender_shield")))) {
                 particleFx(serverLevel, player, ParticleTypes.PORTAL);
             }
 
-            if (level instanceof ServerLevel serverLevel && !player.getCooldowns().isOnCooldown(usedItem) && (
+            if (level instanceof ServerLevel serverLevel && !StackCooldowns.isOnCooldown(player, usedStack) && (
                     usedItemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "skull_giant_sword")) ||
                             usedItemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "skull_shield")) ||
                             usedItemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "gilded_skull_shield")))) {
