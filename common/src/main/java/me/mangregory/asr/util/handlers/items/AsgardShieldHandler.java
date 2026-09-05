@@ -52,21 +52,17 @@ public class AsgardShieldHandler {
             if (source.is(DamageTypes.ARROW) && RandomUtil.chance(0.50))
                 EventHandler.collectArrow(player, (Arrow) projectile);
         } else if (itemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "stone_shield"))) {
+            if (RandomUtil.chance(0.50) && player.isOnFire())
+                player.extinguishFire();
             if (source.is(DamageTypeTags.IS_EXPLOSION))
                 damageAccumulator += 5;
-            else if ((player.isOnFire() || player.isInLava() ||
-                    (enemy != null && enemy.isOnFire() && enemy == projectile) ||
-                    (projectile != null && projectile.isOnFire())) && RandomUtil.chance(0.50))
-                damageAccumulator = 0;
             playSound(player, SoundEvents.STONE_BREAK, 0.8F);
         } else if (itemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "gilded_stone_shield"))) {
             knockback += 0.5F;
+            if (player.isOnFire())
+                player.extinguishFire();
             if (source.is(DamageTypeTags.IS_EXPLOSION))
                 damageAccumulator += 5;
-            else if (player.isOnFire() || player.isInLava() ||
-                    (enemy != null && enemy.isOnFire() && enemy == projectile) ||
-                    (projectile != null && projectile.isOnFire()))
-                damageAccumulator = 0;
             playSound(player, SoundEvents.STONE_BREAK, 0.8F);
         } else if (itemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "iron_shield"))) {
             if (player.isInWaterOrRain())
