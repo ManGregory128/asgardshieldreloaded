@@ -16,7 +16,7 @@ logoFile = "asr.png"
 [[dependencies.asr]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.1.248,)"
+versionRange = "[21.0.167,)"
 ordering = "NONE"
 side = "BOTH"
 
