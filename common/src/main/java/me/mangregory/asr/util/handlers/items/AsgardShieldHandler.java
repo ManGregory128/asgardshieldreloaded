@@ -51,22 +51,18 @@ public class AsgardShieldHandler {
                     EventHandler.collectArrow(player, (Arrow) projectile);
                 break;
             case "asr:stone_shield":
+                if (RandomUtil.chance(0.50) && player.isOnFire())
+                    player.extinguishFire();
                 if (source.is(DamageTypeTags.IS_EXPLOSION))
                     damageAccumulator += 5;
-                else if ((player.isOnFire() || player.isInLava() ||
-                        (enemy != null && enemy.isOnFire() && enemy == projectile) ||
-                        (projectile != null && projectile.isOnFire())) && RandomUtil.chance(0.50))
-                    damageAccumulator = 0;
                 playSound(player, SoundEvents.STONE_BREAK, 0.8F);
                 break;
             case "asr:gilded_stone_shield":
                 knockback += 0.5F;
+                if (player.isOnFire())
+                    player.extinguishFire();
                 if (source.is(DamageTypeTags.IS_EXPLOSION))
                     damageAccumulator += 5;
-                else if (player.isOnFire() || player.isInLava() ||
-                        (enemy != null && enemy.isOnFire() && enemy == projectile) ||
-                        (projectile != null && projectile.isOnFire()))
-                    damageAccumulator = 0;
                 playSound(player, SoundEvents.STONE_BREAK, 0.8F);
                 break;
             case "asr:iron_shield":
