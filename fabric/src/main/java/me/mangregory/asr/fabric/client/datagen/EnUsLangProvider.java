@@ -110,7 +110,7 @@ public class EnUsLangProvider extends FabricLanguageProvider {
         ));
         tooltips.put(AsgardShieldItems.GILDED_STONE_SHIELD.get(), new ShieldTooltip(
                 "Special Perk: Fire Protection",
-                "Negates durability damage from fire sources",
+                "Extinguishes player when blocking an attack while on fire",
                 "Weakness: Explosions",
                 "Stone breaks easily from strong overwhelming damage"
         ));
@@ -152,7 +152,7 @@ public class EnUsLangProvider extends FabricLanguageProvider {
         ));
         tooltips.put(AsgardShieldItems.STONE_SHIELD.get(), new ShieldTooltip(
                 "Special Perk: Fire Protection",
-                "Negates durability damage from fire sources (50 percent chance)",
+                "Extinguishes player when blocking an attack while on fire (50 percent chance)",
                 "Weakness: Explosions",
                 "Stone breaks easily from strong overwhelming damage"
         ));
