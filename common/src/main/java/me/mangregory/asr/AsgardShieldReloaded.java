@@ -8,6 +8,7 @@ import me.mangregory.asr.items.init.AsgardShieldItems;
 import me.mangregory.asr.network.ConfigSyncPacket;
 import me.mangregory.asr.config.ClientConfigCache;
 import me.mangregory.asr.config.ModConfig;
+import me.mangregory.asr.util.handlers.BlockHudRenderer;
 import me.mangregory.asr.util.handlers.EventHandler;
 import me.mangregory.asr.util.handlers.LootEventHandler;
 import me.mangregory.asr.util.handlers.PlayerEventHandler;
@@ -29,6 +30,7 @@ public final class AsgardShieldReloaded {
         LootEventHandler.registerEvents();
         PlayerEventHandler.registerEvents();
 
+        EnvExecutor.runInEnv(Env.CLIENT, () -> BlockHudRenderer::register);
         EnvExecutor.runInEnv(Env.CLIENT, () -> AsgardShieldReloaded::initNetClient);
         EnvExecutor.runInEnv(Env.SERVER, () -> AsgardShieldReloaded::initNetServer);
     }

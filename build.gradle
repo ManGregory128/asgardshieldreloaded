@@ -13,9 +13,10 @@ allprojects {
     version = rootProject.mod_version
 
     repositories {
+        mavenCentral()
         maven {
-            name = "ParchmentMC"
-            url = "https://maven.parchmentmc.org"
+            name = "NeoForged"
+            url = "https://minecraft.neoforged.net/releases"
         }
         maven {
             // location of the maven that hosts JEI files since January 2023
