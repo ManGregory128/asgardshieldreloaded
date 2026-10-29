@@ -25,7 +25,7 @@ public class PlayerEventHandler {
         // Register attack entity event
         PlayerEvent.ATTACK_ENTITY.register((player, level, entity, hand, hitResult) -> {
             if (level instanceof ServerLevel serverLevel &&
-                    player.getItemInHand(player.swingingArm).getItem().toString().equals("asr:ender_giant_sword")) {
+                    player.getItemInHand(hand).getItem().toString().equals("asr:ender_giant_sword")) {
                 EventHandler.particleFx(serverLevel, player, ParticleTypes.PORTAL);
             }
             return EventResult.pass();
@@ -75,9 +75,9 @@ public class PlayerEventHandler {
                                 if (asgardShieldItem.getCooldown(player, usedStack) != ((AsgardShieldItem) item).getCooldown(player, stack))
                                     resetShieldCooldown(player, stack, (AsgardShieldItem) item);
                             }
-                            case GiantSwordItem giantSwordItem when item instanceof AsgardShieldItem && !player.getCooldowns().isOnCooldown(stack) ->
+                            case GiantSwordItem _ when item instanceof AsgardShieldItem && !player.getCooldowns().isOnCooldown(stack) ->
                                     resetShieldCooldown(player, stack, (AsgardShieldItem) item);
-                            case AsgardShieldItem asgardShieldItem when item instanceof GiantSwordItem && !player.getCooldowns().isOnCooldown(stack) ->
+                            case AsgardShieldItem _ when item instanceof GiantSwordItem && !player.getCooldowns().isOnCooldown(stack) ->
                                     resetSwordCooldown(player, stack, (GiantSwordItem) item);
                             default -> {
                                 if (item instanceof GiantSwordItem && ((GiantSwordItem) item).getCooldown(player, stack) > 0)

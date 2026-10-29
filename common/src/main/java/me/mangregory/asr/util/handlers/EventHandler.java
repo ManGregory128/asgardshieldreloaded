@@ -9,7 +9,10 @@ import me.mangregory.asr.util.handlers.items.GiantSwordHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -49,17 +52,19 @@ public class EventHandler {
                 }
             }
             ItemStack usedStack = player.getItemInHand(hand);
+            Identifier usedItemKey = BuiltInRegistries.ITEM.getKey(usedStack.getItem());
+
             if (level instanceof ServerLevel serverLevel && !player.getCooldowns().isOnCooldown(usedStack) && (
-                    player.getItemInHand(player.getUsedItemHand()).getItem().toString().equals("asr:ender_giant_sword") ||
-                            player.getItemInHand(player.getUsedItemHand()).getItem().toString().equals("asr:ender_shield") ||
-                            player.getItemInHand(player.getUsedItemHand()).getItem().toString().equals("asr:gilded_ender_shield"))) {
+                    usedItemKey.equals(Identifier.fromNamespaceAndPath("asr", "ender_giant_sword")) ||
+                            usedItemKey.equals(Identifier.fromNamespaceAndPath("asr", "ender_shield")) ||
+                            usedItemKey.equals(Identifier.fromNamespaceAndPath("asr", "gilded_ender_shield")))) {
                 particleFx(serverLevel, player, ParticleTypes.PORTAL);
             }
 
             if (level instanceof ServerLevel serverLevel && !player.getCooldowns().isOnCooldown(usedStack) && (
-                    player.getItemInHand(player.getUsedItemHand()).getItem().toString().equals("asr:skull_giant_sword") ||
-                            player.getItemInHand(player.getUsedItemHand()).getItem().toString().equals("asr:skull_shield") ||
-                            player.getItemInHand(player.getUsedItemHand()).getItem().toString().equals("asr:gilded_skull_shield"))) {
+                    usedItemKey.equals(Identifier.fromNamespaceAndPath("asr", "skull_giant_sword")) ||
+                            usedItemKey.equals(Identifier.fromNamespaceAndPath("asr", "skull_shield")) ||
+                            usedItemKey.equals(Identifier.fromNamespaceAndPath("asr", "gilded_skull_shield")))) {
                 particleFx(serverLevel, player, ParticleTypes.CLOUD);
             }
 
@@ -89,9 +94,11 @@ public class EventHandler {
                 enemy.getX() + 4,
                 enemy.getY() + 4,
                 enemy.getZ() + 4));
-        if (entities.size() > 1) {
-            ((LivingEntity) enemy).travel(entities.get(1).getPosition(0));
-            ((LivingEntity) enemy).doHurtTarget((ServerLevel) enemy.level(), entities.get(1));
+        // remove the enemy itself and any ServerPlayer entities from the list
+        entities.removeIf(e -> e == enemy || e instanceof ServerPlayer);
+        if (!entities.isEmpty()) {
+            ((LivingEntity) enemy).travel(entities.getFirst().getPosition(0));
+            ((LivingEntity) enemy).doHurtTarget((ServerLevel) enemy.level(), entities.getFirst());
         } else enemy.hurt(enemy.damageSources().magic(), 10000.0F);
     }
 
