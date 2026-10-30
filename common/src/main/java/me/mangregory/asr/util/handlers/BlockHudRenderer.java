@@ -1,7 +1,7 @@
 package me.mangregory.asr.util.handlers;
 
 import dev.architectury.event.events.client.ClientGuiEvent;
-import me.mangregory.asr.config.ModConfig;
+import me.mangregory.asr.config.ClientConfigCache;
 import me.mangregory.asr.items.AsgardShieldItem;
 import me.mangregory.asr.items.GiantSwordItem;
 import net.minecraft.client.DeltaTracker;
@@ -66,17 +66,17 @@ public class BlockHudRenderer {
         // Get cooldown from the item (increases as player blocks)
         long cooldown;
         if (isBlockingWithGiantSword) {
-            cooldown = ((GiantSwordItem) item).getCooldown(player, usingItem);
+            cooldown = ((GiantSwordItem) item).getClientCooldown(player, usingItem);
         } else {
-            cooldown = ((AsgardShieldItem) item).getCooldown(player, usingItem);
+            cooldown = ((AsgardShieldItem) item).getClientCooldown(player, usingItem);
         }
 
         // Get max duration from config
         long maxDuration;
         if (isBlockingWithGiantSword) {
-            maxDuration = ModConfig.GIANT_SWORD_BLOCK_DURATION;
+            maxDuration = ClientConfigCache.giantSwordBlockDuration;
         } else {
-            maxDuration = ModConfig.ASGARD_SHIELD_BLOCK_DURATION;
+            maxDuration = ClientConfigCache.asgardShieldBlockDuration;
         }
 
         // Calculate fill percentage (invert since cooldown increases)
