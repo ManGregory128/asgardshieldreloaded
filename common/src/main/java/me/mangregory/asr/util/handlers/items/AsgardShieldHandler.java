@@ -11,7 +11,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
-import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.entity.monster.Enderman;
 import net.minecraft.world.entity.monster.Endermite;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.arrow.Arrow;
@@ -117,7 +117,7 @@ public class AsgardShieldHandler {
                 playSound(player, SoundEvents.NOTE_BLOCK_XYLOPHONE.value(), 0.6F);
                 break;
             case "asr:ender_shield":
-                if (enemy instanceof EnderDragon || enemy instanceof EnderMan || enemy instanceof Endermite) {
+                if (enemy instanceof EnderDragon || enemy instanceof Enderman || enemy instanceof Endermite) {
                     player.stopUsingItem();
                     return EventResult.interruptTrue();
                 }
@@ -127,7 +127,7 @@ public class AsgardShieldHandler {
                 playSound(player, SoundEvents.ENDER_DRAGON_HURT, 0.8F);
                 break;
             case "asr:gilded_ender_shield":
-                if (enemy instanceof EnderDragon || enemy instanceof EnderMan || enemy instanceof Endermite) {
+                if (enemy instanceof EnderDragon || enemy instanceof Enderman || enemy instanceof Endermite) {
                     player.stopUsingItem();
                     return EventResult.interruptTrue();
                 }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "asr:stone_giant_sword"
+        "recipes": "asr:stone_giant_sword"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

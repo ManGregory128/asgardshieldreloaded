@@ -140,7 +140,7 @@ public class EventHandler {
     public static void reflectArrow(Player player, Arrow arrow, Entity attacker) {
         arrow.setOwner(player);
         arrow.shootFromRotation(player, attacker.xRotO, attacker.yRotO, 0, 7.5F, 0.2F);
-        arrow.hurtMarked = true;
+        arrow.syncVelocity = true;
     }
 
     public static void playSound(Player player, SoundEvent sound, float volume) {

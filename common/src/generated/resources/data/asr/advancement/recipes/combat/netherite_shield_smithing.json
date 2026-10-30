@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "asr:netherite_shield_smithing"
+        "recipes": "asr:netherite_shield_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

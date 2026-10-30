@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "asr:gilded_netherquartz_shield"
+        "recipes": "asr:gilded_netherquartz_shield"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

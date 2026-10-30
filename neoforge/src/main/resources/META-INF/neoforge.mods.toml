@@ -1,5 +1,4 @@
 modLoader = "javafml"
-loaderVersion = "[11,)"
 #issueTrackerURL = ""
 license = "GPL-3.0"
 
@@ -11,27 +10,35 @@ authors = "ManGregory, ACGaming"
 description = '''
 A Hexxit mod ported over to new Minecraft Versions. Includes Giant Swords and Asgard Shields!
 '''
-logoFile = "asr.png"
+iconFile = "asr.png"
+bannerFile = "asr-banner.png"
 
 [[dependencies.asr]]
 modId = "neoforge"
 type = "required"
-versionRange = "[26.2,)"
+versionRange = "[26.3,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.asr]]
 modId = "minecraft"
 type = "required"
-versionRange = "[26.2,)"
+versionRange = "[26.3,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.asr]]
 modId = "architectury"
 type = "required"
-versionRange = "[21.0.2,)"
+versionRange = "[22.0.5,)"
 ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.asr]]
+modId = "resourcefulconfig"
+type = "required"
+versionRange = "[6.0.2,)"
+ordering = "NONE"
 side = "BOTH"
 
 [[mixins]]

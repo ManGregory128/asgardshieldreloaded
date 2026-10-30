@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "asr:netherite_giant_sword_smithing"
+        "recipes": "asr:netherite_giant_sword_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

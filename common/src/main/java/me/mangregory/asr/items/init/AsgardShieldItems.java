@@ -18,7 +18,6 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.BlocksAttacks;
-import net.minecraft.world.item.enchantment.Enchantable;
 
 import java.util.List;
 import java.util.Optional;

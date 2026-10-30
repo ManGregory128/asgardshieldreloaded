@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "asr:skull_shield"
+        "recipes": "asr:skull_shield"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

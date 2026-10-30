@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "asr:golden_giant_sword"
+        "recipes": "asr:golden_giant_sword"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
