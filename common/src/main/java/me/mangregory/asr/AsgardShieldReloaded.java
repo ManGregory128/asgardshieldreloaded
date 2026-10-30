@@ -5,7 +5,9 @@ import dev.architectury.networking.NetworkManager;
 import dev.architectury.utils.Env;
 import dev.architectury.utils.EnvExecutor;
 import me.mangregory.asr.items.init.AsgardShieldItems;
+import me.mangregory.asr.network.BlockCooldownSyncPacket;
 import me.mangregory.asr.network.ConfigSyncPacket;
+import me.mangregory.asr.config.ClientBlockCooldownCache;
 import me.mangregory.asr.config.ClientConfigCache;
 import me.mangregory.asr.config.ModConfig;
 import me.mangregory.asr.util.handlers.BlockHudRenderer;
@@ -41,9 +43,16 @@ public final class AsgardShieldReloaded {
                         ClientConfigCache.updateFromPacket(packet.giantSwordBlockDuration(), packet.asgardShieldBlockDuration());
                     });
                 });
+        NetworkManager.registerReceiver(NetworkManager.Side.S2C, BlockCooldownSyncPacket.TYPE, BlockCooldownSyncPacket.CODEC,
+                (packet, context) -> {
+                    context.queue(() -> {
+                        ClientBlockCooldownCache.update(packet.key(), packet.cooldown());
+                    });
+                });
     }
 
     static void initNetServer() {
         NetworkManager.registerS2CPayloadType(ConfigSyncPacket.TYPE, ConfigSyncPacket.CODEC);
+        NetworkManager.registerS2CPayloadType(BlockCooldownSyncPacket.TYPE, BlockCooldownSyncPacket.CODEC);
     }
 }

@@ -1,6 +1,9 @@
 package me.mangregory.asr.items;
 
+import me.mangregory.asr.config.ClientBlockCooldownCache;
 import me.mangregory.asr.config.ClientConfigCache;
+import me.mangregory.asr.network.BlockCooldownSyncPacket;
+import net.minecraft.server.level.ServerPlayer;
 import me.mangregory.asr.config.ModConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -53,6 +56,7 @@ public class AsgardShieldItem extends ShieldItem {
             String key = getCooldownKey(player, stack);
             player.getCooldowns().addCooldown(stack, getCooldown(key) / 2);
             resetCooldown(key);
+            syncCooldown(player, key);
         }
         return false;
     }
@@ -68,6 +72,7 @@ public class AsgardShieldItem extends ShieldItem {
                 player.getCooldowns().addCooldown(stack, getCooldown(key) / 2);
                 resetCooldown(key);
             }
+            syncCooldown(player, key);
         }
     }
 
@@ -89,9 +94,20 @@ public class AsgardShieldItem extends ShieldItem {
         return getCooldown(key);
     }
 
+    public int getClientCooldown(Player player, ItemStack stack) {
+        return ClientBlockCooldownCache.get(getCooldownKey(player, stack));
+    }
+
+    private void syncCooldown(Player player, String key) {
+        if (player instanceof ServerPlayer serverPlayer) {
+            BlockCooldownSyncPacket.sendToPlayer(serverPlayer, key, getCooldown(key));
+        }
+    }
+
     public void resetCooldown(Player player, ItemStack stack) {
         String key = getCooldownKey(player, stack);
         resetCooldown(key);
+        syncCooldown(player, key);
     }
 
     private void incrementCooldown(String key, int value) {
