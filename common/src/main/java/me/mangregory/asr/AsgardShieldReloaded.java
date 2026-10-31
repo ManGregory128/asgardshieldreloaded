@@ -32,27 +32,26 @@ public final class AsgardShieldReloaded {
         LootEventHandler.registerEvents();
         PlayerEventHandler.registerEvents();
 
+        // Payload types are registered on the server (sending) side only; the client registers receivers,
+        // which also register the types there. Registering both in one JVM crashes NeoForge.
+        EnvExecutor.runInEnv(Env.SERVER, () -> () -> {
+            NetworkManager.registerS2CPayloadType(ConfigSyncPacket.TYPE, ConfigSyncPacket.CODEC);
+            NetworkManager.registerS2CPayloadType(BlockCooldownSyncPacket.TYPE, BlockCooldownSyncPacket.CODEC);
+        });
+        EnvExecutor.runInEnv(Env.CLIENT, () -> () -> {
+            NetworkManager.registerReceiver(NetworkManager.Side.S2C, ConfigSyncPacket.TYPE, ConfigSyncPacket.CODEC,
+                    (packet, context) -> {
+                        context.queue(() -> {
+                            ClientConfigCache.updateFromPacket(packet.giantSwordBlockDuration(), packet.asgardShieldBlockDuration());
+                        });
+            });
+            NetworkManager.registerReceiver(NetworkManager.Side.S2C, BlockCooldownSyncPacket.TYPE, BlockCooldownSyncPacket.CODEC,
+                    (packet, context) -> {
+                        context.queue(() -> {
+                            ClientBlockCooldownCache.update(packet.key(), packet.cooldown());
+                        });
+            });
+        });
         EnvExecutor.runInEnv(Env.CLIENT, () -> BlockHudRenderer::register);
-        EnvExecutor.runInEnv(Env.CLIENT, () -> AsgardShieldReloaded::initNetClient);
-        EnvExecutor.runInEnv(Env.SERVER, () -> AsgardShieldReloaded::initNetServer);
-    }
-    static void initNetClient() {
-        NetworkManager.registerReceiver(NetworkManager.Side.S2C, ConfigSyncPacket.TYPE, ConfigSyncPacket.CODEC,
-                (packet, context) -> {
-                    context.queue(() -> {
-                        ClientConfigCache.updateFromPacket(packet.giantSwordBlockDuration(), packet.asgardShieldBlockDuration());
-                    });
-                });
-        NetworkManager.registerReceiver(NetworkManager.Side.S2C, BlockCooldownSyncPacket.TYPE, BlockCooldownSyncPacket.CODEC,
-                (packet, context) -> {
-                    context.queue(() -> {
-                        ClientBlockCooldownCache.update(packet.key(), packet.cooldown());
-                    });
-                });
-    }
-
-    static void initNetServer() {
-        NetworkManager.registerS2CPayloadType(ConfigSyncPacket.TYPE, ConfigSyncPacket.CODEC);
-        NetworkManager.registerS2CPayloadType(BlockCooldownSyncPacket.TYPE, BlockCooldownSyncPacket.CODEC);
     }
 }

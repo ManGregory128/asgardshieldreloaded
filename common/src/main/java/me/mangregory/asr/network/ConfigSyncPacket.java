@@ -28,6 +28,10 @@ public record ConfigSyncPacket(long giantSwordBlockDuration, long asgardShieldBl
                 ModConfig.GIANT_SWORD_BLOCK_DURATION,
                 ModConfig.ASGARD_SHIELD_BLOCK_DURATION
         );
-        NetworkManager.sendToPlayer(player, packet);
+        try {
+            NetworkManager.sendToPlayer(player, packet);
+        } catch (UnsupportedOperationException e) {
+            // Connectionless players (e.g. gametest mock players) cannot receive custom payloads
+        }
     }
 }

@@ -24,6 +24,10 @@ public record BlockCooldownSyncPacket(String key, int cooldown) implements Custo
     }
 
     public static void sendToPlayer(ServerPlayer player, String key, int cooldown) {
-        NetworkManager.sendToPlayer(player, new BlockCooldownSyncPacket(key, cooldown));
+        try {
+            NetworkManager.sendToPlayer(player, new BlockCooldownSyncPacket(key, cooldown));
+        } catch (UnsupportedOperationException e) {
+            // Connectionless players (e.g. gametest mock players) cannot receive custom payloads
+        }
     }
 }

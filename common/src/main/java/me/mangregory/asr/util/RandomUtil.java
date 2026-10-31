@@ -1,30 +1,19 @@
 package me.mangregory.asr.util;
 
-import java.util.Random;
+import net.minecraft.util.RandomSource;
 
-// Courtesy of UeberallGebannt
 public class RandomUtil {
-    public static final Random RANDOM = new Random();
-
     /**
      * Returns true with a certain chance
      *
      * @param chance The chance to return true
-     * @param random The random instance to be used
+     * @param random The random source to use
      * @return true with a certain chance or false
      */
-    public static boolean chance(double chance, Random random) {
-        double val = random.nextDouble();
-        return val <= chance;
-    }
-
     /**
-     * Returns true with a certain chance
-     *
-     * @param chance The chance to return true
-     * @return true with a certain chance or false
+     * Returns true with a certain chance, using the given random source (injectable for tests).
      */
-    public static boolean chance(double chance) {
-        return chance(chance, RANDOM);
+    public static boolean chance(double chance, RandomSource random) {
+        return random.nextDouble() <= chance;
     }
 }

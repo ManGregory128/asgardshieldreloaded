@@ -7,6 +7,15 @@ architectury {
     neoForge()
 }
 
+loom {
+    runs {
+        gameTestServer {
+            forgeTemplate "gameTestServer"
+            runtimeEnvironment = "gameTestServer"
+        }
+    }
+}
+
 configurations {
     developmentNeoForge.extendsFrom common
 }

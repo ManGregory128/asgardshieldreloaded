@@ -29,6 +29,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
@@ -151,6 +152,12 @@ public class EventHandler {
     public static float teleportEnemy(Entity enemy, float knockback) {
         if (!(enemy.level() instanceof ServerLevel serverLevel))
             return knockback;
+        return teleportEnemy(enemy, knockback, serverLevel.getRandom());
+    }
+
+    public static float teleportEnemy(Entity enemy, float knockback, RandomSource random) {
+        if (!(enemy.level() instanceof ServerLevel serverLevel))
+            return knockback;
 
         Vec3 prevPos = enemy.getPosition(0);
         BlockPos enemyPos = enemy.blockPosition();
@@ -158,8 +165,8 @@ public class EventHandler {
         // Try to find a safe teleport location within a reasonable range
         for (int attempts = 0; attempts < 20; attempts++) {
             // Smaller range to keep enemy visible (8 blocks instead of 32)
-            double offsetX = (serverLevel.getRandom().nextDouble() - 0.5D) * 16.0D;
-            double offsetZ = (serverLevel.getRandom().nextDouble() - 0.5D) * 16.0D;
+            double offsetX = (random.nextDouble() - 0.5D) * 16.0D;
+            double offsetZ = (random.nextDouble() - 0.5D) * 16.0D;
 
             BlockPos targetPos = enemyPos.offset((int)offsetX, 0, (int)offsetZ);
             // Find safe Y position by checking for valid ground
