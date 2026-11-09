@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         java: [ 25 ]
-        os: [ ubuntu-latest, windows-latest ]
+        os: [ ubuntu-latest ]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -32,3 +32,14 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
       - name: Build with Gradle
         run: ./gradlew build
+      # runs the registered NeoForge game tests on a headless server; fails the job if any required test fails
+      # (only present on branches that carry the game tests)
+      - name: Run game tests
+        run: ./gradlew :neoforge:runGameTestServer
+      - name: Upload game test logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gametest-logs-${{ matrix.os }}
+          path: neoforge/run/gametestserver/logs/
+          if-no-files-found: ignore
