@@ -28,15 +28,15 @@ public class ModItems
     public static final Item.ToolMaterial MATERIAL_SKULL = EnumHelper.addToolMaterial("material_skull", 1, ASRConfig.SWORDS.SKULL_GIANT_SWORD_DURABILITY, 4.0F, (float) ASRConfig.SWORDS.SKULL_GIANT_SWORD_DAMAGE - 4, 5).setRepairItem(new ItemStack(Items.BONE));
     public static final Item.ToolMaterial MATERIAL_ENDER = EnumHelper.addToolMaterial("material_ender", 3, ASRConfig.SWORDS.ENDER_GIANT_SWORD_DURABILITY, 8.0F, (float) ASRConfig.SWORDS.ENDER_GIANT_SWORD_DAMAGE - 4, 10).setRepairItem(new ItemStack(Item.getItemFromBlock(Blocks.OBSIDIAN)));
 
-    public static final ItemSword WOODEN_GIANT_SWORD = new ItemGiantSword("wooden_giant_sword", MATERIAL_NEWWOOD, ASRConfig.SWORDS.WOODEN_GIANT_SWORD_MAXUSEDURATION);
-    public static final ItemSword STONE_GIANT_SWORD = new ItemGiantSword("stone_giant_sword", MATERIAL_NEWSTONE, ASRConfig.SWORDS.STONE_GIANT_SWORD_MAXUSEDURATION);
-    public static final ItemSword IRON_GIANT_SWORD = new ItemGiantSword("iron_giant_sword", MATERIAL_NEWIRON, ASRConfig.SWORDS.IRON_GIANT_SWORD_MAXUSEDURATION);
-    public static final ItemSword GOLDEN_GIANT_SWORD = new ItemGiantSword("golden_giant_sword", MATERIAL_NEWGOLD, ASRConfig.SWORDS.GOLD_GIANT_SWORD_MAXUSEDURATION);
-    public static final ItemSword DIAMOND_GIANT_SWORD = new ItemGiantSword("diamond_giant_sword", MATERIAL_NEWDIAMOND, ASRConfig.SWORDS.DIAMOND_GIANT_SWORD_MAXUSEDURATION);
-    public static final ItemSword NETHERQUARTZ_GIANT_SWORD = new ItemGiantSword("netherquartz_giant_sword", MATERIAL_NETHERQUARTZ, ASRConfig.SWORDS.NETHERQUARTZ_GIANT_SWORD_MAXUSEDURATION);
-    public static final ItemSword PATCHWORK_GIANT_SWORD = new ItemGiantSword("patchwork_giant_sword", MATERIAL_PATCHWORK, ASRConfig.SWORDS.PATCHWORK_GIANT_SWORD_MAXUSEDURATION);
-    public static final ItemSword SKULL_GIANT_SWORD = new ItemGiantSword("skull_giant_sword", MATERIAL_SKULL, ASRConfig.SWORDS.SKULL_GIANT_SWORD_MAXUSEDURATION);
-    public static final ItemSword ENDER_GIANT_SWORD = new ItemGiantSword("ender_giant_sword", MATERIAL_ENDER, ASRConfig.SWORDS.ENDER_GIANT_SWORD_MAXUSEDURATION);
+    public static final ItemSword WOODEN_GIANT_SWORD = new ItemGiantSword("wooden_giant_sword", MATERIAL_NEWWOOD);
+    public static final ItemSword STONE_GIANT_SWORD = new ItemGiantSword("stone_giant_sword", MATERIAL_NEWSTONE);
+    public static final ItemSword IRON_GIANT_SWORD = new ItemGiantSword("iron_giant_sword", MATERIAL_NEWIRON);
+    public static final ItemSword GOLDEN_GIANT_SWORD = new ItemGiantSword("golden_giant_sword", MATERIAL_NEWGOLD);
+    public static final ItemSword DIAMOND_GIANT_SWORD = new ItemGiantSword("diamond_giant_sword", MATERIAL_NEWDIAMOND);
+    public static final ItemSword NETHERQUARTZ_GIANT_SWORD = new ItemGiantSword("netherquartz_giant_sword", MATERIAL_NETHERQUARTZ);
+    public static final ItemSword PATCHWORK_GIANT_SWORD = new ItemGiantSword("patchwork_giant_sword", MATERIAL_PATCHWORK);
+    public static final ItemSword SKULL_GIANT_SWORD = new ItemGiantSword("skull_giant_sword", MATERIAL_SKULL);
+    public static final ItemSword ENDER_GIANT_SWORD = new ItemGiantSword("ender_giant_sword", MATERIAL_ENDER);
 
     public static final ItemAsgardShield WOODEN_SHIELD = new ItemAsgardShield("wooden_shield", MATERIAL_NEWWOOD, ASRConfig.SHIELDS.WOODEN_SHIELD_DURABILITY, ASRConfig.SHIELDS.WOODEN_SHIELD_MAXUSEDURATION, 10454093);
     public static final ItemAsgardShield GILDED_WOODEN_SHIELD = new ItemAsgardShield("gilded_wooden_shield", MATERIAL_NEWWOOD, ASRConfig.SHIELDS.GILDED_WOODEN_SHIELD_DURABILITY, ASRConfig.SHIELDS.GILDED_WOODEN_SHIELD_MAXUSEDURATION, 10454093);

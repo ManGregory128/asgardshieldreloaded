@@ -23,17 +23,11 @@ public class ASRConfig
         @Config.Name("Wooden Giant Sword: Damage")
         public double WOODEN_GIANT_SWORD_DAMAGE = 5.0D;
 
-        @Config.Name("Wooden Giant Sword: Max Use Duration")
-        public int WOODEN_GIANT_SWORD_MAXUSEDURATION = 100;
-
         @Config.Name("Stone Giant Sword: Durability")
         public int STONE_GIANT_SWORD_DURABILITY = 176;
 
         @Config.Name("Stone Giant Sword: Damage")
         public double STONE_GIANT_SWORD_DAMAGE = 6.0D;
-
-        @Config.Name("Stone Giant Sword: Max Use Duration")
-        public int STONE_GIANT_SWORD_MAXUSEDURATION = 100;
 
         @Config.Name("Iron Giant Sword: Durability")
         public int IRON_GIANT_SWORD_DURABILITY = 475;
@@ -41,17 +35,11 @@ public class ASRConfig
         @Config.Name("Iron Giant Sword: Damage")
         public double IRON_GIANT_SWORD_DAMAGE = 7.0D;
 
-        @Config.Name("Iron Giant Sword: Max Use Duration")
-        public int IRON_GIANT_SWORD_MAXUSEDURATION = 100;
-
         @Config.Name("Gold Giant Sword: Durability")
         public int GOLD_GIANT_SWORD_DURABILITY = 151;
 
         @Config.Name("Gold Giant Sword: Damage")
         public double GOLD_GIANT_SWORD_DAMAGE = 5.0D;
-
-        @Config.Name("Gold Giant Sword: Max Use Duration")
-        public int GOLD_GIANT_SWORD_MAXUSEDURATION = 100;
 
         @Config.Name("Diamond Giant Sword: Durability")
         public int DIAMOND_GIANT_SWORD_DURABILITY = 2241;
@@ -59,17 +47,11 @@ public class ASRConfig
         @Config.Name("Diamond Giant Sword: Damage")
         public double DIAMOND_GIANT_SWORD_DAMAGE = 8.0D;
 
-        @Config.Name("Diamond Giant Sword: Max Use Duration")
-        public int DIAMOND_GIANT_SWORD_MAXUSEDURATION = 100;
-
         @Config.Name("Nether Quartz Giant Sword: Durability")
         public int NETHERQUARTZ_GIANT_SWORD_DURABILITY = 525;
 
         @Config.Name("Nether Quartz Giant Sword: Damage")
         public double NETHERQUARTZ_GIANT_SWORD_DAMAGE = 7.0D;
-
-        @Config.Name("Nether Quartz Giant Sword: Max Use Duration")
-        public int NETHERQUARTZ_GIANT_SWORD_MAXUSEDURATION = 100;
 
         @Config.Name("Patchwork Giant Sword: Durability")
         public int PATCHWORK_GIANT_SWORD_DURABILITY = 45;
@@ -77,17 +59,11 @@ public class ASRConfig
         @Config.Name("Patchwork Giant Sword: Damage")
         public double PATCHWORK_GIANT_SWORD_DAMAGE = 5.0D;
 
-        @Config.Name("Patchwork Giant Sword: Max Use Duration")
-        public int PATCHWORK_GIANT_SWORD_MAXUSEDURATION = 100;
-
         @Config.Name("Skull Giant Sword: Durability")
         public int SKULL_GIANT_SWORD_DURABILITY = 360;
 
         @Config.Name("Skull Giant Sword: Damage")
         public double SKULL_GIANT_SWORD_DAMAGE = 6.0D;
-
-        @Config.Name("Skull Giant Sword: Max Use Duration")
-        public int SKULL_GIANT_SWORD_MAXUSEDURATION = 100;
 
         @Config.Name("Ender Giant Sword: Durability")
         public int ENDER_GIANT_SWORD_DURABILITY = 1529;
@@ -95,26 +71,17 @@ public class ASRConfig
         @Config.Name("Ender Giant Sword: Damage")
         public double ENDER_GIANT_SWORD_DAMAGE = 8.0D;
 
-        @Config.Name("Ender Giant Sword: Max Use Duration")
-        public int ENDER_GIANT_SWORD_MAXUSEDURATION = 100;
-
         @Config.Name("Biomass Giant Sword: Durability")
         public int BIOMASS_GIANT_SWORD_DURABILITY = 225;
 
         @Config.Name("Biomass Giant Sword: Damage")
         public double BIOMASS_GIANT_SWORD_DAMAGE = 6.0D;
 
-        @Config.Name("Biomass Giant Sword: Max Use Duration")
-        public int BIOMASS_GIANT_SWORD_MAXUSEDURATION = 100;
-
         @Config.Name("Livingmetal Giant Sword: Durability")
         public int LIVINGMETAL_GIANT_SWORD_DURABILITY = 481;
 
         @Config.Name("Livingmetal Giant Sword: Damage")
         public double LIVINGMETAL_GIANT_SWORD_DAMAGE = 6.0D;
-
-        @Config.Name("Livingmetal Giant Sword: Max Use Duration")
-        public int LIVINGMETAL_GIANT_SWORD_MAXUSEDURATION = 100;
     }
 
     public static class CategoryShields

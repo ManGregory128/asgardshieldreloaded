@@ -71,28 +71,22 @@ public class EventHandler
             {
                 if (!player.getCooldownTracker().hasCooldown(itemOffhand))
                 {
-                    ((ItemGiantSword) itemMainhand).setBlocking(false);
-                    ((ItemAsgardShield) itemOffhand).setBlocking(true);
                     if (event.getHand() == EnumHand.MAIN_HAND)
                     {
                         player.resetActiveHand();
-                        event.setCancellationResult(EnumActionResult.PASS);
+                        player.setActiveHand(EnumHand.OFF_HAND);
+                        event.setCancellationResult(EnumActionResult.SUCCESS);
                         event.setCanceled(true);
                     }
-                }
-                else
-                {
-                    ((ItemGiantSword) itemMainhand).setBlocking(true);
-                    ((ItemAsgardShield) itemOffhand).setBlocking(false);
                 }
             }
             else if (itemOffhand instanceof ItemShield)
             {
-                ((ItemGiantSword) itemMainhand).setBlocking(false);
                 if (event.getHand() == EnumHand.MAIN_HAND)
                 {
                     player.resetActiveHand();
-                    event.setCancellationResult(EnumActionResult.PASS);
+                    player.setActiveHand(EnumHand.OFF_HAND);
+                    event.setCancellationResult(EnumActionResult.SUCCESS);
                     event.setCanceled(true);
                 }
             }
@@ -370,45 +364,6 @@ public class EventHandler
                         player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ITEM_SHIELD_BLOCK, SoundCategory.PLAYERS, 1.0F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
                     }
                     event.setCanceled(cancel);
-                }
-                else if (item instanceof ItemGiantSword)
-                {
-                    switch (name)
-                    {
-                        case AsgardShieldReloaded.NAMESPACE + "wooden_giant_sword":
-                            player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_ZOMBIE_ATTACK_DOOR_WOOD, SoundCategory.PLAYERS, 0.6F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
-                            break;
-                        case AsgardShieldReloaded.NAMESPACE + "stone_giant_sword":
-                            player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.BLOCK_NOTE_HAT, SoundCategory.PLAYERS, 1.2F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
-                            break;
-                        case AsgardShieldReloaded.NAMESPACE + "iron_giant_sword":
-                        case AsgardShieldReloaded.NAMESPACE + "livingmetal_giant_sword":
-                            player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.BLOCK_ANVIL_LAND, SoundCategory.PLAYERS, 0.6F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
-                            break;
-                        case AsgardShieldReloaded.NAMESPACE + "golden_giant_sword":
-                            player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, SoundCategory.PLAYERS, 0.6F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
-                            break;
-                        case AsgardShieldReloaded.NAMESPACE + "diamond_giant_sword":
-                            player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.BLOCK_NOTE_CHIME, SoundCategory.PLAYERS, 1.0F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
-                            break;
-                        case AsgardShieldReloaded.NAMESPACE + "netherquartz_giant_sword":
-                            player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.BLOCK_NOTE_XYLOPHONE, SoundCategory.PLAYERS, 1.2F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
-                            break;
-                        case AsgardShieldReloaded.NAMESPACE + "patchwork_giant_sword":
-                        case AsgardShieldReloaded.NAMESPACE + "biomass_giant_sword":
-                            player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_ZOMBIE_STEP, SoundCategory.PLAYERS, 2.0F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
-                            break;
-                        case AsgardShieldReloaded.NAMESPACE + "skull_giant_sword":
-                            player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_SKELETON_HURT, SoundCategory.PLAYERS, 0.8F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
-                            break;
-                        case AsgardShieldReloaded.NAMESPACE + "ender_giant_sword":
-                            player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERDRAGON_HURT, SoundCategory.PLAYERS, 0.8F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
-                            break;
-                    }
-                    stack.damageItem((int) damage, player);
-                    if (enemy instanceof EntityLivingBase && projectile == enemy) ((EntityLivingBase) enemy).knockBack(player, 0.5F, player.posX - enemy.posX, player.posZ - enemy.posZ);
-                    player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, SoundCategory.PLAYERS, 0.8F, 3.0F + player.getEntityWorld().rand.nextFloat() * 0.4F);
-                    event.setCanceled(true);
                 }
             }
         }

@@ -32,8 +32,8 @@ public class HSModItems
         MATERIAL_BIOMASS = EnumHelper.addToolMaterial("material_biomass", 3, ASRConfig.SWORDS.BIOMASS_GIANT_SWORD_DURABILITY, 6.5F, (float) ASRConfig.SWORDS.BIOMASS_GIANT_SWORD_DAMAGE - 4, 17).setRepairItem(biomassStack);
         MATERIAL_LIVINGMETAL = EnumHelper.addToolMaterial("material_livingmetal", 3, ASRConfig.SWORDS.LIVINGMETAL_GIANT_SWORD_DURABILITY, 7.5F, (float) ASRConfig.SWORDS.LIVINGMETAL_GIANT_SWORD_DAMAGE - 4, 20).setRepairItem(livingmetalStack);
 
-        BIOMASS_GIANT_SWORD = new ItemGiantSword("biomass_giant_sword", MATERIAL_BIOMASS, ASRConfig.SWORDS.BIOMASS_GIANT_SWORD_MAXUSEDURATION);
-        LIVINGMETAL_GIANT_SWORD = new ItemGiantSword("livingmetal_giant_sword", MATERIAL_LIVINGMETAL, ASRConfig.SWORDS.LIVINGMETAL_GIANT_SWORD_MAXUSEDURATION);
+        BIOMASS_GIANT_SWORD = new ItemGiantSword("biomass_giant_sword", MATERIAL_BIOMASS);
+        LIVINGMETAL_GIANT_SWORD = new ItemGiantSword("livingmetal_giant_sword", MATERIAL_LIVINGMETAL);
 
         BIOMASS_SHIELD = new ItemAsgardShield("biomass_shield", MATERIAL_BIOMASS, ASRConfig.SHIELDS.BIOMASS_SHIELD_DURABILITY, ASRConfig.SHIELDS.BIOMASS_SHIELD_MAXUSEDURATION, 13136249);
         GILDED_BIOMASS_SHIELD = new ItemAsgardShield("gilded_biomass_shield", MATERIAL_BIOMASS, ASRConfig.SHIELDS.GILDED_BIOMASS_SHIELD_DURABILITY, ASRConfig.SHIELDS.GILDED_BIOMASS_SHIELD_MAXUSEDURATION, 13136249);
