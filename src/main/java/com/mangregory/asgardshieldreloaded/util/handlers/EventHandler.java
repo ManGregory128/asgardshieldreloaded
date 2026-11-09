@@ -3,6 +3,8 @@ package com.mangregory.asgardshieldreloaded.util.handlers;
 import java.util.List;
 import java.util.Objects;
 
+import com.mangregory.asgardshieldreloaded.util.ParticleUtil;
+import com.mangregory.asgardshieldreloaded.util.ShieldUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -12,35 +14,25 @@ import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityEndermite;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.play.server.SPacketEntityVelocity;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import com.mangregory.asgardshieldreloaded.AsgardShieldReloaded;
 import com.mangregory.asgardshieldreloaded.init.ModItems;
 import com.mangregory.asgardshieldreloaded.items.ItemAsgardShield;
-import com.mangregory.asgardshieldreloaded.items.ItemGiantSword;
 import com.mangregory.asgardshieldreloaded.util.RandomUtil;
 
 @Mod.EventBusSubscriber
@@ -51,21 +43,21 @@ public class EventHandler
     {
         EntityPlayer player = event.getEntityPlayer();
         Entity enemy = event.getTarget();
-        if (player.getEntityWorld().isRemote && player.getHeldItemMainhand().getItem().equals(ModItems.ENDER_GIANT_SWORD)) enderFx(player.getEntityWorld(), player.getPosition());
-        if (player.getEntityWorld().isRemote && player.getHeldItemMainhand().getItem().equals(ModItems.ENDER_SHIELD)) enderFx(player.getEntityWorld(), player.getPosition());
-        if (player.getEntityWorld().isRemote && player.getHeldItemMainhand().getItem().equals(ModItems.GILDED_ENDER_SHIELD)) enderFx(player.getEntityWorld(), player.getPosition());
-        if (player.getEntityWorld().isRemote && player.getHeldItemMainhand().getItem().equals(ModItems.GILDED_SKULL_SHIELD)) skullFx(enemy.getEntityWorld(), enemy.getPosition());
-        if (player.getEntityWorld().isRemote && player.getHeldItemMainhand().getItem().equals(ModItems.SKULL_GIANT_SWORD)) skullFx(enemy.getEntityWorld(), enemy.getPosition());
-        if (player.getEntityWorld().isRemote && player.getHeldItemMainhand().getItem().equals(ModItems.SKULL_SHIELD)) skullFx(enemy.getEntityWorld(), enemy.getPosition());
+        if (player.getEntityWorld().isRemote && player.getHeldItemMainhand().getItem().equals(ModItems.ENDER_GIANT_SWORD)) ParticleUtil.enderFx(player.getEntityWorld(), player.getPosition());
+        if (player.getEntityWorld().isRemote && player.getHeldItemMainhand().getItem().equals(ModItems.ENDER_SHIELD)) ParticleUtil.enderFx(player.getEntityWorld(), player.getPosition());
+        if (player.getEntityWorld().isRemote && player.getHeldItemMainhand().getItem().equals(ModItems.GILDED_ENDER_SHIELD)) ParticleUtil.enderFx(player.getEntityWorld(), player.getPosition());
+        if (player.getEntityWorld().isRemote && player.getHeldItemMainhand().getItem().equals(ModItems.GILDED_SKULL_SHIELD)) ParticleUtil.skullFx(enemy.getEntityWorld(), enemy.getPosition());
+        if (player.getEntityWorld().isRemote && player.getHeldItemMainhand().getItem().equals(ModItems.SKULL_GIANT_SWORD)) ParticleUtil.skullFx(enemy.getEntityWorld(), enemy.getPosition());
+        if (player.getEntityWorld().isRemote && player.getHeldItemMainhand().getItem().equals(ModItems.SKULL_SHIELD)) ParticleUtil.skullFx(enemy.getEntityWorld(), enemy.getPosition());
     }
 
     @SubscribeEvent
     public static void onBlockStart(PlayerInteractEvent.RightClickItem event)
     {
         EntityPlayer player = event.getEntityPlayer();
-        if (player.getEntityWorld().isRemote && player.getHeldItem(event.getHand()).getItem().equals(ModItems.ENDER_GIANT_SWORD)) enderFx(player.getEntityWorld(), player.getPosition());
-        if (player.getEntityWorld().isRemote && player.getHeldItem(event.getHand()).getItem().equals(ModItems.ENDER_SHIELD)) enderFx(player.getEntityWorld(), player.getPosition());
-        if (player.getEntityWorld().isRemote && player.getHeldItem(event.getHand()).getItem().equals(ModItems.GILDED_ENDER_SHIELD)) enderFx(player.getEntityWorld(), player.getPosition());
+        if (player.getEntityWorld().isRemote && player.getHeldItem(event.getHand()).getItem().equals(ModItems.ENDER_GIANT_SWORD)) ParticleUtil.enderFx(player.getEntityWorld(), player.getPosition());
+        if (player.getEntityWorld().isRemote && player.getHeldItem(event.getHand()).getItem().equals(ModItems.ENDER_SHIELD)) ParticleUtil.enderFx(player.getEntityWorld(), player.getPosition());
+        if (player.getEntityWorld().isRemote && player.getHeldItem(event.getHand()).getItem().equals(ModItems.GILDED_ENDER_SHIELD)) ParticleUtil.enderFx(player.getEntityWorld(), player.getPosition());
     }
 
     @SubscribeEvent
@@ -106,7 +98,7 @@ public class EventHandler
                                     cancel = false;
                                     break;
                                 }
-                                if (RandomUtil.chance(0.25D)) dropArrowAtPlayer(arrow, player);
+                                if (RandomUtil.chance(0.25D)) ShieldUtil.dropArrowAtPlayer(arrow, player);
                             }
                             break;
                         case AsgardShieldReloaded.NAMESPACE + "gilded_wooden_shield":
@@ -125,7 +117,7 @@ public class EventHandler
                                     cancel = false;
                                     break;
                                 }
-                                if (RandomUtil.chance(0.5D)) dropArrowAtPlayer(arrow, player);
+                                if (RandomUtil.chance(0.5D)) ShieldUtil.dropArrowAtPlayer(arrow, player);
                             }
                             break;
                         case AsgardShieldReloaded.NAMESPACE + "stone_shield":
@@ -189,7 +181,7 @@ public class EventHandler
                         case AsgardShieldReloaded.NAMESPACE + "diamond_shield":
                             if (projectile != null && RandomUtil.chance(0.3D))
                             {
-                                reflectProjectile(player, projectile);
+                                ShieldUtil.reflectProjectile(player, projectile);
                                 damage *= 1.5F;
                             }
                             else knockback = 1.0F;
@@ -198,7 +190,7 @@ public class EventHandler
                         case AsgardShieldReloaded.NAMESPACE + "gilded_diamond_shield":
                             if (projectile != null && RandomUtil.chance(0.6D))
                             {
-                                reflectProjectile(player, projectile);
+                                ShieldUtil.reflectProjectile(player, projectile);
                                 damage *= 2.0F;
                             }
                             else knockback = 1.5F;
@@ -282,7 +274,7 @@ public class EventHandler
                                 cancel = false;
                                 break;
                             }
-                            if (enemy instanceof EntityLivingBase && RandomUtil.chance(0.2D)) knockback = teleportEnemy(enemy, knockback);
+                            if (enemy instanceof EntityLivingBase && RandomUtil.chance(0.2D)) knockback = ShieldUtil.teleportEnemy(enemy, knockback);
                             else knockback = 1.5F;
                             player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERDRAGON_HURT, SoundCategory.PLAYERS, 0.8F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
                             break;
@@ -292,12 +284,12 @@ public class EventHandler
                                 cancel = false;
                                 break;
                             }
-                            if (enemy instanceof EntityLivingBase && RandomUtil.chance(0.4D)) knockback = teleportEnemy(enemy, knockback);
+                            if (enemy instanceof EntityLivingBase && RandomUtil.chance(0.4D)) knockback = ShieldUtil.teleportEnemy(enemy, knockback);
                             else knockback = 2.0F;
                             player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERDRAGON_HURT, SoundCategory.PLAYERS, 0.8F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
                             break;
                         case AsgardShieldReloaded.NAMESPACE + "biomass_shield":
-                            if (RandomUtil.chance(0.1D) && (handleEssenceContainer(player, "harkenscythe:essence_keeper_blood") || handleEssenceContainer(player, "harkenscythe:essence_vessel_blood")))
+                            if (RandomUtil.chance(0.1D) && (ShieldUtil.handleEssenceContainer(player, "harkenscythe:essence_keeper_blood") || ShieldUtil.handleEssenceContainer(player, "harkenscythe:essence_vessel_blood")))
                             {
                                 if (!player.isPotionActive(MobEffects.ABSORPTION)) player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 200, 4));
                             }
@@ -305,7 +297,7 @@ public class EventHandler
                             player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_ZOMBIE_STEP, SoundCategory.PLAYERS, 2.0F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
                             break;
                         case AsgardShieldReloaded.NAMESPACE + "gilded_biomass_shield":
-                            if (RandomUtil.chance(0.2D) && (handleEssenceContainer(player, "harkenscythe:essence_keeper_blood") || handleEssenceContainer(player, "harkenscythe:essence_vessel_blood")))
+                            if (RandomUtil.chance(0.2D) && (ShieldUtil.handleEssenceContainer(player, "harkenscythe:essence_keeper_blood") || ShieldUtil.handleEssenceContainer(player, "harkenscythe:essence_vessel_blood")))
                             {
                                 if (!player.isPotionActive(MobEffects.ABSORPTION)) player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 300, 4));
                             }
@@ -313,7 +305,7 @@ public class EventHandler
                             player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_ZOMBIE_STEP, SoundCategory.PLAYERS, 2.0F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
                             break;
                         case AsgardShieldReloaded.NAMESPACE + "livingmetal_shield":
-                            if (RandomUtil.chance(0.1D) && (handleEssenceContainer(player, "harkenscythe:essence_keeper_soul") || handleEssenceContainer(player, "harkenscythe:essence_vessel_soul")))
+                            if (RandomUtil.chance(0.1D) && (ShieldUtil.handleEssenceContainer(player, "harkenscythe:essence_keeper_soul") || ShieldUtil.handleEssenceContainer(player, "harkenscythe:essence_vessel_soul")))
                             {
                                 if (!player.isPotionActive(MobEffects.ABSORPTION)) player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 200, 4));
                             }
@@ -321,7 +313,7 @@ public class EventHandler
                             player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.BLOCK_ANVIL_LAND, SoundCategory.PLAYERS, 0.6F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
                             break;
                         case AsgardShieldReloaded.NAMESPACE + "gilded_livingmetal_shield":
-                            if (RandomUtil.chance(0.2D) && (handleEssenceContainer(player, "harkenscythe:essence_keeper_soul") || handleEssenceContainer(player, "harkenscythe:essence_vessel_soul")))
+                            if (RandomUtil.chance(0.2D) && (ShieldUtil.handleEssenceContainer(player, "harkenscythe:essence_keeper_soul") || ShieldUtil.handleEssenceContainer(player, "harkenscythe:essence_vessel_soul")))
                             {
                                 if (!player.isPotionActive(MobEffects.ABSORPTION)) player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 300, 4));
                             }
@@ -339,124 +331,5 @@ public class EventHandler
                 }
             }
         }
-    }
-
-    // TODO: Break particles for when shields are hit or used
-    public static void breakFx(World world, EntityPlayer player, ItemStack stack)
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            Vec3d vec3d = new Vec3d(world.rand.nextFloat() - 0.5D * 0.1D, Math.random() * 0.1D + 0.1D, 0.0D);
-            vec3d = vec3d.rotatePitch(-player.rotationPitch * 0.017453292F);
-            vec3d = vec3d.rotateYaw(-player.rotationYaw * 0.017453292F);
-            double d0 = -world.rand.nextFloat() * 0.6D - 0.3D;
-            Vec3d vec3d1 = new Vec3d(world.rand.nextFloat() - 0.5D * 0.3D, d0, 0.6D);
-            vec3d1 = vec3d1.rotatePitch(-player.rotationPitch * 0.017453292F);
-            vec3d1 = vec3d1.rotateYaw(-player.rotationYaw * 0.017453292F);
-            vec3d1 = vec3d1.add(player.posX, player.posY + player.getEyeHeight(), player.posZ);
-            if (world instanceof WorldServer) world.spawnParticle(EnumParticleTypes.ITEM_CRACK, vec3d1.x, vec3d1.y, vec3d1.z, vec3d.x, vec3d.y + 0.05D, vec3d.z, Item.getIdFromItem(stack.getItem()), stack.getMetadata());
-            else world.spawnParticle(EnumParticleTypes.ITEM_CRACK, vec3d1.x, vec3d1.y, vec3d1.z, vec3d.x, vec3d.y + 0.05D, vec3d.z, Item.getIdFromItem(stack.getItem()), stack.getMetadata());
-        }
-    }
-
-    public static void enderFx(World world, BlockPos pos)
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            int rand1 = world.rand.nextInt(2) * 2 - 1;
-            int rand2 = world.rand.nextInt(2) * 2 - 1;
-            double xCoord = pos.getX() + 0.5D + 0.25D * rand1;
-            double yCoord = pos.getY() + world.rand.nextFloat();
-            double zCoord = pos.getZ() + 0.5D + 0.25D * rand2;
-            double xSpeed = (world.rand.nextFloat() * 1.0F * rand1);
-            double ySpeed = (world.rand.nextFloat() - 0.5D) * 0.125D;
-            double zSpeed = (world.rand.nextFloat() * 1.0F * rand2);
-            world.spawnParticle(EnumParticleTypes.PORTAL, xCoord, yCoord, zCoord, xSpeed, ySpeed, zSpeed);
-        }
-    }
-
-    public static void dropArrowAtPlayer(EntityArrow arrow, EntityPlayer player)
-    {
-        arrow.pickupStatus = EntityArrow.PickupStatus.ALLOWED;
-        arrow.motionX = 0;
-        arrow.motionY = 0;
-        arrow.motionZ = 0;
-        arrow.setPosition(player.posX, player.posY, player.posZ);
-        player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_ARROW_HIT_PLAYER, SoundCategory.PLAYERS, 0.8F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
-    }
-
-    public static void reflectProjectile(EntityPlayer player, Entity projectile)
-    {
-        Vec3d look = player.getLookVec();
-        double speed = projectile.motionX * projectile.motionX + projectile.motionY * projectile.motionY + projectile.motionZ * projectile.motionZ;
-        speed = Math.sqrt(speed);
-        speed += 0.2F;
-        projectile.motionX = look.x * speed;
-        projectile.motionY = look.y * speed;
-        projectile.motionZ = look.z * speed;
-        projectile.rotationYaw = (float) (Math.atan2(projectile.motionX, projectile.motionZ) * 180.0D / Math.PI);
-        projectile.rotationPitch = (float) (Math.atan2(projectile.motionY, speed) * 180.0D / Math.PI);
-        if (player instanceof EntityPlayerMP) ((EntityPlayerMP) player).connection.sendPacket(new SPacketEntityVelocity(projectile));
-        if (projectile instanceof EntityArrow)
-        {
-            ((EntityArrow) projectile).shootingEntity = player;
-            projectile.motionX /= -0.10000000149011612D;
-            projectile.motionY /= -0.10000000149011612D;
-            projectile.motionZ /= -0.10000000149011612D;
-        }
-    }
-
-    public static void skullFx(World world, BlockPos pos)
-    {
-        double xCoord = pos.getX();
-        double yCoord = pos.getY() + 1.0D;
-        double zCoord = pos.getZ();
-        world.spawnParticle(EnumParticleTypes.CLOUD, xCoord, yCoord, zCoord, 0.0D, 0.0D, 0.0D);
-    }
-
-    public static float teleportEnemy(Entity enemy, float knockback)
-    {
-        double d0 = enemy.posX + (enemy.getEntityWorld().rand.nextDouble() - 0.5D) * 64.0D;
-        double d1 = enemy.posY + (enemy.getEntityWorld().rand.nextInt(64) - 32);
-        double d2 = enemy.posZ + (enemy.getEntityWorld().rand.nextDouble() - 0.5D) * 64.0D;
-        boolean teleport = ((EntityLivingBase) enemy).attemptTeleport(d0, d1, d2);
-        if (teleport)
-        {
-            enemy.getEntityWorld().playSound(null, enemy.prevPosX, enemy.prevPosY, enemy.prevPosZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, enemy.getSoundCategory(), 1.0F, 1.0F);
-            enemy.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);
-            return 0.0F;
-        }
-        return knockback;
-    }
-
-    public static boolean handleEssenceContainer(EntityPlayer player, String registryName)
-    {
-        for (int i = 0, size = player.inventory.getSizeInventory(); i < size; i++)
-        {
-            ItemStack stack = player.inventory.getStackInSlot(i);
-            String regName = Objects.requireNonNull(stack.getItem().getRegistryName()).toString();
-            if (regName.equals(registryName))
-            {
-                if (!player.capabilities.isCreativeMode)
-                {
-                    int itemDamage = stack.getItemDamage();
-                    if (itemDamage + 1 < stack.getMaxDamage())
-                    {
-                        stack.setItemDamage(itemDamage + 1);
-                    }
-                    else
-                    {
-                        stack.shrink(1);
-                        ResourceLocation newItem = regName.contains("keeper") ? new ResourceLocation("harkenscythe:essence_keeper") : new ResourceLocation("harkenscythe:essence_vessel");
-                        if (regName.contains("keeper") || regName.contains("vessel"))
-                        {
-                            player.inventory.setInventorySlotContents(i, new ItemStack(Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(newItem))));
-                        }
-                    }
-                }
-                return true;
-            }
-        }
-        return false;
     }
 }
