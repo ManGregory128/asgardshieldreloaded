@@ -13,7 +13,6 @@ public class ASRConfig
 {
     public static final CategorySwords SWORDS = new CategorySwords();
     public static final CategoryShields SHIELDS = new CategoryShields();
-    public static final CategoryVanillaShield VANILLA_SHIELD = new CategoryVanillaShield();
     public static final CategoryMisc MISC = new CategoryMisc();
 
     public static class CategorySwords
@@ -251,21 +250,6 @@ public class ASRConfig
 
         @Config.Name("Gilded Livingmetal Shield: Max Use Duration")
         public int GILDED_LIVINGMETAL_SHIELD_MAXUSEDURATION = 200;
-    }
-
-    public static class CategoryVanillaShield
-    {
-        @Config.Name("Vanilla Shield Override")
-        @Config.Comment("Utilize Asgard Shield behavior without special abilities for the vanilla shield")
-        public boolean VANILLA_SHIELD_OVERRIDE = true;
-
-        @Config.Name("Vanilla Shield: Durability")
-        @Config.Comment("Only effective when 'Vanilla Shield Override' is enabled")
-        public int VANILLA_SHIELD_DURABILITY = 200;
-
-        @Config.Name("Vanilla Shield: Max Use Duration")
-        @Config.Comment("Only effective when 'Vanilla Shield Override' is enabled")
-        public int VANILLA_SHIELD_MAXUSEDURATION = 200;
     }
 
     public static class CategoryMisc

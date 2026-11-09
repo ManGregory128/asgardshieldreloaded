@@ -40,7 +40,6 @@ import com.mangregory.asgardshieldreloaded.AsgardShieldReloaded;
 import com.mangregory.asgardshieldreloaded.init.ModItems;
 import com.mangregory.asgardshieldreloaded.items.ItemAsgardShield;
 import com.mangregory.asgardshieldreloaded.items.ItemGiantSword;
-import com.mangregory.asgardshieldreloaded.items.ItemVanillaShield;
 import com.mangregory.asgardshieldreloaded.util.RandomUtil;
 
 @Mod.EventBusSubscriber
@@ -84,25 +83,6 @@ public class EventHandler
                 {
                     ((ItemGiantSword) itemMainhand).setBlocking(true);
                     ((ItemAsgardShield) itemOffhand).setBlocking(false);
-                }
-            }
-            else if (itemOffhand instanceof ItemVanillaShield)
-            {
-                if (!player.getCooldownTracker().hasCooldown(itemOffhand))
-                {
-                    ((ItemGiantSword) itemMainhand).setBlocking(false);
-                    ((ItemVanillaShield) itemOffhand).setBlocking(true);
-                    if (event.getHand() == EnumHand.MAIN_HAND)
-                    {
-                        player.resetActiveHand();
-                        event.setCancellationResult(EnumActionResult.PASS);
-                        event.setCanceled(true);
-                    }
-                }
-                else
-                {
-                    ((ItemGiantSword) itemMainhand).setBlocking(true);
-                    ((ItemVanillaShield) itemOffhand).setBlocking(false);
                 }
             }
             else if (itemOffhand instanceof ItemShield)
