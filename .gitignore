@@ -26,5 +26,7 @@ run-data
 repo
 /gradlew.bat
 
+CHANGELOG.md
+
 # macOS
 .DS_Store

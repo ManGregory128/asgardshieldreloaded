@@ -1,5 +1,5 @@
 modLoader = "javafml"
-#issueTrackerURL = ""
+issueTrackerURL = "https://github.com/ManGregory128/asgardshieldreloaded/issues"
 license = "GPL-3.0"
 
 [[mods]]
