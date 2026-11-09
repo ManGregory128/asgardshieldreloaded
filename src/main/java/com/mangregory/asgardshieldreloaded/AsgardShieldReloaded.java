@@ -1,5 +1,6 @@
 package com.mangregory.asgardshieldreloaded;
 
+import com.mangregory.asr.Tags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraftforge.fml.common.Loader;
@@ -17,10 +18,10 @@ import com.mangregory.asgardshieldreloaded.items.IDyeable;
 @Mod(modid = AsgardShieldReloaded.MOD_ID, name = AsgardShieldReloaded.NAME, version = AsgardShieldReloaded.VERSION, acceptedMinecraftVersions = AsgardShieldReloaded.ACCEPTED_VERSIONS, dependencies = AsgardShieldReloaded.DEPENDENCIES)
 public class AsgardShieldReloaded
 {
-    public static final String MOD_ID = "asr";
+    public static final String MOD_ID = Tags.MOD_ID;
     public static final String NAMESPACE = MOD_ID + ":";
-    public static final String NAME = "Asgard Shield Reloaded";
-    public static final String VERSION = "2.2.1";
+    public static final String NAME = Tags.MOD_NAME;
+    public static final String VERSION = Tags.VERSION;
     public static final String ACCEPTED_VERSIONS = "[1.12.2]";
     public static final String DEPENDENCIES = "after:harkenscythe";
 
