@@ -6,10 +6,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
+import net.minecraft.item.*;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
@@ -38,6 +35,8 @@ public class ItemGiantSword extends ItemSword
     public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World world, EntityPlayer player, @NotNull EnumHand hand)
     {
         ItemStack stack = player.getHeldItem(hand);
+        EnumHand oppositeHand = hand == EnumHand.MAIN_HAND ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND;
+        if (player.getHeldItem(oppositeHand).getItem() instanceof ItemAsgardShield) return new ActionResult<>(EnumActionResult.PASS, stack);
         player.setActiveHand(hand);
         if (ASRConfig.MISC.BLOCKING_SOUND) player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_IRONGOLEM_ATTACK, SoundCategory.PLAYERS, 0.8F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
         return new ActionResult<>(EnumActionResult.SUCCESS, stack);

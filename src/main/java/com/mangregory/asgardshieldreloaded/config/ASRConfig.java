@@ -89,134 +89,69 @@ public class ASRConfig
         @Config.Name("Wooden Shield: Durability")
         public int WOODEN_SHIELD_DURABILITY = 118;
 
-        @Config.Name("Wooden Shield: Max Use Duration")
-        public int WOODEN_SHIELD_MAXUSEDURATION = 200;
-
         @Config.Name("Gilded Wooden Shield: Durability")
         public int GILDED_WOODEN_SHIELD_DURABILITY = 246;
-
-        @Config.Name("Gilded Wooden Shield: Max Use Duration")
-        public int GILDED_WOODEN_SHIELD_MAXUSEDURATION = 200;
 
         @Config.Name("Stone Shield: Durability")
         public int STONE_SHIELD_DURABILITY = 131;
 
-        @Config.Name("Stone Shield: Max Use Duration")
-        public int STONE_SHIELD_MAXUSEDURATION = 200;
-
         @Config.Name("Gilded Stone Shield: Durability")
         public int GILDED_STONE_SHIELD_DURABILITY = 259;
-
-        @Config.Name("Gilded Stone Shield: Max Use Duration")
-        public int GILDED_STONE_SHIELD_MAXUSEDURATION = 200;
 
         @Config.Name("Iron Shield: Durability")
         public int IRON_SHIELD_DURABILITY = 250;
 
-        @Config.Name("Iron Shield: Max Use Duration")
-        public int IRON_SHIELD_MAXUSEDURATION = 200;
-
         @Config.Name("Gilded Iron Shield: Durability")
         public int GILDED_IRON_SHIELD_DURABILITY = 378;
-
-        @Config.Name("Gilded Iron Shield: Max Use Duration")
-        public int GILDED_IRON_SHIELD_MAXUSEDURATION = 200;
 
         @Config.Name("Golden Shield: Durability")
         public int GOLDEN_SHIELD_DURABILITY = 121;
 
-        @Config.Name("Golden Shield: Max Use Duration")
-        public int GOLDEN_SHIELD_MAXUSEDURATION = 200;
-
         @Config.Name("Blessed Golden Shield: Durability")
         public int BLESSED_GOLDEN_SHIELD_DURABILITY = 489;
-
-        @Config.Name("Blessed Golden Shield: Max Use Duration")
-        public int BLESSED_GOLDEN_SHIELD_MAXUSEDURATION = 200;
 
         @Config.Name("Diamond Shield: Durability")
         public int DIAMOND_SHIELD_DURABILITY = 780;
 
-        @Config.Name("Diamond Shield: Max Use Duration")
-        public int DIAMOND_SHIELD_MAXUSEDURATION = 200;
-
         @Config.Name("Gilded Diamond Shield: Durability")
         public int GILDED_DIAMOND_SHIELD_DURABILITY = 908;
-
-        @Config.Name("Gilded Diamond Shield: Max Use Duration")
-        public int GILDED_DIAMOND_SHIELD_MAXUSEDURATION = 200;
 
         @Config.Name("Nether Quartz Shield: Durability")
         public int NETHERQUARTZ_SHIELD_DURABILITY = 369;
 
-        @Config.Name("Nether Quartz Shield: Max Use Duration")
-        public int NETHERQUARTZ_SHIELD_MAXUSEDURATION = 200;
-
         @Config.Name("Gilded Nether Quartz Shield: Durability")
         public int GILDED_NETHERQUARTZ_SHIELD_DURABILITY = 497;
-
-        @Config.Name("Gilded Nether Quartz Shield: Max Use Duration")
-        public int GILDED_NETHERQUARTZ_SHIELD_MAXUSEDURATION = 200;
 
         @Config.Name("Patchwork Shield: Durability")
         public int PATCHWORK_SHIELD_DURABILITY = 60;
 
-        @Config.Name("Patchwork Shield: Max Use Duration")
-        public int PATCHWORK_SHIELD_MAXUSEDURATION = 200;
-
         @Config.Name("Gilded Patchwork Shield: Durability")
         public int GILDED_PATCHWORK_SHIELD_DURABILITY = 188;
-
-        @Config.Name("Gilded Patchwork Shield: Max Use Duration")
-        public int GILDED_PATCHWORK_SHIELD_MAXUSEDURATION = 200;
 
         @Config.Name("Skull Shield: Durability")
         public int SKULL_SHIELD_DURABILITY = 174;
 
-        @Config.Name("Skull Shield: Max Use Duration")
-        public int SKULL_SHIELD_MAXUSEDURATION = 200;
-
         @Config.Name("Gilded Skull Shield: Durability")
         public int GILDED_SKULL_SHIELD_DURABILITY = 302;
-
-        @Config.Name("Gilded Skull Shield: Max Use Duration")
-        public int GILDED_SKULL_SHIELD_MAXUSEDURATION = 200;
 
         @Config.Name("Ender Shield: Durability")
         public int ENDER_SHIELD_DURABILITY = 450;
 
-        @Config.Name("Ender Shield: Max Use Duration")
-        public int ENDER_SHIELD_MAXUSEDURATION = 200;
-
         @Config.Name("Gilded Ender Shield: Durability")
         public int GILDED_ENDER_SHIELD_DURABILITY = 578;
-
-        @Config.Name("Gilded Ender Shield: Max Use Duration")
-        public int GILDED_ENDER_SHIELD_MAXUSEDURATION = 200;
 
         @Config.Name("Biomass Shield: Durability")
         public int BIOMASS_SHIELD_DURABILITY = 481;
 
-        @Config.Name("Biomass Shield: Max Use Duration")
-        public int BIOMASS_SHIELD_MAXUSEDURATION = 200;
-
         @Config.Name("Gilded Biomass Shield: Durability")
         public int GILDED_BIOMASS_SHIELD_DURABILITY = 650;
-
-        @Config.Name("Gilded Biomass Shield: Max Use Duration")
-        public int GILDED_BIOMASS_SHIELD_MAXUSEDURATION = 200;
 
         @Config.Name("Livingmetal Shield: Durability")
         public int LIVINGMETAL_SHIELD_DURABILITY = 481;
 
-        @Config.Name("Livingmetal Shield: Max Use Duration")
-        public int LIVINGMETAL_SHIELD_MAXUSEDURATION = 200;
-
         @Config.Name("Gilded Livingmetal Shield: Durability")
         public int GILDED_LIVINGMETAL_SHIELD_DURABILITY = 650;
 
-        @Config.Name("Gilded Livingmetal Shield: Max Use Duration")
-        public int GILDED_LIVINGMETAL_SHIELD_MAXUSEDURATION = 200;
     }
 
     public static class CategoryMisc

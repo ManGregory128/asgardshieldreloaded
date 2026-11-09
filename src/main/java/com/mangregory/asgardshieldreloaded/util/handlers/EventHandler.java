@@ -63,34 +63,6 @@ public class EventHandler
     public static void onBlockStart(PlayerInteractEvent.RightClickItem event)
     {
         EntityPlayer player = event.getEntityPlayer();
-        Item itemMainhand = player.getHeldItemMainhand().getItem();
-        Item itemOffhand = player.getHeldItemOffhand().getItem();
-        if (itemMainhand instanceof ItemGiantSword)
-        {
-            if (itemOffhand instanceof ItemAsgardShield)
-            {
-                if (!player.getCooldownTracker().hasCooldown(itemOffhand))
-                {
-                    if (event.getHand() == EnumHand.MAIN_HAND)
-                    {
-                        player.resetActiveHand();
-                        player.setActiveHand(EnumHand.OFF_HAND);
-                        event.setCancellationResult(EnumActionResult.SUCCESS);
-                        event.setCanceled(true);
-                    }
-                }
-            }
-            else if (itemOffhand instanceof ItemShield)
-            {
-                if (event.getHand() == EnumHand.MAIN_HAND)
-                {
-                    player.resetActiveHand();
-                    player.setActiveHand(EnumHand.OFF_HAND);
-                    event.setCancellationResult(EnumActionResult.SUCCESS);
-                    event.setCanceled(true);
-                }
-            }
-        }
         if (player.getEntityWorld().isRemote && player.getHeldItem(event.getHand()).getItem().equals(ModItems.ENDER_GIANT_SWORD)) enderFx(player.getEntityWorld(), player.getPosition());
         if (player.getEntityWorld().isRemote && player.getHeldItem(event.getHand()).getItem().equals(ModItems.ENDER_SHIELD)) enderFx(player.getEntityWorld(), player.getPosition());
         if (player.getEntityWorld().isRemote && player.getHeldItem(event.getHand()).getItem().equals(ModItems.GILDED_ENDER_SHIELD)) enderFx(player.getEntityWorld(), player.getPosition());

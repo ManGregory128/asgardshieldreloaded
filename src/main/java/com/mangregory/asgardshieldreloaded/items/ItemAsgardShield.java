@@ -39,24 +39,18 @@ import org.jetbrains.annotations.NotNull;
 
 public class ItemAsgardShield extends ItemShield implements IDyeable
 {
-    private final int maxUseDuration;
     private final Item.ToolMaterial material;
-    private int cooldown;
     private final int color;
-    private boolean isBlocking;
 
-    public ItemAsgardShield(String name, Item.ToolMaterial material, int durability, int maxUseDuration, int color)
+    public ItemAsgardShield(String name, Item.ToolMaterial material, int durability, int color)
     {
         this.setTranslationKey(AsgardShieldReloaded.MOD_ID + "." + name);
         this.setRegistryName(name);
         this.setMaxStackSize(1);
         this.setCreativeTab(CreativeTabs.COMBAT);
         this.setMaxDamage(durability);
-        this.cooldown = 0;
         this.color = color;
         this.material = material;
-        this.maxUseDuration = maxUseDuration;
-        this.setBlocking(false);
         this.addPropertyOverride(new ResourceLocation(AsgardShieldReloaded.NAMESPACE + "blocking"), new IItemPropertyGetter()
         {
             @SideOnly(Side.CLIENT)
@@ -80,16 +74,6 @@ public class ItemAsgardShield extends ItemShield implements IDyeable
         });
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, ItemArmor.DISPENSER_BEHAVIOR);
         ModItems.ITEMS.add(this);
-    }
-
-    public boolean getBlocking()
-    {
-        return isBlocking;
-    }
-
-    public void setBlocking(boolean blocking)
-    {
-        isBlocking = blocking;
     }
 
     @Override
@@ -117,9 +101,6 @@ public class ItemAsgardShield extends ItemShield implements IDyeable
             }
         }
 
-        String duration = "tooltip." + AsgardShieldReloaded.MOD_ID + ".category.duration";
-        tooltip.add(I18n.format(duration) + ": " + this.maxUseDuration / 20 + "s");
-
         String weakness = "item." + AsgardShieldReloaded.MOD_ID + "." + name + ".weakness";
         tooltip.add(TextFormatting.RED + I18n.format(weakness));
         String weaknessDesc = "item." + AsgardShieldReloaded.MOD_ID + "." + name + ".weakness.desc";
@@ -132,17 +113,9 @@ public class ItemAsgardShield extends ItemShield implements IDyeable
     }
 
     @Override
-    public @NotNull EnumAction getItemUseAction(@NotNull ItemStack stack)
-    {
-        if (this.getBlocking()) return EnumAction.BLOCK;
-        return EnumAction.NONE;
-    }
-
-    @Override
     public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World world, @NotNull EntityPlayer player, @NotNull EnumHand hand)
     {
         if (ASRConfig.MISC.BLOCKING_SOUND) player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_IRONGOLEM_ATTACK, SoundCategory.PLAYERS, 0.8F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
-        this.setBlocking(true);
         return super.onItemRightClick(world, player, hand);
     }
 
@@ -161,31 +134,15 @@ public class ItemAsgardShield extends ItemShield implements IDyeable
     }
 
     @Override
-    public void onPlayerStoppedUsing(@NotNull ItemStack stack, @NotNull World world, @NotNull EntityLivingBase entity, int timeLeft)
-    {
-        if (entity instanceof EntityPlayer && !world.isRemote)
-        {
-            ((EntityPlayer) entity).getCooldownTracker().setCooldown(this, this.cooldown / 2);
-            this.cooldown = 0;
-        }
-        this.setBlocking(false);
-    }
-
-    @Override
     public int getItemEnchantability()
     {
         return this.material.getEnchantability();
     }
 
     @Override
-    public void onUsingTick(@NotNull ItemStack stack, EntityLivingBase player, int count)
+    public boolean shouldCauseReequipAnimation(@NotNull ItemStack oldStack, @NotNull ItemStack newStack, boolean slotChanged)
     {
-        if (!player.world.isRemote) this.cooldown++;
-        if (this.cooldown >= this.maxUseDuration)
-        {
-            player.stopActiveHand();
-            this.setBlocking(false);
-        }
+        return slotChanged;
     }
 
     @Override
