@@ -59,7 +59,7 @@ public class EventHandler
         if (player.getEntityWorld().isRemote && player.getHeldItemMainhand().getItem().equals(ModItems.SKULL_SHIELD)) skullFx(enemy.getEntityWorld(), enemy.getPosition());
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    @SubscribeEvent
     public static void onBlockStart(PlayerInteractEvent.RightClickItem event)
     {
         EntityPlayer player = event.getEntityPlayer();
