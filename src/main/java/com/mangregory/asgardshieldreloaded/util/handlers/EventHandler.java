@@ -1,6 +1,7 @@
 package com.mangregory.asgardshieldreloaded.util.handlers;
 
 import java.util.List;
+import java.util.Objects;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -112,7 +113,7 @@ public class EventHandler
             {
                 ItemStack stack = player.getActiveItemStack();
                 Item item = stack.getItem();
-                String name = item.getRegistryName().toString();
+                String name = Objects.requireNonNull(item.getRegistryName()).toString();
                 float damage = event.getAmount();
                 float knockback = 0.0F;
                 Entity projectile = source.getImmediateSource();
@@ -506,7 +507,7 @@ public class EventHandler
         for (int i = 0, size = player.inventory.getSizeInventory(); i < size; i++)
         {
             ItemStack stack = player.inventory.getStackInSlot(i);
-            String regName = stack.getItem().getRegistryName().toString();
+            String regName = Objects.requireNonNull(stack.getItem().getRegistryName()).toString();
             if (regName.equals(registryName))
             {
                 if (!player.capabilities.isCreativeMode)
@@ -522,7 +523,7 @@ public class EventHandler
                         ResourceLocation newItem = regName.contains("keeper") ? new ResourceLocation("harkenscythe:essence_keeper") : new ResourceLocation("harkenscythe:essence_vessel");
                         if (regName.contains("keeper") || regName.contains("vessel"))
                         {
-                            player.inventory.setInventorySlotContents(i, new ItemStack(ForgeRegistries.ITEMS.getValue(newItem)));
+                            player.inventory.setInventorySlotContents(i, new ItemStack(Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(newItem))));
                         }
                     }
                 }

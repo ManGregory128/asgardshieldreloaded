@@ -1,6 +1,7 @@
 package com.mangregory.asgardshieldreloaded.items;
 
 import java.util.List;
+import java.util.Objects;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.BlockCauldron;
@@ -34,13 +35,14 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.mangregory.asgardshieldreloaded.AsgardShieldReloaded;
 import com.mangregory.asgardshieldreloaded.config.ASRConfig;
 import com.mangregory.asgardshieldreloaded.init.ModItems;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemAsgardShield extends ItemShield implements IDyeable
 {
     private final int maxUseDuration;
     private final Item.ToolMaterial material;
     private int cooldown;
-    private int color;
+    private final int color;
     private boolean isBlocking;
 
     public ItemAsgardShield(String name, Item.ToolMaterial material, int durability, int maxUseDuration, int color)
@@ -58,7 +60,7 @@ public class ItemAsgardShield extends ItemShield implements IDyeable
         this.addPropertyOverride(new ResourceLocation(AsgardShieldReloaded.NAMESPACE + "blocking"), new IItemPropertyGetter()
         {
             @SideOnly(Side.CLIENT)
-            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
+            public float apply(@NotNull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
             {
                 return entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack ? 1.0F : 0.0F;
             }
@@ -66,7 +68,7 @@ public class ItemAsgardShield extends ItemShield implements IDyeable
         this.addPropertyOverride(new ResourceLocation("dyed"), new IItemPropertyGetter()
         {
             @SideOnly(Side.CLIENT)
-            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
+            public float apply(@NotNull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
             {
                 if (getDyedColor(stack) != getDefaultDyedColorForMeta(stack.getMetadata()))
                 {
@@ -92,22 +94,22 @@ public class ItemAsgardShield extends ItemShield implements IDyeable
 
     @Override
     @SideOnly(Side.CLIENT)
-    public String getItemStackDisplayName(ItemStack stack)
+    public @NotNull String getItemStackDisplayName(@NotNull ItemStack stack)
     {
         return I18n.format(this.getUnlocalizedNameInefficiently(stack) + ".name");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
+    public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flag)
     {
-        String name = this.getRegistryName().getPath();
+        String name = Objects.requireNonNull(this.getRegistryName()).getPath();
         int color = getDyedColor(stack);
 
         // If it's dyed, show it on the tooltip
         if (color != getDefaultDyedColorForMeta(stack.getMetadata()))
         {
-            if (flagIn.isAdvanced())
+            if (flag.isAdvanced())
             	tooltip.add(new TextComponentTranslation("item.color", TextFormatting.GRAY + String.format("#%06X", color)).getFormattedText());
             else
             {
@@ -130,22 +132,22 @@ public class ItemAsgardShield extends ItemShield implements IDyeable
     }
 
     @Override
-    public EnumAction getItemUseAction(ItemStack stack)
+    public @NotNull EnumAction getItemUseAction(@NotNull ItemStack stack)
     {
         if (this.getBlocking()) return EnumAction.BLOCK;
         return EnumAction.NONE;
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World world, @NotNull EntityPlayer player, @NotNull EnumHand hand)
     {
-        if (ASRConfig.MISC.BLOCKING_SOUND) playerIn.getEntityWorld().playSound(null, playerIn.getPosition(), SoundEvents.ENTITY_IRONGOLEM_ATTACK, SoundCategory.PLAYERS, 0.8F, 0.8F + playerIn.getEntityWorld().rand.nextFloat() * 0.4F);
+        if (ASRConfig.MISC.BLOCKING_SOUND) player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_IRONGOLEM_ATTACK, SoundCategory.PLAYERS, 0.8F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
         this.setBlocking(true);
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+        return super.onItemRightClick(world, player, hand);
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
+    public boolean getIsRepairable(@NotNull ItemStack toRepair, @NotNull ItemStack repair)
     {
         ItemStack mat = this.material.getRepairItemStack();
         return !mat.isEmpty() && OreDictionary.itemMatches(mat, repair, false);
@@ -159,11 +161,11 @@ public class ItemAsgardShield extends ItemShield implements IDyeable
     }
 
     @Override
-    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
+    public void onPlayerStoppedUsing(@NotNull ItemStack stack, @NotNull World world, @NotNull EntityLivingBase entity, int timeLeft)
     {
-        if (entityLiving instanceof EntityPlayer && !worldIn.isRemote)
+        if (entity instanceof EntityPlayer && !world.isRemote)
         {
-            ((EntityPlayer) entityLiving).getCooldownTracker().setCooldown(this, this.cooldown / 2);
+            ((EntityPlayer) entity).getCooldownTracker().setCooldown(this, this.cooldown / 2);
             this.cooldown = 0;
         }
         this.setBlocking(false);
@@ -176,7 +178,7 @@ public class ItemAsgardShield extends ItemShield implements IDyeable
     }
 
     @Override
-    public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
+    public void onUsingTick(@NotNull ItemStack stack, EntityLivingBase player, int count)
     {
         if (!player.world.isRemote) this.cooldown++;
         if (this.cooldown >= this.maxUseDuration)
@@ -187,7 +189,7 @@ public class ItemAsgardShield extends ItemShield implements IDyeable
     }
 
     @Override
-    public boolean isShield(ItemStack stack, @Nullable EntityLivingBase entity)
+    public boolean isShield(@NotNull ItemStack stack, @Nullable EntityLivingBase entity)
     {
         return true;
     }
@@ -227,7 +229,7 @@ public class ItemAsgardShield extends ItemShield implements IDyeable
     }
 
     @Override
-    public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand)
+    public @NotNull EnumActionResult onItemUseFirst(EntityPlayer player, World world, @NotNull BlockPos pos, @NotNull EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand)
     {
         ItemStack stack = player.getHeldItem(hand);
         IBlockState state = world.getBlockState(pos);

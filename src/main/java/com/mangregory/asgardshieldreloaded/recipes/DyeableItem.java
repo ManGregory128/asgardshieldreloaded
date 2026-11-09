@@ -8,12 +8,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.RecipesArmorDyes;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.DyeUtils;
+import org.jetbrains.annotations.NotNull;
 
 // Courtesy of TheCodex6824
 public class DyeableItem extends RecipesArmorDyes
 {
     @Override
-    public boolean matches(InventoryCrafting inv, World worldIn)
+    public boolean matches(InventoryCrafting inv, @NotNull World world)
     {
         boolean hasDyedItem = false;
         boolean hasDye = false;
@@ -46,7 +47,7 @@ public class DyeableItem extends RecipesArmorDyes
     }
 
     @Override
-    public ItemStack getCraftingResult(InventoryCrafting inv)
+    public @NotNull ItemStack getCraftingResult(InventoryCrafting inv)
     {
         ItemStack toDye = ItemStack.EMPTY;
         ArrayList<ItemStack> dyes = new ArrayList<>();
@@ -109,11 +110,5 @@ public class DyeableItem extends RecipesArmorDyes
         }
 
         return ItemStack.EMPTY;
-    }
-
-    @Override
-    public boolean isDynamic()
-    {
-        return true;
     }
 }
