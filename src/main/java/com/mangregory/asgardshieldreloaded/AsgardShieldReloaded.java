@@ -23,7 +23,7 @@ public class AsgardShieldReloaded
     public static final String NAME = Tags.MOD_NAME;
     public static final String VERSION = Tags.VERSION;
     public static final String ACCEPTED_VERSIONS = "[1.12.2]";
-    public static final String DEPENDENCIES = "after:harkenscythe";
+    public static final String DEPENDENCIES = "required-after:mixinbooter@[10.7,)" + ";required-after:expandedevents@[1.3.1,)" + ";after:harkenscythe";
 
     @Mod.EventHandler
     public void init(FMLPreInitializationEvent event)

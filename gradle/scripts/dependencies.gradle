@@ -36,7 +36,6 @@ dependencies {
     compileOnly 'org.jetbrains:annotations:24.1.0'
 
     implementation 'mezz:jei:4.35.0'
-    implementation rfg.deobf('curse.maven:configanytime-870276:5212709')
 	implementation rfg.deobf('curse.maven:expanded-events-1396395:9427265')
 
     def modMap = [:]
