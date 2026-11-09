@@ -51,3 +51,63 @@ shadowJar {
     configurations = [project.configurations.shadowBundle]
     archiveClassifier = null           // shadowJar becomes the main artifact
 }
+
+// published file name: modid-loader-modversion-mcversion.jar
+tasks.shadowJar {
+    archiveFileName = "${rootProject.archives_name}-neoforge-${rootProject.mod_version}-${rootProject.minecraft_version}.jar"
+}
+
+tasks.register('verifyPublish') {
+    group = 'publishing'
+    description = 'Prints the artifact and metadata the publish tasks would upload (no network calls)'
+    doLast {
+        def artifact = tasks.shadowJar.archiveFile.get().asFile
+        println "artifact: ${artifact.name} (${artifact.length() / 1024} KB)"
+        def clFile = rootProject.file('CHANGELOG.md')
+        def clText = clFile.exists() ? clFile.text : ''
+        println "changelog: ${clText.length()} chars${clText ? ' | first line: ' + clText.readLines().find { !it.isBlank() } : ''}"
+        println "modrinth: projectId=${project.property('modrinth_project_id')} version=${modrinth.versionNumber.get()} type=${modrinth.versionType.get()} loaders=${modrinth.loaders.get()} gameVersions=${modrinth.gameVersions.get()}"
+        tasks.named('curseforge').get().uploadArtifacts.each { ua ->
+            println "curseforge: projectId=${project.property('curseforge_project_id')} file='${ua.displayName}' releaseType=${ua.releaseType} gameVersions=${ua.gameVersions}"
+        }
+    }
+}
+
+apply plugin: 'com.modrinth.minotaur'
+apply plugin: 'net.darkhax.curseforgegradle'
+
+// per-release changelog, kept local (gitignored) at the repo root
+def changelogFile = rootProject.file('CHANGELOG.md')
+def changelogText = changelogFile.exists() ? changelogFile.text : ''
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN") ?: project.findProperty("modrinthToken")
+    projectId = project.property("modrinth_project_id")
+    changelog = changelogText
+    versionNumber = "${rootProject.mod_version}"
+    versionName = "[${rootProject.minecraft_version}] ${rootProject.mod_version} - NeoForge"
+    versionType = project.findProperty("publishVersionType") ?: "release"
+    uploadFile = tasks.shadowJar
+    gameVersions = [rootProject.minecraft_version]
+    loaders = ["neoforge"]
+    dependencies {
+        required.project "M1953qlQ"
+        required.project "lhGA9TYQ"
+    }
+}
+
+tasks.register('curseforge', net.darkhax.curseforgegradle.TaskPublishCurseForge) {
+    apiToken = System.getenv("CURSEFORGE_API_KEY") ?: project.findProperty("curseforgeApiKey")
+    debugMode = (project.findProperty("curseforgeDryRun") ?: "false").toString().toBoolean()  // -PcurseforgeDryRun=true logs the upload without sending it
+    upload(project.property("curseforge_project_id"), tasks.shadowJar) {
+        displayName = "[${rootProject.minecraft_version}] ${rootProject.mod_version} - NeoForge"
+        releaseType = project.findProperty("publishVersionType") ?: "release"
+        changelog = changelogText
+        changelogType = "markdown"
+        addGameVersion(rootProject.minecraft_version)
+        addModLoader("NeoForge")
+        addJavaVersion("Java 25")
+        addEnvironment("Client", "Server")  // required since CF enforces environment tags
+        addRelations("requiredDependency", "architectury-api", "resourceful-config")
+    }
+}
