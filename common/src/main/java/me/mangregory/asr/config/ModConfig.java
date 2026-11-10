@@ -8,7 +8,7 @@ import com.teamresourceful.resourcefulconfig.common.annotations.LongRange;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
 
 @Config("asgard-shield-reloaded")
-public class ModConfig {
+public final class ModConfig {
 
     @Comment("Giant Sword maximum block duration in ticks (min 20 ticks = 1 second, max 200 ticks = 10 seconds)")
     @LongRange(min = 20, max = 200)
