@@ -33,7 +33,6 @@ public class EventEnderShieldBlock
         Item shield = event.getShield().getItem();
         String name = Objects.requireNonNull(shield.getRegistryName()).toString();
         double teleportChance;
-        float teleportKnockback;
 
         // Ender Shield: 20% chance to teleport attackers away
         // Gilded Ender Shield: 40% chance to teleport attackers away
@@ -41,11 +40,9 @@ public class EventEnderShieldBlock
         {
             case AsgardShieldReloaded.NAMESPACE + "ender_shield":
                 teleportChance = 0.2D;
-                teleportKnockback = 1.5F;
                 break;
             case AsgardShieldReloaded.NAMESPACE + "gilded_ender_shield":
                 teleportChance = 0.4D;
-                teleportKnockback = 2.0F;
                 break;
             default:
                 return;
@@ -59,7 +56,7 @@ public class EventEnderShieldBlock
             event.setResult(Event.Result.DENY);
         } else if (attacker instanceof EntityLivingBase && RandomUtil.chance(teleportChance))
         {
-            ShieldUtil.teleportEnemy(attacker, teleportKnockback);
+            ShieldUtil.teleportEnemy(attacker);
         }
 
         wielder.getEntityWorld().playSound(null, wielder.getPosition(), SoundEvents.ENTITY_ENDERDRAGON_HURT, SoundCategory.PLAYERS, 0.8F, 0.8F + wielder.getEntityWorld().rand.nextFloat() * 0.4F);

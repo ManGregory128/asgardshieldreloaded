@@ -123,7 +123,7 @@ public class ShieldUtil
         }
     }
 
-    public static float teleportEnemy(Entity enemy, float knockback)
+    public static void teleportEnemy(Entity enemy)
     {
         double d0 = enemy.posX + (enemy.getEntityWorld().rand.nextDouble() - 0.5D) * 64.0D;
         double d1 = enemy.posY + (enemy.getEntityWorld().rand.nextInt(64) - 32);
@@ -133,9 +133,7 @@ public class ShieldUtil
         {
             enemy.getEntityWorld().playSound(null, enemy.prevPosX, enemy.prevPosY, enemy.prevPosZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, enemy.getSoundCategory(), 1.0F, 1.0F);
             enemy.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);
-            return 0.0F;
         }
-        return knockback;
     }
 
     public static void updateConfusion(EntityLiving attacker)

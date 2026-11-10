@@ -32,6 +32,10 @@ item.asr.gilded_biomass_shield.name=Gilded Biomass Shield
 item.asr.livingmetal_shield.name=Livingmetal Shield
 item.asr.gilded_livingmetal_shield.name=Gilded Livingmetal Shield
 
+# DEATH MESSAGES
+death.attack.asr_diamond_reflect=%1$s was eliminated by a shield
+death.attack.asr_diamond_reflect.player=%1$s was eliminated by the shield of %2$s
+
 # GIANT SWORDS
 item.asr.diamond_giant_sword.name=Diamond Giant Sword
 item.asr.ender_giant_sword.name=Ender Giant Sword
@@ -47,12 +51,12 @@ item.asr.livingmetal_giant_sword.name=Livingmetal Giant Sword
 
 # TOOLTIPS
 item.asr.diamond_shield.perk=Special Perk: Reflect
-item.asr.diamond_shield.perk.desc=Reflects projectiles back to the attacker (30 percent chance)
+item.asr.diamond_shield.perk.desc=Reflects 3 damage back to the attacker
 item.asr.diamond_shield.weakness=Weakness: Displace
 item.asr.diamond_shield.weakness.desc=Reflected damage also damages the shield
 
 item.asr.gilded_diamond_shield.perk=Special Perk: Reflect
-item.asr.gilded_diamond_shield.perk.desc=Reflects projectiles back to the attacker (60 percent chance)
+item.asr.gilded_diamond_shield.perk.desc=Reflects 6 damage back to the attacker
 item.asr.gilded_diamond_shield.weakness=Weakness: Displace
 item.asr.gilded_diamond_shield.weakness.desc=Reflected damage also damages the shield
 
