@@ -1,0 +1,53 @@
+plugins {
+    id 'com.gradleup.shadow'
+}
+
+architectury {
+    platformSetupLoomIde()
+    forge()
+}
+
+loom {
+    forge {
+        mixinConfig 'asr.mixins.json'
+    }
+}
+
+configurations {
+    developmentForge.extendsFrom common
+}
+
+repositories {
+    maven {
+        name = 'MinecraftForge'
+        url = 'https://maven.minecraftforge.net/'
+    }
+}
+
+dependencies {
+    forge "net.minecraftforge:forge:$rootProject.forge_version"
+
+    // Architectury API. This is optional, and you can comment it out if you don't need it.
+    implementation "dev.architectury:architectury-forge:$rootProject.architectury_api_version"
+    modImplementation "com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-$rootProject.resourceful_config_version"
+
+    common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
+    shadowBundle project(path: ':common', configuration: 'transformProductionForge')
+}
+
+processResources {
+    inputs.property 'version', project.version
+
+    filesMatching('META-INF/mods.toml') {
+        expand version: inputs.properties.version
+    }
+}
+
+shadowJar {
+    configurations = [project.configurations.shadowBundle]
+    archiveClassifier = 'dev-shadow'
+}
+
+remapJar {
+    inputFile.set shadowJar.archiveFile
+}
