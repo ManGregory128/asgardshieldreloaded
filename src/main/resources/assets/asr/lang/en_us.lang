@@ -71,14 +71,14 @@ item.asr.gilded_ender_shield.weakness=Weakness: End Tech
 item.asr.gilded_ender_shield.weakness.desc=Ender folk can bypass the guard
 
 item.asr.golden_shield.perk=Special Perk: Paladin's Ward
-item.asr.golden_shield.perk.desc=Heals the wielder for a heart and a half plus 10 percent of the attacker's max health (25 percent chance)
+item.asr.golden_shield.perk.desc=Heals the wielder for three hearts plus 10 percent of the shield's damage taken (50 percent chance)
 item.asr.golden_shield.weakness=Weakness: Paladin's Oath
-item.asr.golden_shield.weakness.desc=Knockback is halved against non-undead attackers
+item.asr.golden_shield.weakness.desc=Does not heal you when blocking against non-undead attackers
 
 item.asr.blessed_golden_shield.perk=Special Perk: Paladin's Ward
-item.asr.blessed_golden_shield.perk.desc=Heals the wielder for three hearts plus 20 percent of the attacker's max health (50 percent chance)
+item.asr.blessed_golden_shield.perk.desc=Heals the wielder for six hearts plus 10 percent of the shield's damage taken (50 percent chance)
 item.asr.blessed_golden_shield.weakness=Weakness: Paladin's Oath
-item.asr.blessed_golden_shield.weakness.desc=Knockback is halved against non-undead attackers
+item.asr.blessed_golden_shield.weakness.desc=Does not heal you when blocking against non-undead attackers
 
 item.asr.iron_shield.perk=Special Perk: Explosive Resistant
 item.asr.iron_shield.perk.desc=Receives less explosion durability damage (50 percent chance)
@@ -103,7 +103,7 @@ item.asr.gilded_netherquartz_shield.weakness.desc=Has a chance to go into cooldo
 item.asr.patchwork_shield.perk=Special Perk: Foulness
 item.asr.patchwork_shield.perk.desc=Inflicts attackers with nausea or weakness (10 percent chance)
 item.asr.patchwork_shield.weakness=Weakness: Foulness
-item.asr.patchwork_shield.weakness.desc=Inflicts wielder with nausea (5 percent chance)
+item.asr.patchwork_shield.weakness.desc=Inflicts wielder with nausea (10 percent chance)
 
 item.asr.gilded_patchwork_shield.perk=Special Perk: Foulness
 item.asr.gilded_patchwork_shield.perk.desc=Inflicts attackers with nausea or weakness (20 percent chance)
