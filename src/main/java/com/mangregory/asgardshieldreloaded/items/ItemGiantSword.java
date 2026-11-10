@@ -1,18 +1,12 @@
 package com.mangregory.asgardshieldreloaded.items;
 
-import java.util.List;
 import javax.annotation.Nullable;
 
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
+import net.minecraft.item.*;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
@@ -24,90 +18,50 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.mangregory.asgardshieldreloaded.AsgardShieldReloaded;
 import com.mangregory.asgardshieldreloaded.config.ASRConfig;
 import com.mangregory.asgardshieldreloaded.init.ModItems;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemGiantSword extends ItemSword
 {
-    private final int maxUseDuration;
-    private int cooldown;
-    private boolean isBlocking;
-
-    public ItemGiantSword(String name, Item.ToolMaterial material, int maxUseDuration)
+    public ItemGiantSword(String name, Item.ToolMaterial material)
     {
         super(material);
         this.setTranslationKey(AsgardShieldReloaded.MOD_ID + "." + name);
         this.setRegistryName(name);
         this.setCreativeTab(CreativeTabs.COMBAT);
-        this.cooldown = 0;
-        this.maxUseDuration = maxUseDuration;
-        this.setBlocking(false);
         ModItems.ITEMS.add(this);
     }
 
-    public boolean getBlocking()
-    {
-        return isBlocking;
-    }
-
-    public void setBlocking(boolean blocking)
-    {
-        isBlocking = blocking;
-    }
-
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World world, EntityPlayer player, @NotNull EnumHand hand)
     {
-        ItemStack stack = playerIn.getHeldItem(handIn);
-        playerIn.setActiveHand(handIn);
-        if (ASRConfig.MISC.BLOCKING_SOUND) playerIn.getEntityWorld().playSound(null, playerIn.getPosition(), SoundEvents.ENTITY_IRONGOLEM_ATTACK, SoundCategory.PLAYERS, 0.8F, 0.8F + playerIn.getEntityWorld().rand.nextFloat() * 0.4F);
-        this.setBlocking(true);
+        ItemStack stack = player.getHeldItem(hand);
+        EnumHand oppositeHand = hand == EnumHand.MAIN_HAND ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND;
+        if (player.getHeldItem(oppositeHand).getItem() instanceof ItemAsgardShield) return new ActionResult<>(EnumActionResult.PASS, stack);
+        player.setActiveHand(hand);
+        if (ASRConfig.MISC.BLOCKING_SOUND) player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_IRONGOLEM_ATTACK, SoundCategory.PLAYERS, 0.8F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
         return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }
 
     @Override
-    public EnumAction getItemUseAction(ItemStack stack)
+    public boolean isShield(@NotNull ItemStack stack, @Nullable EntityLivingBase entity)
     {
-        if (this.getBlocking()) return EnumAction.BLOCK;
-        return EnumAction.NONE;
+        return true;
     }
 
     @Override
-    public int getMaxItemUseDuration(ItemStack stack)
+    public @NotNull EnumAction getItemUseAction(@NotNull ItemStack stack)
+    {
+        return EnumAction.BLOCK;
+    }
+
+    @Override
+    public int getMaxItemUseDuration(@NotNull ItemStack stack)
     {
         return 72000;
     }
 
     @Override
-    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
-    {
-        if (entityLiving instanceof EntityPlayer && !worldIn.isRemote)
-        {
-            ((EntityPlayer) entityLiving).getCooldownTracker().setCooldown(this, this.cooldown / 2);
-            this.cooldown = 0;
-        }
-        this.setBlocking(false);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
-    {
-        String duration = "tooltip." + AsgardShieldReloaded.MOD_ID + ".category.duration";
-        tooltip.add(I18n.format(duration) + ": " + this.maxUseDuration / 20 + "s");
-    }
-
-    @Override
-    public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
-    {
-        if (!player.world.isRemote) this.cooldown++;
-        if (this.cooldown >= this.maxUseDuration)
-        {
-            player.stopActiveHand();
-            this.setBlocking(false);
-        }
-    }
-
-    @Override
-    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)
+    public boolean shouldCauseReequipAnimation(@NotNull ItemStack oldStack, @NotNull ItemStack newStack, boolean slotChanged)
     {
         return slotChanged;
     }

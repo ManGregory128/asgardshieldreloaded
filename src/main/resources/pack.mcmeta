@@ -1,6 +1,6 @@
 {
-  "pack": {
-    "pack_format": 3,
-    "description": "AsgardShieldReloaded assets"
-  }
+	"pack": {
+		"description": "${mod_name} Resources",
+		"pack_format": 3
+	}
 }
