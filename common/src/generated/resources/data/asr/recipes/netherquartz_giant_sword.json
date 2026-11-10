@@ -3,10 +3,10 @@
   "category": "equipment",
   "key": {
     "#": {
-      "tag": "c:gems/quartz"
+      "tag": "asr:gems/quartz"
     },
     "/": {
-      "tag": "c:rods/blaze"
+      "tag": "asr:rods/blaze"
     }
   },
   "pattern": [

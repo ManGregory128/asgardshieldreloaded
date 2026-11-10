@@ -6,7 +6,7 @@
       "tag": "minecraft:planks"
     },
     "/": {
-      "tag": "c:rods/wooden"
+      "tag": "asr:rods/wooden"
     }
   },
   "pattern": [

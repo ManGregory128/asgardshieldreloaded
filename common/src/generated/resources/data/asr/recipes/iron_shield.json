@@ -6,7 +6,7 @@
       "item": "minecraft:iron_ingot"
     },
     "/": {
-      "tag": "c:leathers"
+      "tag": "asr:leathers"
     }
   },
   "pattern": [

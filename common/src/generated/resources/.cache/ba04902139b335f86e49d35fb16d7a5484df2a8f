@@ -1,4 +1,4 @@
-// 1.20.1	2026-11-10T14:02:31.8954427	Asgard Shield: Reloaded/asr models
+// 1.20.1	2026-11-10T16:57:36.8406815	Asgard Shield: Reloaded/asr models
 73bd9f317ebb2a071548946740d5e166af3f95a1 assets\asr\models\item\gilded_netherite_shield_blocking.json
 45db8c2218b63cbda7201987f7eb6fab96bd36ae assets\asr\models\item\skull_giant_sword_blocking.json
 36b1045c9c900a5fdd119c6e6b0ccda79373c7a7 assets\asr\models\item\diamond_giant_sword_blocking.json
@@ -38,8 +38,8 @@ a9c2b02bac389ddbc7f9c1b9eb6b6b36201d34f4 assets\asr\models\item\diamond_giant_sw
 77171a88929e6cb58791c244c011740c48987d4c assets\asr\models\item\netherquartz_shield.json
 4b00d3dc235a489b9dc47c899b2db95465718e26 assets\asr\models\item\netherite_giant_sword_blocking.json
 84c1fe8527695b64e787340ca225fe0a79a9f66d assets\asr\models\item\gilded_ender_shield.json
-d6cfd41ef7e7f5c9ecfdafc098162dd23c8f9ade assets\asr\models\item\gilded_diamond_shield_blocking.json
 ab5d25352791afdd3f96eb9e1da8058beb307fe4 assets\asr\models\item\gilded_iron_shield_blocking.json
+d6cfd41ef7e7f5c9ecfdafc098162dd23c8f9ade assets\asr\models\item\gilded_diamond_shield_blocking.json
 2d8d85de3648784bf953c542369a50db6e38a331 assets\asr\models\item\netherquartz_shield_blocking.json
 5d3c6b1572135bf5ca030b2d25072986a24823a3 assets\asr\models\item\copper_shield.json
 87db4081d9b8249b3d15accdd94ff8843edb7241 assets\asr\models\item\wooden_shield.json
@@ -52,6 +52,6 @@ e073527302e168f8884f21dddd1d6cb431a14e29 assets\asr\models\item\gilded_copper_sh
 746dcb8175c8df20096bfe10827c89e6b17fcb5b assets\asr\models\item\gilded_wooden_shield.json
 b696225b45a8f732479daaabd8527f0a91581cd1 assets\asr\models\item\diamond_shield.json
 1542d8974bc66868f1ba894deb8b9fc990716486 assets\asr\models\item\netherite_shield_blocking.json
-a535e7779721d945a7de8564379dcdfa8acf237c assets\asr\models\item\gilded_stone_shield.json
 357b446bcab2d91052b7ebf1823b9266ed0560a8 assets\asr\models\item\netherite_shield.json
+a535e7779721d945a7de8564379dcdfa8acf237c assets\asr\models\item\gilded_stone_shield.json
 d1d2ee9f679a37fce7d7f09f2dd1c0ac2f3a7d26 assets\asr\models\item\iron_giant_sword_blocking.json

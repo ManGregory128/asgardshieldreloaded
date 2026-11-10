@@ -22,6 +22,12 @@ public class ItemTagsProvider extends FabricTagProvider.ItemTagProvider {
             new ResourceLocation("minecraft", "enchantable/durability")
     );
 
+    // vanilla items for our recipe tags (1.20.1 has no c:/forge: tags on Fabric)
+    private static final TagKey<Item> GEMS_QUARTZ = TagKey.create(Registries.ITEM, new ResourceLocation("asr", "gems/quartz"));
+    private static final TagKey<Item> RODS_WOODEN = TagKey.create(Registries.ITEM, new ResourceLocation("asr", "rods/wooden"));
+    private static final TagKey<Item> RODS_BLAZE = TagKey.create(Registries.ITEM, new ResourceLocation("asr", "rods/blaze"));
+    private static final TagKey<Item> LEATHERS = TagKey.create(Registries.ITEM, new ResourceLocation("asr", "leathers"));
+
     public ItemTagsProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
         super(output, completableFuture);
     }
@@ -42,6 +48,11 @@ public class ItemTagsProvider extends FabricTagProvider.ItemTagProvider {
         add(ENCHANTABLE_DURABILITY, AsgardShieldItems.ASGARD_SHIELDS.stream()
                 .map(Supplier::get)
                 .toArray(Item[]::new));
+
+        add(GEMS_QUARTZ, net.minecraft.world.item.Items.QUARTZ);
+        add(RODS_WOODEN, net.minecraft.world.item.Items.STICK);
+        add(RODS_BLAZE, net.minecraft.world.item.Items.BLAZE_ROD);
+        add(LEATHERS, net.minecraft.world.item.Items.LEATHER);
     }
 
     private void add(TagKey<Item> tag, ItemLike... suppliers) {

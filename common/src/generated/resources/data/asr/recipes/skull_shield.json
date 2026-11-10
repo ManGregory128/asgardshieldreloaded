@@ -9,7 +9,7 @@
       "item": "minecraft:skeleton_skull"
     },
     "/": {
-      "tag": "c:leathers"
+      "tag": "asr:leathers"
     }
   },
   "pattern": [

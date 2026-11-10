@@ -6,7 +6,7 @@
       "tag": "minecraft:stone_tool_materials"
     },
     "/": {
-      "tag": "c:rods/wooden"
+      "tag": "asr:rods/wooden"
     }
   },
   "pattern": [

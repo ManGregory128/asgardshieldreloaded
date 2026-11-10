@@ -9,7 +9,7 @@
       "item": "minecraft:skeleton_skull"
     },
     "/": {
-      "tag": "c:rods/wooden"
+      "tag": "asr:rods/wooden"
     }
   },
   "pattern": [

@@ -9,7 +9,7 @@
       "item": "minecraft:ender_eye"
     },
     "/": {
-      "tag": "c:rods/blaze"
+      "tag": "asr:rods/blaze"
     }
   },
   "pattern": [

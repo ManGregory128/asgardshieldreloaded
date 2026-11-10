@@ -6,7 +6,7 @@
       "item": "minecraft:copper_ingot"
     },
     "/": {
-      "tag": "c:rods/wooden"
+      "tag": "asr:rods/wooden"
     }
   },
   "pattern": [

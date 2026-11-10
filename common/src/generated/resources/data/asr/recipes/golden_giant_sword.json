@@ -6,7 +6,7 @@
       "item": "minecraft:gold_ingot"
     },
     "/": {
-      "tag": "c:rods/wooden"
+      "tag": "asr:rods/wooden"
     }
   },
   "pattern": [

@@ -6,7 +6,7 @@
       "tag": "minecraft:planks"
     },
     "/": {
-      "tag": "c:leathers"
+      "tag": "asr:leathers"
     }
   },
   "pattern": [

@@ -17,14 +17,16 @@ import net.minecraft.world.level.ItemLike;
 import java.util.function.Consumer;
 
 public class ModRecipeProvider extends FabricRecipeProvider {
+    // 1.20.1 has no "c:" convention tags on either loader (old Forge branch used "forge:" tags,
+    // which don't exist on Fabric) - use our own asr: tags with the vanilla items instead
     private static final TagKey<Item> C_GEMS_QUARTZ =
-            TagKey.create(Registries.ITEM, new ResourceLocation("c", "gems/quartz"));
+            TagKey.create(Registries.ITEM, new ResourceLocation("asr", "gems/quartz"));
     private static final TagKey<Item> C_RODS_WOODEN =
-            TagKey.create(Registries.ITEM, new ResourceLocation("c", "rods/wooden"));
+            TagKey.create(Registries.ITEM, new ResourceLocation("asr", "rods/wooden"));
     private static final TagKey<Item> C_RODS_BLAZE =
-            TagKey.create(Registries.ITEM, new ResourceLocation("c", "rods/blaze"));
+            TagKey.create(Registries.ITEM, new ResourceLocation("asr", "rods/blaze"));
     private static final TagKey<Item> C_LEATHERS =
-            TagKey.create(Registries.ITEM, new ResourceLocation("c", "leathers"));
+            TagKey.create(Registries.ITEM, new ResourceLocation("asr", "leathers"));
 
     public ModRecipeProvider(FabricDataOutput output) {
         super(output);
