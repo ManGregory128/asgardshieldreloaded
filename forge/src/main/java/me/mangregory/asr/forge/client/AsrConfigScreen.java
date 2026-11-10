@@ -42,10 +42,12 @@ public class AsrConfigScreen extends ConfigScreen {
             }
             if (categories != null) this.removeWidget(categories);
             if (list != null) {
-                // RC sized the values list at 0.64x screen width beside the categories panel;
-                // re-center it now that the panel is gone (AbstractSelectionList has no setX/setWidth)
-                int listWidth = (int) (this.width * 0.64);
-                list.setLeftPos((this.width - listWidth) / 2);
+                // RC sizes the values list at 0.64x screen width beside the categories panel;
+                // stretch it across the full width now that the panel is gone (row width tracks list width)
+                var rect = list.getRectangle();
+                int margin = Math.max(10, this.width / 20);
+                list.updateSize(this.width - margin * 2, rect.height(), rect.top(), rect.top() + rect.height());
+                list.setLeftPos(margin);
             }
         }
     }
