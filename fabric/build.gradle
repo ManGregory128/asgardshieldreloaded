@@ -22,6 +22,11 @@ dependencies {
 
     modImplementation "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-$rootProject.resourceful_config_version"
 
+    // compile against the JEI API but do not include it at runtime
+    modCompileOnly("mezz.jei:jei-${minecraft_version}-fabric-api:${rootProject.jei_version}")
+    // at runtime, use the full JEI jar for Fabric
+    modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${rootProject.jei_version}")
+
     common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
     shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
 }
@@ -52,5 +57,65 @@ fabricApi {
         addToResources = false
         createSourceSet = false
         strictValidation = false
+    }
+}
+
+// Final artifact name follows the usual scheme: asr-<loader>-<modversion>-<mcversion>.jar
+tasks.remapJar {
+    archiveFileName = "${rootProject.archives_name}-fabric-${rootProject.mod_version}-${rootProject.minecraft_version}.jar"
+}
+
+tasks.register('verifyPublish') {
+    group = 'publishing'
+    description = 'Prints the artifact and metadata the publish tasks would upload (no network calls)'
+    doLast {
+        def artifact = tasks.remapJar.archiveFile.get().asFile
+        println "artifact: ${artifact.name} (${artifact.length() / 1024} KB)"
+        def clFile = rootProject.file('CHANGELOG.md')
+        def clText = clFile.exists() ? clFile.text : ''
+        println "changelog: ${clText.length()} chars${clText ? ' | first line: ' + clText.readLines().find { !it.isBlank() } : ''}"
+        println "modrinth: projectId=${project.property('modrinth_project_id')} version=${modrinth.versionNumber.get()} type=${modrinth.versionType.get()} loaders=${modrinth.loaders.get()} gameVersions=${modrinth.gameVersions.get()}"
+        tasks.named('curseforge').get().uploadArtifacts.each { ua ->
+            println "curseforge: projectId=${project.property('curseforge_project_id')} file='${ua.displayName}' releaseType=${ua.releaseType} gameVersions=${ua.gameVersions}"
+        }
+    }
+}
+
+apply plugin: 'com.modrinth.minotaur'
+apply plugin: 'net.darkhax.curseforgegradle'
+
+// per-release changelog, kept local (gitignored) at the repo root
+def changelogFile = rootProject.file('CHANGELOG.md')
+def changelogText = changelogFile.exists() ? changelogFile.text : ''
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN") ?: project.findProperty("modrinthToken")
+    projectId = project.property("modrinth_project_id")
+    changelog = changelogText
+    versionNumber = "${rootProject.mod_version}"
+    versionName = "[${rootProject.minecraft_version}] ${rootProject.mod_version} - Fabric"
+    versionType = project.findProperty("publishVersionType") ?: "release"
+    uploadFile = tasks.remapJar
+    gameVersions = [rootProject.minecraft_version]
+    loaders = ["fabric"]
+    dependencies {
+        required.project "lhGA9TYQ"   // architectury
+        required.project "M1953qlQ"   // resourcefulconfig
+    }
+}
+
+tasks.register('curseforge', net.darkhax.curseforgegradle.TaskPublishCurseForge) {
+    apiToken = System.getenv("CURSEFORGE_API_KEY") ?: project.findProperty("curseforgeApiKey")
+    debugMode = (project.findProperty("curseforgeDryRun") ?: "false").toString().toBoolean()  // -PcurseforgeDryRun=true logs the upload without sending it
+    upload(project.property("curseforge_project_id"), tasks.remapJar) {
+        displayName = "[${rootProject.minecraft_version}] ${rootProject.mod_version} - Fabric"
+        releaseType = project.findProperty("publishVersionType") ?: "release"
+        changelog = changelogText
+        changelogType = "markdown"
+        addGameVersion(rootProject.minecraft_version)
+        addModLoader("Fabric")
+        addJavaVersion("Java 17")
+        addEnvironment("Client", "Server")  // required since CF enforces environment tags
+        addRelations("requiredDependency", "architectury-api", "resourceful-config")
     }
 }
