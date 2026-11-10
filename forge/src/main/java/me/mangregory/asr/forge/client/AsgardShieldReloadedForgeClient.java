@@ -1,6 +1,5 @@
 package me.mangregory.asr.forge.client;
 
-import com.teamresourceful.resourcefulconfig.client.ConfigScreen;
 import me.mangregory.asr.AsgardShieldReloaded;
 import me.mangregory.asr.config.ModConfig;
 import me.mangregory.asr.items.init.AsgardShieldItems;
@@ -24,7 +23,7 @@ public final class AsgardShieldReloadedForgeClient {
         // extension point, which ModMenu picks up on 1.20.1
         ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
                 () -> new ConfigScreenHandler.ConfigScreenFactory((minecraft, parent) ->
-                        new ConfigScreen(parent, null, AsgardShieldReloaded.CONFIGURATOR.getConfig(ModConfig.class))));
+                        new AsrConfigScreen(parent, AsgardShieldReloaded.CONFIGURATOR.getConfig(ModConfig.class))));
         // Register HUD renderer for block time display (architectury event, works on Forge)
         BlockHudRenderer.register();
     }

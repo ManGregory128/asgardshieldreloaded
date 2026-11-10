@@ -1,6 +1,6 @@
 package me.mangregory.asr.fabric.compat.modmenu;
 
-import com.teamresourceful.resourcefulconfig.client.ConfigScreen;
+import me.mangregory.asr.fabric.client.AsrConfigScreen;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import me.mangregory.asr.AsgardShieldReloaded;
@@ -14,6 +14,6 @@ public class AsrModMenuApi implements ModMenuApi {
 
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return parent -> new ConfigScreen(parent, null, AsgardShieldReloaded.CONFIGURATOR.getConfig(ModConfig.class));
+        return parent -> new AsrConfigScreen(parent, AsgardShieldReloaded.CONFIGURATOR.getConfig(ModConfig.class));
     }
 }
