@@ -40,6 +40,8 @@ public class EventSkullShieldBlock
                 return;
         }
 
+        // Weakness: Brittle Bones
+        // There is a 10% chance for durability loss to be increased (3x) when blocking
         if (RandomUtil.chance(0.1D))
         {
             event.setShieldDamage(event.getShieldDamage() * 3.0F);

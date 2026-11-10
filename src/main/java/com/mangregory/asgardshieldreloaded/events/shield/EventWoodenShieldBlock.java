@@ -45,12 +45,12 @@ public class EventWoodenShieldBlock
                 return;
         }
 
+        // Weakness: Fire Damage
+        // Durability taken is increased (4x) while blocking against fire sources
         if (source.isFireDamage())
         {
-            //wielder.stopActiveHand();
-            //wielder.world.setEntityState(wielder, (byte) 30);
             event.setShieldDamage(event.getShieldDamage() * 4.0F);
-            //event.setShieldCooldown(5 * 20);
+            event.setShieldCooldown(5 * 20);
         }
 
         if (projectile instanceof EntityArrow)
@@ -59,10 +59,8 @@ public class EventWoodenShieldBlock
 
             if (arrow.isBurning())
             {
-                //wielder.stopActiveHand();
-                //wielder.world.setEntityState(wielder, (byte) 30);
                 event.setShieldDamage(event.getShieldDamage() * 4.0F);
-                //event.setShieldCooldown(5 * 20);
+                event.setShieldCooldown(5 * 20);
             }
 
             if (RandomUtil.chance(arrowChance))

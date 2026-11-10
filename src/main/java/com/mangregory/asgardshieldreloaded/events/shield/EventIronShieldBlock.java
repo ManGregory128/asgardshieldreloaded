@@ -42,6 +42,8 @@ public class EventIronShieldBlock
                 return;
         }
 
+        // Weakness: Water
+        // Durability taken is increased (2x) while in water or under rain
         if (wielder.isInWater() || wielder.world.isRainingAt(wielder.getPosition()))
         {
             event.setShieldDamage(event.getShieldDamage() * 2.0F);

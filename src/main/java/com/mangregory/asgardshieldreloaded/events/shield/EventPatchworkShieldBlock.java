@@ -45,6 +45,8 @@ public class EventPatchworkShieldBlock
                 return;
         }
 
+        // Weakness: Foulness
+        // There is a 10% chance to inflict the user with Nausea
         if (RandomUtil.chance(0.1D)) {
             wielder.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 8 * 20, 0));
         }

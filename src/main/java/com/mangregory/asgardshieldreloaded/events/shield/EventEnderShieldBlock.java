@@ -15,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Objects;
@@ -51,11 +52,11 @@ public class EventEnderShieldBlock
         }
 
         // TODO: Check mobs from other mods
+        // Weakness: End Tech
+        // Blocking won't work against ender type mobs
         if (attacker instanceof EntityEnderman || attacker instanceof EntityEndermite || attacker instanceof EntityDragon)
         {
-            wielder.stopActiveHand();
-            wielder.world.setEntityState(wielder, (byte) 30);
-            event.setShieldCooldown(5 * 20);
+            event.setResult(Event.Result.DENY);
         } else if (attacker instanceof EntityLivingBase && RandomUtil.chance(teleportChance))
         {
             ShieldUtil.teleportEnemy(attacker, teleportKnockback);

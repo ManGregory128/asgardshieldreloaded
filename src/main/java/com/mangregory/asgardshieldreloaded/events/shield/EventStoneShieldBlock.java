@@ -44,12 +44,13 @@ public class EventStoneShieldBlock
                 return;
         }
 
+        // Weakness: Explosions
+        // Durability taken is increased (10x) while blocking against explosions, additionally the shield is disabled for 20 seconds
+        // Stone is cheap
         if (source.isExplosion())
         {
-            //wielder.stopActiveHand();
-            //wielder.world.setEntityState(wielder, (byte) 30);
             event.setShieldDamage(event.getShieldDamage() * 10.0F);
-            //event.setShieldCooldown(20 * 20);
+            event.setShieldCooldown(20 * 20);
         }
 
         wielder.getEntityWorld().playSound(null, wielder.getPosition(), SoundEvents.BLOCK_NOTE_HAT, SoundCategory.PLAYERS, 1.2F, 0.8F + wielder.getEntityWorld().rand.nextFloat() * 0.4F);

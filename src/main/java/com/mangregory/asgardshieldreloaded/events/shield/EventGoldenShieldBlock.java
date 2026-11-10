@@ -47,6 +47,8 @@ public class EventGoldenShieldBlock
         if (RandomUtil.chance(0.5D) && wielder.shouldHeal() && attacker instanceof EntityLivingBase)
         {
             boolean isUndead = ((EntityLivingBase) attacker).getCreatureAttribute() == EnumCreatureAttribute.UNDEAD;
+            // Weakness: Paladin's Oath
+            // Healing will only work when blocking against undead
             if (isUndead)
             {
                 // TODO: Spawn particles when player is healed

@@ -46,6 +46,13 @@ public class EventQuartzShieldBlock
                 return;
         }
 
+        // Weakness: Fatigue
+        // There is a 10% chance for the shield to break for 5 seconds due to its heavy weight
+        if (RandomUtil.chance(0.1D))
+        {
+            event.setShieldCooldown(5 * 20);
+        }
+
         if (projectile instanceof EntityFireball && RandomUtil.chance(fireballChance))
         {
             EntityFireball fireball = (EntityFireball) projectile;
