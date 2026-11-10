@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "asr",
+  "version": "${version}",
+  "name": "Asgard Shield: Reloaded",
+  "description": "A Hexxit mod ported over to new Minecraft Versions. Includes Giant Swords and Asgard Shields!",
+  "authors": [
+    "ManGregory, ACGaming"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/asgard-shield-reloaded",
+    "sources": "https://github.com/ManGregory128/asgardshieldreloaded"
+  },
+  "license": " GPL-3.0",
+  "icon": "asr.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "me.mangregory.asr.fabric.AsgardShieldReloadedFabric"
+    ],
+    "client": [
+      "me.mangregory.asr.fabric.client.AsgardShieldReloadedFabricClient"
+    ]
+  },
+  "mixins": [
+    "asr.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.11",
+    "minecraft": "~1.20.1",
+    "java": ">=17",
+    "architectury": ">=9.2.14",
+    "fabric-api": "*"
+  }
+}

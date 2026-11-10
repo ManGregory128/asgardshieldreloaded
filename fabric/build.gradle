@@ -20,7 +20,6 @@ dependencies {
     // Architectury API. This is optional, and you can comment it out if you don't need it.
     modImplementation "dev.architectury:architectury-fabric:$rootProject.architectury_api_version"
 
-    modImplementation("com.terraformersmc:modmenu:${rootProject.modmenu_version}")
     modImplementation "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-$rootProject.resourceful_config_version"
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
@@ -42,16 +41,4 @@ shadowJar {
 
 remapJar {
     inputFile.set shadowJar.archiveFile
-}
-
-// Configure Fabric data generation to write generated resources into the common module
-def commonProject = project(":common")
-fabricApi {
-    configureDataGeneration() {
-        modId = "$rootProject.archives_name"
-        outputDirectory = commonProject.file("src/generated/resources")
-        addToResources = false
-        createSourceSet = false
-        strictValidation = false
-    }
 }

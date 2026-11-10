@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "me.mangregory.asr.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "client": [
+    "client.ItemInHandRendererMixin"
+  ],
+  "mixins": [
+    "LivingEntityAccessor",
+    "PlayerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

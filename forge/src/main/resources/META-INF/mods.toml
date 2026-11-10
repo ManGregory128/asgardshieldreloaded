@@ -1,0 +1,31 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="GNU GPL 3.0"
+
+[[mods]]
+modId="asr"
+version="${version}"
+displayName="Asgard Shield: Reloaded"
+authors="ManGregory, ACGaming"
+description='''A Hexxit mod ported over to new Minecraft Versions. Includes Giant Swords and Asgard Shields!'''
+
+[[dependencies.asr]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.asr]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.21)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.asr]]
+    modId="architectury"
+    mandatory=true
+    versionRange="[9,)"
+    ordering="NONE"
+    side="BOTH"
