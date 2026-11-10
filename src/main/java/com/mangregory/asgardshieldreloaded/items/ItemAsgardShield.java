@@ -140,12 +140,6 @@ public class ItemAsgardShield extends ItemShield implements IDyeable
     }
 
     @Override
-    public boolean shouldCauseReequipAnimation(@NotNull ItemStack oldStack, @NotNull ItemStack newStack, boolean slotChanged)
-    {
-        return slotChanged;
-    }
-
-    @Override
     public boolean isShield(@NotNull ItemStack stack, @Nullable EntityLivingBase entity)
     {
         return true;
