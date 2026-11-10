@@ -1,7 +1,9 @@
 package com.mangregory.asgardshieldreloaded.util;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -10,13 +12,28 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketEntityVelocity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class ShieldUtil
 {
+    private static final String CONFUSED_UNTIL = "ASRConfusedUntil";
+
+    public static void confuseEnemy(EntityLiving attacker, EntityPlayer player, int duration)
+    {
+        if (attacker == null || player == null) return;
+        if (!attacker.isEntityAlive()) return;
+        if (attacker.world.isRemote) return;
+
+        attacker.getEntityData().setLong(CONFUSED_UNTIL, attacker.world.getTotalWorldTime() + duration);
+        findNewTarget(attacker, player.getEntityBoundingBox().grow(10.0D));
+    }
+
     public static void dropArrowAtPlayer(EntityArrow arrow, EntityPlayer player)
     {
         arrow.pickupStatus = EntityArrow.PickupStatus.ALLOWED;
@@ -25,6 +42,27 @@ public class ShieldUtil
         arrow.motionZ = 0;
         arrow.setPosition(player.posX, player.posY, player.posZ);
         player.getEntityWorld().playSound(null, player.getPosition(), SoundEvents.ENTITY_ARROW_HIT_PLAYER, SoundCategory.PLAYERS, 0.8F, 0.8F + player.getEntityWorld().rand.nextFloat() * 0.4F);
+    }
+
+    private static void findNewTarget(EntityLiving attacker, AxisAlignedBB area)
+    {
+        List<EntityLivingBase> targets = attacker.world.getEntitiesWithinAABB(EntityLivingBase.class, area);
+        List<EntityLivingBase> validTargets = new ArrayList<>();
+
+        for (EntityLivingBase entity : targets)
+        {
+            if (!isValidTarget(attacker, entity)) continue;
+            validTargets.add(entity);
+        }
+
+        if (validTargets.isEmpty())
+        {
+            attacker.setAttackTarget(null);
+            return;
+        }
+
+        EntityLivingBase target = validTargets.get(attacker.world.rand.nextInt(validTargets.size()));
+        attacker.setAttackTarget(target);
     }
 
     // Meant for Harken Scythe shields
@@ -57,6 +95,11 @@ public class ShieldUtil
             }
         }
         return false;
+    }
+
+    private static boolean isValidTarget(EntityLiving attacker, EntityLivingBase target)
+    {
+        return target != null && target != attacker && target.isEntityAlive() && target instanceof IMob;
     }
 
     public static void reflectProjectile(EntityPlayer player, Entity projectile)
@@ -93,5 +136,21 @@ public class ShieldUtil
             return 0.0F;
         }
         return knockback;
+    }
+
+    public static void updateConfusion(EntityLiving attacker)
+    {
+        if (!attacker.getEntityData().hasKey(CONFUSED_UNTIL)) return;
+        long expiration = attacker.getEntityData().getLong(CONFUSED_UNTIL);
+
+        if (attacker.world.getTotalWorldTime() >= expiration)
+        {
+            attacker.getEntityData().removeTag(CONFUSED_UNTIL);
+            return;
+        }
+
+        EntityLivingBase currentTarget = attacker.getAttackTarget();
+        if (isValidTarget(attacker, currentTarget)) return;
+        findNewTarget(attacker, attacker.getEntityBoundingBox().grow(10.0D));
     }
 }

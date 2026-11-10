@@ -17,7 +17,6 @@ public class EventGiantSwordBlock {
     @SubscribeEvent
     public static void onShieldBlock(LivingBlockDamageEvent event) {
         Entity wielder = event.getEntity();
-        Entity attacker = event.getSource().getTrueSource();
         Item shield = event.getShield().getItem();
         String name = Objects.requireNonNull(shield.getRegistryName()).toString();
 

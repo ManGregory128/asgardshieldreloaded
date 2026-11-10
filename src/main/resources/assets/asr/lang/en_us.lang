@@ -76,25 +76,25 @@ item.asr.blessed_golden_shield.perk.desc=Heals the wielder for three hearts plus
 item.asr.blessed_golden_shield.weakness=Weakness: Paladin's Oath
 item.asr.blessed_golden_shield.weakness.desc=Knockback is halved against non-undead attackers
 
-item.asr.iron_shield.perk=Special Perk: Unmovable Object
+item.asr.iron_shield.perk=Special Perk: Explosive Resistant
 item.asr.iron_shield.perk.desc=Receives less explosion durability damage (50 percent chance)
 item.asr.iron_shield.weakness=Weakness: Water
 item.asr.iron_shield.weakness.desc=Iron begins to rust in wet environments, increasing durability damage taken
 
-item.asr.gilded_iron_shield.perk=Special Perk: Unmovable Object
+item.asr.gilded_iron_shield.perk=Special Perk: Explosive Resistant
 item.asr.gilded_iron_shield.perk.desc=Receives less explosion durability damage
 item.asr.gilded_iron_shield.weakness=Weakness: Water
 item.asr.gilded_iron_shield.weakness.desc=Iron begins to rust in wet environments, increasing durability damage taken
 
 item.asr.netherquartz_shield.perk=Special Perk: Flame Keeper
 item.asr.netherquartz_shield.perk.desc=Allows the wielder to collect fire charges from small fireballs (25 percent chance)
-item.asr.netherquartz_shield.weakness=Weakness: Hungering
-item.asr.netherquartz_shield.weakness.desc=The living mass feeds on the wielder, drains hunger gauge
+item.asr.netherquartz_shield.weakness=Weakness: Fatigue
+item.asr.netherquartz_shield.weakness.desc=Has a chance to go into cooldown, due to its heavy weight
 
 item.asr.gilded_netherquartz_shield.perk=Special Perk: Flame Keeper
 item.asr.gilded_netherquartz_shield.perk.desc=Allows the wielder to collect fire charges from small fireballs (50 percent chance)
-item.asr.gilded_netherquartz_shield.weakness=Weakness: Hungering
-item.asr.gilded_netherquartz_shield.weakness.desc=The living mass feeds on the wielder, drains hunger gauge
+item.asr.gilded_netherquartz_shield.weakness=Weakness: Fatigue
+item.asr.gilded_netherquartz_shield.weakness.desc=Has a chance to go into cooldown, due to its heavy weight
 
 item.asr.patchwork_shield.perk=Special Perk: Foulness
 item.asr.patchwork_shield.perk.desc=Inflicts attackers with nausea or weakness (10 percent chance)
@@ -107,23 +107,23 @@ item.asr.gilded_patchwork_shield.weakness=Weakness: Foulness
 item.asr.gilded_patchwork_shield.weakness.desc=Inflicts wielder with nausea (5 percent chance)
 
 item.asr.skull_shield.perk=Special Perk: Mind Control
-item.asr.skull_shield.perk.desc=Controls attacker (excluding bosses) to attack other targets or commit suicide when at 20 percent of max health or less (15 percent chance)
+item.asr.skull_shield.perk.desc=Has a chance to confuse attackers (excluding bosses) to go after other targets (15 percent chance)
 item.asr.skull_shield.weakness=Weakness: Brittle Bones
 item.asr.skull_shield.weakness.desc=Receives x3 durability damage (10 percent chance)
 
 item.asr.gilded_skull_shield.perk=Special Perk: Mind Control
-item.asr.gilded_skull_shield.perk.desc=Controls attacker (excluding bosses) to attack other targets or commit suicide when at 30 percent of max health or less (30 percent chance)
+item.asr.gilded_skull_shield.perk.desc=Has a chance to confuse attackers (excluding bosses) to go after other targets (30 percent chance)
 item.asr.gilded_skull_shield.weakness=Weakness: Brittle Bones
 item.asr.gilded_skull_shield.weakness.desc=Receives x3 durability damage (10 percent chance)
 
-item.asr.stone_shield.perk=Special Perk: Fire Protection
+item.asr.stone_shield.perk=Special Perk: Fire Resistant
 item.asr.stone_shield.perk.desc=Negates durability damage from fire sources (50 percent chance)
-item.asr.stone_shield.weakness=Weakness: Explosions
+item.asr.stone_shield.weakness=Weakness: Explosive Damage
 item.asr.stone_shield.weakness.desc=Stone breaks easily from strong overwhelming damage
 
-item.asr.gilded_stone_shield.perk=Special Perk: Fire Protection
+item.asr.gilded_stone_shield.perk=Special Perk: Fire Resistant
 item.asr.gilded_stone_shield.perk.desc=Negates durability damage from fire sources
-item.asr.gilded_stone_shield.weakness=Weakness: Explosions
+item.asr.gilded_stone_shield.weakness=Weakness: Explosive Damage
 item.asr.gilded_stone_shield.weakness.desc=Stone breaks easily from strong overwhelming damage
 
 item.asr.wooden_shield.perk=Special Perk: Arrow Catch

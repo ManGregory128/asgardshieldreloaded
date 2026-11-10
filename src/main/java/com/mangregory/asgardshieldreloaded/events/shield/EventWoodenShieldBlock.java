@@ -46,7 +46,7 @@ public class EventWoodenShieldBlock
         }
 
         // Weakness: Fire Damage
-        // Durability taken is increased (4x) while blocking against fire sources
+        // Durability taken is increased (4x) while blocking against fire sources, additionally the shield is disabled for 5 seconds
         if (source.isFireDamage())
         {
             event.setShieldDamage(event.getShieldDamage() * 4.0F);
