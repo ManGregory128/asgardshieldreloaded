@@ -31,6 +31,9 @@ dependencies {
     modImplementation "dev.architectury:architectury-forge:$rootProject.architectury_api_version"
     modImplementation "com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-$rootProject.resourceful_config_version"
 
+    // ModMenu for dev runs; the config screen is registered via Forge's ConfigScreenHandler extension point
+    modRuntimeOnly("com.terraformersmc:modmenu:${rootProject.modmenu_version}")
+
     // compile against the JEI API but do not include it at runtime
     modCompileOnly("mezz.jei:jei-${minecraft_version}-forge-api:${rootProject.jei_version}")
     // at runtime, use the full JEI jar for Forge

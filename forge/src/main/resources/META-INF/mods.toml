@@ -29,3 +29,10 @@ description='''A Hexxit mod ported over to new Minecraft Versions. Includes Gian
     versionRange="[9,)"
     ordering="NONE"
     side="BOTH"
+
+[[dependencies.asr]]
+    modId="modmenu"
+    mandatory=false
+    versionRange="[7,)"
+    ordering="NONE"
+    side="CLIENT"

@@ -26,11 +26,17 @@
     ],
     "jei_mod_plugin": [
       "me.mangregory.asr.fabric.compat.jei.ASRJeiPlugin"
+    ],
+    "modmenu": [
+      "me.mangregory.asr.fabric.compat.modmenu.AsrModMenuApi"
     ]
   },
   "mixins": [
     "asr.mixins.json"
   ],
+  "suggests": {
+    "modmenu": "*"
+  },
   "depends": {
     "fabricloader": ">=0.15.11",
     "minecraft": "~1.20.1",
