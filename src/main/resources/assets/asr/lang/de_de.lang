@@ -14,11 +14,11 @@ item.asr.gilded_iron_shield.name=Vergoldeter Eisenschild
 item.asr.netherquartz_shield.name=Netherquarzschild
 item.asr.gilded_netherquartz_shield.name=Vergoldeter Netherquarzschild
 
-item.asr.patchwork_shield.name=Patchworkschild
-item.asr.gilded_patchwork_shield.name=Vergoldeter Patchworkschild
+item.asr.patchwork_shield.name=Patchwork-Torso
+item.asr.gilded_patchwork_shield.name=Vergoldeter Patchwork-Torso
 
-item.asr.skull_shield.name=Skelettschädelschild
-item.asr.gilded_skull_shield.name=Vergoldeter Skelettschädelschild
+item.asr.skull_shield.name=Schädelschild
+item.asr.gilded_skull_shield.name=Vergoldeter Schädelschild
 
 item.asr.stone_shield.name=Steinschild
 item.asr.gilded_stone_shield.name=Vergoldeter Steinschild
@@ -32,14 +32,18 @@ item.asr.gilded_biomass_shield.name=Vergoldeter Biomasseschild
 item.asr.livingmetal_shield.name=Lebendmetallschild
 item.asr.gilded_livingmetal_shield.name=Vergoldeter Lebendmetallschild
 
+# DEATH MESSAGES
+death.attack.asr_diamond_reflect=%1$s wurde von einem Schild eliminiert
+death.attack.asr_diamond_reflect.player=%1$s wurde vom Schild von %2$s eliminiert
+
 # GIANT SWORDS
 item.asr.diamond_giant_sword.name=Diamantriesenschwert
 item.asr.ender_giant_sword.name=Enderriesenschwert
 item.asr.golden_giant_sword.name=Goldriesenschwert
 item.asr.iron_giant_sword.name=Eisenriesenschwert
 item.asr.netherquartz_giant_sword.name=Netherquarzriesenschwert
-item.asr.patchwork_giant_sword.name=Patchworkriesenschwert
-item.asr.skull_giant_sword.name=Skelettschädelriesenschwert
+item.asr.patchwork_giant_sword.name=Patchwork-Bein
+item.asr.skull_giant_sword.name=Schädelriesenschwert
 item.asr.stone_giant_sword.name=Steinriesenschwert
 item.asr.wooden_giant_sword.name=Holzriesenschwert
 item.asr.biomass_giant_sword.name=Biomasseriesenschwert
@@ -47,12 +51,12 @@ item.asr.livingmetal_giant_sword.name=Lebendmetallriesenschwert
 
 # TOOLTIPS
 item.asr.diamond_shield.perk=Besonderer Vorteil: Reflektieren
-item.asr.diamond_shield.perk.desc=Reflektiert Geschosse zurück zum Gegner (30-Prozent-Chance)
+item.asr.diamond_shield.perk.desc=Reflektiert 3 Schadenspunkte zurück zum Gegner
 item.asr.diamond_shield.weakness=Schwäche: Verlagern
 item.asr.diamond_shield.weakness.desc=Reflektierter Schaden beschädigt auch den Schild
 
 item.asr.gilded_diamond_shield.perk=Besonderer Vorteil: Reflektieren
-item.asr.gilded_diamond_shield.perk.desc=Reflektiert Geschosse zurück zum Gegner (60-Prozent-Chance)
+item.asr.gilded_diamond_shield.perk.desc=Reflektiert 6 Schadenspunkte zurück zum Gegner
 item.asr.gilded_diamond_shield.weakness=Schwäche: Verlagern
 item.asr.gilded_diamond_shield.weakness.desc=Reflektierter Schaden beschädigt auch den Schild
 
@@ -67,39 +71,39 @@ item.asr.gilded_ender_shield.weakness=Schwäche: Endtechnologie
 item.asr.gilded_ender_shield.weakness.desc=Enderbewohner können den Schutz umgehen
 
 item.asr.golden_shield.perk=Besonderer Vorteil: Paladinwache
-item.asr.golden_shield.perk.desc=Heilt den Träger um ein halbes Herz plus 4 Prozent der maximalen Gesundheit des Gegners (20-Prozent-Chance)
+item.asr.golden_shield.perk.desc=Heilt den Träger um drei Herzen plus 10 Prozent des erlittenen Schildschadens (50-Prozent-Chance)
 item.asr.golden_shield.weakness=Schwäche: Paladinschwur
-item.asr.golden_shield.weakness.desc=Rückschlag gegen nicht untote Gegner wird halbiert
+item.asr.golden_shield.weakness.desc=Heilt nicht, wenn gegen nicht-untote Gegner geblockt wird
 
 item.asr.blessed_golden_shield.perk=Besonderer Vorteil: Paladinwache
-item.asr.blessed_golden_shield.perk.desc=Heilt den Träger um ein halbes Herz plus 5 Prozent der maximalen Gesundheit des Gegners (30-Prozent-Chance)
+item.asr.blessed_golden_shield.perk.desc=Heilt den Träger um sechs Herzen plus 10 Prozent des erlittenen Schildschadens (50-Prozent-Chance)
 item.asr.blessed_golden_shield.weakness=Schwäche: Paladinschwur
-item.asr.blessed_golden_shield.weakness.desc=Rückschlag gegen nicht untote Gegner wird halbiert
+item.asr.blessed_golden_shield.weakness.desc=Heilt nicht, wenn gegen nicht-untote Gegner geblockt wird
 
-item.asr.iron_shield.perk=Besonderer Vorteil: Unbewegliches Objekt
-item.asr.iron_shield.perk.desc=Erhält weniger Schaden durch Explosionsbeständigkeit (50-Prozent-Chance)
+item.asr.iron_shield.perk=Besonderer Vorteil: Explosionsbeständig
+item.asr.iron_shield.perk.desc=Erhält weniger Haltbarkeitsschaden durch Explosionen (50-Prozent-Chance)
 item.asr.iron_shield.weakness=Schwäche: Wasser
 item.asr.iron_shield.weakness.desc=Eisen beginnt in feuchter Umgebung zu rosten und erhöht den erlittenen Haltbarkeitsschaden
 
-item.asr.gilded_iron_shield.perk=Besonderer Vorteil: Unbewegliches Objekt
-item.asr.gilded_iron_shield.perk.desc=Erhält weniger Schaden durch Explosionsbeständigkeit
+item.asr.gilded_iron_shield.perk=Besonderer Vorteil: Explosionsbeständig
+item.asr.gilded_iron_shield.perk.desc=Erhält weniger Haltbarkeitsschaden durch Explosionen
 item.asr.gilded_iron_shield.weakness=Schwäche: Wasser
-item.asr.gilded_iron_shield.weakness.desc=Eisen beginnt in feuchten Umgebungen zu rosten und erhöht den erlittenen Haltbarkeitsschaden
+item.asr.gilded_iron_shield.weakness.desc=Eisen beginnt in feuchter Umgebung zu rosten und erhöht den erlittenen Haltbarkeitsschaden
 
 item.asr.netherquartz_shield.perk=Besonderer Vorteil: Flammenbewahrer
-item.asr.netherquartz_shield.perk.desc=Ermöglicht es dem Träger, Feuerkugeln von kleinen Feuerbällen zu sammeln (50-Prozent-Chance)
-item.asr.netherquartz_shield.weakness=Schwäche: Hunger
-item.asr.netherquartz_shield.weakness.desc=Die lebende Masse ernährt sich vom Träger und verbraucht Nahrung
+item.asr.netherquartz_shield.perk.desc=Ermöglicht dem Träger, Feuerladungen von kleinen Feuerbällen zu sammeln (25-Prozent-Chance)
+item.asr.netherquartz_shield.weakness=Schwäche: Ermüdung
+item.asr.netherquartz_shield.weakness.desc=Hat aufgrund seines hohen Gewichts eine Chance, Abklingzeit zu erzeugen
 
 item.asr.gilded_netherquartz_shield.perk=Besonderer Vorteil: Flammenbewahrer
-item.asr.gilded_netherquartz_shield.perk.desc=Ermöglicht es dem Träger, Feuerkugeln von kleinen Feuerbällen zu sammeln
-item.asr.gilded_netherquartz_shield.weakness=Schwäche: Hunger
-item.asr.gilded_netherquartz_shield.weakness.desc=Die lebende Masse ernährt sich vom Träger und verbraucht Nahrung
+item.asr.gilded_netherquartz_shield.perk.desc=Ermöglicht dem Träger, Feuerladungen von kleinen Feuerbällen zu sammeln (50-Prozent-Chance)
+item.asr.gilded_netherquartz_shield.weakness=Schwäche: Ermüdung
+item.asr.gilded_netherquartz_shield.weakness.desc=Hat aufgrund seines hohen Gewichts eine Chance, Abklingzeit zu erzeugen
 
 item.asr.patchwork_shield.perk=Besonderer Vorteil: Verdorbenheit
 item.asr.patchwork_shield.perk.desc=Verursacht bei Gegnern Übelkeit oder Schwäche (10-Prozent-Chance)
 item.asr.patchwork_shield.weakness=Schwäche: Verdorbenheit
-item.asr.patchwork_shield.weakness.desc=Verursacht beim Träger Übelkeit (5-Prozent-Chance)
+item.asr.patchwork_shield.weakness.desc=Verursacht beim Träger Übelkeit (10-Prozent-Chance)
 
 item.asr.gilded_patchwork_shield.perk=Besonderer Vorteil: Verdorbenheit
 item.asr.gilded_patchwork_shield.perk.desc=Verursacht bei Gegnern Übelkeit oder Schwäche (20-Prozent-Chance)
@@ -107,32 +111,32 @@ item.asr.gilded_patchwork_shield.weakness=Schwäche: Verdorbenheit
 item.asr.gilded_patchwork_shield.weakness.desc=Verursacht beim Träger Übelkeit (5-Prozent-Chance)
 
 item.asr.skull_shield.perk=Besonderer Vorteil: Gedankenkontrolle
-item.asr.skull_shield.perk.desc=Zwingt den Gegner dazu, andere Ziele anzugreifen oder Selbstmord zu begehen (15-Prozent-Chance)
+item.asr.skull_shield.perk.desc=Hat eine Chance, Gegner (außer Bosse) zu verwirren, sodass sie andere Ziele angreifen (15-Prozent-Chance)
 item.asr.skull_shield.weakness=Schwäche: Brüchige Knochen
 item.asr.skull_shield.weakness.desc=Erhält x3 Haltbarkeitsschaden (10-Prozent-Chance)
 
 item.asr.gilded_skull_shield.perk=Besonderer Vorteil: Gedankenkontrolle
-item.asr.gilded_skull_shield.perk.desc=Zwingt den Gegner dazu, andere Ziele anzugreifen oder Selbstmord zu begehen (30-Prozent-Chance)
+item.asr.gilded_skull_shield.perk.desc=Hat eine Chance, Gegner (außer Bosse) zu verwirren, sodass sie andere Ziele angreifen (30-Prozent-Chance)
 item.asr.gilded_skull_shield.weakness=Schwäche: Brüchige Knochen
 item.asr.gilded_skull_shield.weakness.desc=Erhält x3 Haltbarkeitsschaden (10-Prozent-Chance)
 
 item.asr.stone_shield.perk=Besonderer Vorteil: Feuerschutz
 item.asr.stone_shield.perk.desc=Negiert Haltbarkeitsschaden durch Feuerquellen (50-Prozent-Chance)
-item.asr.stone_shield.weakness=Schwäche: Explosionen
+item.asr.stone_shield.weakness=Schwäche: Explosionsschaden
 item.asr.stone_shield.weakness.desc=Stein bricht leicht bei starkem, überwältigendem Schaden
 
 item.asr.gilded_stone_shield.perk=Besonderer Vorteil: Feuerschutz
 item.asr.gilded_stone_shield.perk.desc=Negiert Haltbarkeitsschaden durch Feuerquellen
-item.asr.gilded_stone_shield.weakness=Schwäche: Explosionen
+item.asr.gilded_stone_shield.weakness=Schwäche: Explosionsschaden
 item.asr.gilded_stone_shield.weakness.desc=Stein bricht leicht bei starkem, überwältigendem Schaden
 
 item.asr.wooden_shield.perk=Besonderer Vorteil: Pfeilfang
-item.asr.wooden_shield.perk.desc=Ermöglicht es dem Träger, Pfeile von Gegnern einzusammeln (50-Prozent-Chance)
+item.asr.wooden_shield.perk.desc=Ermöglicht dem Träger, Pfeile von Gegnern einzusammeln (25-Prozent-Chance)
 item.asr.wooden_shield.weakness=Schwäche: Feuerschaden
 item.asr.wooden_shield.weakness.desc=Feuer brennt schnell durch Holz, sei vorsichtig
 
 item.asr.gilded_wooden_shield.perk=Besonderer Vorteil: Pfeilfang
-item.asr.gilded_wooden_shield.perk.desc=Ermöglicht es dem Träger, Pfeile von Feinden einzusammeln
+item.asr.gilded_wooden_shield.perk.desc=Ermöglicht dem Träger, Pfeile von Gegnern einzusammeln (50-Prozent-Chance)
 item.asr.gilded_wooden_shield.weakness=Schwäche: Feuerschaden
 item.asr.gilded_wooden_shield.weakness.desc=Feuer brennt schnell durch Holz, sei vorsichtig
 
@@ -148,12 +152,12 @@ item.asr.gilded_biomass_shield.weakness.desc=Blutessenz wird einem Essenzbehält
 
 item.asr.livingmetal_shield.perk=Besonderer Vorteil: Seelenmatrix
 item.asr.livingmetal_shield.perk.desc=Gewährt dem Träger 10 Absorptionsherzen für 10 Sekunden (10-Prozent-Chance)
-item.asr.livingmetal_shield.weakness=Schwäche: Seelentrinker
+item.asr.livingmetal_shield.weakness=Schwäche: Seelenfresser
 item.asr.livingmetal_shield.weakness.desc=Seelenessenz wird einem Essenzbehälter entzogen, um Gesundheit zu spenden
 
 item.asr.gilded_livingmetal_shield.perk=Besonderer Vorteil: Seelenmatrix
 item.asr.gilded_livingmetal_shield.perk.desc=Gewährt dem Träger 10 Absorptionsherzen für 15 Sekunden (20-Prozent-Chance)
-item.asr.gilded_livingmetal_shield.weakness=Schwäche: Seelentrinker
+item.asr.gilded_livingmetal_shield.weakness=Schwäche: Seelenfresser
 item.asr.gilded_livingmetal_shield.weakness.desc=Seelenessenz wird einem Essenzbehälter entzogen, um Gesundheit zu spenden
 
 tooltip.asr.category.duration=Maximale Nutzungsdauer
