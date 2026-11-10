@@ -15,7 +15,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Objects;
 
-// TODO: Need to add diamond shield functionality
 @Mod.EventBusSubscriber
 public class EventDiamondShieldBlock
 {
