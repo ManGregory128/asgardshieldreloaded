@@ -20,6 +20,9 @@
     ],
     "client": [
       "me.mangregory.asr.fabric.client.AsgardShieldReloadedFabricClient"
+    ],
+    "fabric-datagen": [
+      "me.mangregory.asr.fabric.client.AsgardShieldReloadedDataGen"
     ]
   },
   "mixins": [

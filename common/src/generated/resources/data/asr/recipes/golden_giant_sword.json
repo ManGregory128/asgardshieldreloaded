@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:gold_ingot"
+    },
+    "/": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    " ##",
+    "###",
+    "/# "
+  ],
+  "result": {
+    "item": "asr:golden_giant_sword"
+  },
+  "show_notification": true
+}

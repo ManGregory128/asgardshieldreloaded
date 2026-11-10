@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "/": {
+      "tag": "c:leathers"
+    }
+  },
+  "pattern": [
+    "###",
+    "#/#",
+    " # "
+  ],
+  "result": {
+    "item": "asr:diamond_shield"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "tag": "c:gems/quartz"
+    },
+    "/": {
+      "tag": "c:leathers"
+    }
+  },
+  "pattern": [
+    "###",
+    "#/#",
+    " # "
+  ],
+  "result": {
+    "item": "asr:netherquartz_shield"
+  },
+  "show_notification": true
+}

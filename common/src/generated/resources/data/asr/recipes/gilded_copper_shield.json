@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:gold_ingot"
+    },
+    "/": {
+      "item": "asr:copper_shield"
+    }
+  },
+  "pattern": [
+    "###",
+    "#/#",
+    " # "
+  ],
+  "result": {
+    "item": "asr:gilded_copper_shield"
+  },
+  "show_notification": true
+}

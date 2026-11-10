@@ -42,3 +42,15 @@ shadowJar {
 remapJar {
     inputFile.set shadowJar.archiveFile
 }
+
+// Configure Fabric data generation to write generated resources into the common module
+def commonProject = project(":common")
+fabricApi {
+    configureDataGeneration() {
+        modId = "$rootProject.archives_name"
+        outputDirectory = commonProject.file("src/generated/resources")
+        addToResources = false
+        createSourceSet = false
+        strictValidation = false
+    }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "tag": "minecraft:stone_tool_materials"
+    },
+    "/": {
+      "tag": "c:leathers"
+    }
+  },
+  "pattern": [
+    "###",
+    "#/#",
+    " # "
+  ],
+  "result": {
+    "item": "asr:stone_shield"
+  },
+  "show_notification": true
+}

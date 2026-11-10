@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:gold_ingot"
+    },
+    "/": {
+      "item": "asr:wooden_shield"
+    }
+  },
+  "pattern": [
+    "###",
+    "#/#",
+    " # "
+  ],
+  "result": {
+    "item": "asr:gilded_wooden_shield"
+  },
+  "show_notification": true
+}

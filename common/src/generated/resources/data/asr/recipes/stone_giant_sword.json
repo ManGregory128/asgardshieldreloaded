@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "tag": "minecraft:stone_tool_materials"
+    },
+    "/": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    " ##",
+    "###",
+    "/# "
+  ],
+  "result": {
+    "item": "asr:stone_giant_sword"
+  },
+  "show_notification": true
+}
