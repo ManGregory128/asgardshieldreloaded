@@ -26,3 +26,6 @@ forge*changelog.txt
 
 # MacOS
 .DS_Store
+
+# per-release changelog, kept local (never committed)
+CHANGELOG.md
