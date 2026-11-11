@@ -2,10 +2,20 @@ plugins {
     id 'dev.architectury.loom' version '1.9-SNAPSHOT' apply false
     id 'architectury-plugin' version '3.4-SNAPSHOT'
     id 'com.gradleup.shadow' version '9.4.3' apply false
+    id 'com.modrinth.minotaur' version '2.+' apply false
+    id 'net.darkhax.curseforgegradle' version '1.2.30' apply false
 }
 
 architectury {
     minecraft = project.minecraft_version
+}
+
+// Publishes both loaders to Modrinth and CurseForge (tokens via MODRINTH_TOKEN / CURSEFORGE_API_KEY
+// env vars, or modrinthToken/curseforgeApiKey in ~/.gradle/gradle.properties)
+tasks.register('publishMods') {
+    group = 'publishing'
+    description = 'Publishes fabric + neoforge builds to Modrinth and CurseForge'
+    dependsOn ':fabric:modrinth', ':neoforge:modrinth', ':fabric:curseforge', ':neoforge:curseforge'
 }
 
 allprojects {
