@@ -79,10 +79,10 @@ modrinth {
     projectId = project.property("modrinth_project_id")
     changelog = changelogText
     versionNumber = "${rootProject.mod_version}"
-    versionName = "[${rootProject.minecraft_version}] ${rootProject.mod_version} - Fabric"
+    versionName = "[1.21-${rootProject.minecraft_version}] ${rootProject.mod_version} - Fabric"
     versionType = project.findProperty("publishVersionType") ?: "release"
     uploadFile = tasks.remapJar
-    gameVersions = [rootProject.minecraft_version]
+    gameVersions = [rootProject.minecraft_version, "1.21"]
     loaders = ["fabric"]
     dependencies {
         required.project "lhGA9TYQ"   // architectury
@@ -94,11 +94,12 @@ tasks.register('curseforge', net.darkhax.curseforgegradle.TaskPublishCurseForge)
     apiToken = System.getenv("CURSEFORGE_API_KEY") ?: project.findProperty("curseforgeApiKey")
     debugMode = (project.findProperty("curseforgeDryRun") ?: "false").toString().toBoolean()  // -PcurseforgeDryRun=true logs the upload without sending it
     upload(project.property("curseforge_project_id"), tasks.remapJar) {
-        displayName = "[${rootProject.minecraft_version}] ${rootProject.mod_version} - Fabric"
+        displayName = "[1.21-${rootProject.minecraft_version}] ${rootProject.mod_version} - Fabric"
         releaseType = project.findProperty("publishVersionType") ?: "release"
         changelog = changelogText
         changelogType = "markdown"
         addGameVersion(rootProject.minecraft_version)
+        addGameVersion("1.21")
         addModLoader("Fabric")
         addJavaVersion("Java 21")
         addEnvironment("Client", "Server")  // required since CF enforces environment tags
