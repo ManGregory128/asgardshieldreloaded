@@ -8,6 +8,7 @@ version="${version}"
 displayName="Asgard Shield: Reloaded"
 authors="ManGregory, ACGaming"
 description='''A Hexxit mod ported over to new Minecraft Versions. Includes Giant Swords and Asgard Shields!'''
+logoFile = "asr.png"
 
 [[dependencies.asr]]
     modId="forge"
@@ -31,8 +32,8 @@ description='''A Hexxit mod ported over to new Minecraft Versions. Includes Gian
     side="BOTH"
 
 [[dependencies.asr]]
-    modId="modmenu"
-    mandatory=false
-    versionRange="[7,)"
+    modId="resourcefulconfig"
+    mandatory=true
+    versionRange="[2.1.0,)"
     ordering="NONE"
-    side="CLIENT"
+    side="BOTH"
