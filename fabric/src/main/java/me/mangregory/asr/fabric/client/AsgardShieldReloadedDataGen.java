@@ -10,6 +10,8 @@ public class AsgardShieldReloadedDataGen implements DataGeneratorEntrypoint {
     public void onInitializeDataGenerator(FabricDataGenerator generator) {
         var pack = generator.createPack();
         pack.addProvider(EnUsLangProvider::new);
+        pack.addProvider(DeDeLangProvider::new);
+        pack.addProvider(ElGrLangProvider::new);
         pack.addProvider(ModelProvider::new);
         pack.addProvider(ItemTagsProvider::new);
         pack.addProvider((FabricDataGenerator.Pack.Factory<ItemDefinitionsProvider>) ItemDefinitionsProvider::new);
