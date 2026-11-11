@@ -1,5 +1,6 @@
 modLoader="javafml"
 loaderVersion="[47,)"
+issueTrackerURL="https://github.com/ManGregory128/asgardshieldreloaded/issues"
 license="GNU GPL 3.0"
 
 [[mods]]

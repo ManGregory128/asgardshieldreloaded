@@ -9,7 +9,8 @@
   ],
   "contact": {
     "homepage": "https://modrinth.com/mod/asgard-shield-reloaded",
-    "sources": "https://github.com/ManGregory128/asgardshieldreloaded"
+    "sources": "https://github.com/ManGregory128/asgardshieldreloaded",
+    "issues": "https://github.com/ManGregory128/asgardshieldreloaded/issues"
   },
   "license": " GPL-3.0",
   "icon": "asr.png",
