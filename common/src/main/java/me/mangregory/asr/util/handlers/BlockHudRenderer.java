@@ -1,6 +1,7 @@
 package me.mangregory.asr.util.handlers;
 
 import dev.architectury.event.events.client.ClientGuiEvent;
+import me.mangregory.asr.config.ClientConfigCache;
 import me.mangregory.asr.config.ModConfig;
 import me.mangregory.asr.items.AsgardShieldItem;
 import me.mangregory.asr.items.GiantSwordItem;
@@ -62,12 +63,15 @@ public class BlockHudRenderer {
 
         boolean isBlockingWithGiantSword = item instanceof GiantSwordItem;
 
-        // Get max duration from config
+        // Get max duration: on a dedicated server use the server-synced cache so the
+        // bar matches the server's block duration; in singleplayer read the live
+        // local config so in-game config changes apply without rejoining the world
+        boolean local = minecraft.hasSingleplayerServer();
         long maxDuration;
         if (isBlockingWithGiantSword) {
-            maxDuration = ModConfig.GIANT_SWORD_BLOCK_DURATION;
+            maxDuration = local ? ModConfig.GIANT_SWORD_BLOCK_DURATION : ClientConfigCache.giantSwordBlockDuration;
         } else {
-            maxDuration = ModConfig.ASGARD_SHIELD_BLOCK_DURATION;
+            maxDuration = local ? ModConfig.ASGARD_SHIELD_BLOCK_DURATION : ClientConfigCache.asgardShieldBlockDuration;
         }
 
         float fillPercentage = StackCooldowns.getFillPercentage(
