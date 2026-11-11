@@ -30,7 +30,10 @@ public final class StackCooldowns {
     }
 
     public static float getFillPercentage(Player player, ItemStack stack, float partialTick, int maxBlockDuration) {
-        if (player.isUsingItem() && player.getUseItem() == stack) {
+        // If the server already ended this block, its cooldown is synced through the stack
+        // component; a still-active client use (hold-to-reuse race in singleplayer) must
+        // not restart the bar
+        if (player.isUsingItem() && player.getUseItem() == stack && !isOnCooldown(player, stack)) {
             return Math.clamp(1.0F - (player.getTicksUsingItem() + partialTick) / maxBlockDuration, 0.0F, 1.0F);
         }
 

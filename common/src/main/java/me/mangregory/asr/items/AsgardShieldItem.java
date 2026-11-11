@@ -78,12 +78,20 @@ public class AsgardShieldItem extends ShieldItem {
 
     @Override
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int remainingUseDuration) {
-        if (!level.isClientSide() && entity instanceof Player player) {
+        if (!(entity instanceof Player player)) {
+            return;
+        }
+        if (!level.isClientSide()) {
             if (getCooldown(player, stack) >= this.maxBlockDuration) {
                 int blockTicks = getCooldown(player, stack);
                 entity.stopUsingItem();
                 StackCooldowns.addCooldown(player, stack, blockTicks / 2);
             }
+        } else if (StackCooldowns.isOnCooldown(player, stack)) {
+            // The server already stopped this block and its cooldown is synced via the stack
+            // component; stop the client-side use so hold-to-reuse cannot restart the block
+            // (and the HUD bar) while the key is still held (seen in singleplayer)
+            entity.stopUsingItem();
         }
     }
 
