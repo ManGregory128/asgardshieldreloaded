@@ -1,5 +1,7 @@
 package me.mangregory.asr.fabric.client;
 
+import me.mangregory.asr.fabric.client.datagen.DeDeLangProvider;
+import me.mangregory.asr.fabric.client.datagen.ElGrLangProvider;
 import me.mangregory.asr.fabric.client.datagen.EnUsLangProvider;
 import me.mangregory.asr.fabric.client.datagen.ItemTagsProvider;
 import me.mangregory.asr.fabric.client.datagen.ModelProvider;
@@ -13,6 +15,8 @@ public class AsgardShieldReloadedDataGen implements DataGeneratorEntrypoint {
     public void onInitializeDataGenerator(FabricDataGenerator generator) {
         var pack = generator.createPack();
         pack.addProvider(EnUsLangProvider::new);
+        pack.addProvider(DeDeLangProvider::new);
+        pack.addProvider(ElGrLangProvider::new);
         pack.addProvider(ModelProvider::new);
         pack.addProvider(ModRecipeProvider::new);
         pack.addProvider((FabricDataGenerator.Pack.RegistryDependentFactory<ItemTagsProvider>) ItemTagsProvider::new);
