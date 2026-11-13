@@ -3,45 +3,38 @@ package me.mangregory.asr.fabric.client.datagen;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import me.mangregory.asr.items.init.AsgardShieldItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.minecraft.core.Registry;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 // 1.20.1: ItemModelGenerators.output is private, so write the model JSONs directly as a DataProvider
 public class ModelProvider implements DataProvider {
-    private final FabricDataOutput output;
+    private final FabricDataGenerator output;
 
-    public ModelProvider(FabricDataOutput output) {
+    public ModelProvider(FabricDataGenerator output) {
         this.output = output;
     }
 
     @Override
-    public CompletableFuture<?> run(CachedOutput cache) {
-        List<CompletableFuture<?>> futures = new ArrayList<>();
-        AsgardShieldItems.GIANT_SWORDS.forEach(sword ->
-                modelFiles(cache, futures, sword.get(), true));
-        AsgardShieldItems.ASGARD_SHIELDS.forEach(shield ->
-                modelFiles(cache, futures, shield.get(), false));
-        return CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new));
+    public void run(CachedOutput cache) throws java.io.IOException {
+        for (var sword : AsgardShieldItems.GIANT_SWORDS) modelFiles(cache, sword.get(), true);
+        for (var shield : AsgardShieldItems.ASGARD_SHIELDS) modelFiles(cache, shield.get(), false);
     }
 
-    private void modelFiles(CachedOutput cache, List<CompletableFuture<?>> futures, Item item, boolean sword) {
-        ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(item);
+    private void modelFiles(CachedOutput cache, Item item, boolean sword) throws java.io.IOException {
+        ResourceLocation itemId = Registry.ITEM.getKey(item);
         ResourceLocation texture = new ResourceLocation(itemId.getNamespace(), "item/" + itemId.getPath());
         ResourceLocation blockingModelId = new ResourceLocation(itemId.getNamespace(), "item/" + itemId.getPath() + "_blocking");
 
         Path basePath = modelPath(itemId, false);
         Path blockingPath = modelPath(itemId, true);
-        futures.add(DataProvider.saveStable(cache, sword ? baseSwordModelJson(texture, blockingModelId) : baseShieldModelJson(texture, blockingModelId), basePath));
-        futures.add(DataProvider.saveStable(cache, sword ? blockingSwordModelJson(texture) : blockingShieldModelJson(texture), blockingPath));
+        DataProvider.saveStable(cache, sword ? baseSwordModelJson(texture, blockingModelId) : baseShieldModelJson(texture, blockingModelId), basePath);
+        DataProvider.saveStable(cache, sword ? blockingSwordModelJson(texture) : blockingShieldModelJson(texture), blockingPath);
     }
 
     private Path modelPath(ResourceLocation itemId, boolean blocking) {

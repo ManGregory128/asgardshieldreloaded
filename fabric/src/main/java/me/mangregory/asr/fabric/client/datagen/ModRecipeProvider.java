@@ -1,9 +1,9 @@
 package me.mangregory.asr.fabric.client.datagen;
 
 import me.mangregory.asr.items.init.AsgardShieldItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.*;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
@@ -20,20 +20,20 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     // 1.20.1 has no "c:" convention tags on either loader (old Forge branch used "forge:" tags,
     // which don't exist on Fabric) - use our own asr: tags with the vanilla items instead
     private static final TagKey<Item> C_GEMS_QUARTZ =
-            TagKey.create(Registries.ITEM, new ResourceLocation("asr", "gems/quartz"));
+            TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation("asr", "gems/quartz"));
     private static final TagKey<Item> C_RODS_WOODEN =
-            TagKey.create(Registries.ITEM, new ResourceLocation("asr", "rods/wooden"));
+            TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation("asr", "rods/wooden"));
     private static final TagKey<Item> C_RODS_BLAZE =
-            TagKey.create(Registries.ITEM, new ResourceLocation("asr", "rods/blaze"));
+            TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation("asr", "rods/blaze"));
     private static final TagKey<Item> C_LEATHERS =
-            TagKey.create(Registries.ITEM, new ResourceLocation("asr", "leathers"));
+            TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation("asr", "leathers"));
 
-    public ModRecipeProvider(FabricDataOutput output) {
+    public ModRecipeProvider(FabricDataGenerator output) {
         super(output);
     }
 
     @Override
-    public void buildRecipes(Consumer<FinishedRecipe> recipeOutput) {
+    public void generateRecipes(Consumer<FinishedRecipe> recipeOutput) {
 
         giantSwordCommonTag(recipeOutput, AsgardShieldItems.WOODEN_GIANT_SWORD.get(), ItemTags.PLANKS, C_RODS_WOODEN, ItemTags.PLANKS);
         giantSwordCommonTag(recipeOutput, AsgardShieldItems.DIAMOND_GIANT_SWORD.get(), Items.DIAMOND, C_RODS_WOODEN, Items.DIAMOND);
@@ -74,7 +74,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             TagKey<Item> rodTag,
             Item unlockRepresentative
     ) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+        ShapedRecipeBuilder.shaped(result)
                 .pattern(" ##")
                 .pattern("###")
                 .pattern("/# ")
@@ -91,7 +91,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             TagKey<Item> rodTag,
             TagKey<Item> unlockRepresentative
     ) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+        ShapedRecipeBuilder.shaped(result)
                 .pattern(" ##")
                 .pattern("###")
                 .pattern("/# ")
@@ -102,7 +102,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     }
 
     private void giantSwordEnder(Consumer<FinishedRecipe> out, ItemLike result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+        ShapedRecipeBuilder.shaped(result)
                 .pattern(" ##")
                 .pattern("#*#")
                 .pattern("/# ")
@@ -114,19 +114,19 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     }
 
     private void netheriteUpgrades(Consumer<FinishedRecipe> out, ItemLike base, ItemLike result) {
-        SmithingTransformRecipeBuilder.smithing(
-                Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+        // 1.19.2 legacy smithing: (base, addition) - the netherite upgrade template item only
+        // exists from 1.20; in 1.19.2 the addition is the netherite ingot itself
+        UpgradeRecipeBuilder.smithing(
                 Ingredient.of(base),
                 Ingredient.of(Items.NETHERITE_INGOT),
-                RecipeCategory.COMBAT,
                 result.asItem()
         )
-                .unlocks("has_template", has(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE))
+                .unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT))
                 .save(out, result + "_smithing");
     }
 
     private void giantSwordSkull(Consumer<FinishedRecipe> out, ItemLike result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+        ShapedRecipeBuilder.shaped(result)
                 .pattern(" ##")
                 .pattern("#*#")
                 .pattern("/# ")
@@ -143,7 +143,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             TagKey<Item> plateTag,
             TagKey<Item> unlockRepresentative
     ) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+        ShapedRecipeBuilder.shaped(result)
                 .pattern("###")
                 .pattern("#/#")
                 .pattern(" # ")
@@ -158,7 +158,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             Item plateTag,
             Item unlockRepresentative
     ) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+        ShapedRecipeBuilder.shaped(result)
                 .pattern("###")
                 .pattern("#/#")
                 .pattern(" # ")
@@ -173,7 +173,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             ItemLike result,
             ItemLike shield
     ) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+        ShapedRecipeBuilder.shaped(result)
                 .pattern("###")
                 .pattern("#/#")
                 .pattern(" # ")
@@ -187,7 +187,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             Consumer<FinishedRecipe> out,
             ItemLike result
     ) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+        ShapedRecipeBuilder.shaped(result)
                 .pattern("#*#")
                 .pattern("#/#")
                 .pattern(" # ")
@@ -202,7 +202,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             Consumer<FinishedRecipe> out,
             ItemLike result
     ) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+        ShapedRecipeBuilder.shaped(result)
                 .pattern("#*#")
                 .pattern("#/#")
                 .pattern(" # ")
