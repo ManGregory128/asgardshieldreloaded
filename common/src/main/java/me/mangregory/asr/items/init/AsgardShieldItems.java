@@ -5,8 +5,7 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import me.mangregory.asr.AsgardShieldReloaded;
 import me.mangregory.asr.items.AsgardShieldItem;
 import me.mangregory.asr.items.GiantSwordItem;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -15,12 +14,12 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class AsgardShieldItems {
-    // 1.20.1: CreativeModeTabs keys are private, so build the combat tab key directly
-    private static final ResourceKey<CreativeModeTab> COMBAT_TAB = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation("combat"));
+    // 1.19.2: creative tabs are plain instances, no registry key
+    private static final CreativeModeTab COMBAT_TAB = CreativeModeTab.TAB_COMBAT;
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(
             AsgardShieldReloaded.MOD_ID,
-            Registries.ITEM
+            Registry.ITEM_REGISTRY
     );
 
     public static RegistrySupplier<Item> DIAMOND_GIANT_SWORD;
@@ -59,117 +58,117 @@ public class AsgardShieldItems {
     public static void init() {
         DIAMOND_GIANT_SWORD = registerItem("diamond_giant_sword",
                 () -> new GiantSwordItem(AsgardShieldToolMaterials.ALTDIAMOND, new Item.Properties().durability(AsgardShieldToolMaterials.ALTDIAMOND.getUses())
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         IRON_GIANT_SWORD = registerItem("iron_giant_sword",
                 () -> new GiantSwordItem(AsgardShieldToolMaterials.ALTIRON, new Item.Properties().durability(AsgardShieldToolMaterials.ALTIRON.getUses())
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         GOLDEN_GIANT_SWORD = registerItem("golden_giant_sword",
                 () -> new GiantSwordItem(AsgardShieldToolMaterials.ALTGOLD, new Item.Properties().durability(AsgardShieldToolMaterials.ALTGOLD.getUses())
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         COPPER_GIANT_SWORD = registerItem("copper_giant_sword",
                 () -> new GiantSwordItem(AsgardShieldToolMaterials.ALTCOPPER, new Item.Properties().durability(AsgardShieldToolMaterials.ALTCOPPER.getUses())
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         NETHERITE_GIANT_SWORD = registerItem("netherite_giant_sword",
                 () -> new GiantSwordItem(AsgardShieldToolMaterials.ALTNETHERITE, new Item.Properties().durability(AsgardShieldToolMaterials.ALTNETHERITE.getUses()).fireResistant()
                         .fireResistant()
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         STONE_GIANT_SWORD = registerItem("stone_giant_sword",
                 () -> new GiantSwordItem(AsgardShieldToolMaterials.ALTSTONE, new Item.Properties().durability(AsgardShieldToolMaterials.ALTSTONE.getUses())
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         WOODEN_GIANT_SWORD = registerItem("wooden_giant_sword",
                 () -> new GiantSwordItem(AsgardShieldToolMaterials.ALTWOOD, new Item.Properties().durability(AsgardShieldToolMaterials.ALTWOOD.getUses())
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         ENDER_GIANT_SWORD = registerItem("ender_giant_sword",
                 () -> new GiantSwordItem(AsgardShieldToolMaterials.ENDTOOLMATERIAL, new Item.Properties().durability(AsgardShieldToolMaterials.ENDTOOLMATERIAL.getUses())
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         NETHERQUARTZ_GIANT_SWORD = registerItem("netherquartz_giant_sword",
                 () -> new GiantSwordItem(AsgardShieldToolMaterials.NQ_TOOLMATERIAL, new Item.Properties().durability(AsgardShieldToolMaterials.NQ_TOOLMATERIAL.getUses())
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         SKULL_GIANT_SWORD = registerItem("skull_giant_sword",
                 () -> new GiantSwordItem(AsgardShieldToolMaterials.SKULL_TOOLMATERIAL, new Item.Properties().durability(AsgardShieldToolMaterials.SKULL_TOOLMATERIAL.getUses())
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
 
         ENDER_SHIELD = registerItem("ender_shield",
                 () -> new AsgardShieldItem(new Item.Properties().durability(600)
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         GILDED_ENDER_SHIELD = registerItem("gilded_ender_shield",
                 () -> new AsgardShieldItem(new Item.Properties().durability(700)
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         DIAMOND_SHIELD = registerItem("diamond_shield",
                 () -> new AsgardShieldItem(new Item.Properties().durability(600)
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         GILDED_DIAMOND_SHIELD = registerItem("gilded_diamond_shield",
                 () -> new AsgardShieldItem(new Item.Properties().durability(680)
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         NETHERQUARTZ_SHIELD = registerItem("netherquartz_shield",
                 () -> new AsgardShieldItem(new Item.Properties().durability(450)
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         GILDED_NETHERQUARTZ_SHIELD = registerItem("gilded_netherquartz_shield",
                 () -> new AsgardShieldItem(new Item.Properties().durability(500)
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         SKULL_SHIELD = registerItem("skull_shield",
                 () -> new AsgardShieldItem(new Item.Properties().durability(500)
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         GILDED_SKULL_SHIELD = registerItem("gilded_skull_shield",
                 () -> new AsgardShieldItem(new Item.Properties().durability(580)
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         IRON_SHIELD = registerItem("iron_shield",
                 () -> new AsgardShieldItem(new Item.Properties().durability(400)
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         GILDED_IRON_SHIELD = registerItem("gilded_iron_shield",
                 () -> new AsgardShieldItem(new Item.Properties().durability(480)
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         STONE_SHIELD = registerItem("stone_shield",
                 () -> new AsgardShieldItem(new Item.Properties().durability(300)
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         GILDED_STONE_SHIELD = registerItem("gilded_stone_shield",
                 () -> new AsgardShieldItem(new Item.Properties().durability(330)
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         COPPER_SHIELD = registerItem("copper_shield",
                 () -> new AsgardShieldItem(new Item.Properties().durability(350)
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         GILDED_COPPER_SHIELD = registerItem("gilded_copper_shield",
                 () -> new AsgardShieldItem(new Item.Properties().durability(380)
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         NETHERITE_SHIELD = registerItem("netherite_shield",
                 () -> new AsgardShieldItem(new Item.Properties().durability(800).fireResistant()
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         GILDED_NETHERITE_SHIELD = registerItem("gilded_netherite_shield",
                 () -> new AsgardShieldItem(new Item.Properties().durability(900).fireResistant()
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         WOODEN_SHIELD = registerItem("wooden_shield",
                 () -> new AsgardShieldItem(new Item.Properties().durability(215)
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
         GILDED_WOODEN_SHIELD = registerItem("gilded_wooden_shield",
                 () -> new AsgardShieldItem(new Item.Properties().durability(280)
-                        .arch$tab(COMBAT_TAB))
+                        .tab(COMBAT_TAB))
         );
 
         GIANT_SWORDS = List.of(

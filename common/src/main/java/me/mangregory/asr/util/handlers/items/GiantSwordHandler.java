@@ -3,7 +3,7 @@ package me.mangregory.asr.util.handlers.items;
 import dev.architectury.event.EventResult;
 import me.mangregory.asr.config.ModConfig;
 import me.mangregory.asr.util.handlers.EventHandler;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
@@ -21,7 +21,7 @@ public class GiantSwordHandler {
         Entity enemy = source.getEntity();
         long damageAccumulator = ModConfig.GIANT_SWORD_BASE_ATTACKDMG;
 
-        ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(item);
+        ResourceLocation itemId = Registry.ITEM.getKey(item);
         
         if (itemId.equals(new ResourceLocation("asr", "stone_giant_sword"))) {
             playSound(player, SoundEvents.STONE_BREAK, 0.8F);
@@ -29,9 +29,9 @@ public class GiantSwordHandler {
                    itemId.equals(new ResourceLocation("asr", "golden_giant_sword"))) {
             playSound(player, SoundEvents.ANVIL_LAND, 0.6F);
         } else if (itemId.equals(new ResourceLocation("asr", "diamond_giant_sword"))) {
-            playSound(player, SoundEvents.NOTE_BLOCK_CHIME.value(), 0.8F);
+            playSound(player, SoundEvents.NOTE_BLOCK_CHIME, 0.8F);
         } else if (itemId.equals(new ResourceLocation("asr", "netherquartz_giant_sword"))) {
-            playSound(player, SoundEvents.NOTE_BLOCK_XYLOPHONE.value(), 0.8F);
+            playSound(player, SoundEvents.NOTE_BLOCK_XYLOPHONE, 0.8F);
         } else if (itemId.equals(new ResourceLocation("asr", "skull_giant_sword"))) {
             playSound(player, SoundEvents.SKELETON_HURT, 0.8F);
         } else if (itemId.equals(new ResourceLocation("asr", "ender_giant_sword"))) {

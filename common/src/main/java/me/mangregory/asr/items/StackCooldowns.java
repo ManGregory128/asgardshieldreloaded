@@ -12,18 +12,18 @@ public final class StackCooldowns {
 
     public static boolean isOnCooldown(Player player, ItemStack stack) {
         StackCooldown cooldown = get(stack);
-        return cooldown.cooldownUntil() > player.level().getGameTime();
+        return cooldown.cooldownUntil() > player.level.getGameTime();
     }
 
     public static long getRemainingCooldown(Player player, ItemStack stack) {
         StackCooldown cooldown = get(stack);
-        return Math.max(0L, cooldown.cooldownUntil() - player.level().getGameTime());
+        return Math.max(0L, cooldown.cooldownUntil() - player.level.getGameTime());
     }
 
     public static void addCooldown(Player player, ItemStack stack, int duration) {
         CompoundTag tag = stack.getOrCreateTag();
         tag.putInt(StackCooldown.BLOCK_TICKS_KEY, duration);
-        tag.putLong(StackCooldown.COOLDOWN_UNTIL_KEY, player.level().getGameTime() + duration);
+        tag.putLong(StackCooldown.COOLDOWN_UNTIL_KEY, player.level.getGameTime() + duration);
     }
 
     public static int getBlockTicks(Player player, ItemStack stack) {
@@ -40,10 +40,10 @@ public final class StackCooldowns {
         }
 
         StackCooldown cooldown = get(stack);
-        if (cooldown.cooldownUntil() <= player.level().getGameTime() || cooldown.blockTicks() <= 0)
+        if (cooldown.cooldownUntil() <= player.level.getGameTime() || cooldown.blockTicks() <= 0)
             return 1.0F;
 
-        double now = player.level().getGameTime() + partialTick;
+        double now = player.level.getGameTime() + partialTick;
         double remaining = (cooldown.cooldownUntil() - now) / cooldown.blockTicks();
         return (float) Mth.clamp(1.0D - remaining, 0.0D, 1.0D);
     }

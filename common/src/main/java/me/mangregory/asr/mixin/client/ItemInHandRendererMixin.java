@@ -53,6 +53,6 @@ abstract class ItemInHandRendererMixin {
         if (old.isEmpty() || current.isEmpty()) return false;
         Item item = current.getItem();
         if (!(item instanceof GiantSwordItem) && !(item instanceof AsgardShieldItem)) return false;
-        return ItemStack.isSameItem(old, current);
+        return ItemStack.isSame(old, current);
     }
 }

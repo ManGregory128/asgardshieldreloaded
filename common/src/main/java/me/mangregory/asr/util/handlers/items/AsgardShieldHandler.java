@@ -4,14 +4,14 @@ import dev.architectury.event.EventResult;
 import me.mangregory.asr.config.ModConfig;
 import me.mangregory.asr.util.RandomUtil;
 import me.mangregory.asr.util.handlers.EventHandler;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Endermite;
@@ -34,14 +34,14 @@ public class AsgardShieldHandler {
         ItemStack stack = player.getItemInHand(hand);
         long damageAccumulator = ModConfig.ASGARD_SHIELD_BASE_ATTACKDMG;
         float knockback = ModConfig.ASGARD_SHIELD_BASE_KNOCKBACK;
-        ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(item);
+        ResourceLocation itemId = Registry.ITEM.getKey(item);
         
         if (itemId.equals(new ResourceLocation("asr", "wooden_shield"))) {
             if (player.isOnFire() || player.isInLava() ||
                     (enemy != null && enemy.isOnFire() && enemy == projectile) ||
                     (projectile != null && projectile.isOnFire()))
                 damageAccumulator += 10;
-            if (source.is(DamageTypes.ARROW) && RandomUtil.chance(0.50))
+            if (source.getDirectEntity() instanceof AbstractArrow && RandomUtil.chance(0.50))
                 EventHandler.collectArrow(player, (Arrow) projectile);
         } else if (itemId.equals(new ResourceLocation("asr", "gilded_wooden_shield"))) {
             knockback += 0.5F;
@@ -49,49 +49,49 @@ public class AsgardShieldHandler {
                     (enemy != null && enemy.isOnFire() && enemy == projectile) ||
                     (projectile != null && projectile.isOnFire()))
                 damageAccumulator += 5;
-            if (source.is(DamageTypes.ARROW) && RandomUtil.chance(0.50))
+            if (source.getDirectEntity() instanceof AbstractArrow && RandomUtil.chance(0.50))
                 EventHandler.collectArrow(player, (Arrow) projectile);
         } else if (itemId.equals(new ResourceLocation("asr", "stone_shield"))) {
             if (RandomUtil.chance(0.50) && player.isOnFire())
-                player.extinguishFire();
-            if (source.is(DamageTypeTags.IS_EXPLOSION))
+                player.clearFire();
+            if (source.isExplosion())
                 damageAccumulator += 5;
             playSound(player, SoundEvents.STONE_BREAK, 0.8F);
         } else if (itemId.equals(new ResourceLocation("asr", "gilded_stone_shield"))) {
             knockback += 0.5F;
             if (player.isOnFire())
-                player.extinguishFire();
-            if (source.is(DamageTypeTags.IS_EXPLOSION))
+                player.clearFire();
+            if (source.isExplosion())
                 damageAccumulator += 5;
             playSound(player, SoundEvents.STONE_BREAK, 0.8F);
         } else if (itemId.equals(new ResourceLocation("asr", "iron_shield"))) {
             if (player.isInWaterOrRain())
                 damageAccumulator += 5;
-            else if (source.is(DamageTypeTags.IS_EXPLOSION) && RandomUtil.chance(0.50))
+            else if (source.isExplosion() && RandomUtil.chance(0.50))
                 damageAccumulator = 0;
             playSound(player, SoundEvents.ANVIL_LAND, 0.8F);
         } else if (itemId.equals(new ResourceLocation("asr", "gilded_iron_shield"))) {
             knockback += 0.5F;
             if (player.isInWaterOrRain())
                 damageAccumulator += 5;
-            else if (source.is(DamageTypeTags.IS_EXPLOSION))
+            else if (source.isExplosion())
                 damageAccumulator = 0;
             playSound(player, SoundEvents.ANVIL_LAND, 0.8F);
         } else if (itemId.equals(new ResourceLocation("asr", "diamond_shield"))) {
-            if (source.is(DamageTypes.ARROW) && RandomUtil.chance(0.30)) {
+            if (source.getDirectEntity() instanceof AbstractArrow && RandomUtil.chance(0.30)) {
                 EventHandler.reflectArrow(player, (Arrow) projectile, source.getEntity());
                 damageAccumulator += 3;
                 knockback = 0.0F;
             }
-            playSound(player, SoundEvents.NOTE_BLOCK_CHIME.value(), 0.6F);
+            playSound(player, SoundEvents.NOTE_BLOCK_CHIME, 0.6F);
         } else if (itemId.equals(new ResourceLocation("asr", "gilded_diamond_shield"))) {
-            if (source.is(DamageTypes.ARROW) && RandomUtil.chance(0.60)) {
+            if (source.getDirectEntity() instanceof AbstractArrow && RandomUtil.chance(0.60)) {
                 EventHandler.reflectArrow(player, (Arrow) projectile, source.getEntity());
                 damageAccumulator += 3;
                 knockback = 0.0F;
             }
             else knockback += 0.5F;
-            playSound(player, SoundEvents.NOTE_BLOCK_CHIME.value(), 0.6F);
+            playSound(player, SoundEvents.NOTE_BLOCK_CHIME, 0.6F);
         } else if (itemId.equals(new ResourceLocation("asr", "netherquartz_shield"))) {
             player.causeFoodExhaustion(1.0F);
             if (projectile instanceof SmallFireball && RandomUtil.chance(0.5D)) {
@@ -99,7 +99,7 @@ public class AsgardShieldHandler {
                 projectile.discard();
                 if (RandomUtil.chance(0.25D)) player.getInventory().add(new ItemStack(Items.FIRE_CHARGE));
             }
-            playSound(player, SoundEvents.NOTE_BLOCK_XYLOPHONE.value(), 0.6F);
+            playSound(player, SoundEvents.NOTE_BLOCK_XYLOPHONE, 0.6F);
         } else if (itemId.equals(new ResourceLocation("asr", "gilded_netherquartz_shield"))) {
             player.causeFoodExhaustion(1.0F);
             knockback += 0.5F;
@@ -108,7 +108,7 @@ public class AsgardShieldHandler {
                 projectile.discard();
                 if (RandomUtil.chance(0.50D)) player.getInventory().add(new ItemStack(Items.FIRE_CHARGE));
             }
-            playSound(player, SoundEvents.NOTE_BLOCK_XYLOPHONE.value(), 0.6F);
+            playSound(player, SoundEvents.NOTE_BLOCK_XYLOPHONE, 0.6F);
         } else if (itemId.equals(new ResourceLocation("asr", "ender_shield"))) {
             if (enemy instanceof EnderDragon || enemy instanceof EnderMan || enemy instanceof Endermite) {
                 player.stopUsingItem();
@@ -138,16 +138,14 @@ public class AsgardShieldHandler {
                 EventHandler.hurtNearbyEntity(enemy);
             playSound(player, SoundEvents.SKELETON_HURT, 0.8F);
         } else if (itemId.equals(new ResourceLocation("asr", "copper_shield"))) {
-            if (player.level().isThundering() && RandomUtil.chance(0.1F))
-                player.level().addFreshEntity(Objects.requireNonNull(EntityType.LIGHTNING_BOLT.spawn(
-                        Objects.requireNonNull(Objects.requireNonNull(player.level().getServer())
-                                .getLevel(player.level().dimension())), player.getOnPos(), MobSpawnType.EVENT)));
+            if (player.level.isThundering() && RandomUtil.chance(0.1F))
+                player.level.addFreshEntity(Objects.requireNonNull(EntityType.LIGHTNING_BOLT.spawn(
+                        (ServerLevel) player.level, null, null, player.getOnPos(), MobSpawnType.EVENT, false, false)));
             playSound(player, SoundEvents.COPPER_BREAK, 0.8F);
         } else if (itemId.equals(new ResourceLocation("asr", "gilded_copper_shield"))) {
-            if (player.level().isThundering() && RandomUtil.chance(0.2F))
-                player.level().addFreshEntity(Objects.requireNonNull(EntityType.LIGHTNING_BOLT.spawn(
-                        Objects.requireNonNull(Objects.requireNonNull(player.level().getServer())
-                                .getLevel(player.level().dimension())), player.getOnPos(), MobSpawnType.EVENT)));
+            if (player.level.isThundering() && RandomUtil.chance(0.2F))
+                player.level.addFreshEntity(Objects.requireNonNull(EntityType.LIGHTNING_BOLT.spawn(
+                        (ServerLevel) player.level, null, null, player.getOnPos(), MobSpawnType.EVENT, false, false)));
             playSound(player, SoundEvents.COPPER_BREAK, 0.8F);
         } else if (itemId.equals(new ResourceLocation("asr", "netherite_shield"))) {
             playSound(player, SoundEvents.NETHERITE_BLOCK_BREAK, 0.8F);

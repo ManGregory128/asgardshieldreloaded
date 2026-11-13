@@ -8,7 +8,9 @@ import me.mangregory.asr.items.GiantSwordItem;
 import me.mangregory.asr.items.StackCooldowns;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -38,10 +40,10 @@ public class BlockHudRenderer {
     // Giant swords: column 4-5 at (36,0) empty, (45,0) full
 
     public static void register() {
-        ClientGuiEvent.RENDER_HUD.register(BlockHudRenderer::onRenderHud);
+        ClientGuiEvent.RENDER_HUD.register(BlockHudRenderer::renderHud);
     }
 
-    private static void onRenderHud(GuiGraphics guiGraphics, float partialTick) {
+    private static void renderHud(PoseStack poseStack, float partialTick) {
         Minecraft minecraft = Minecraft.getInstance();
         Player player = minecraft.player;
         
@@ -83,8 +85,8 @@ public class BlockHudRenderer {
         }
 
         // Get screen dimensions
-        int screenWidth = guiGraphics.guiWidth();
-        int screenHeight = guiGraphics.guiHeight();
+        int screenWidth = minecraft.getWindow().getGuiScaledWidth();
+        int screenHeight = minecraft.getWindow().getGuiScaledHeight();
         
         // Check if other HUD bars would overlap (mount health when riding, oxygen when underwater)
         boolean hasOverlap = player.isPassenger() || player.getAirSupply() < player.getMaxAirSupply();
@@ -121,7 +123,8 @@ public class BlockHudRenderer {
             }
             float v = 0.0f;
             
-            guiGraphics.blit(TEXTURE, segmentX, barY, u, v, 
+            RenderSystem.setShaderTexture(0, TEXTURE);
+            GuiComponent.blit(poseStack, segmentX, barY, u, v,
                 SEGMENT_SIZE, SEGMENT_SIZE, TEXTURE_SIZE, TEXTURE_SIZE);
         }
         

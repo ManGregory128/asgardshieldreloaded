@@ -11,15 +11,15 @@ import me.mangregory.asr.util.handlers.items.GiantSwordHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -38,7 +38,7 @@ public class EventHandler {
     public static void registerEvents() {
         // Register right-click item event (for blocking)
         InteractionEvent.RIGHT_CLICK_ITEM.register((player, hand) -> {
-            Level level = player.level();
+            Level level = player.level;
 
             // Handle Giant Sword + Shield combo blocking
             Item itemMainHand = player.getItemInHand(InteractionHand.MAIN_HAND).getItem();
@@ -54,7 +54,7 @@ public class EventHandler {
                     return CompoundEventResult.interruptFalse(usedStack);
                 }
             }
-            ResourceLocation usedItemId = BuiltInRegistries.ITEM.getKey(usedItem);
+            ResourceLocation usedItemId = Registry.ITEM.getKey(usedItem);
             
             if (level instanceof ServerLevel serverLevel && !StackCooldowns.isOnCooldown(player, usedStack) && (
                     usedItemId.equals(new ResourceLocation("asr", "ender_giant_sword")) ||
@@ -75,8 +75,8 @@ public class EventHandler {
 
         // Register living hurt event (for blocking damage)
         EntityEvent.LIVING_HURT.register((entity, damageSource, amount) -> {
-            if (entity instanceof Player player && !entity.level().isClientSide()
-                    && !damageSource.is(DamageTypeTags.BYPASSES_SHIELD)) {
+            if (entity instanceof Player player && !entity.level.isClientSide()
+                    && !damageSource.isBypassArmor() && !damageSource.isBypassMagic()) {
                 InteractionHand hand = player.getUsedItemHand();
                 Item item = entity.getItemInHand(hand).getItem();
                 if (player.isUsingItem()) {
@@ -91,7 +91,7 @@ public class EventHandler {
     }
 
     public static void hurtNearbyEntity(Entity enemy) {
-        List<Entity> entities = enemy.level().getEntities(null, new AABB(
+        List<Entity> entities = enemy.level.getEntities(null, new AABB(
                 enemy.getX() - 4,
                 enemy.getY() - 4,
                 enemy.getZ() - 4,
@@ -103,7 +103,7 @@ public class EventHandler {
         if (!entities.isEmpty()) {
             ((LivingEntity) enemy).travel(entities.get(0).getPosition(0));
             ((LivingEntity) enemy).doHurtTarget(entities.get(0));
-        } else enemy.hurt(enemy.damageSources().magic(), 10000.0F);
+        } else enemy.hurt(DamageSource.MAGIC, 10000.0F);
     }
 
     public static void knockbackEnemy(Player player, Entity enemy, Entity projectile, float knockback) {
@@ -147,12 +147,12 @@ public class EventHandler {
     }
 
     public static void playSound(Player player, SoundEvent sound, float volume) {
-        player.level().playSound(null, BlockPos.containing(player.getPosition(0)), sound,
-                SoundSource.PLAYERS, volume, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
+        player.level.playSound(null, new BlockPos(player.getPosition(0)), sound,
+                SoundSource.PLAYERS, volume, 0.8F + player.level.getRandom().nextFloat() * 0.4F);
     }
 
     public static float teleportEnemy(Entity enemy, float knockback) {
-        if (!(enemy.level() instanceof ServerLevel serverLevel))
+        if (!(enemy.level instanceof ServerLevel serverLevel))
             return knockback;
 
         Vec3 prevPos = enemy.getPosition(0);
@@ -201,7 +201,7 @@ public class EventHandler {
     private static boolean isSafePosition(ServerLevel level, BlockPos pos, Entity entity) {
         // Check if there's solid ground to stand on
         BlockPos groundPos = pos.below();
-        if (!level.getBlockState(groundPos).isSolid()) {
+        if (!level.getBlockState(groundPos).isSolidRender(level, groundPos)) {
             return false;
         }
         // Check if the entity has enough space
@@ -209,12 +209,12 @@ public class EventHandler {
         for (int i = 0; i < Math.max(2, entityHeight); i++) {
             BlockPos checkPos = pos.above(i);
             if (!level.getBlockState(checkPos).isAir() &&
-                    !level.getBlockState(checkPos).liquid()) {
+                    level.getBlockState(checkPos).getFluidState().isEmpty()) {
                 return false;
             }
         }
         // Check if position is not in lava or dangerous blocks
-        return !level.getBlockState(pos).liquid() &&
-                !level.getBlockState(pos.above()).liquid();
+        return level.getBlockState(pos).getFluidState().isEmpty() &&
+                level.getBlockState(pos.above()).getFluidState().isEmpty();
     }
 }

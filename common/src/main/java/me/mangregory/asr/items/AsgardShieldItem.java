@@ -14,7 +14,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
@@ -53,7 +53,7 @@ public class AsgardShieldItem extends ShieldItem {
         if (super.isValidRepairItem(stack, repairCandidate))
             return true;
 
-        String itemId = BuiltInRegistries.ITEM.getKey(this).getPath();
+        String itemId = Registry.ITEM.getKey(this).getPath();
         return switch (itemId) {
             case "diamond_shield", "gilded_diamond_shield" -> repairCandidate.is(Items.DIAMOND);
             case "ender_shield", "gilded_ender_shield" -> repairCandidate.is(Items.OBSIDIAN);
