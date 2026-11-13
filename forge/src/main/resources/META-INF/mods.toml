@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[47,)"
+loaderVersion="[43,)"
 issueTrackerURL="https://github.com/ManGregory128/asgardshieldreloaded/issues"
 license="GNU GPL 3.0"
 
@@ -14,27 +14,27 @@ logoFile = "asr.png"
 [[dependencies.asr]]
     modId="forge"
     mandatory=true
-    versionRange="[47,)"
+    versionRange="[43,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.asr]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.20.1,1.21)"
+    versionRange="[1.19.2,1.20)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.asr]]
     modId="architectury"
     mandatory=true
-    versionRange="[9,)"
+    versionRange="[6,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.asr]]
     modId="resourcefulconfig"
     mandatory=true
-    versionRange="[2.1.0,)"
+    versionRange="[1.0.20,)"
     ordering="NONE"
     side="BOTH"

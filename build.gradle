@@ -85,6 +85,13 @@ subprojects {
     }
 
     configurations {
+        // architectury-plugin injects a dynamic fabric-loader:+ dep; pin it to the declared
+        // version so loom does not remap a second loader jar onto the run classpath (1.19.2)
+        all {
+            resolutionStrategy {
+                force "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+            }
+        }
         common {
             canBeResolved = true
             canBeConsumed = false
