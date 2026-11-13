@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "equipment",
   "key": {
     "#": {
       "tag": "minecraft:stone_tool_materials"
@@ -16,6 +15,5 @@
   ],
   "result": {
     "item": "asr:stone_shield"
-  },
-  "show_notification": true
+  }
 }

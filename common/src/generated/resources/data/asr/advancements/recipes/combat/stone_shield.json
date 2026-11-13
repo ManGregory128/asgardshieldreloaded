@@ -28,6 +28,5 @@
     "recipes": [
       "asr:stone_shield"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

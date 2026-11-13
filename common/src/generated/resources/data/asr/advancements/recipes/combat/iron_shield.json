@@ -30,6 +30,5 @@
     "recipes": [
       "asr:iron_shield"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

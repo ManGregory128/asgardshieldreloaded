@@ -28,6 +28,5 @@
     "recipes": [
       "asr:wooden_shield"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

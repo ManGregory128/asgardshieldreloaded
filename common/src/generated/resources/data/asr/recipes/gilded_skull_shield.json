@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "equipment",
   "key": {
     "#": {
       "item": "minecraft:gold_ingot"
@@ -16,6 +15,5 @@
   ],
   "result": {
     "item": "asr:gilded_skull_shield"
-  },
-  "show_notification": true
+  }
 }

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_template": {
+    "has_netherite_ingot": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:netherite_upgrade_smithing_template"
+              "minecraft:netherite_ingot"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_template",
+      "has_netherite_ingot",
       "has_the_recipe"
     ]
   ],
@@ -30,6 +30,5 @@
     "recipes": [
       "minecraft:netherite_giant_sword_smithing"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

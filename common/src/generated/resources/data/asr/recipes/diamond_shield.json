@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "equipment",
   "key": {
     "#": {
       "item": "minecraft:diamond"
@@ -16,6 +15,5 @@
   ],
   "result": {
     "item": "asr:diamond_shield"
-  },
-  "show_notification": true
+  }
 }

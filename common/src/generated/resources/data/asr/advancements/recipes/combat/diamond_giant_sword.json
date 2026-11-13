@@ -30,6 +30,5 @@
     "recipes": [
       "asr:diamond_giant_sword"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

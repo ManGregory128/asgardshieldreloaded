@@ -30,6 +30,5 @@
     "recipes": [
       "asr:ender_shield"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -30,6 +30,5 @@
     "recipes": [
       "asr:gilded_iron_shield"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

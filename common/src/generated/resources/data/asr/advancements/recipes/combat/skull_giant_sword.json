@@ -30,6 +30,5 @@
     "recipes": [
       "asr:skull_giant_sword"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }
