@@ -1,6 +1,6 @@
 package me.mangregory.asr.items;
 
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
@@ -8,7 +8,7 @@ final class TooltipKeys {
     private TooltipKeys() {}
 
     static String itemBaseKey(ItemStack itemStack) {
-        ResourceLocation id = Registry.ITEM.getKey(itemStack.getItem());
+        ResourceLocation id = BuiltInRegistries.ITEM.getKey(itemStack.getItem());
         // id: asr:diamond_shield -> item.asr.diamond_shield
         return "item." + id.getNamespace() + "." + id.getPath();
     }

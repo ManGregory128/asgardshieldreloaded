@@ -11,7 +11,7 @@ import me.mangregory.asr.util.handlers.items.GiantSwordHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -19,7 +19,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -54,7 +54,7 @@ public class EventHandler {
                     return CompoundEventResult.interruptFalse(usedStack);
                 }
             }
-            ResourceLocation usedItemId = Registry.ITEM.getKey(usedItem);
+            ResourceLocation usedItemId = BuiltInRegistries.ITEM.getKey(usedItem);
             
             if (level instanceof ServerLevel serverLevel && !StackCooldowns.isOnCooldown(player, usedStack) && (
                     usedItemId.equals(new ResourceLocation("asr", "ender_giant_sword")) ||
@@ -76,7 +76,7 @@ public class EventHandler {
         // Register living hurt event (for blocking damage)
         EntityEvent.LIVING_HURT.register((entity, damageSource, amount) -> {
             if (entity instanceof Player player && !entity.level.isClientSide()
-                    && !damageSource.isBypassArmor() && !damageSource.isBypassMagic()) {
+                    && !damageSource.is(DamageTypeTags.BYPASSES_SHIELD)) {
                 InteractionHand hand = player.getUsedItemHand();
                 Item item = entity.getItemInHand(hand).getItem();
                 if (player.isUsingItem()) {
@@ -103,7 +103,7 @@ public class EventHandler {
         if (!entities.isEmpty()) {
             ((LivingEntity) enemy).travel(entities.get(0).getPosition(0));
             ((LivingEntity) enemy).doHurtTarget(entities.get(0));
-        } else enemy.hurt(DamageSource.MAGIC, 10000.0F);
+        } else enemy.hurt(enemy.damageSources().magic(), 10000.0F);
     }
 
     public static void knockbackEnemy(Player player, Entity enemy, Entity projectile, float knockback) {
@@ -147,7 +147,7 @@ public class EventHandler {
     }
 
     public static void playSound(Player player, SoundEvent sound, float volume) {
-        player.level.playSound(null, new BlockPos(player.getPosition(0)), sound,
+        player.level.playSound(null, BlockPos.containing(player.getPosition(0)), sound,
                 SoundSource.PLAYERS, volume, 0.8F + player.level.getRandom().nextFloat() * 0.4F);
     }
 
