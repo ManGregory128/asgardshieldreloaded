@@ -13,11 +13,12 @@ public class AsgardShieldReloadedDataGen implements DataGeneratorEntrypoint {
 
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator generator) {
-        generator.addProvider(EnUsLangProvider::new);
-        generator.addProvider(DeDeLangProvider::new);
-        generator.addProvider(ElGrLangProvider::new);
-        generator.addProvider(ModelProvider::new);
-        generator.addProvider(ModRecipeProvider::new);
-        generator.addProvider(ItemTagsProvider::new);
+        var pack = generator.createPack();
+        pack.addProvider(EnUsLangProvider::new);
+        pack.addProvider(DeDeLangProvider::new);
+        pack.addProvider(ElGrLangProvider::new);
+        pack.addProvider(ModelProvider::new);
+        pack.addProvider(ModRecipeProvider::new);
+        pack.addProvider((FabricDataGenerator.Pack.RegistryDependentFactory<ItemTagsProvider>) ItemTagsProvider::new);
     }
 }

@@ -1,9 +1,9 @@
 package me.mangregory.asr.fabric.client.datagen;
 
 import me.mangregory.asr.items.init.AsgardShieldItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
@@ -14,7 +14,7 @@ public class EnUsLangProvider extends FabricLanguageProvider {
 
     private record ShieldTooltip(String perk, String perkDesc, String weakness, String weaknessDesc) {}
 
-    public EnUsLangProvider(FabricDataGenerator dataOutput) {
+    public EnUsLangProvider(FabricDataOutput dataOutput) {
         super(dataOutput, "en_us");
     }
 
@@ -161,7 +161,7 @@ public class EnUsLangProvider extends FabricLanguageProvider {
                 "Fire burns quickly through wood, be careful"
         ));
         tooltips.forEach((item, spec) -> {
-            ResourceLocation id = Registry.ITEM.getKey(item);
+            ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
             String baseKey = "item." + id.getNamespace() + "." + id.getPath();
             tb.add(baseKey + ".perk", spec.perk);
             tb.add(baseKey + ".perk.desc", spec.perkDesc);

@@ -7,8 +7,8 @@ import com.teamresourceful.resourcefulconfig.client.ConfigValuesWidget;
 import com.teamresourceful.resourcefulconfig.common.config.ResourcefulConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Widget;
-import net.minecraft.client.gui.components.TooltipAccessor;
+import net.minecraft.client.gui.components.Renderable;
+import com.teamresourceful.resourcefulconfig.client.TooltipAccessor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
@@ -62,10 +62,10 @@ public class AsrConfigScreen extends ConfigScreen {
         this.renderBackground(poseStack);
         if (valuesList != null) valuesList.render(poseStack, mouseX, mouseY, partialTick);
         // footer buttons and any other renderable children (but not RC's private list/categories widgets)
-        Set<Widget> rendered = new HashSet<>();
+        Set<Renderable> rendered = new HashSet<>();
         for (var child : this.children()) {
             if (child instanceof ConfigValuesWidget || child instanceof CategoriesWidget) continue;
-            if (child instanceof Widget r && rendered.add(r)) r.render(poseStack, mouseX, mouseY, partialTick);
+            if (child instanceof Renderable r && rendered.add(r)) r.render(poseStack, mouseX, mouseY, partialTick);
         }
         Component options = Component.literal("Options").withStyle(ChatFormatting.BOLD);
         this.drawString(poseStack, this.font, options, this.width / 2 - this.font.width(options) / 2, 11, 0xFFFFFF);
