@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.concurrent.CompletableFuture;
@@ -21,6 +22,11 @@ public class ItemTagsProvider extends FabricTagProvider.ItemTagProvider {
             Registries.ITEM,
             ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/durability")
     );
+    // repair-item tags for the custom ToolMaterials (1.21.2+ ToolMaterial takes a TagKey<Item>)
+    private static final TagKey<Item> REPAIR_COPPER = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("asr", "ingots/copper"));
+    private static final TagKey<Item> REPAIR_QUARTZ = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("asr", "gems/quartz"));
+    private static final TagKey<Item> REPAIR_OBSIDIAN = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("asr", "obsidian"));
+    private static final TagKey<Item> REPAIR_BONE = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("asr", "bones"));
 
     public ItemTagsProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
         super(output, completableFuture);
@@ -39,6 +45,10 @@ public class ItemTagsProvider extends FabricTagProvider.ItemTagProvider {
         add(ItemTags.SWORDS, AsgardShieldItems.NETHERITE_GIANT_SWORD.get());
         add(ItemTags.SWORDS, AsgardShieldItems.COPPER_GIANT_SWORD.get());
 
+        add(REPAIR_COPPER, Items.COPPER_INGOT);
+        add(REPAIR_QUARTZ, Items.QUARTZ);
+        add(REPAIR_OBSIDIAN, Items.OBSIDIAN);
+        add(REPAIR_BONE, Items.BONE);
         add(ENCHANTABLE_DURABILITY, AsgardShieldItems.ASGARD_SHIELDS.stream()
                 .map(Supplier::get)
                 .toArray(Item[]::new));

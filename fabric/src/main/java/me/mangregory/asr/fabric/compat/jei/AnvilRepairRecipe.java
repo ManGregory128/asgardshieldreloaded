@@ -5,7 +5,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,7 +21,8 @@ public class AnvilRepairRecipe implements IJeiAnvilRecipe {
     public AnvilRepairRecipe(ResourceLocation uid, ItemStack damagedItem, ItemStack repairedItem, Ingredient repairMaterial) {
         this.uid = uid;
         this.leftInput = damagedItem;
-        this.rightInputs = Arrays.asList(repairMaterial.getItems());
+        // 1.21.4 removed Ingredient#getItems; items() yields Holder<Item> now
+        this.rightInputs = repairMaterial.items().map(holder -> new ItemStack(holder.value())).toList();
         this.output = repairedItem;
     }
 

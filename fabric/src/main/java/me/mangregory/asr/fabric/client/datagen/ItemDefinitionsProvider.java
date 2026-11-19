@@ -72,6 +72,10 @@ public final class ItemDefinitionsProvider implements DataProvider {
     }
 
     private static JsonObject swordItemDefinition(ResourceLocation itemId) {
+        // Plain model: since 1.21.2 the first-person BLOCK animation applies a built-in
+        // blocking transform to non-shield items, so swords must NOT switch to a custom
+        // _blocking model (that double-rotates in first person). Shields extend ShieldItem
+        // and are exempt, so they keep their using_item condition.
         JsonObject root = new JsonObject();
 
         JsonObject model = new JsonObject();
