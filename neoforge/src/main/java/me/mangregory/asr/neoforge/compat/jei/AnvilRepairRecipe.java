@@ -19,10 +19,15 @@ public class AnvilRepairRecipe implements IJeiAnvilRecipe {
     private final ItemStack output;
 
     public AnvilRepairRecipe(ResourceLocation uid, ItemStack damagedItem, ItemStack repairedItem, Ingredient repairMaterial) {
+        this(uid, damagedItem, repairedItem,
+                // 1.21.4 removed Ingredient#getItems; items() yields Holder<Item> now
+                repairMaterial.items().map(holder -> new ItemStack(holder.value())).toList());
+    }
+
+    public AnvilRepairRecipe(ResourceLocation uid, ItemStack damagedItem, ItemStack repairedItem, List<ItemStack> rightInputs) {
         this.uid = uid;
         this.leftInput = damagedItem;
-        // 1.21.4 removed Ingredient#getItems; items() yields Holder<Item> now
-        this.rightInputs = repairMaterial.items().map(holder -> new ItemStack(holder.value())).toList();
+        this.rightInputs = rightInputs;
         this.output = repairedItem;
     }
 

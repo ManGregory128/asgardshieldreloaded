@@ -220,8 +220,10 @@ public class ASRJeiPlugin implements IModPlugin {
                 "anvil_repair/same_item/" + itemSupplier.get().getDescriptionId()
         );
         
-        // For same-item repair, both left and right inputs are the same damaged item
-        recipes.add(new AnvilRepairRecipe(uid, damaged, repaired, Ingredient.of(damaged.getItem())));
+        // For same-item repair, both left and right inputs are the same damaged item.
+        // Pass the stack itself: Ingredient.of(item) would drop the damage and JEI would
+        // render a pristine shield on the right (1.21.4 has no Ingredient.of(ItemStack)).
+        recipes.add(new AnvilRepairRecipe(uid, damaged, repaired, List.of(damaged)));
     }
 
     private static ItemStack createDamagedItem(RegistrySupplier<Item> itemSupplier) {
