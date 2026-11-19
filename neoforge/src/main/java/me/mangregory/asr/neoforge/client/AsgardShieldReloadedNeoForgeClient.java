@@ -1,11 +1,7 @@
 package me.mangregory.asr.neoforge.client;
 
 import me.mangregory.asr.AsgardShieldReloaded;
-import me.mangregory.asr.items.init.AsgardShieldItems;
 import me.mangregory.asr.util.handlers.BlockHudRenderer;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -16,22 +12,9 @@ public final class AsgardShieldReloadedNeoForgeClient {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            ResourceLocation blockingId = ResourceLocation.withDefaultNamespace("blocking");
-            for (var supplier : AsgardShieldItems.ASGARD_SHIELDS) {
-                Item shield = supplier.get();
-                ItemProperties.register(shield, blockingId,
-                        (stack, level, entity, seed) ->
-                                entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F
-                );
-            }
-            for (var supplier : AsgardShieldItems.GIANT_SWORDS) {
-                Item sword = supplier.get();
-                ItemProperties.register(sword, blockingId,
-                        (stack, level, entity, seed) ->
-                                entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F
-                );
-            }
-            
+            // Blocking item models are data-driven in 1.21.2+ (assets/<ns>/items/<id>.json
+            // with a minecraft:using_item condition), so no ItemProperties registration is needed.
+
             // Register HUD renderer for block time display
             BlockHudRenderer.register();
         });
