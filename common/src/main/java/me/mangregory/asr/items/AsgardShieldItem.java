@@ -35,7 +35,9 @@ public class AsgardShieldItem extends ShieldItem {
     private static final Map<String, Integer> cooldownMap = new HashMap<>();
 
     public AsgardShieldItem(Properties properties) {
-        super(properties);
+        // 1.21.2+ enchantability is the ENCHANTABLE component (like 26.x); the item tags only
+        // cover the enchanting table. Swords get this from their ToolMaterial, shields need it here.
+        super(properties.enchantable(15));
         updateMaxBlockDuration();
     }
 
