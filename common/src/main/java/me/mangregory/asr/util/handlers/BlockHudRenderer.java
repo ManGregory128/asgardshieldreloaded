@@ -5,11 +5,10 @@ import me.mangregory.asr.config.ClientConfigCache;
 import me.mangregory.asr.config.ModConfig;
 import me.mangregory.asr.items.AsgardShieldItem;
 import me.mangregory.asr.items.GiantSwordItem;
-import me.mangregory.asr.items.StackCooldowns;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -28,11 +27,12 @@ public class BlockHudRenderer {
     private static final int BAR_Y_OFFSET = -9; // Directly above hunger bar (screenHeight - 39 - 9 = screenHeight - 48)
     private static final int BAR_X_OFFSET = 50; // Shift right to place adjacent to hunger bar
     private static final int OVERLAP_SHIFT = 10; // Shift up when other bars overlap
-    
+
     // State tracking to prevent flashing when cooldown resets
     private static boolean wasBlockingLastTick = false;
     private static float lastFillPercentage = 1.0f;
-    
+    private static Item lastRenderedItem = null;
+
     // Icon positions in texture (6 columns x 4 rows, 9x9 each, with gaps between item types)
     // Regular shields: column 0-1 at (0,0) empty, (9,0) full
     // Gilded shields: column 2-3 at (18,0) empty, (27,0) full
@@ -45,27 +45,35 @@ public class BlockHudRenderer {
     private static void onRenderHud(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
         Minecraft minecraft = Minecraft.getInstance();
         Player player = minecraft.player;
-        
-        if (player == null) {
+
+        if (player == null || !player.isUsingItem()) {
+            wasBlockingLastTick = false;
+            lastRenderedItem = null;
             return;
         }
 
-        ItemStack usingItem = getDisplayedStack(player);
-        if (usingItem.isEmpty()) {
-            return;
-        }
+        ItemStack usingItem = player.getUseItem();
         Item item = usingItem.getItem();
-        
+
         // Check if player is blocking with a giant sword or asgard shield
         if (!(item instanceof GiantSwordItem) && !(item instanceof AsgardShieldItem)) {
+            wasBlockingLastTick = false;
+            lastRenderedItem = null;
             return;
         }
 
         boolean isBlockingWithGiantSword = item instanceof GiantSwordItem;
 
-        // Get max duration: on a dedicated server use the server-synced cache so the
-        // bar matches the server's block duration; in singleplayer read the live
-        // local config so in-game config changes apply without rejoining the world
+        // Get block time from the item (server-synced; increases as the player blocks)
+        long cooldown;
+        if (isBlockingWithGiantSword) {
+            cooldown = ((GiantSwordItem) item).getClientCooldown(player, usingItem);
+        } else {
+            cooldown = ((AsgardShieldItem) item).getClientCooldown(player, usingItem);
+        }
+
+        // Get max duration: in singleplayer read the live local config so in-game config
+        // changes apply without rejoining; on a dedicated server use the server-synced cache
         boolean local = minecraft.hasSingleplayerServer();
         long maxDuration;
         if (isBlockingWithGiantSword) {
@@ -74,35 +82,37 @@ public class BlockHudRenderer {
             maxDuration = local ? ModConfig.ASGARD_SHIELD_BLOCK_DURATION : ClientConfigCache.asgardShieldBlockDuration;
         }
 
-        float fillPercentage = StackCooldowns.getFillPercentage(
-                player, usingItem, deltaTracker.getGameTimeDeltaPartialTick(false), (int) maxDuration);
+        // Calculate fill percentage (invert since cooldown increases)
+        // cooldown=0 at start (full bar), cooldown=maxDuration at end (empty bar)
+        float fillPercentage = 1.0f - (float) cooldown / maxDuration;
+        fillPercentage = Math.clamp(fillPercentage, 0.0f, 1.0f);
 
-        // Prevent flash when cooldown resets (player hit or new block starts)
-        boolean isBlocking = player.isUsingItem() && player.getUseItem() == usingItem;
-        if (isBlocking && fillPercentage == 1.0F && wasBlockingLastTick) {
+        // Prevent flash when cooldown resets mid-block (e.g., player was hit).
+        // Only applies when still blocking with the same item; a fresh block always starts full.
+        if (cooldown == 0 && wasBlockingLastTick && item == lastRenderedItem) {
             fillPercentage = lastFillPercentage;
         }
 
         // Get screen dimensions
         int screenWidth = guiGraphics.guiWidth();
         int screenHeight = guiGraphics.guiHeight();
-        
+
         // Check if other HUD bars would overlap (mount health when riding, oxygen when underwater)
         boolean hasOverlap = player.isPassenger() || player.getAirSupply() < player.getMaxAirSupply();
-        
+
         // Calculate bar position (centered horizontally, directly above hunger bar)
         int totalBarWidth = SEGMENT_COUNT * SEGMENT_SIZE; // No spacing between segments
         int barX = ((screenWidth - totalBarWidth) / 2) + BAR_X_OFFSET;
         int barY = screenHeight - 39 + BAR_Y_OFFSET; // Hunger bar is at screenHeight - 39
-        
+
         // Shift up if mount health or oxygen bar would overlap
         if (hasOverlap) {
             barY -= OVERLAP_SHIFT;
         }
 
-        // The same right-anchored segments drain while blocking and refill during cooldown.
+        // The same right-anchored segments drain while blocking.
         int filledSegments = (int) Math.ceil(fillPercentage * SEGMENT_COUNT);
-        
+
         // Render each segment
         for (int i = 0; i < SEGMENT_COUNT; i++) {
             int segmentX = barX + i * (SEGMENT_SIZE);
@@ -121,40 +131,15 @@ public class BlockHudRenderer {
                 u = isFilled ? 9.0f : 0.0f;
             }
             float v = 0.0f;
-            
-            guiGraphics.blit(TEXTURE, segmentX, barY, u, v, 
+
+            guiGraphics.blit(RenderType::guiTextured, TEXTURE, segmentX, barY, u, v,
                 SEGMENT_SIZE, SEGMENT_SIZE, TEXTURE_SIZE, TEXTURE_SIZE);
         }
-        
+
         // Update state for next tick
-        wasBlockingLastTick = isBlocking;
+        wasBlockingLastTick = true;
+        lastRenderedItem = item;
         lastFillPercentage = fillPercentage;
-    }
-
-    private static ItemStack getDisplayedStack(Player player) {
-        if (player.isUsingItem() && isBlockingItem(player.getUseItem())) {
-            return player.getUseItem();
-        }
-        ItemStack mainHand = player.getItemInHand(InteractionHand.MAIN_HAND);
-        if (isCoolingDownItem(player, mainHand)) {
-            ItemStack offHand = player.getItemInHand(InteractionHand.OFF_HAND);
-            if (isCoolingDownItem(player, offHand)
-                    && StackCooldowns.getRemainingCooldown(player, offHand)
-                    < StackCooldowns.getRemainingCooldown(player, mainHand)) {
-                return offHand;
-            }
-            return mainHand;
-        }
-        ItemStack offHand = player.getItemInHand(InteractionHand.OFF_HAND);
-        return isCoolingDownItem(player, offHand) ? offHand : ItemStack.EMPTY;
-    }
-
-    private static boolean isCoolingDownItem(Player player, ItemStack stack) {
-        return isBlockingItem(stack) && StackCooldowns.isOnCooldown(player, stack);
-    }
-
-    private static boolean isBlockingItem(ItemStack stack) {
-        return stack.getItem() instanceof GiantSwordItem || stack.getItem() instanceof AsgardShieldItem;
     }
 
     static boolean isBlockingWithGildedShield(Item item) {

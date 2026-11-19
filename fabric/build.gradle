@@ -27,9 +27,8 @@ dependencies {
     shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
 
     // compile against the JEI API but do not include it at runtime
-    modCompileOnly("mezz.jei:jei-${minecraft_version}-fabric-api:${jei_version}")
-    // at runtime, use the full JEI jar for Fabric
-    modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}")
+    // (JEI 20+/1.21.4 publishes no fabric artifacts on maven; the plugin only uses mezz.jei.api common classes)
+    modCompileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
 }
 
 processResources {

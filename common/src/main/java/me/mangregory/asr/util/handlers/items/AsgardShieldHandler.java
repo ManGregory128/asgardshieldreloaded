@@ -141,13 +141,13 @@ public class AsgardShieldHandler {
             if (player.level().isThundering() && RandomUtil.chance(0.1F))
                 player.level().addFreshEntity(Objects.requireNonNull(EntityType.LIGHTNING_BOLT.spawn(
                         Objects.requireNonNull(Objects.requireNonNull(player.level().getServer())
-                                .getLevel(player.level().dimension())), player.getOnPos(), MobSpawnType.EVENT)));
+                                .getLevel(player.level().dimension())), player.getOnPos(), EntitySpawnReason.EVENT)));
             playSound(player, SoundEvents.COPPER_BREAK, 0.8F);
         } else if (itemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "gilded_copper_shield"))) {
             if (player.level().isThundering() && RandomUtil.chance(0.2F))
                 player.level().addFreshEntity(Objects.requireNonNull(EntityType.LIGHTNING_BOLT.spawn(
                         Objects.requireNonNull(Objects.requireNonNull(player.level().getServer())
-                                .getLevel(player.level().dimension())), player.getOnPos(), MobSpawnType.EVENT)));
+                                .getLevel(player.level().dimension())), player.getOnPos(), EntitySpawnReason.EVENT)));
             playSound(player, SoundEvents.COPPER_BREAK, 0.8F);
         } else if (itemId.equals(ResourceLocation.fromNamespaceAndPath("asr", "netherite_shield"))) {
             playSound(player, SoundEvents.NETHERITE_BLOCK_BREAK, 0.8F);

@@ -34,11 +34,11 @@
   ],
   "depends": {
     "fabricloader": ">=0.19.3",
-    "minecraft": ">=1.21 <=1.21.1",
+    "minecraft": ">=1.21.4 <=1.21.4",
     "java": ">=21",
-    "architectury": ">=13.0.11",
+    "architectury": ">=15.0.3",
     "fabric-api": "*",
-    "resourcefulconfig": ">=3.0.0"
+    "resourcefulconfig": ">=3.4.3"
   },
   "suggests": {
     "another-mod": "*"

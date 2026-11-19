@@ -1,53 +1,63 @@
 package me.mangregory.asr.items;
 
-import me.mangregory.asr.mixin.LivingEntityAccessor;
+import me.mangregory.asr.config.ClientBlockCooldownCache;
 import me.mangregory.asr.config.ClientConfigCache;
 import me.mangregory.asr.config.ModConfig;
+import me.mangregory.asr.mixin.LivingEntityAccessor;
+import me.mangregory.asr.network.BlockCooldownSyncPacket;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static me.mangregory.asr.util.handlers.EventHandler.playSound;
 
 public class GiantSwordItem extends SwordItem {
     private long maxBlockDuration;
-    public GiantSwordItem(Tier tier, Properties properties) {
-        super(tier, properties);
+    // Server-side block-time tracking (keyed by player uuid + inventory slot); the post-block
+    // cooldown itself uses the vanilla per-itemStack ItemCooldowns (1.21.2+), which the game
+    // syncs to the client automatically.
+    private static final Map<String, Integer> cooldownMap = new HashMap<>();
+
+    public GiantSwordItem(ToolMaterial material, Properties properties) {
+        super(material, 3.0F, -2.4F, properties);
         updateMaxBlockDuration();
     }
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    public @NotNull InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (StackCooldowns.isOnCooldown(player, stack))
-            return InteractionResultHolder.pass(stack);
+        if (player.getCooldowns().isOnCooldown(stack))
+            return InteractionResult.PASS;
         if (player instanceof LivingEntityAccessor accessor) {
             if (accessor.getAttackStrengthTicker() < 10) {
-                return InteractionResultHolder.pass(stack); // Prevent blocking if recently attacked
+                return InteractionResult.PASS; // Prevent blocking if recently attacked
             }
         }
         updateMaxBlockDuration();
         if (ModConfig.ENABLE_GIANT_SWORD_EQUIP_SOUND)
             playSound(player, SoundEvents.IRON_GOLEM_ATTACK, 0.8F);
         player.startUsingItem(hand);
-        return InteractionResultHolder.consume(stack);
+        return InteractionResult.CONSUME;
     }
 
     @Override
-    public @NotNull UseAnim getUseAnimation(ItemStack stack) {
-        return UseAnim.BLOCK;
+    public @NotNull ItemUseAnimation getUseAnimation(ItemStack stack) {
+        return ItemUseAnimation.BLOCK;
     }
 
     @Override
@@ -56,11 +66,14 @@ public class GiantSwordItem extends SwordItem {
     }
 
     @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeUsed) {
+    public boolean releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeUsed) {
         if (entity instanceof Player player && !level.isClientSide()) {
-            int blockTicks = getUseDuration(stack, entity) - timeUsed;
-            StackCooldowns.addCooldown(player, stack, blockTicks / 2);
+            String key = getCooldownKey(player, stack);
+            player.getCooldowns().addCooldown(stack, getCooldown(key) / 2);
+            resetCooldown(key);
+            syncCooldown(player, key);
         }
+        return false;
     }
 
     @Override
@@ -69,24 +82,59 @@ public class GiantSwordItem extends SwordItem {
             return;
         }
         if (!level.isClientSide()) {
-            if (getCooldown(player, stack) >= this.maxBlockDuration) {
-                int blockTicks = getCooldown(player, stack);
+            String key = getCooldownKey(player, stack);
+            incrementCooldown(key, 1);
+
+            if (getCooldown(key) >= this.maxBlockDuration) {
                 entity.stopUsingItem();
-                StackCooldowns.addCooldown(player, stack, blockTicks / 2);
+                player.getCooldowns().addCooldown(stack, getCooldown(key) / 2);
+                resetCooldown(key);
             }
-        } else if (StackCooldowns.isOnCooldown(player, stack)) {
-            // The server already stopped this block and its cooldown is synced via the stack
-            // component; stop the client-side use so hold-to-reuse cannot restart the block
-            // (and the HUD bar) while the key is still held (seen in singleplayer)
+            syncCooldown(player, key);
+        } else if (player.getCooldowns().isOnCooldown(stack)) {
+            // The vanilla cooldown is synced to the client; stop the client-side use so
+            // hold-to-reuse cannot restart the block (and the HUD bar) while the key is
+            // still held after the server ended the block (seen in singleplayer)
             entity.stopUsingItem();
         }
     }
 
+    private String getCooldownKey(Player player, ItemStack stack) {
+        int slot = player.getInventory().findSlotMatchingItem(stack);
+        return player.getUUID() + ":" + slot;
+    }
+
+    private int getCooldown(String key) {
+        return cooldownMap.getOrDefault(key, 0);
+    }
+
+    private void resetCooldown(String key) {
+        cooldownMap.remove(key);
+    }
+
     public int getCooldown(Player player, ItemStack stack) {
-        return StackCooldowns.getBlockTicks(player, stack);
+        String key = getCooldownKey(player, stack);
+        return getCooldown(key);
+    }
+
+    public int getClientCooldown(Player player, ItemStack stack) {
+        return ClientBlockCooldownCache.get(getCooldownKey(player, stack));
+    }
+
+    private void syncCooldown(Player player, String key) {
+        if (player instanceof ServerPlayer serverPlayer) {
+            BlockCooldownSyncPacket.sendToPlayer(serverPlayer, key, getCooldown(key));
+        }
     }
 
     public void resetCooldown(Player player, ItemStack stack) {
+        String key = getCooldownKey(player, stack);
+        resetCooldown(key);
+        syncCooldown(player, key);
+    }
+
+    private void incrementCooldown(String key, int value) {
+        cooldownMap.put(key, getCooldown(key) + value);
     }
 
     @Environment(EnvType.CLIENT)

@@ -16,28 +16,28 @@ logoFile = "asr.png"
 [[dependencies.asr]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.0.167,)"
+versionRange = "[21.4,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.asr]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21, 1.21.1]"
+versionRange = "[1.21.4, 1.21.5)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.asr]]
 modId = "architectury"
 type = "required"
-versionRange = "[13.0.11,)"
+versionRange = "[15.0.3,)"
 ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies.asr]]
 modId = "resourcefulconfig"
 type = "required"
-versionRange = "[3.0.0,)"
+versionRange = "[3.4.3,)"
 ordering = "AFTER"
 side = "BOTH"
 
