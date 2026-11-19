@@ -1,3 +1,7 @@
-// 1.21.1	2026-11-11T21:12:45.7357383	Asgard Shield: Reloaded/Tags for minecraft:item
-65fa4838854bb2f0726ddeb01b9f9a96c38567d2 data\minecraft\tags\item\swords.json
-c0c8c3950f4d82e0948f223af7f299ab0dc00a3b data\minecraft\tags\item\enchantable\durability.json
+// 1.21.4	-999999999-01-01T00:00:00	Asgard Shield: Reloaded/Tags for minecraft:item
+243f2dab6ef46a493d12775f6f28baf7b72922cf data/asr/tags/item/bones.json
+42605e6989bb70ecdd5f2ded50fbb315b1c185ec data/asr/tags/item/gems/quartz.json
+6222fd0d7d2ce08ee1f70be68a61f4e167dda650 data/asr/tags/item/ingots/copper.json
+26d89c4e3cfa827f5d2a7ef1ef43ec4c8c63cd6e data/asr/tags/item/obsidian.json
+c0c8c3950f4d82e0948f223af7f299ab0dc00a3b data/minecraft/tags/item/enchantable/durability.json
+65fa4838854bb2f0726ddeb01b9f9a96c38567d2 data/minecraft/tags/item/swords.json

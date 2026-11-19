@@ -1,27 +1,18 @@
 {
   "parent": "item/generated",
+  "textures": {
+    "layer0": "asr:item/stone_shield"
+  },
   "display": {
-    "firstperson_lefthand": {
-      "scale": [
-        0.7,
-        0.7,
-        0.7
+    "thirdperson_righthand": {
+      "rotation": [
+        63.7,
+        -0.03,
+        0.78
       ],
       "translation": [
-        -3.0,
-        3.0,
-        1.0
-      ]
-    },
-    "firstperson_righthand": {
-      "scale": [
-        0.7,
-        0.7,
-        0.7
-      ],
-      "translation": [
-        -3.0,
-        3.0,
+        0.0,
+        0.5,
         1.0
       ]
     },
@@ -37,20 +28,29 @@
         1.0
       ]
     },
-    "thirdperson_righthand": {
-      "rotation": [
-        63.7,
-        -0.03,
-        0.78
-      ],
+    "firstperson_righthand": {
       "translation": [
-        0.0,
-        0.5,
+        -3.0,
+        3.0,
         1.0
+      ],
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ]
+    },
+    "firstperson_lefthand": {
+      "translation": [
+        -3.0,
+        3.0,
+        1.0
+      ],
+      "scale": [
+        0.7,
+        0.7,
+        0.7
       ]
     }
-  },
-  "textures": {
-    "layer0": "asr:item/stone_shield"
   }
 }

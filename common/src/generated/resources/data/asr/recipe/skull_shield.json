@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "tag": "minecraft:stone_tool_materials"
-    },
-    "*": {
-      "item": "minecraft:skeleton_skull"
-    },
-    "/": {
-      "tag": "c:leathers"
-    }
+    "#": "#minecraft:stone_tool_materials",
+    "*": "minecraft:skeleton_skull",
+    "/": "#c:leathers"
   },
   "pattern": [
     "#*#",

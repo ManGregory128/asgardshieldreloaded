@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "tag": "c:gems/quartz"
-    },
-    "/": {
-      "tag": "c:leathers"
-    }
+    "#": "#c:gems/quartz",
+    "/": "#c:leathers"
   },
   "pattern": [
     "###",

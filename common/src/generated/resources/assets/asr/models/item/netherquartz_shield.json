@@ -1,50 +1,19 @@
 {
   "parent": "item/generated",
+  "textures": {
+    "layer0": "asr:item/netherquartz_shield"
+  },
   "display": {
-    "firstperson_lefthand": {
+    "thirdperson_righthand": {
       "rotation": [
-        0.0,
-        -30.0,
-        0.0
-      ],
-      "scale": [
-        0.7,
-        0.7,
-        0.7
+        -80.97,
+        -88.52,
+        -81.7
       ],
       "translation": [
-        1.0,
-        -0.5,
-        1.0
-      ]
-    },
-    "firstperson_righthand": {
-      "rotation": [
-        0.0,
-        -30.0,
-        0.0
-      ],
-      "scale": [
-        0.7,
-        0.7,
-        0.7
-      ],
-      "translation": [
-        1.0,
-        -0.5,
-        1.0
-      ]
-    },
-    "ground": {
-      "scale": [
-        0.7,
-        0.7,
-        0.7
-      ],
-      "translation": [
-        0.0,
-        2.0,
-        0.0
+        2.5,
+        -2.25,
+        1.75
       ]
     },
     "thirdperson_lefthand": {
@@ -59,28 +28,51 @@
         1.75
       ]
     },
-    "thirdperson_righthand": {
+    "firstperson_righthand": {
       "rotation": [
-        -80.97,
-        -88.52,
-        -81.7
+        0.0,
+        -30.0,
+        0.0
       ],
       "translation": [
-        2.5,
-        -2.25,
-        1.75
+        1.0,
+        -0.5,
+        1.0
+      ],
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0.0,
+        -30.0,
+        0.0
+      ],
+      "translation": [
+        1.0,
+        -0.5,
+        1.0
+      ],
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ]
+    },
+    "ground": {
+      "translation": [
+        0.0,
+        2.0,
+        0.0
+      ],
+      "scale": [
+        0.7,
+        0.7,
+        0.7
       ]
     }
-  },
-  "overrides": [
-    {
-      "model": "asr:item/netherquartz_shield_blocking",
-      "predicate": {
-        "blocking": 1
-      }
-    }
-  ],
-  "textures": {
-    "layer0": "asr:item/netherquartz_shield"
   }
 }

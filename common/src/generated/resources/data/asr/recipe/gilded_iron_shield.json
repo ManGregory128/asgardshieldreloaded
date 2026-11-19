@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "item": "minecraft:gold_ingot"
-    },
-    "/": {
-      "item": "asr:iron_shield"
-    }
+    "#": "minecraft:gold_ingot",
+    "/": "asr:iron_shield"
   },
   "pattern": [
     "###",

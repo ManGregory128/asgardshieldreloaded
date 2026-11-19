@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "item": "minecraft:copper_ingot"
-    },
-    "/": {
-      "tag": "c:leathers"
-    }
+    "#": "minecraft:copper_ingot",
+    "/": "#c:leathers"
   },
   "pattern": [
     "###",

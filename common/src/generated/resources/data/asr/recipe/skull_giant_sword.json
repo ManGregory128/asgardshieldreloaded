@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "item": "minecraft:bone"
-    },
-    "*": {
-      "item": "minecraft:skeleton_skull"
-    },
-    "/": {
-      "tag": "c:rods/wooden"
-    }
+    "#": "minecraft:bone",
+    "*": "minecraft:skeleton_skull",
+    "/": "#c:rods/wooden"
   },
   "pattern": [
     " ##",
